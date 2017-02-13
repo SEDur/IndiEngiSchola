@@ -8,19 +8,32 @@
 % permission
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function[pd, ud] = PSTD1Dfun(pd, ud, diffmatrix,...
+function[pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
      PMLdiff, PMLalphau, PMLalphap, PMLconst)
     %% Function solves using the PSTD method for a pressure vector,...
     %  velocity vector and differentiation impulse response in 1 dimension
     %  and returns the solved pressure and velocity vectors
-    
-    phat = fft(pd);
-    temp = phat .* diffmatrix;
-    pdiffhat = ifft(temp);
+    for i = 1:size(pd, 1)
+        phat(i,:) = fft(pd(i,:));
+        temp(i,:) = phat(i,:) .* diffmatrix;
+        pdiffhat(i,:) = ifft(temp(i,:));
+    end
+    for i = 1:size(pd, 2)
+        phat(i,:) = fft(pdiffhat(:,1)');
+        temp(i,:) = phat(i,:) .* diffmatrix;
+        pdiffhat(:,i) = ifft(temp(i,:)');
+    end
     ud = ud .* PMLdiff - PMLalphau .* (pdiffhat./PMLconst); 
-    uhat = fft(ud);
-    temp = uhat .* diffmatrix;
-    udiffhat = ifft(temp);
+    for i = 1:size(ud, 1)
+        uhat(i,:) = fft(ud(i,:));
+        temp(i,:) = uhat(i,:) .* diffmatrix;
+        udiffhat(i,:) = ifft(temp(i,:));
+    end
+    for i = 1:size(ud, 2)
+        phat(i,:) = fft(pdiffhat(:,1)');
+        temp(i,:) = phat(i,:) .* diffmatrix;
+        pdiffhat(:,i) = ifft(temp(i,:)');
+    end
     pd = pd .* PMLdiff - PMLalphap .* (udiffhat./PMLconst);
 
 end
