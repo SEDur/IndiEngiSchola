@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function[pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
-     PMLdiff, PMLalphau, PMLalphap, PMLconst)
+     PMLdiff, PMLalphau, PMLalphap, PMLconst, N)
     phat = zeros(N,N);
     uhat = zeros(N,N);
     pdiffhat = zeros(N,N);

@@ -3,7 +3,7 @@
 %% Initz
 clc;
 clear all;
-close all;
+% close all;
 
 %% Make Variables
 
@@ -16,7 +16,7 @@ c = 343.0;
 %define total time
 T = 10.0;
 %define grid width
-gridWidth = 100.0;
+gridWidth = 10.0;
 %define timestep
 dt = 1/(2*fs);
 %dfine grid spacing
