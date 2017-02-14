@@ -61,10 +61,29 @@ diffmatrix = 1i * tempdiffmatrix;
 PMLconst = ones(N,N);
 PMLconst = PMLconst .* (3.142*N);
 PMLdiff = zeros(N,N);
-PMLdiff(:,1:PMLdepth) = 1:PMLdepth;
-PMLdiff((N-PMLdepth+1):end) = 1 : PMLdepth;
-PMLdiff(1:PMLdepth) = (1/3.0).*(((PMLdepth-PMLdiff(1:PMLdepth))./PMLdepth).^3);
-PMLdiff((N-PMLdepth+1):end) = (1/3.0).*(PMLdiff((N-PMLdepth+1):end)./PMLdepth).^3;
+for i = 1 : N
+PMLdiff(i,1:PMLdepth) = 1:PMLdepth;
+PMLdiff(i,(N-PMLdepth+1):end) = 1 : PMLdepth;
+PMLdiff(i,1:PMLdepth) = (1/3.0).*(((PMLdepth-PMLdiff(i,1:PMLdepth))./PMLdepth).^3);
+PMLdiff(i,(N-PMLdepth+1):end) = (1/3.0).*(PMLdiff(i,(N-PMLdepth+1):end)./PMLdepth).^3;
+% PMLdiff(1:PMLdepth,i) = 1:PMLdepth';
+% PMLdiff((N-PMLdepth+1):end, i) = 1 : PMLdepth';
+end
+mesh(PMLdiff);
+% for i = PMLdepth : N-PMLdepth+1
+%     PMLdiff(1:PMLdepth,i) = 1:PMLdepth';
+% PMLdiff((N-PMLdepth+1):end, i) = 1 : PMLdepth';
+% end
+PMLdiff2 = PMLdiff';
+mesh(PMLdiff2);
+
+PMLdiff = sqrt(PMLdiff.^2 + PMLdiff2.^2);
+
+mesh(PMLdiff);
+
+% PMLdiff((N-PMLdepth+1):end) = 1 : PMLdepth;
+% PMLdiff(1:PMLdepth) = (1/3.0).*(((PMLdepth-PMLdiff(1:PMLdepth))./PMLdepth).^3);
+% PMLdiff((N-PMLdepth+1):end) = (1/3.0).*(PMLdiff((N-PMLdepth+1):end)./PMLdepth).^3;
 PMLalphau = uconst*(1./(1+PMLdiff));
 PMLalphap = pconst*(1./(1+PMLdiff));
 PMLdiff = ((1-PMLdiff)./(1+PMLdiff));
@@ -73,10 +92,10 @@ PMLdiff = ((1-PMLdiff)./(1+PMLdiff));
 tic();
 for i = 1 : T/dt
    [pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
-     PMLdiff, PMLalphau, PMLalphap, PMLconst);
+     PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
     pd = PTSD2Dsrc(pd, src(i), srcloc);
     mesh(real(pd));
-    view(2);
+%     view(2);
     title(sprintf('Time = %.6f s',dt*i));
     drawnow;
 end
