@@ -8,7 +8,7 @@ close all;
 %% Make Variables
 
 %define FS
-fs = 10000.0;
+fs = 1000.0;
 %define density
 rho = 1.21;
 %define speed of sound
@@ -16,7 +16,7 @@ c = 343.0;
 %define total time
 T = 2.0;
 %define grid width
-gridWidth = 10.0;
+gridWidth = 20.0;
 %define timestep
 dt = 1/(2*fs);
 %dfine grid spacing
@@ -36,7 +36,7 @@ tempdiffmatrix = zeros(1,N);
 % temp = zeros(N, N);
 %Calc source
 src = zeros(1,ceil(T/dt)+1);
-src(10:1010) = 10^-12*50*10^(50/20) * sin(2*(pi/1010)*(1:1001));
+src(10:1010) = 10^-12*30*10^(50/20) * sin(2*(pi/1010)*(1:1001));
 srcloc = ceil(N/2);
 % alpha = 0;
 % calculate geometry matricies
@@ -63,12 +63,9 @@ PMLconst = PMLconst .* (3.142*N);
 PMLdiff = zeros(N,N);
 for i = 1 : N
 PMLdiff(i,1:PMLdepth) = 1:PMLdepth;
-PMLdiff(i,(N-PMLdepth+1):end) = 1 : PMLdepth;
 PMLdiff(i,1:PMLdepth) = (1/3.0).*(((PMLdepth-PMLdiff(i,1:PMLdepth))./PMLdepth).^3);
-PMLdiff(i,(N-PMLdepth+1):end) = (1/3.0).*(PMLdiff(i,(N-PMLdepth+1):end)./PMLdepth).^3;
-% PMLdiff(1:PMLdepth,i) = 1:PMLdepth';
-% PMLdiff((N-PMLdepth+1):end, i) = 1 : PMLdepth';
 end
+PMLdiff(:,N-PMLdepth+1:end) = fliplr(PMLdiff(:,1:PMLdepth));
 mesh(PMLdiff);
 % for i = PMLdepth : N-PMLdepth+1
 %     PMLdiff(1:PMLdepth,i) = 1:PMLdepth';
