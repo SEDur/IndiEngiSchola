@@ -16,7 +16,7 @@ c = 343.0;
 %define total time
 T = 2.0;
 %define grid width
-gridWidth = 20.0;
+gridWidth = 100.0;
 %define timestep
 dt = 1/(2*fs);
 %dfine grid spacing
@@ -75,7 +75,9 @@ PMLdiff2 = PMLdiff';
 mesh(PMLdiff2);
 
 PMLdiff = sqrt(PMLdiff.^2 + PMLdiff2.^2);
-
+PMLdiffmax = max(max(PMLdiff));
+PMLdiffsetmax = 0.3011;
+PMLdiff(PMLdiff > PMLdiffsetmax) = PMLdiffsetmax;
 mesh(PMLdiff);
 
 % PMLdiff((N-PMLdepth+1):end) = 1 : PMLdepth;
@@ -90,7 +92,7 @@ tic();
 for i = 1 : T/dt
    [pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
      PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
-    pd = PTSD2Dsrc(pd, src(i), srcloc);
+%     pd = PTSD2Dsrc(pd, src(i), srcloc);
     mesh(real(pd));
 %     view(2);
     title(sprintf('Time = %.6f s',dt*i));
