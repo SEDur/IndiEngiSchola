@@ -23,28 +23,28 @@ function[pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
         temp(i,:) = phat(i,:) .* diffmatrix;
     end
     pdiffhat = ifft(temp,N,2);
-    surf(real(pdiffhat));
+%     surf(real(pdiffhat));
     phat = fft(pdiffhat,N,1);
     for i = 1:size(pd, 2)
         temp(:,i) = phat(:,i) .* diffmatrix';
     end
     pdiffhat = ifft(temp,N,1);
-    surf(real(pdiffhat));
+%     surf(real(pdiffhat));
     ud = -ud .* PMLdiff - PMLalphau .* (-pdiffhat./PMLconst);
-    surf(real(ud));
+%     surf(real(ud));
     uhat = fft(ud,N,2);
     for i = 1:size(ud, 1)
         temp(i,:) = uhat(i,:) .* diffmatrix;
     end
     udiffhat = ifft(temp,N,2);
-    surf(real(udiffhat));
+%     surf(real(udiffhat));
     uhat = fft(udiffhat,N,1);
     for i = 1:size(ud, 2)
         temp(:,i) = uhat(:,i) .* diffmatrix';
     end
     udiffhat = ifft(temp,N,1);
-    surf(real(udiffhat));
+%     surf(real(udiffhat));
     pd = -pd .* PMLdiff - PMLalphap .* (-udiffhat./PMLconst);
-    surf(real(pd));
+%     surf(real(pd));
 
 end

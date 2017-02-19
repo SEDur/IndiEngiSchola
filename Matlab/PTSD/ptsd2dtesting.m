@@ -8,15 +8,15 @@ close all;
 %% Make Variables
 
 %define FS
-fs = 10000.0;
+fs = 5000.0;
 %define density
 rho = 1.21;
 %define speed of sound
 c = 343.0;
 %define total time
-T = 2.0;
+T = 5.0;
 %define grid width
-gridWidth = 100.0;
+gridWidth = 50.0;
 %define timestep
 dt = 1/(2*fs);
 %dfine grid spacing
@@ -26,7 +26,7 @@ pconst = rho * c^2 * (dt/dx) * dt * c;
 %calculate uconst
 uconst = (1/rho)*(dt/dx)*dt*c;
 %define pml depth 
-PMLdepth = 30;
+PMLdepth = 20;
 %calc time steps
 timestep = abs(T/dt);
 %calc grid size
@@ -66,19 +66,19 @@ PMLdiff(i,1:PMLdepth) = 1:PMLdepth;
 PMLdiff(i,1:PMLdepth) = (1/3.0).*(((PMLdepth-PMLdiff(i,1:PMLdepth))./PMLdepth).^3);
 end
 PMLdiff(:,N-PMLdepth+1:end) = fliplr(PMLdiff(:,1:PMLdepth));
-mesh(PMLdiff);
+% mesh(PMLdiff);
 % for i = PMLdepth : N-PMLdepth+1
 %     PMLdiff(1:PMLdepth,i) = 1:PMLdepth';
 % PMLdiff((N-PMLdepth+1):end, i) = 1 : PMLdepth';
 % end
 PMLdiff2 = PMLdiff';
-mesh(PMLdiff2);
+% mesh(PMLdiff2);
 
 PMLdiff = sqrt(PMLdiff.^2 + PMLdiff2.^2);
 PMLdiffmax = max(max(PMLdiff));
 PMLdiffsetmax = 0.3011;
 PMLdiff(PMLdiff > PMLdiffsetmax) = PMLdiffsetmax;
-mesh(PMLdiff);
+% mesh(PMLdiff);
 
 % PMLdiff((N-PMLdepth+1):end) = 1 : PMLdepth;
 % PMLdiff(1:PMLdepth) = (1/3.0).*(((PMLdepth-PMLdiff(1:PMLdepth))./PMLdepth).^3);
@@ -88,13 +88,16 @@ PMLalphap = pconst*(1./(1+PMLdiff));
 PMLdiff = ((1-PMLdiff)./(1+PMLdiff));
 
 %% solve for some time
+linkdata on;
 tic();
 for i = 1 : T/dt
    [pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
      PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
     pd = PTSD2Dsrc(pd, src(i), srcloc);
     mesh(real(pd));
-%     view(2);
+    set(gca,'zlim',[-10^-12 10^-12]);
+    caxis([-10^-12 10^-12])
+    shading interp;
     title(sprintf('Time = %.6f s',dt*i));
     drawnow;
 end
