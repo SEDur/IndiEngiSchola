@@ -8,7 +8,7 @@ close all;
 %% Make Variables
 
 %define FS
-fs = 1000.0;
+fs = 10000.0;
 %define density
 rho = 1.21;
 %define speed of sound
@@ -36,7 +36,7 @@ tempdiffmatrix = zeros(1,N);
 % temp = zeros(N, N);
 %Calc source
 src = zeros(1,ceil(T/dt)+1);
-src(10:1010) = 10^-12*30*10^(50/20) * sin(2*(pi/1010)*(1:1001));
+src(10:11) = 10^-12*30*10^(50/20) * sin(2*(pi/2000)*(1:2));
 srcloc = ceil(N/2);
 % alpha = 0;
 % calculate geometry matricies
@@ -92,7 +92,7 @@ tic();
 for i = 1 : T/dt
    [pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
      PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
-%     pd = PTSD2Dsrc(pd, src(i), srcloc);
+    pd = PTSD2Dsrc(pd, src(i), srcloc);
     mesh(real(pd));
 %     view(2);
     title(sprintf('Time = %.6f s',dt*i));
