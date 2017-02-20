@@ -26,7 +26,7 @@ pconst = rho * c^2 * (dt/dx) * dt * c;
 %calculate uconst
 uconst = (1/rho)*(dt/dx)*dt*c;
 %define pml depth 
-PMLdepth = 20;
+PMLdepth = 60;
 %calc time steps
 timestep = abs(T/dt);
 %calc grid size
@@ -36,7 +36,7 @@ tempdiffmatrix = zeros(1,N);
 % temp = zeros(N, N);
 %Calc source
 src = zeros(1,ceil(T/dt)+1);
-src(10:11) = 10^-12*30*10^(50/20) * sin(2*(pi/2000)*(1:2));
+src(10:2010) = (10^-12)*30*10^(50/20) * sin(2*(pi/2000)*(1:2001));
 srcloc = ceil(N/2);
 % alpha = 0;
 % calculate geometry matricies
@@ -88,14 +88,14 @@ PMLalphap = pconst*(1./(1+PMLdiff));
 PMLdiff = ((1-PMLdiff)./(1+PMLdiff));
 
 %% solve for some time
-linkdata on;
+% linkdata on;
 tic();
 for i = 1 : T/dt
    [pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
      PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
     pd = PTSD2Dsrc(pd, src(i), srcloc);
     mesh(real(pd));
-    set(gca,'zlim',[-10^-12 10^-12]);
+%     set(gca,'zlim',[-10^-12 10^-12]);
     caxis([-10^-12 10^-12])
     shading interp;
     title(sprintf('Time = %.6f s',dt*i));
