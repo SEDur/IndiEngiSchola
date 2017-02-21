@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PTSD1Dfun.m
+% PTSD2Dfun.m
 % Created by S Durbridge as part of work on a masters dissertation
 % Copywrite S Durbridge 2017
 %
