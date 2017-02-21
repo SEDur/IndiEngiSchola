@@ -1,0 +1,455 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.10.10)  21 FEB 2017 23:20
+entering extended mode
+**./Main.tex
+(Main.tex
+LaTeX2e <2016/03/31> patch level 3
+Babel <3.9r> and hyphenation patterns for 75 language(s) loaded.
+(svproc.cls
+Document Class: svproc 2016/07/20 v1.3 
+ LaTeX document class for Proceedings volumes
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\base\article.cls"
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\base\size10.clo"
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\tools\multicol.sty"
+Package: multicol 2016/04/07 v1.8p multicolumn formatting (FMi)
+\c@tracingmulticols=\count87
+\mult@box=\box26
+\multicol@leftmargin=\dimen103
+\c@unbalance=\count88
+\c@collectmore=\count89
+\doublecol@number=\count90
+\multicoltolerance=\count91
+\multicolpretolerance=\count92
+\full@width=\dimen104
+\page@free=\dimen105
+\premulticols=\dimen106
+\postmulticols=\dimen107
+\multicolsep=\skip43
+\multicolbaselineskip=\skip44
+\partial@page=\box27
+\last@line=\box28
+\maxbalancingoverflow=\dimen108
+\mult@rightbox=\box29
+\mult@grightbox=\box30
+\mult@gfirstbox=\box31
+\mult@firstbox=\box32
+\@tempa=\box33
+\@tempa=\box34
+\@tempa=\box35
+\@tempa=\box36
+\@tempa=\box37
+\@tempa=\box38
+\@tempa=\box39
+\@tempa=\box40
+\@tempa=\box41
+\@tempa=\box42
+\@tempa=\box43
+\@tempa=\box44
+\@tempa=\box45
+\@tempa=\box46
+\@tempa=\box47
+\@tempa=\box48
+\@tempa=\box49
+\c@columnbadness=\count93
+\c@finalcolumnbadness=\count94
+\last@try=\dimen109
+\multicolovershoot=\dimen110
+\multicolundershoot=\dimen111
+\mult@nat@firstbox=\box50
+\colbreak@box=\box51
+\mc@col@check@num=\count95
+)
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\oberdiek\aliascnt.sty"
+Package: aliascnt 2016/05/16 v1.4 Alias counters (HO)
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\carlisle\remreset.sty"))
+\c@chapter=\count96
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 369.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 370.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 371.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 372.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 373.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 374.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 375.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 376.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 377.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 378.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 379.
+\tocchpnum=\dimen112
+\tocsecnum=\dimen113
+\tocsectotal=\dimen114
+\tocsubsecnum=\dimen115
+\tocsubsectotal=\dimen116
+\tocsubsubsecnum=\dimen117
+\tocsubsubsectotal=\dimen118
+\tocparanum=\dimen119
+\tocparatotal=\dimen120
+\tocsubparanum=\dimen121
+\@tempcntc=\count97
+\fnindent=\dimen122
+\c@@inst=\count98
+\c@@auth=\count99
+\c@auco=\count100
+\instindent=\dimen123
+\authrun=\box52
+\authorrunning=\toks14
+\tocauthor=\toks15
+\titrun=\box53
+\titlerunning=\toks16
+\toctitle=\toks17
+\c@theorem=\count101
+\c@case=\count102
+\c@conjecture=\count103
+\c@corollary=\count104
+\c@definition=\count105
+\c@example=\count106
+\c@exercise=\count107
+\c@lemma=\count108
+\c@note=\count109
+\c@problem=\count110
+\c@property=\count111
+\c@proposition=\count112
+\c@question=\count113
+\c@solution=\count114
+\c@remark=\count115
+\headlineindent=\dimen124
+)
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\generic\babel\babel.sty"
+Package: babel 2016/04/23 3.9r The Babel package
+
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Users\Simon\AppData\Roaming\MiKTeX\2.9\tex\latex\arabi\bblopts.cfg
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
+ babel
+)
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\babel-english\english.ldf"
+Language: english 2012/08/20 v3.3p English support from the babel system
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\generic\babel\babel.def"
+File: babel.def 2016/04/23 3.9r Babel common definitions
+\babel@savecnt=\count116
+\U@D=\dimen125
+)
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
+))
+(C:\Users\Simon\AppData\Roaming\MiKTeX\2.9\tex\latex\url\url.sty
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(C:\Users\Simon\AppData\Roaming\MiKTeX\2.9\tex\latex\sectsty\sectsty.sty
+Package: sectsty 2002/02/25 v2.0.2 Commands to change all sectional heading sty
+les
+)
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks18
+)
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2016/07/10 v1.0t Standard LaTeX Graphics (DPC,SPQR)
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def"
+File: pdftex.def 2016/07/10 v0.06j Graphics/color for pdfTeX
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count117
+))
+\Gin@req@height=\dimen126
+\Gin@req@width=\dimen127
+)
+(C:\Users\Simon\AppData\Roaming\MiKTeX\2.9\tex\latex\footmisc\footmisc.sty
+Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
+\FN@temptoken=\toks19
+\footnotemargin=\dimen128
+\c@pp@next@reset=\count118
+Package footmisc Info: Declaring symbol style bringhurst on input line 855.
+Package footmisc Info: Declaring symbol style chicago on input line 863.
+Package footmisc Info: Declaring symbol style wiley on input line 872.
+Package footmisc Info: Declaring symbol style lamport-robust on input line 883.
+
+Package footmisc Info: Declaring symbol style lamport* on input line 903.
+Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
+.
+)
+(Main.aux)
+\openout1 = `Main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+
+(C:\Users\Simon\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count119
+\scratchdimen=\dimen129
+\scratchbox=\box54
+\nofMPsegments=\count120
+\nofMParguments=\count121
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count122
+\MPscratchDim=\dimen130
+\MPnumerator=\count123
+\makeMPintoPDFobject=\count124
+\everyMPtoPDFconversion=\toks21
+) ("D:\MSC\Research Methose\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
+Package: pdftexcmds 2016/05/21 v0.22 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\generic\oberdiek\kvdefinekeys.sty"
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+))
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 30.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 30.
+
+
+LaTeX Warning: Citation `BritishStandardsInst2013' on page 1 undefined on input
+ line 66.
+
+
+LaTeX Warning: Citation `Google2016' on page 1 undefined on input line 66.
+
+
+LaTeX Warning: Citation `Dod2016' on page 1 undefined on input line 66.
+
+
+Overfull \hbox (9.09923pt too wide) in paragraph at lines 66--67
+\OT1/cmr/m/n/10 ar-eas such as pub-lic ad-dress and safety(Public Ad-dress Voic
+e Alarm(PAVA))system
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--67
+
+ []
+
+[1
+
+{C:/Users/Simon/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+
+LaTeX Warning: Citation `Durbridge2016a' on page 2 undefined on input line 76.
+
+
+LaTeX Warning: Citation `Everest2009' on page 2 undefined on input line 84.
+
+
+LaTeX Warning: Citation `Bengtsson2009' on page 2 undefined on input line 84.
+
+
+LaTeX Warning: Citation `Elorza2005' on page 2 undefined on input line 84.
+
+
+LaTeX Warning: Citation `Rober2007' on page 2 undefined on input line 89.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 94.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 94.
+
+LaTeX Warning: Citation `Elorza2005' on page 2 undefined on input line 94.
+
+
+LaTeX Warning: Citation `Rober2007' on page 2 undefined on input line 94.
+
+
+LaTeX Warning: Citation `Rober2007' on page 2 undefined on input line 94.
+
+[2]
+
+LaTeX Warning: Citation `Bilbao2004' on page 3 undefined on input line 99.
+
+
+LaTeX Warning: Citation `Rienstra1952a' on page 3 undefined on input line 99.
+
+
+LaTeX Warning: Citation `Zienkiewicz2013' on page 3 undefined on input line 99.
+
+
+
+LaTeX Warning: Citation `Savioja2010' on page 3 undefined on input line 99.
+
+
+LaTeX Warning: Citation `Yee1966' on page 3 undefined on input line 105.
+
+
+LaTeX Warning: Citation `Schneider2015' on page 3 undefined on input line 105.
+
+[3]
+
+LaTeX Warning: Citation `Hill2012' on page 4 undefined on input line 111.
+
+
+LaTeX Warning: Citation `Hill2012' on page 4 undefined on input line 111.
+
+
+LaTeX Warning: Citation `Abdulkadir2015' on page 4 undefined on input line 129.
+
+
+
+LaTeX Warning: Citation `Oxnard2015' on page 4 undefined on input line 129.
+
+
+LaTeX Warning: Citation `Bilbao2016' on page 4 undefined on input line 129.
+
+
+LaTeX Warning: Citation `Hamilton2014' on page 4 undefined on input line 129.
+
+
+LaTeX Warning: Citation `Savioja2010' on page 4 undefined on input line 129.
+
+
+LaTeX Warning: Citation `Angus2010' on page 4 undefined on input line 129.
+
+
+LaTeX Warning: Citation `excluding some extra boundary handling to ensure stabi
+lity' on page 4 undefined on input line 132.
+
+
+LaTeX Warning: Citation `Doerr2013' on page 4 undefined on input line 132.
+
+
+LaTeX Warning: Citation `Doerr2013' on page 4 undefined on input line 137.
+
+
+LaTeX Warning: Citation `Doerr2013' on page 4 undefined on input line 137.
+
+[4]
+
+LaTeX Warning: Citation `Hornikx2016' on page 5 undefined on input line 141.
+
+
+LaTeX Warning: Citation `Angus2010' on page 5 undefined on input line 141.
+
+
+LaTeX Warning: Citation `Durbridg2016' on page 5 undefined on input line 151.
+
+
+LaTeX Warning: Citation `Durbridg2016' on page 5 undefined on input line 156.
+
+
+LaTeX Warning: Citation `Pirkle2013' on page 5 undefined on input line 160.
+
+
+LaTeX Warning: Citation `Microsoft2016' on page 5 undefined on input line 160.
+
+
+LaTeX Warning: Citation `Galvez2016' on page 5 undefined on input line 160.
+
+[5]
+
+LaTeX Warning: Citation `Microsoft2016' on page 6 undefined on input line 162.
+
+
+LaTeX Warning: Citation `Savioja2010' on page 6 undefined on input line 162.
+
+No file Main.bbl.
+[6] (Main.aux) ) 
+Here is how much of TeX's memory you used:
+ 2625 strings out of 493334
+ 36222 string characters out of 3136241
+ 113995 words of memory out of 3000000
+ 6127 multiletter control sequences out of 15000+200000
+ 7802 words of font info for 28 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 40i,8n,25p,1660b,252s stack positions out of 5000i,500n,10000p,200000b,50000s
+<D:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmbx10.pfb><D:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmbx12.pfb><D:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmbx9.pfb><D:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmmi10.pfb><D:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+mmi5.pfb><D:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmm
+i7.pfb><D:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10
+.pfb><D:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pf
+b><D:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><
+D:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/
+MSC/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><D:/MSC
+/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/MSC/
+Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><D:/MSC/R
+esearch Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on Main.pdf (6 pages, 176464 bytes).
+PDF statistics:
+ 77 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
