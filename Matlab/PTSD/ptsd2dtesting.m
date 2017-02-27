@@ -8,7 +8,7 @@ close all;
 %% Make Variables
 
 %define FS
-fs = 20000.0;
+fs = 24000.0;
 %define density
 rho = 1.21;
 %define speed of sound
@@ -35,9 +35,13 @@ N = ceil(abs(gridWidth/dx)+2*PMLdepth);
 tempdiffmatrix = zeros(1,N);
 % temp = zeros(N, N);
 %Calc source
-src = zeros(1,ceil(T/dt)+1);
-src(10:2010) = (10^-12)*30*10^(50/20) * sin(2*(pi/200)*(1:2001));
-plot((abs(fft(src(1:48000)))))
+% src = zeros(1,ceil(T/dt)+1);
+% src(10:2010) = (10^-12)*30*10^(50/20) * sin(2*(pi/2000)*(1:2001));
+srcGain = (10^-12)*30*10^(50/20) .* (1 : -0.001 : 0);
+hpink = dsp.ColoredNoise(1,48e3,1);
+rng default;
+src = hpink();
+% plot((abs(fft(src(1:48000)))))
 srcloc = ceil(N/2);
 % alpha = 0;
 % calculate geometry matricies
@@ -96,7 +100,7 @@ tic();
 for i = 1 : T/dt
    [pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
      PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
-    pd = PTSD2Dsrc(pd, src(i), srcloc);
+    pd = PTSD2Dsrc(pd, src(i), srcloc, srcGain(i));
     if mod(i, 10)
     mesh(real(pd));
 %     set(gca,'zlim',[-10^-12 10^-12]);
