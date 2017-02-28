@@ -167,7 +167,7 @@ while or((max(max(abs(p(:,:)))) > (p0 * 10^(40/10))),(n < 48000))
     end
     
     [pidxRow, pidxCol, uxidx, uyidx] = SPARSEfun(p, 60);
-    if n > 100
+    if n > 20
     [p, ux, uy] = SFDTD2Dfun(p, pCx, pCy, ux, uy, uCx, uCy, Rx, Ry, ZL,...
         ZR, ZT, ZB, pidxRow, pidxCol);
     else
