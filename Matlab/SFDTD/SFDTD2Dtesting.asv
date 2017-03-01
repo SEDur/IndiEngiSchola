@@ -33,7 +33,7 @@ cstab = sqrt(1/3);
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 5000 * hertz;
+fmax = 48000 * hertz;
 %grid size
 gx = c * (1/fmax) / cstab;
 gy = c * (1/fmax) / cstab;
@@ -193,7 +193,7 @@ end
 leftear = real(10*log10(leftear/p0));
 rightear = real(10*log10(rightear/p0));
 signal = real(10*log10(source1/p0));
-
+figure;
 ax = gca;
 ax = plot(leftear);
 hold on;

@@ -1,0 +1,17 @@
+function [pidxRow, pidxCol, uxidx, uyidx] = SPARSEfun(p, thresholddB)
+
+threshold = 10^-12 * 10^(thresholddB/20);
+
+temp = p ./ threshold;
+
+temp = floor(temp);
+
+temp(temp > 1) = 1;
+
+temp = decimate(temp, 2)
+
+if length(pidxCol) > 1
+surf(p(pidxRow, pidxCol))
+view(2);
+end
+end
