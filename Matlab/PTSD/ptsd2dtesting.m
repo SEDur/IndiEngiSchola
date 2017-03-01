@@ -99,7 +99,7 @@ for i = 1 : T/dt
     caxis([-10^-12 10^-12])
     shading interp;
     title(sprintf('Time = %.6f s',dt*i));
-    drawnow 
+    drawnow;
 end
 toc();
 
