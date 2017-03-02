@@ -6,8 +6,6 @@
 clear all;
 % close all;
 
-figure('color', 'w');
-
 %% Initz Variables
 
 %Units
@@ -39,8 +37,8 @@ gx = c * (1/fmax) / cstab;
 gy = c * (1/fmax) / cstab;
 %Dims
 %Dim Size (m)
-lx = 100*meters;
-ly = 100*meters;
+lx = 20*meters;
+ly = 20*meters;
 
 pidxRow = [];
 pidxCol = [];
@@ -81,6 +79,10 @@ dt = 1/ (c*sqrt((1/(gx^2))+(1/(gy^2))));
 % dt = 3.35563e-4;
 T = 10*seconds ;
 
+figure(1);
+set(1, 'WindowStyle', 'Docked')
+figure(2);
+set(2, 'WindowStyle', 'Docked')
 % generate the source(s) & determine number of time steps needed
 
 tnum = ceil(T/dt);
@@ -98,7 +100,7 @@ source2 = zeros(1,tnum);
 %             source1(1, t0 : t0 + ceil(T/dt) - 1) = y;
 % source1(1,11:1811) = (sin(0:(pi/1800)*2:(2*pi)))*(p0*10^(100/10));
 % source2(1,11:1811) = (sin(0:(pi/1800)*2:(2*pi)))*(p0*10^(100/10));
-source1(1,11:20) = ones(1,10);
+source1(1,11:20) = ones(1,10).*(10^-12*10^(80/10));
 for n = ceil(tnum/10) : 1 : ceil(tnum/10) + 9 
 source1(n) = source1((n-1) * 2);       
 source2(n) = source2((n-1) * 2);
