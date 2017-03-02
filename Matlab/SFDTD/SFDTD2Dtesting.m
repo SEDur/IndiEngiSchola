@@ -39,8 +39,8 @@ gx = c * (1/fmax) / cstab;
 gy = c * (1/fmax) / cstab;
 %Dims
 %Dim Size (m)
-lx = 10*meters;
-ly = 10*meters;
+lx = 100*meters;
+ly = 100*meters;
 
 pidxRow = [];
 pidxCol = [];
@@ -61,7 +61,7 @@ snum = 2;
 %source locations
 % s1loc = [ceil(xcells/3) ceil(ycells/3)];
 % s2loc = [ceil(xcells/1.5) ceil(ycells/1.5)];%source frequency
-s1loc = [ceil((lx/gx)/2) ceil((lx/gy)/8)];
+s1loc = [ceil((lx/gx)/2)-1 ceil((lx/gy)/2)-1];
 s2loc = [ceil((ly/gx)/4) ceil((ly/gy)/2)];%source frequency
 s1Freq = 400;
 s2Freq = 400;
@@ -96,8 +96,9 @@ source2 = zeros(1,tnum);
 %             temp(1 : ceil(length(y)/10)) = gain;
 %             y = y.*temp;
 %             source1(1, t0 : t0 + ceil(T/dt) - 1) = y;
-source1(1,11:1811) = (sin(0:(pi/1800)*2:(2*pi)))*(p0*10^(100/10));
-source2(1,11:1811) = (sin(0:(pi/1800)*2:(2*pi)))*(p0*10^(100/10));
+% source1(1,11:1811) = (sin(0:(pi/1800)*2:(2*pi)))*(p0*10^(100/10));
+% source2(1,11:1811) = (sin(0:(pi/1800)*2:(2*pi)))*(p0*10^(100/10));
+source1(1,11:20) = ones(1,10);
 for n = ceil(tnum/10) : 1 : ceil(tnum/10) + 9 
 source1(n) = source1((n-1) * 2);       
 source2(n) = source2((n-1) * 2);
