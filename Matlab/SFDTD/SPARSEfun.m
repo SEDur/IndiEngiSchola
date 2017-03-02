@@ -1,6 +1,6 @@
 function [idx] = SPARSEfun(p, thresholddB)
 
-threshold = 10^-12 * 10^(thresholddB/20);
+threshold = 10^-12 * 10^(thresholddB/10);
 
 temp = abs(p) ./ threshold;
 

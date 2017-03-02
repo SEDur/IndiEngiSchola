@@ -37,8 +37,8 @@ gx = c * (1/fmax) / cstab;
 gy = c * (1/fmax) / cstab;
 %Dims
 %Dim Size (m)
-lx = 20*meters;
-ly = 20*meters;
+lx = 40*meters;
+ly = 40*meters;
 
 pidxRow = [];
 pidxCol = [];
@@ -49,10 +49,10 @@ xcells = ceil(lx/gx);
 ycells = ceil(lx/gy);
 
 %Boundary Absorption Coefs (0 to 1)
-alphaL = 0.5;
-alphaR = 0.5;
-alphaF = 0.5;
-alphaB = 0.5;
+alphaL = 0.8;
+alphaR = 0.8;
+alphaF = 0.8;
+alphaB = 0.8;
 
 %number of sources
 snum = 2;
@@ -105,6 +105,9 @@ for n = ceil(tnum/10) : 1 : ceil(tnum/10) + 9
 source1(n) = source1((n-1) * 2);       
 source2(n) = source2((n-1) * 2);
 end
+
+source1 = decimate(source1, 2, 'fir')';
+source1 = interp(source1, 2);
 % %             t0 = ceil(T/dt) + 1;
 %             t0 = 10;
 %             t1 = 0 : dt : T;
@@ -169,7 +172,7 @@ while or((max(max(abs(p(:,:)))) > (p0 * 10^(40/10))),(n < 48000))
     10*log10(real(max(max(abs(p(:,:)))))/p0)
     end
     
-    [idx] = SPARSEfun(p, 60);
+    [idx] = SPARSEfun(p, 50);
     [p, ux, uy] = SFDTD2Dfun(p, pCx, pCy, ux, uy, uCx, uCy, Rx, Ry, ZL,...
         ZR, ZT, ZB, idx);
 
