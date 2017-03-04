@@ -1,11 +1,11 @@
 function [p, ux, uy] = SFDTD2Dfun(p, pCx, pCy, ux, uy, uCx, uCy, Rx, Ry, ZL, ZR, ZT, ZB, idx, idx2, idx3)
 
     % update the non-boundary condition nodes for velocity
-%     ux(:, 2:end-1) = ux(:, 2:end-1) - uCx*(p(:, 2:end) - p(:, 1:end-1));
-%     uy(2:end-1, :) = uy(2:end-1, :) - uCy*(p(2:end, :) - p(1:end-1, :));
+    ux(:, 2:end-1) = ux(:, 2:end-1) - uCx*(p(:, 2:end) - p(:, 1:end-1));
+    uy(2:end-1, :) = uy(2:end-1, :) - uCy*(p(2:end, :) - p(1:end-1, :));
 
-    ux(idx2 > 0) = ux(idx2 > 0) - uCx*(p(idx2 > 0) - p(idx > 0));
-    uy(idx3 > 0) = uy(idx3 > 0) - uCy*(p(idx3 > 0) - p(idx > 0));
+    ux(idx > 0) = ux(idx > 0) - uCx*(p(pidxRow, pidxCol+1) - p(pidxRow, pidxCol));
+    uy(pidxRow+1, pidxCol) = uy(pidxRow+1, pidxCol) - uCy*(p(pidxRow+1, pidxCol) - p(pidxRow, pidxCol));
 
 
     % update the velocity at the right wall
