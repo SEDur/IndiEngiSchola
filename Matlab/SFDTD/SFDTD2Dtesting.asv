@@ -126,13 +126,10 @@ ux = zeros(ycells - 1, xcells);
 idx2 = ux;
 uy = zeros(ycells, xcells - 1);
 idx3 = uy;
-
-%% 
 % set up the multiplication constants for the update equations
-uXt = dt/(sqrt(gx^2 + gy^2)*rho);
+uXtr = dt/(*rho)
 uCx = dt/(gx*rho);
 uCy = dt/(gy*rho);
-pCt = c^2*rho*dt/sqrt(gx^2 + gy ^2);
 pCx = c^2*rho*dt/gx;
 pCy = c^2*rho*dt/gy;
 
@@ -178,7 +175,7 @@ while or((max(max(abs(p(:,:)))) > (p0 * 10^(40/10))),(n < 48000))
     end
     
     [idx] = SPARSEfun(p, 60);
-    [p, ux, uy] = SFDTD2Dfun(p, pCx, pCy, pCt, ux, uy, uCx, uCy, uCt, Rx, Ry, ZL,...
+    [p, ux, uy] = SFDTD2Dfun(p, pCx, pCy, ux, uy, uCx, uCy, Rx, Ry, ZL,...
         ZR, ZT, ZB, idx);
 
     % set the pressure at the source location
