@@ -129,7 +129,7 @@ idx3 = uy;
 
 %% 
 % set up the multiplication constants for the update equations
-uXt = dt/(sqrt(gx^2 + gy^2)*rho);
+uCt = dt/(sqrt(gx^2 + gy^2)*rho);
 uCx = dt/(gx*rho);
 uCy = dt/(gy*rho);
 pCt = c^2*rho*dt/sqrt(gx^2 + gy ^2);

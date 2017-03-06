@@ -5,9 +5,7 @@ if(size(idx(idx > 0),1) > 10)
     for i = 1 : size(ux,1)-1
         for i1 = 2 : size(ux,2)-2
             if(idx(i, i1) > 0)
-                ux(i,i1) = ux(i,i1) - uCx*(p(i,i1)-p(i,i1-1))...
-                    - uCt * (p(i-1,i1-1)-p(i+1,i1))...
-                    - uCt * (p(i+1,i1-1)-p(i-1,i1+1));
+                ux(i,i1) = ux(i,i1) - uCx*(p(i,i1)-p(i,i1-1));
             end
         end
     end
@@ -15,9 +13,7 @@ if(size(idx(idx > 0),1) > 10)
     for i = 2 : size(uy,1)-2
         for i1 = 1 : size(uy,2)-1
             if(idx(i, i1) > 0)
-                uy(i,i1) = uy(i,i1) - uCx*(p(i,i1)-p(i-1,i1))...
-                    - uCt * (p(i-1,i1-1)-p(i+1,i1))...
-                    - uCt * (p(i+1,i1-1)-p(i-1,i1+1));
+                uy(i,i1) = uy(i,i1) - uCx*(p(i,i1)-p(i-1,i1));
             end
         end
     end
@@ -49,8 +45,7 @@ if(size(idx(idx > 0),1) > 10)
         for i1 = 1 : size(p,2)
             if(idx(i, i1) > 0)
                 p(i,i1) = p(i,i1) - pCx*(ux(i, i1 + 1) - ux(i, i1))...
-                    - pCy*(uy(i+1, i1) - uy(i, i1))...
-                    - (p(i-1, i1-1) - p(i-1, i1-1);
+                    - pCy*(uy(i+1, i1) - uy(i, i1));
             end
         end
     end
