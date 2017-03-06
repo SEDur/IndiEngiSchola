@@ -2,6 +2,9 @@ function [idx] = SPARSEfun(p, thresholddB)
 
 threshold = 10^-12 * 10^(thresholddB/10);
 
+p(end+1,1:end) = 0;
+p(1:end,end+1) = 0;
+
 temp = abs(p) ./ threshold;
 
 temp = floor(temp);
@@ -19,8 +22,9 @@ end
 temp3(temp3 > 0.1) = 1.0;
 temp3 = round(temp3);
 
+% temp4 = interp2(temp3);
 temp4 = interp2(temp3);
 figure(2);
 mesh(temp4);
-idx = temp4;
+idx = temp4(1:end-1, 1:end-1);
 end
