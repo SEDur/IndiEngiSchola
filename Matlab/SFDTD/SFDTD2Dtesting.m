@@ -40,7 +40,8 @@ gy = c * (1/fmax) / cstab;
 lx = 40*meters;
 ly = 40*meters;
 
-pidx = [];
+pidxRow = [];
+pidxCol = [];
 uxidx = [];
 uyidx = [];
 
@@ -121,13 +122,11 @@ source1 = interp(source1, 2);
 % initialize the velocity and pressure matrices (matrices are set up in a
 % y by x fashion to properly display the 2D space (y = rows, x = columns))
 p = zeros(ycells - 1, xcells - 1);
-idx = p;
 ux = zeros(ycells - 1, xcells);
-idx2 = ux;
 uy = zeros(ycells, xcells - 1);
+
 idx3 = uy;
 
-%% 
 % set up the multiplication constants for the update equations
 uCt = dt/(sqrt(gx^2 + gy^2)*rho);
 uCx = dt/(gx*rho);
@@ -177,6 +176,7 @@ while or((max(max(abs(p(:,:)))) > (p0 * 10^(40/10))),(n < 48000))
     10*log10(real(max(max(abs(p(:,:)))))/p0)
     end
     
+
     [idx] = SPARSEfun(p, 60);
     [p, ux, uy] = SFDTD2Dfun(p, pCx, pCy, pCt, ux, uy, uCx, uCy, uCt, Rx, Ry, ZL,...
         ZR, ZT, ZB, idx);
