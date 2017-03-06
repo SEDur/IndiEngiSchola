@@ -172,7 +172,7 @@ while or((max(max(abs(p(:,:)))) > (p0 * 10^(40/10))),(n < 48000))
     10*log10(real(max(max(abs(p(:,:)))))/p0)
     end
     
-    [idx] = SPARSEfun(p, 50);
+    [idx] = SPARSEfun(p, 62);
     [p, ux, uy] = SFDTD2Dfun(p, pCx, pCy, ux, uy, uCx, uCy, Rx, Ry, ZL,...
         ZR, ZT, ZB, idx);
 
