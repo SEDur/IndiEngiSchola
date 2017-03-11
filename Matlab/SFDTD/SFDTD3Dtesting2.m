@@ -40,28 +40,28 @@ cstab = sqrt(1/3);
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 8000 * hertz;
+fmax = 10000 * hertz;
 %grid size
 gx = c * (1/fmax) / cstab;
 gy = c * (1/fmax) / cstab;
 gz = c * (1/fmax) / cstab;
 %Dims
 %Dim Size (m)
-lx = 10*meters;
-ly = 10*meters;
-lz = 10*meters;
+lx = 3*meters;
+ly = 4*meters;
+lz = 5*meters;
 
 xcells = ceil(lx/gx);
 ycells = ceil(ly/gy);
 zcells = ceil(lz/gz);
 
 %Boundary Absorption Coefs (0 to 1)
-alphaL = 0.5;
-alphaR = 0.5;
-alphaF = 0.5;
-alphaB = 0.5;
-alphaT = 0.5;
-alphaG = 0.5;
+alphaL = 1.0;
+alphaR = 1.0;
+alphaF = 1.0;
+alphaB = 1.0;
+alphaT = 1.0;
+alphaG = 1.0;
 
 %number of sources
 snum = 2;
