@@ -7,16 +7,18 @@ close all;
 
 %% Make Variables
 
+%alpha 
+a = 0.5;
 %define FS
-fs = 5000.0;
+fs = 10c000.0;
 %define density
 rho = 1.21;
 %define speed of sound
 c = 343.0;
 %define total time
-T = 5.0;
+T = 1.0;
 %define grid width
-gridWidth = 50.0;
+gridWidth = 40.0;
 %define timestep
 dt = 1/(2*fs);
 %dfine grid spacing
@@ -26,7 +28,7 @@ pconst = rho * c^2 * (dt/dx) * dt * c;
 %calculate uconst
 uconst = (1/rho)*(dt/dx)*dt*c;
 %define pml depth 
-PMLdepth = 60;
+PMLdepth = ceil(abs(gridWidth/dx)/(2*(fs/c)));
 %calc time steps
 timestep = abs(T/dt);
 %calc grid size
@@ -36,8 +38,21 @@ tempdiffmatrix = zeros(1,N);
 % temp = zeros(N, N);
 %Calc source
 src = zeros(1,ceil(T/dt)+1);
-src(10:2010) = (10^-12)*30*10^(50/20) * sin(2*(pi/2000)*(1:2001));
+% src(10:2010) = (10^-12)*30*10^(50/20) * sin(2*(pi/2000)*(1:2001));
 srcloc = ceil(N/2);
+
+tnum = ceil(T/dt);
+fc = 0.25;     % Cutoff frequency (normalised 0.5=nyquist)
+n0 = 30;        % Initial delay (samples)
+sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
+n=0:tnum;
+src=exp(-dt^2*(n-n0).^2/(2*sigma^2));
+for n = 37 : length(src)
+    if(src(n) < 0)
+       src(n) = 0; 
+    end
+end
+        
 % alpha = 0;
 % calculate geometry matricies
 % phat = zeros(N,N);
@@ -63,7 +78,7 @@ PMLconst = PMLconst .* (3.142*N);
 PMLdiff = zeros(N,N);
 for i = 1 : N
 PMLdiff(i,1:PMLdepth) = 1:PMLdepth;
-PMLdiff(i,1:PMLdepth) = (1/3.0).*(((PMLdepth-PMLdiff(i,1:PMLdepth))./PMLdepth).^3);
+PMLdiff(i,1:PMLdepth) = (a/3.0).*(((PMLdepth-PMLdiff(i,1:PMLdepth))./PMLdepth).^3);
 end
 PMLdiff(:,N-PMLdepth+1:end) = fliplr(PMLdiff(:,1:PMLdepth));
 % mesh(PMLdiff);
@@ -95,6 +110,7 @@ for i = 1 : T/dt
      PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
     pd = PTSD2Dsrc(pd, src(i), srcloc);
     mesh(real(pd));
+    zlim([-10^-9 10^-9]);
 %     set(gca,'zlim',[-10^-12 10^-12]);
     caxis([-10^-12 10^-12])
     shading interp;

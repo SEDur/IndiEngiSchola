@@ -39,17 +39,17 @@ gx = c * (1/fmax) / cstab;
 gy = c * (1/fmax) / cstab;
 %Dims
 %Dim Size (m)
-lx = 10*meters;
-ly = 10*meters;
+lx = 5*meters;
+ly = 4*meters;
 
 xcells = ceil(lx/gx);
 ycells = ceil(lx/gy);
 
 %Boundary Absorption Coefs (0 to 1)
-alphaL = 0.5;
-alphaR = 0.5;
-alphaF = 0.5;
-alphaB = 0.5;
+alphaL = 1.0;
+alphaR = 1.0;
+alphaF = 1.0;
+alphaB = 1.0;
 
 %number of sources
 snum = 2;
@@ -161,7 +161,7 @@ while or((max(max(abs(p(:,:)))) > (p0 * 10^(40/10))),(n < 48000))
     10*log10(real(max(max(abs(p(:,:)))))/p0)
     end
     
-    [p, ux, uy] = SFDTD2Dfun(p, pCx, pCy, ux, uy, uCx, uCy, Rx, Ry, ZL, ZR, ZT, ZB);
+    [p, ux, uy] = FDTD2Dfun(p, pCx, pCy, ux, uy, uCx, uCy, Rx, Ry, ZL, ZR, ZT, ZB);
     % set the pressure at the source location
     % NOTE: source vectors for unused drivers will be zeros
     p(s1loc(1),s1loc(2)) = p(s1loc(1),s1loc(2)) - source1(n);

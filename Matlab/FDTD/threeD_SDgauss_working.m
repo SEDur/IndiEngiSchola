@@ -41,21 +41,21 @@ gy = c * (1/fmax) / cstab;
 gz = c * (1/fmax) / cstab;
 %Dims
 %Dim Size (m)
-lx = 10*meters;
-ly = 10*meters;
-lz = 10*meters;
+lx = 5*meters;
+ly = 4*meters;
+lz = 3*meters;
 
 xcells = ceil(lx/gx);
 ycells = ceil(ly/gy);
 zcells = ceil(lz/gz);
 
 %Boundary Absorption Coefs (0 to 1)
-alphaL = 0.5;
-alphaR = 0.5;
-alphaF = 0.5;
-alphaB = 0.5;
-alphaT = 0.5;
-alphaG = 0.5;
+alphaL = 1.0;
+alphaR = 1.0;
+alphaF = 1.0;
+alphaB = 1.0;
+alphaT = 1.0;
+alphaG = 1.0;
 
 %number of sources
 snum = 2;
@@ -131,7 +131,7 @@ end
         
 % initialize the velocity and pressure matrices (matrices are set up in a
 % y by x fashion to properly display the 2D space (y = rows, x = columns))
-p = zeros(ycells - 1, xcells - 1, zcells - 1);
+p = ones(ycells - 1, xcells - 1, zcells - 1) .* 10^-12*10^(40/20);
 ux = zeros(ycells - 1, xcells, zcells - 1);
 uy = zeros(ycells, xcells - 1, zcells - 1);
 uz = zeros(ycells - 1, xcells - 1, zcells);
