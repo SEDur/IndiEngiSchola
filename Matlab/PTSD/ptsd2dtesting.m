@@ -8,7 +8,7 @@ close all;
 %% Make Variables
 
 %define FS
-fs = 20000.0;
+fs = 5000.0;
 %define density
 rho = 1.21;
 %define speed of sound
@@ -16,7 +16,7 @@ c = 343.0;
 %define total time
 T = 5.0;
 %define grid width
-gridWidth = 30.0;
+gridWidth = 50.0;
 %define timestep
 dt = 1/(2*fs);
 %dfine grid spacing
@@ -36,8 +36,7 @@ tempdiffmatrix = zeros(1,N);
 % temp = zeros(N, N);
 %Calc source
 src = zeros(1,ceil(T/dt)+1);
-src(10:2010) = (10^-12)*30*10^(50/20) * sin(2*(pi/200)*(1:2001));
-plot((abs(fft(src(1:48000)))))
+src(10:2010) = (10^-12)*30*10^(50/20) * sin(2*(pi/2000)*(1:2001));
 srcloc = ceil(N/2);
 % alpha = 0;
 % calculate geometry matricies
@@ -89,22 +88,18 @@ PMLalphap = pconst*(1./(1+PMLdiff));
 PMLdiff = ((1-PMLdiff)./(1+PMLdiff));
 
 %% solve for some time
-h = figure(1);
-set(h,'WindowStyle','docked');
 % linkdata on;
 tic();
 for i = 1 : T/dt
    [pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
      PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
     pd = PTSD2Dsrc(pd, src(i), srcloc);
-    if mod(i, 10)
     mesh(real(pd));
 %     set(gca,'zlim',[-10^-12 10^-12]);
     caxis([-10^-12 10^-12])
     shading interp;
     title(sprintf('Time = %.6f s',dt*i));
     drawnow;
-    end
 end
 toc();
 

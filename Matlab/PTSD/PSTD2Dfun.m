@@ -30,7 +30,7 @@ function[pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
     end
     pdiffhat = ifft(temp,N,1);
 %     surf(real(pdiffhat));
-    ud = ud .* PMLdiff - PMLalphau .* (pdiffhat./PMLconst);
+    ud = -ud .* PMLdiff - PMLalphau .* (-pdiffhat./PMLconst);
 %     surf(real(ud));
     uhat = fft(ud,N,2);
     for i = 1:size(ud, 1)
@@ -44,7 +44,7 @@ function[pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
     end
     udiffhat = ifft(temp,N,1);
 %     surf(real(udiffhat));
-    pd = pd .* PMLdiff - PMLalphap .* (udiffhat./PMLconst);
+    pd = -pd .* PMLdiff - PMLalphap .* (-udiffhat./PMLconst);
 %     surf(real(pd));
 
 end
