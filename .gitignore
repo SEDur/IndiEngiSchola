@@ -41,6 +41,7 @@ local.properties
 *.user
 *.sln.docstates
 *.asv
+*.mat
 # Build results
 
 [Dd]ebug/
