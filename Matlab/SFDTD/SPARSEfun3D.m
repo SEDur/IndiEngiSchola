@@ -33,8 +33,8 @@ temp4(temp4 > 0.1) = 1.0;
 temp4 = round(temp4);
 
 temp5 = interp3(temp4);
-figure(2);
-spy(temp5(:,:,ceil(size(temp5,2)/2)));
-drawnow;
+% figure(2);
+% spy(temp5(:,:,ceil(size(temp5,2)/2)));
+% drawnow;
 idx = temp5();
 end

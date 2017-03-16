@@ -6,7 +6,8 @@
 % clear all;
 % close all;
 %Units
-
+figure(1);
+set(1, 'WindowStyle', 'Docked');
 %Distance
 meters      = 1;
 centimeters = 1e-2 * meters;
@@ -78,7 +79,7 @@ fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
 n0 = 30;        % Initial delay (samples)
 sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
 n=0:tnum;
-source1=exp(-dt^2*(n-n0).^2/(2*sigma^2));
+source1=exp(-dt^2*(n-n0).^2/(2*sigma^2)).*(10^-12*10^(80/20));
 for n = 37 : length(source1)
     if(source1(n) < 0)
        source1(n) = 0; 
@@ -105,12 +106,12 @@ pCz = c^2*rho*dt/gz;
 % impedance.
 
 %Boundary Absorption Coefs (0 to 1)
-alphaL = 1.0;
-alphaR = 1.0;
-alphaF = 1.0;
-alphaB = 1.0;
-alphaT = 1.0;
-alphaG = 1.0;
+alphaL = 0.5;
+alphaR = 0.5;
+alphaF = 0.5;
+alphaB = 0.5;
+alphaT = 0.5;
+alphaG = 0.5;
 
 if alphaR == 0
    alphaR = 1e-016; 

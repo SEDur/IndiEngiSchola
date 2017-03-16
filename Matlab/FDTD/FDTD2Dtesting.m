@@ -33,14 +33,14 @@ cstab = sqrt(1/3);
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 48000 * hertz;
+fmax = 20000 * hertz;
 %grid size
 gx = c * (1/fmax) / cstab;
 gy = c * (1/fmax) / cstab;
 %Dims
 %Dim Size (m)
-lx = 5*meters;
-ly = 4*meters;
+lx = 68*meters;
+ly = 1*meters;
 
 xcells = ceil(lx/gx);
 ycells = ceil(lx/gy);
@@ -56,7 +56,8 @@ snum = 2;
 %source locations
 % s1loc = [ceil(xcells/3) ceil(ycells/3)];
 % s2loc = [ceil(xcells/1.5) ceil(ycells/1.5)];%source frequency
-s1loc = [ceil((lx/gx)/2) ceil((lx/gy)/8)];
+% s1loc = [ceil((lx/gx)/2) ceil((lx/gy)/8)];
+s1loc = [ceil((lx/gx)/2) 2];
 s2loc = [ceil((ly/gx)/4) ceil((ly/gy)/2)];%source frequency
 s1Freq = 400;
 s2Freq = 400;
@@ -67,8 +68,11 @@ s2Phase = 0;
 A = 1;
 
 %recieves position
-recieverleftloc = [ceil(lx/gx/2.42) ceil(ly/gx/8)];
+% recieverleftloc = [ceil(lx/gx/2.42) ceil(ly/gx/8)];
+% recieverrightloc = [ceil(lx/gx/2.27) ceil(ly/gx/8)];
+recieverleftloc = [ceil(xcells/2) ycells-2];
 recieverrightloc = [ceil(lx/gx/2.27) ceil(ly/gx/8)];
+
 
 %Time of sim
 % dt = 1/ (c*sqrt(3/(gx)^2));
@@ -91,7 +95,7 @@ source2 = zeros(1,tnum);
 %             temp(1 : ceil(length(y)/10)) = gain;
 %             y = y.*temp;
 %             source1(1, t0 : t0 + ceil(T/dt) - 1) = y;
-source1(1,11:1811) = (sin(0:(pi/1800)*2:(2*pi)))*(p0*10^(100/10));
+source1(1,1:1801) = (sin(0:(pi/1800)*2:(2*pi)))*(p0*10^(100/10));
 source2(1,11:1811) = (sin(0:(pi/1800)*2:(2*pi)))*(p0*10^(100/10));
 for n = ceil(tnum/10) : 1 : ceil(tnum/10) + 9 
 source1(n) = source1((n-1) * 2);       

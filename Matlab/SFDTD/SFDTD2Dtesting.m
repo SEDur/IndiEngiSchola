@@ -31,14 +31,14 @@ cstab = sqrt(1/3);
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 5000 * hertz;
+fmax = 10000 * hertz;
 %grid size
 gx = c * (1/fmax) / cstab;
 gy = c * (1/fmax) / cstab;
 %Dims
 %Dim Size (m)
-lx = 40*meters;
-ly = 40*meters;
+lx = 10*meters;
+ly = 10*meters;
 
 pidxRow = [];
 pidxCol = [];

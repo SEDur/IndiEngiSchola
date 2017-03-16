@@ -39,16 +39,16 @@ set(2, 'WindowStyle', 'Docked')
 %% Hard Coded Variables
 
 %Maximum calculation frequency
-fmax = 2000 * hertz;
+fmax = 5000 * hertz;
 %grid size
 gx = c * (1/fmax) / cstab;
 gy = c * (1/fmax) / cstab;
 gz = c * (1/fmax) / cstab;
 %Dims
 %Dim Size (m)
-lx = 10*meters;
-ly = 10*meters;
-lz = 10*meters;
+lx = 5*meters;
+ly = 5*meters;
+lz = 5*meters;
 
 xcells = ceil(lx/gx);
 ycells = ceil(ly/gy);
@@ -107,22 +107,22 @@ source2 = zeros(1,tnum);
 % source1(1,11:1811) = (sin(0:(pi/1800)*2:(2*pi)))*(p0*10^(100/10));
 % source2(1,11:1811) = (sin(0:(pi/1800)*2:(2*pi)))*(p0*10^(100/10));
 %% Source 1 Gauss
-fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
-n0 = 30;        % Initial delay (samples)
-sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
-n=0:tnum;
-source1=exp(-dt^2*(n-n0).^2/(2*sigma^2));
-for n = 37 : length(source1)
-    if(source1(n) < 0)
-       source1(n) = 0; 
-    end
-end
-%% Source 1 step
-% source1(1,11:20) = ones(1,10).*(10^-12*10^(90/10));
-% for n = ceil(tnum/10) : 1 : ceil(tnum/10) + 9 
-% source1(n) = source1((n-1) * 2);       
-% source2(n) = source2((n-1) * 2);
+% fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
+% n0 = 30;        % Initial delay (samples)
+% sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
+% n=0:tnum;
+% source1=exp(-dt^2*(n-n0).^2/(2*sigma^2)).*(10^-12*10^(80/20));
+% for n = 37 : length(source1)
+%     if(source1(n) < 0)
+%        source1(n) = 0; 
+%     end
 % end
+%% Source 1 step
+source1(1,5:7) = ones(1,3).*(10^-12*10^(40/20));
+for n = ceil(tnum/10) : 1 : ceil(tnum/10) + 9 
+source1(n) = source1((n-1) * 2);       
+source2(n) = source2((n-1) * 2);
+end
 
 source1 = decimate(source1, 2, 'fir')';
 source1 = interp(source1, 2);
@@ -212,7 +212,7 @@ while or((meanpstore(n) > (max(meanpstore)-60)),(n < (1600)))
     if mod(n,100)
     (100/tnum)*n
     end
-    [idx] = SPARSEfun3D(p, 60);
+    [idx] = SPARSEfun3D(p, 40);
     [p, ux, uy] = SFDTD3Dfun(p, pCx, pCy, pCz, ux, uy, uz, uCx, uCy, uCz, Rx, Ry, Rz, ZL, ZR, ZT, ZB, ZF, ZB, idx);
     
     % Input source
@@ -231,7 +231,7 @@ while or((meanpstore(n) > (max(meanpstore)-60)),(n < (1600)))
 %         zslice = (ceil(zcells-1)/2);
 %         slice(abs(p),xslice,yslice,zslice)
         zslice = (ceil(zcells-1)/2);
-        figure(1);
+%         figure(1);
         slice(abs(p),[xcells-1 ceil(xcells/2)],ycells-1,zslice) 
 %         shading interp;
         title(sprintf('Time = %.6f s Max P = %.3f dB',n*dt,10*log10(real(max(max(max(abs(p(:,:,:))))))/p0)),...

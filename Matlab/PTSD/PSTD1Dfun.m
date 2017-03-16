@@ -22,5 +22,5 @@ function[pd, ud] = PSTD1Dfun(pd, ud, diffmatrix,...
     temp = uhat .* diffmatrix;
     udiffhat = ifft(temp);
     pd = pd .* PMLdiff - PMLalphap .* (udiffhat./PMLconst);
-
+    
 end

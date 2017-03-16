@@ -1,6 +1,6 @@
 function [p, ux, uy, uz] = SFDTD3Dfun(p, pCx, pCy, pCz, ux, uy, uz, uCx, uCy, uCz, Rx, Ry, Rz, ZL, ZR, ZT, ZB, ZF, ZG, idx)
 
-if(size(idx(idx > 0),1) > 10)
+if(size(idx(idx > 0),1) > 100)
     %  mat(col, row)
     for i = 1 : size(ux,1)-1
         for i1 = 2 : size(ux,2)-2
@@ -21,9 +21,9 @@ if(size(idx(idx > 0),1) > 10)
             end
         end
     end
-    for i = 1 : size(uz,1)-2
+    for i = 1 : size(uz,1)-1
         for i1 = 1 : size(uz,2)-1
-            for i2 = 2 : size(uz,3)-1
+            for i2 = 2 : size(uz,3)-2
                 if(idx(i, i1, i2) > 0)
                     uz(i,i1,i2) = uz(i,i1,i2) - uCx*(p(i,i1, i2)-p(i,i1, i2-1));
                 end
@@ -59,7 +59,7 @@ uz(:, :, end) = ((Rz - ZT)/(Rz + ZT))*uz(:, :, end) + ...
 uz(:, :, 1) = ((Rz - ZG)/(Rz + ZG))*uz(:, :, 1) - ...
     (2/(Rz + ZG))*p(:, :, 1);
 
-if(size(idx(idx > 0),1) > 10)
+if(size(idx(idx > 0),1) > 100)
     for i = 1 : size(p,1)
         for i1 = 1 : size(p,2)
             for i2 = 1 : size(p,3)
