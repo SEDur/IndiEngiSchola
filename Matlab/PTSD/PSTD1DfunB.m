@@ -8,7 +8,7 @@
 % permission
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function[pressure, velocity] = PSTD1Dfun(pressure, velocity, diffmatrix,...
+function[pressure, velocity] = PSTD1DfunB(pressure, velocity, diffmatrix,...
      PMLdiff, PMLalphau, PMLalphap, PMLconst)
     %% Function solves using the PSTD method for a pressure vector,...
     %  velocity vector and differentiation impulse response in 1 dimension
@@ -17,10 +17,12 @@ function[pressure, velocity] = PSTD1Dfun(pressure, velocity, diffmatrix,...
     phat = fft(pressure);
     temp = phat .* diffmatrix;
     pdiffhat = ifft(temp);
-    velocity = velocity .* PMLdiff - PMLalphau .* (pdiffhat./PMLconst); 
+    velocity = velocity .* PMLdiff  - PMLalphau  .* (pdiffhat ./PMLconst); 
+
     uhat = fft(velocity);
     temp = uhat .* diffmatrix;
     udiffhat = ifft(temp);
-    pressure = pressure .* PMLdiff - PMLalphap .* (udiffhat./PMLconst);
+    pressure  = pressure  .* PMLdiff  - PMLalphap  .* (udiffhat ./PMLconst);
+
     
 end
