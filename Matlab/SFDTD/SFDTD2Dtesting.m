@@ -37,8 +37,8 @@ gx = c * (1/fmax) / cstab;
 gy = c * (1/fmax) / cstab;
 %Dims
 %Dim Size (m)
-lx = 10*meters;
-ly = 10*meters;
+lx = 30*meters;
+ly = 30*meters;
 
 pidxRow = [];
 pidxCol = [];
@@ -177,7 +177,7 @@ while or((max(max(abs(p(:,:)))) > (p0 * 10^(40/10))),(n < 48000))
     end
     
 
-    [idx] = SPARSEfun(p, 60);
+    [idx] = SPARSEfun2DB(p, 60);
     [p, ux, uy] = SFDTD2Dfun(p, pCx, pCy, pCt, ux, uy, uCx, uCy, uCt, Rx, Ry, ZL,...
         ZR, ZT, ZB, idx);
 
@@ -189,16 +189,16 @@ while or((max(max(abs(p(:,:)))) > (p0 * 10^(40/10))),(n < 48000))
     leftear(n) = abs(p(recieverleftloc(1),recieverleftloc(2)));
     rightear(n) = abs(p(recieverrightloc(1),recieverrightloc(2)));
     %PLOTTING SECTION
-        figure(1);
-        surf(linex, liney, abs(p));
-        shading interp;
-        title(sprintf('Time = %.6f s',n*dt),...
-            'Color',[0 0 0],'FontSize', 14);
-        xlabel('Width (meters)', 'Color', [0 0 0]);
-        ylabel('Length (meters)', 'Color', [0 0 0]);
-        view(2);
-%         view([25.6 61.2]);
-        drawnow;
+%         figure(1);
+%         surf(linex, liney, abs(p));
+%         shading interp;
+%         title(sprintf('Time = %.6f s',n*dt),...
+%             'Color',[0 0 0],'FontSize', 14);
+%         xlabel('Width (meters)', 'Color', [0 0 0]);
+%         ylabel('Length (meters)', 'Color', [0 0 0]);
+%         view(2);
+% %         view([25.6 61.2]);
+%         drawnow;
         
 end
 leftear = real(10*log10(leftear/p0));
