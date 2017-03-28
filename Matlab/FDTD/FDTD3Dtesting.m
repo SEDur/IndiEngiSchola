@@ -8,24 +8,7 @@
 %Units
 figure(1);
 set(1, 'WindowStyle', 'Docked');
-%Distance
-meters      = 1;
-centimeters = 1e-2 * meters;
-millimeters = 1e-3 * meters;
-inches      = 2.54 * centimeters;
-feet        = 12 * inches;
-%Time
-seconds     = 1; 
-hertz       = 1/seconds;
-kilohertz   = 1e3 * hertz;
-megahertz   = 1e6 * hertz;
-gigahertz   = 1e9 * hertz;
 
-% constants
-c     = 343 * meters / seconds; %Speed of sound m/s
-rho    = 1.21; %Density of air kg/m^3
-p0 = 10^-12;
-cstab = sqrt(1/3);
 %%
 %%Hard Code Variables
 %Maximum calculation frequency

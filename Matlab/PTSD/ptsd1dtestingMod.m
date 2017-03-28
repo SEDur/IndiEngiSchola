@@ -37,8 +37,8 @@ tempdiffmatrix = zeros(1,N);
 temp = zeros(1, N);
 
 %Boundary Absorption Coefs (0 to 1)
-alphaL = 0.001;
-alphaR = 0.001;
+alphaL = 1.0;
+alphaR = 1.0;
 
 %Calc source
 src = zeros(1,ceil(T/(dt/2))+1);
@@ -83,12 +83,12 @@ linex = linspace(0, gridWidth - dx, N);
 diffmatrix = 1i * tempdiffmatrix;
 PMLconst = ones(1,N);
 PMLconst = PMLconst .* (3.142*N);
-PMLdiff = zeros(1,N);
-PMLdiff(1:PMLdepth) = 1:PMLdepth;
-PMLdiff(N-(PMLdepth-1):end) = N -(PMLdepth-1) : N;
-PMLdiff(1:PMLdepth) = (1.0/3.0).*(((PMLdepth-PMLdiff(1:PMLdepth))./PMLdepth).^3);
-PMLdiff(N-(PMLdepth-1) : end) = (1.0/3.0)*(((PMLdiff(N-(PMLdepth-1) : end)-(N-(PMLdepth-1)))./PMLdepth).^3);
-% PMLdiff = zeros(1, N);
+% PMLdiff = zeros(1,N);
+% PMLdiff(1:PMLdepth) = 1:PMLdepth;
+% PMLdiff(N-(PMLdepth-1):end) = N -(PMLdepth-1) : N;
+% PMLdiff(1:PMLdepth) = (1.0/3.0).*(((PMLdepth-PMLdiff(1:PMLdepth))./PMLdepth).^3);
+% PMLdiff(N-(PMLdepth-1) : end) = (1.0/3.0)*(((PMLdiff(N-(PMLdepth-1) : end)-(N-(PMLdepth-1)))./PMLdepth).^3);
+PMLdiff = zeros(1, N);
 PMLalphau = uconst*(1./(1+PMLdiff));
 PMLalphap = pconst*(1./(1+PMLdiff));
 PMLdiff = ((1.0-PMLdiff)./(1.0+PMLdiff));

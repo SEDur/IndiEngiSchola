@@ -1,4 +1,4 @@
-classdef Initz
+classdef Simulation
     %Class def does here
     properties
         %Sim Properties
@@ -6,13 +6,11 @@ classdef Initz
         noDims
         problemSize
         fmax
-        dx
-        dy
-        dz
+        lx
+        ly
+        lz
         T
-        dt
         Consts
-        sampleRate
         %Sim Boundary
         alphaXP
         alphaXN
@@ -57,12 +55,21 @@ classdef Initz
         
         
     end
+
     methods
-        function obj = Initz (simMethod, noDims, problemSize, fmax)
+        function obj = Simulation (simMethod, noDims, problemSize, fmax)
             obj.Consts = Consts;
+            obj.lx = problemSize(1);
+            if length(problemSize) > 1
+                obj.ly = problemSize(2);
+            end
+            if length(problemSize) > 2
+                obj.lz = problemSize(3);
+            end
             obj.fmax = fmax;
             obj.sampleRate = 2*fmax;
             obj.simMethod = simMethod;
+            
             switch simMethod
                 case 'fdtd'
                     switch noDims
@@ -94,4 +101,23 @@ classdef Initz
             end
         end
     end
+        properties (Dependent)
+        domainVolume
+        sampleRate
+        end
+        methods
+            function value = get.domainVolume(obj)
+                switch obj.noDims
+                    case 1
+                        value = obj.lx;
+                    case 2
+                        value = obj.lx * obj.ly;
+                    case 3
+                        value = obj.lx * obj.ly * obj.lz;
+                end
+            end
+            function value = get.sampleRate(obj)
+                value = 2 * obj.fmax;
+            end
+        end
 end

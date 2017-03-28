@@ -10,7 +10,7 @@ close all;
 %alpha 
 a = 0.5;
 %define FS
-fs = 10c000.0;
+fs = 10000.0;
 %define density
 rho = 1.21;
 %define speed of sound
