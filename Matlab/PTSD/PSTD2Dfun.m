@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function[pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
-     PMLdiff, PMLalphau, PMLalphap, PMLconst, N)
+     PMLdiff, PMLalphau, PMLalphap, PMLconst, N, PMLdepth)
     phat = zeros(N,N);
     uhat = zeros(N,N);
     pdiffhat = zeros(N,N);
@@ -19,32 +19,32 @@ function[pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
     %  velocity vector and differentiation impulse response in 1 dimension
     %  and returns the solved pressure and velocity vectors
     phat = fft(pd,N,2);
-    for i = 1:size(pd, 1)
+    for i = PMLdepth:size(pd, 1)-PMLdepth
         temp(i,:) = phat(i,:) .* diffmatrix;
     end
-    pdiffhat = ifft(temp,N,2);
+    pdiffhat = real(ifft(temp,N,2));
 %     surf(real(pdiffhat));
     phat = fft(pdiffhat,N,1);
-    for i = 1:size(pd, 2)
+    for i = PMLdepth:size(pd, 2)-PMLdepth
         temp(:,i) = phat(:,i) .* diffmatrix';
     end
-    pdiffhat = ifft(temp,N,1);
+    pdiffhat = real(ifft(temp,N,1));
 %     surf(real(pdiffhat));
-    ud = -ud .* PMLdiff - PMLalphau .* (-pdiffhat./PMLconst);
+    ud = ud .* PMLdiff - PMLalphau .* (pdiffhat./PMLconst);
 %     surf(real(ud));
     uhat = fft(ud,N,2);
-    for i = 1:size(ud, 1)
+    for i = PMLdepth:size(ud, 1)-PMLdepth
         temp(i,:) = uhat(i,:) .* diffmatrix;
     end
-    udiffhat = ifft(temp,N,2);
+    udiffhat = real(ifft(temp,N,2));
 %     surf(real(udiffhat));
     uhat = fft(udiffhat,N,1);
-    for i = 1:size(ud, 2)
+    for i = PMLdepth:size(ud, 2)-PMLdepth
         temp(:,i) = uhat(:,i) .* diffmatrix';
     end
-    udiffhat = ifft(temp,N,1);
+    udiffhat = real(ifft(temp,N,1));
 %     surf(real(udiffhat));
-    pd = -pd .* PMLdiff - PMLalphap .* (-udiffhat./PMLconst);
+    pd = pd .* PMLdiff - PMLalphap .* (udiffhat./PMLconst);
 %     surf(real(pd));
 
 end

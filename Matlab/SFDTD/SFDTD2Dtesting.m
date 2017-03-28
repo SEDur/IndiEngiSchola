@@ -1,4 +1,4 @@
-% twoD.m
+%
 % S Durbridge 
 % 2016
 
@@ -37,8 +37,8 @@ gx = c * (1/fmax) / cstab;
 gy = c * (1/fmax) / cstab;
 %Dims
 %Dim Size (m)
-lx = 30*meters;
-ly = 30*meters;
+lx = 50*meters;
+ly = 50*meters;
 
 pidxRow = [];
 pidxCol = [];
@@ -100,7 +100,7 @@ source2 = zeros(1,tnum);
 %             source1(1, t0 : t0 + ceil(T/dt) - 1) = y;
 % source1(1,11:1811) = (sin(0:(pi/1800)*2:(2*pi)))*(p0*10^(100/10));
 % source2(1,11:1811) = (sin(0:(pi/1800)*2:(2*pi)))*(p0*10^(100/10));
-source1(1,11:20) = ones(1,10).*(10^-12*10^(90/10));
+source1(1,11:20) = ones(1,10).*(p0*10^(90/20));
 for n = ceil(tnum/10) : 1 : ceil(tnum/10) + 9 
 source1(n) = source1((n-1) * 2);       
 source2(n) = source2((n-1) * 2);
@@ -169,6 +169,7 @@ leftear = zeros(1,tnum);
 rightear = zeros(1,tnum);
 % loop to update the velocities and pressures over the time steps, n
 n = 1;
+figure(1);
 while or((max(max(abs(p(:,:)))) > (p0 * 10^(40/10))),(n < 48000))
     n = n + 1;
     if mod(n,100)
@@ -177,7 +178,8 @@ while or((max(max(abs(p(:,:)))) > (p0 * 10^(40/10))),(n < 48000))
     end
     
 
-    [idx] = SPARSEfun2DB(p, 60);
+%     [idx] = SPARSEfun2DB(p, 60);
+    [idx] = SPARSEfun(p, 60);
     [p, ux, uy] = SFDTD2Dfun(p, pCx, pCy, pCt, ux, uy, uCx, uCy, uCt, Rx, Ry, ZL,...
         ZR, ZT, ZB, idx);
 
@@ -190,15 +192,15 @@ while or((max(max(abs(p(:,:)))) > (p0 * 10^(40/10))),(n < 48000))
     rightear(n) = abs(p(recieverrightloc(1),recieverrightloc(2)));
     %PLOTTING SECTION
 %         figure(1);
-%         surf(linex, liney, abs(p));
-%         shading interp;
-%         title(sprintf('Time = %.6f s',n*dt),...
-%             'Color',[0 0 0],'FontSize', 14);
-%         xlabel('Width (meters)', 'Color', [0 0 0]);
-%         ylabel('Length (meters)', 'Color', [0 0 0]);
+        surf(linex, liney, real(p0.*log10(real(p)./20)));
+        shading interp;
+        title(sprintf('Time = %.6f s',n*dt),...
+            'Color',[0 0 0],'FontSize', 14);
+        xlabel('Width (meters)', 'Color', [0 0 0]);
+        ylabel('Length (meters)', 'Color', [0 0 0]);
 %         view(2);
 % %         view([25.6 61.2]);
-%         drawnow;
+        drawnow;
         
 end
 leftear = real(10*log10(leftear/p0));

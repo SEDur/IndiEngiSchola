@@ -24,7 +24,7 @@ temp3 = round(temp3);
 
 % temp4 = interp2(temp3);
 temp4 = interp2(temp3);
-figure(2);
-mesh(temp4);
+% figure(2);
+% mesh(temp4);
 idx = temp4(1:end-1, 1:end-1);
 end

@@ -17,16 +17,19 @@ c = 343.0;
 %define total time
 T = 1.1;
 %define grid width
-gridWidth = 10.0;
+gridWidth = 30.0;
 %define timestep
 dt = 1/fs;
+% dt = 1/(2*fs);
 %dfine grid spacing
 dx = c * sqrt(2) * dt;
+% dx = 2*dt*c;
 %calculate pconst
 pconst = rho * c^2 * (dt/dx);
+% pconst = rho*c^2*(dt/dx)*dt*c;
 %calculate uconst
-% uconst = (1/rho)*(dt/dx);
 uconst = dt/(dx*rho);
+% uconst = (1/rho)*(dt/dx)*dt*c;
 
 %define pml depth 
 PMLdepth = 30;

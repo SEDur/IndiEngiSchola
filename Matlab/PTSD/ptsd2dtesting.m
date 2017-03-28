@@ -8,27 +8,29 @@ close all;
 %% Make Variables
 
 %alpha 
-a = 0.5;
+a = 1.0;
 %define FS
-fs = 10c000.0;
+fs = 10000.0;
 %define density
 rho = 1.21;
 %define speed of sound
 c = 343.0;
 %define total time
-T = 1.0;
+T = 4.0;
 %define grid width
-gridWidth = 40.0;
+gridWidth = 10.0;
 %define timestep
-dt = 1/(2*fs);
+dt = 1/fs;
 %dfine grid spacing
-dx = 2 * dt * c;
+dx = c * sqrt(2) * dt;
 %calculate pconst
-pconst = rho * c^2 * (dt/dx) * dt * c;
+pconst = rho * c^2 * (dt/dx);
 %calculate uconst
-uconst = (1/rho)*(dt/dx)*dt*c;
+uconst = (1/rho)*(dt/dx);
 %define pml depth 
-PMLdepth = ceil(abs(gridWidth/dx)/(2*(fs/c)));
+% PMLdepth = ceil(abs(gridWidth/dx)/(10*(fs/c)));
+PMLdepth = 100;
+
 %calc time steps
 timestep = abs(T/dt);
 %calc grid size
@@ -40,18 +42,21 @@ tempdiffmatrix = zeros(1,N);
 src = zeros(1,ceil(T/dt)+1);
 % src(10:2010) = (10^-12)*30*10^(50/20) * sin(2*(pi/2000)*(1:2001));
 srcloc = ceil(N/2);
+% 
+% tnum = ceil(T/dt);
+% fc = 0.25;     % Cutoff frequency (normalised 0.5=nyquist)
+% n0 = 30;        % Initial delay (samples)
+% sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
+% n=0:tnum;
+% src=exp(-dt^2*(n-n0).^2/(2*sigma^2));
+% for n = 37 : length(src)
+%     if(src(n) < 0)
+%        src(n) = 0; 
+%     end
+% end
 
-tnum = ceil(T/dt);
-fc = 0.25;     % Cutoff frequency (normalised 0.5=nyquist)
-n0 = 30;        % Initial delay (samples)
-sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
-n=0:tnum;
-src=exp(-dt^2*(n-n0).^2/(2*sigma^2));
-for n = 37 : length(src)
-    if(src(n) < 0)
-       src(n) = 0; 
-    end
-end
+
+src(10:4010) = (10^-12*10^(50/20)) * sin(2*(pi/8010)*(1:4001));
         
 % alpha = 0;
 % calculate geometry matricies
@@ -102,22 +107,24 @@ PMLalphau = uconst*(1./(1+PMLdiff));
 PMLalphap = pconst*(1./(1+PMLdiff));
 PMLdiff = ((1-PMLdiff)./(1+PMLdiff));
 
+linex = 0 : dx : (size(pd, 1)-1)*dx;
 %% solve for some time
 % linkdata on;
-tic();
+% tic();
 for i = 1 : T/dt
    [pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
-     PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
+     PMLdiff, PMLalphau, PMLalphap, PMLconst, N, PMLdepth);
     pd = PTSD2Dsrc(pd, src(i), srcloc);
-    mesh(real(pd));
-    zlim([-10^-9 10^-9]);
-%     set(gca,'zlim',[-10^-12 10^-12]);
-    caxis([-10^-12 10^-12])
-    shading interp;
-    title(sprintf('Time = %.6f s',dt*i));
+    mesh(linex, linex, pd);
+%     zlim([-4e-10 4e-10]);
+% %     set(gca,'zlim',[-10^-12 10^-12]);
+% %     caxis([-10^-12 10^-12])
+%     shading interp;
+%     title(sprintf('Time = %.6f s',dt*i));
     drawnow;
+i
 end
-toc();
+% toc();
 
 %% Display the results
 

@@ -24,7 +24,7 @@ temp3(temp3 > 1) = 1;
 
 temp4 = ceil(interp2(temp3));
 % figure(2);
-mesh(temp4);
-drawnow;
+% mesh(temp4);
+% drawnow;
 idx = temp4(1:end-1, 1:end-1);
 end
