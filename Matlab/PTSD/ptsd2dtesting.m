@@ -3,32 +3,33 @@
 %% Initz
 clc;
 clear all;
-close all;
+% close all;
 
 %% Make Variables
 
 %alpha 
-a = 0.5;
+a = 1.0;
 %define FS
-fs = 10000.0;
+fs = 2000.0;
 %define density
 rho = 1.21;
 %define speed of sound
 c = 343.0;
 %define total time
-T = 1.0;
+T = 5.0;
 %define grid width
-gridWidth = 40.0;
+gridWidth = 10.0;
 %define timestep
-dt = 1/(2*fs);
+dt = 1/fs;
 %dfine grid spacing
-dx = 2 * dt * c;
+dx = c * sqrt(2) * dt;
 %calculate pconst
-pconst = rho * c^2 * (dt/dx) * dt * c;
+pconst = rho * c^2 * (dt/dx);
 %calculate uconst
-uconst = (1/rho)*(dt/dx)*dt*c;
+uconst = dt/(dx*rho);
 %define pml depth 
-PMLdepth = ceil(abs(gridWidth/dx)/(2*(fs/c)));
+% PMLdepth = ceil(abs(gridWidth/dx)/(2*(fs/c)));
+PMLdepth = 30;
 %calc time steps
 timestep = abs(T/dt);
 %calc grid size
@@ -37,21 +38,24 @@ N = ceil(abs(gridWidth/dx)+2*PMLdepth);
 tempdiffmatrix = zeros(1,N);
 % temp = zeros(N, N);
 %Calc source
+sStart = 44100 * 40;
 src = zeros(1,ceil(T/dt)+1);
-% src(10:2010) = (10^-12)*30*10^(50/20) * sin(2*(pi/2000)*(1:2001));
-srcloc = ceil(N/2);
+src(10:1010) = (10^-12)*10^(50/20) * sin(2*(pi/200)*(1:1001));
+% music = audioread('track.mp3');
+% src = (10^-12)*10^(50/20) .* music(sStart:sStart + length(src));
+srcloc = ceil(N/3);
 
-tnum = ceil(T/dt);
-fc = 0.25;     % Cutoff frequency (normalised 0.5=nyquist)
-n0 = 30;        % Initial delay (samples)
-sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
-n=0:tnum;
-src=exp(-dt^2*(n-n0).^2/(2*sigma^2));
-for n = 37 : length(src)
-    if(src(n) < 0)
-       src(n) = 0; 
-    end
-end
+% tnum = ceil(T/dt);
+% fc = 0.25;     % Cutoff frequency (normalised 0.5=nyquist)
+% n0 = 30;        % Initial delay (samples)
+% sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
+% n=0:tnum;
+% src=exp(-dt^2*(n-n0).^2/(2*sigma^2));
+% for n = 37 : length(src)
+%     if(src(n) < 0)
+%        src(n) = 0; 
+%     end
+% end
         
 % alpha = 0;
 % calculate geometry matricies
@@ -72,7 +76,13 @@ ud = zeros(N,N);
             tempdiffmatrix(i2) = (i2 - 1 - N) ;
         end
     end
-diffmatrix = 1i * tempdiffmatrix;
+% diffmatrix = 1i * tempdiffmatrix;
+
+[mgx mgy] = meshgrid([tempdiffmatrix tempdiffmatrix]);
+[mhx mhy] = meshgrid(-[fliplr(tempdiffmatrix) -fliplr(tempdiffmatrix)]);
+
+diffmatrix = 1i.*(((mgx(1:N,1:N) + mgy(1:N,1:N))./2) + ((mhx(1:N,1:N) + mhy(1:N,1:N))./2))./2; 
+
 PMLconst = ones(N,N);
 PMLconst = PMLconst .* (3.142*N);
 PMLdiff = zeros(N,N);
@@ -110,7 +120,8 @@ for i = 1 : T/dt
      PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
     pd = PTSD2Dsrc(pd, src(i), srcloc);
     mesh(real(pd));
-    zlim([-10^-9 10^-9]);
+    reciever(i) = pd(ceil(N/2), ceil(N/2));
+    zlim([-10^-09 10^-09]);
 %     set(gca,'zlim',[-10^-12 10^-12]);
     caxis([-10^-12 10^-12])
     shading interp;

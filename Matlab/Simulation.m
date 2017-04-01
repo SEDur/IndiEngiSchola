@@ -100,6 +100,14 @@ classdef Simulation
                     end
             end
         end
+        function run(obj)
+            obj.Engine.uCacl;
+            obj.Engine.uBoundary;
+            obj.Engine.pCalc;
+            obj.Engine.pBoundary;
+            obj.Engine.source;
+            obj.Engine.recieve;
+        end
     end
         properties (Dependent)
         domainVolume
