@@ -11,17 +11,17 @@ clear all;
 %alpha 
 a = 1.0;
 %define FS
-fs = 4000.0;
+fs = 10000.0;
 %define density
 rho = 1.21;
 %define speed of sound
 c = 343.0;
 %define total time
-T = 2.0;
+T = 20.0;
 %define grid width
 gridWidth = 10.0;
 %define timestep
-dt = (1/fs)/2;
+dt = (1/fs);
 %dfine grid spacing
 dx = c * sqrt(2) * dt;
 %calculate pconst
@@ -67,7 +67,9 @@ spin = -180 :0.005 : 180;
 % pdiffhat = zeros(N,N);
 % udiffhat = zeros(N,N);
 pd = zeros(N,N);
-ud = zeros(N,N);
+udx = zeros(N,N);
+udy = zeros(N,N);
+% udy = zeros(N,N);
     for i2 = 1 : N-1
         if i2 <  ceil((N-2)/2)
             tempdiffmatrix(i2) =  (i2-1);
@@ -85,11 +87,11 @@ ud = zeros(N,N);
 [mhx mhy] = meshgrid(-[fliplr(tempdiffmatrix) -fliplr(tempdiffmatrix)]);
 
 % diffmatrix =  1i.*-(((mgx(1:N,1:N) + mgy(1:N,1:N))./2) + ((mhx(1:N,1:N) + mhy(1:N,1:N))./2))./2; 
-diffmatrix =  1i.*-((mgx(1:N,1:N) + mgy(1:N,1:N))./2) ;
+diffmatrix =  1i.*(mgx(1:N,1:N)) ;
 
 
 PMLconst = ones(N,N);
-PMLconst = PMLconst .* (3.142*N);
+PMLconst = PMLconst .* (pi*N);
 PMLdiff = zeros(N,N);
 for i = 1 : N
 PMLdiff(i,1:PMLdepth) = 1:PMLdepth;
@@ -121,7 +123,7 @@ PMLdiff = ((1-PMLdiff)./(1+PMLdiff));
 % linkdata on;
 tic();
 for i = 1 : T/dt
-   [pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
+   [pd, udx, udy] = PSTD2Dfun(pd, udx, udy, diffmatrix,...
      PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
     pd = PTSD2Dsrc(pd, src(i), srcloc);
     reciever(i) = pd(ceil(N/2), ceil(N/2));
@@ -130,7 +132,7 @@ for i = 1 : T/dt
     
 %     zlim([-10^-10 10^-10]);
 %     set(gca,'zlim',[-10^-12 10^-12]);
-    caxis([-10^-12 10^-12])
+%     caxis([-10^-12 10^-12])
     shading interp;
     title(sprintf('Time = %.6f s',dt*i));
 %     view([spin(i) 13]);

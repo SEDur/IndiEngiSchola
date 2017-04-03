@@ -8,12 +8,15 @@
 % permission
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function[pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
+function[pd, udx, udy] = PSTD2Dfun(pd, udx, udy, diffmatrix,...
      PMLdiff, PMLalphau, PMLalphap, PMLconst, N)
     phat = zeros(N,N);
     uhat = zeros(N,N);
-    pdiffhat = zeros(N,N);
-    udiffhat = zeros(N,N);
+    pdiffhatx = zeros(N,N);
+    pdiffhaty = zeros(N,N);
+    udiffhatx = zeros(N,N);
+    udiffhaty = zeros(N,N);
+
     temp = zeros(N, N);
     %% Function solves using the PSTD method for a pressure vector,...
     %  velocity vector and differentiation impulse response in 1 dimension
@@ -35,18 +38,23 @@ function[pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
 
 %% Velocity in 2d
     phat = fft2(pd);
-    temp = phat .* diffmatrix;
-%     temp = temp .* diffmatrix';
-    pdiffhat = ifft2(temp);
+    temp1 = phat .* diffmatrix;
+    temp2 = phat .* diffmatrix';
+    pdiffhatx = ifft2(temp1);
+    pdiffhaty = ifft2(temp2);
 
 %% Total Velocity
-    ud = ud .* PMLdiff - PMLalphau .* (pdiffhat./PMLconst);
+    udx = udx .* PMLdiff - PMLalphau .* (pdiffhatx./PMLconst);
+    udy = udy .* PMLdiff - PMLalphau .* (pdiffhaty./PMLconst);
+%% Pressure in 2d
+    uhat = fft2(udx);
+    temp = uhat .* diffmatrix;
+    udiffhatx = ifft2(temp);
     
 %% Pressure in 2d
-    uhat = fft2(ud);
-    temp = uhat .* diffmatrix;
-%     temp = temp .* diffmatrix';
-    udiffhat = ifft2(temp);
+    uhat = fft2(udy);
+    temp = uhat .* diffmatrix';
+    udiffhaty = ifft2(temp);
 %% Pressure in the X dim
 %     uhat = fft(ud,N,2);
 %     for i = 1:size(ud, 1)
@@ -62,7 +70,8 @@ function[pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
 %     udiffhat = (udiffhat + ifft(temp,N,1)) ./2;
 
 %% Total Pressure
-    pd = pd .* PMLdiff - PMLalphap .* (udiffhat./PMLconst);
+    pd = pd .* PMLdiff -(PMLalphap .* (udiffhatx./(PMLconst./2)))...
+        - (PMLalphap .* (udiffhaty./(PMLconst./2)));
 
 
 end
