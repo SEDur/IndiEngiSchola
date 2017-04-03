@@ -19,7 +19,7 @@ c = 343.0;
 %define total time
 T = 20.0;
 %define grid width
-gridWidth = 10.0;
+gridWidth = 30.0;
 %define timestep
 dt = (1/fs);
 %dfine grid spacing
