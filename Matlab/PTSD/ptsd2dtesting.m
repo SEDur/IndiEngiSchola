@@ -7,20 +7,21 @@ clear all;
 
 %% Make Variables
 
+
 %alpha 
 a = 1.0;
 %define FS
-fs = 2000.0;
+fs = 4000.0;
 %define density
 rho = 1.21;
 %define speed of sound
 c = 343.0;
 %define total time
-T = 5.0;
+T = 2.0;
 %define grid width
 gridWidth = 10.0;
 %define timestep
-dt = 1/fs;
+dt = (1/fs)/2;
 %dfine grid spacing
 dx = c * sqrt(2) * dt;
 %calculate pconst
@@ -40,7 +41,7 @@ tempdiffmatrix = zeros(1,N);
 %Calc source
 sStart = 44100 * 40;
 src = zeros(1,ceil(T/dt)+1);
-src(10:1010) = (10^-12)*10^(50/20) * sin(2*(pi/200)*(1:1001));
+src(10:5010) = (10^-12)*10^(50/20) * sin(2*(pi/8000)*(1:5001));
 % music = audioread('track.mp3');
 % src = (10^-12)*10^(50/20) .* music(sStart:sStart + length(src));
 srcloc = ceil(N/3);
@@ -56,6 +57,8 @@ srcloc = ceil(N/3);
 %        src(n) = 0; 
 %     end
 % end
+
+spin = -180 :0.005 : 180;
         
 % alpha = 0;
 % calculate geometry matricies
@@ -81,7 +84,9 @@ ud = zeros(N,N);
 [mgx mgy] = meshgrid([tempdiffmatrix tempdiffmatrix]);
 [mhx mhy] = meshgrid(-[fliplr(tempdiffmatrix) -fliplr(tempdiffmatrix)]);
 
-diffmatrix = 1i.*(((mgx(1:N,1:N) + mgy(1:N,1:N))./2) + ((mhx(1:N,1:N) + mhy(1:N,1:N))./2))./2; 
+% diffmatrix =  1i.*-(((mgx(1:N,1:N) + mgy(1:N,1:N))./2) + ((mhx(1:N,1:N) + mhy(1:N,1:N))./2))./2; 
+diffmatrix =  1i.*-((mgx(1:N,1:N) + mgy(1:N,1:N))./2) ;
+
 
 PMLconst = ones(N,N);
 PMLconst = PMLconst .* (3.142*N);
@@ -119,14 +124,19 @@ for i = 1 : T/dt
    [pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
      PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
     pd = PTSD2Dsrc(pd, src(i), srcloc);
-    mesh(real(pd));
     reciever(i) = pd(ceil(N/2), ceil(N/2));
-    zlim([-10^-09 10^-09]);
+    if mod(i, 100) < 1
+    mesh(real(pd));
+    
+%     zlim([-10^-10 10^-10]);
 %     set(gca,'zlim',[-10^-12 10^-12]);
     caxis([-10^-12 10^-12])
     shading interp;
     title(sprintf('Time = %.6f s',dt*i));
+%     view([spin(i) 13]);
+% view(2);
     drawnow;
+    end
 end
 toc();
 

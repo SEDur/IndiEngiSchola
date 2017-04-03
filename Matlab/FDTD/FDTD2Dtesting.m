@@ -34,7 +34,7 @@ cstab = sqrt(1/3);
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 10000 * hertz;
+fmax = 5000 * hertz;
 %grid size
 gx = c * (1/fmax) / cstab;
 gy = c * (1/fmax) / cstab;
@@ -79,7 +79,7 @@ recieverrightloc = [ceil(lx/gx/2.27) ceil(ly/gx/8)];
 % dt = 1/ (c*sqrt(3/(gx)^2));
 dt = 1/ (c*sqrt((1/(gx^2))+(1/(gy^2))));
 % dt = 3.35563e-4;
-T = 10*seconds ;
+T = 1*seconds ;
 
 % generate the source(s) & determine number of time steps needed
 
@@ -159,12 +159,15 @@ leftear = zeros(1,tnum);
 rightear = zeros(1,tnum);
 % loop to update the velocities and pressures over the time steps, n
 n = 1;
-while or((max(max(abs(p(:,:)))) > (p0 * 10^(40/10))),(n < 48000))
+% while or((max(max(abs(p(:,:)))) > (p0 * 10^(40/10))),(n < 48000))
+tic
+while n <= (T/dt)
+
     n = n + 1;
-    if mod(n,100)
-    (100/tnum)*n;
-    10*log10(real(max(max(abs(p(:,:)))))/p0)
-    end
+%     if mod(n,100)
+%     (100/tnum)*n;
+%     10*log10(real(max(max(abs(p(:,:)))))/p0)
+%     end
     
     [p, ux, uy] = FDTD2Dfun(p, pCx, pCy, ux, uy, uCx, uCy, Rx, Ry, ZL, ZR, ZT, ZB);
     % set the pressure at the source location
@@ -173,26 +176,27 @@ while or((max(max(abs(p(:,:)))) > (p0 * 10^(40/10))),(n < 48000))
 %     p(s2loc(1),s2loc(2)) = p(s2loc(1),s2loc(2)) + -source2(n);
 %     power(n) = 20*log10(abs(max(p)));
     leftear(n) = abs(p(recieverleftloc(1),recieverleftloc(2)));
-    rightear(n) = abs(p(recieverrightloc(1),recieverrightloc(2)));
+%     rightear(n) = abs(p(recieverrightloc(1),recieverrightloc(2)));
     %PLOTTING SECTION
-        surf(linex, liney, abs(p));
-        shading interp;
-        title(sprintf('Time = %.6f s',n*dt),...
-            'Color',[0 0 0],'FontSize', 14);
-        xlabel('Width (meters)', 'Color', [0 0 0]);
-        ylabel('Length (meters)', 'Color', [0 0 0]);
-        view(2);
-%         view([25.6 61.2]);
-        drawnow;
+%         surf(linex, liney, abs(p));
+%         shading interp;
+%         title(sprintf('Time = %.6f s',n*dt),...
+%             'Color',[0 0 0],'FontSize', 14);
+%         xlabel('Width (meters)', 'Color', [0 0 0]);
+%         ylabel('Length (meters)', 'Color', [0 0 0]);
+%         view(2);
+% %         view([25.6 61.2]);
+%         drawnow;
         
 end
-leftear = real(10*log10(leftear/p0));
-rightear = real(10*log10(rightear/p0));
-signal = real(10*log10(source1/p0));
-figure;
-ax = gca;
-ax = plot(leftear);
-hold on;
-plot(rightear);
-ax.XTickLabel = [0 : (dt)* 10 : length(leftear)* dt];
-hold off;
+toc
+% leftear = real(10*log10(leftear/p0));
+% rightear = real(10*log10(rightear/p0));
+% signal = real(10*log10(source1/p0));
+% figure;
+% ax = gca;
+% ax = plot(leftear);
+% hold on;
+% plot(rightear);
+% ax.XTickLabel = [0 : (dt)* 10 : length(leftear)* dt];
+% hold off;

@@ -37,12 +37,12 @@ tempdiffmatrix = zeros(1,N);
 temp = zeros(1, N);
 
 %Boundary Absorption Coefs (0 to 1)
-alphaL = 0.001;
-alphaR = 0.001;
+alphaL = 1.0;
+alphaR = 1.0;
 
 %Calc source
 src = zeros(1,ceil(T/(dt/2))+1);
-src(10:1010) = (10^-12*10^(50/20)) * sin(2*(pi/1010)*(1:1001));
+% src(10:1010) = (10^-12*10^(50/20)) * sin(2*(pi/1010)*(1:1001));
 % tnum = ceil(T/dt);
 % fc = 0.1;     % Cutoff frequency (normalised 0.5=nyquist)
 % n0 = 120;        % Initial delay (samples)
@@ -66,6 +66,8 @@ pdiffhat = zeros(1,N);
 udiffhat = zeros(1,N);
 pd = zeros(1,N);
 ud = zeros(1,N);
+
+pd(PMLdepth:N-PMLdepth) = (10^-12*10^(50/20)) * sin(2*(pi/208)*(1:208));
 
 linex = linspace(0, gridWidth - dx, N);
 
@@ -102,7 +104,7 @@ for i = 1 : T/dt
      PMLdiff, PMLalphau, PMLalphap, PMLconst);
     pd = PTSD1Dsrc(pd, src(i), srcloc);
     plot(linex, real(pd));
-    ylim([-10e-9 10e-9]);
+%     ylim([-10e-9 10e-9]);
     title(sprintf('Time = %.6f s',dt*i));
     drawnow;
     reciever(i) = pd(floor(N-PMLdepth)-1);

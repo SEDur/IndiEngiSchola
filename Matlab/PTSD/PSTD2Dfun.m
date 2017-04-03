@@ -36,6 +36,7 @@ function[pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
 %% Velocity in 2d
     phat = fft2(pd);
     temp = phat .* diffmatrix;
+%     temp = temp .* diffmatrix';
     pdiffhat = ifft2(temp);
 
 %% Total Velocity
@@ -44,6 +45,7 @@ function[pd, ud] = PSTD2Dfun(pd, ud, diffmatrix,...
 %% Pressure in 2d
     uhat = fft2(ud);
     temp = uhat .* diffmatrix;
+%     temp = temp .* diffmatrix';
     udiffhat = ifft2(temp);
 %% Pressure in the X dim
 %     uhat = fft(ud,N,2);
