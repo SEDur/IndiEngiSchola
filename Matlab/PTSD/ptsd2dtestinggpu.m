@@ -11,7 +11,7 @@ clear all;
 %alpha 
 a = 1.0;
 %define FS
-fs = 48000.0;
+fs = 4000.0;
 %define density
 rho = 1.21;
 %define speed of sound
@@ -19,7 +19,7 @@ c = 343.0;
 %define total time
 T = 1.0;
 %define grid width
-gridWidth = 30.0;
+gridWidth = 10.0;
 %define timestep
 dt = (1/fs);
 %dfine grid spacing
@@ -42,6 +42,7 @@ tempdiffmatrix = zeros(1,N);
 sStart = 44100 * 40;
 src = zeros(1,ceil(T/dt)+1);
 src(10:5010) = (10^-12)*10^(50/20) * sin(2*(pi/8000)*(1:5001));
+src = gpuArray(src);
 % music = audioread('track.mp3');
 % src = (10^-12)*10^(50/20) .* music(sStart:sStart + length(src));
 srcloc = ceil(N/3);
@@ -67,8 +68,11 @@ spin = -180 :0.005 : 180;
 % pdiffhat = zeros(N,N);
 % udiffhat = zeros(N,N);
 pd = zeros(N,N);
+pd = gpuArray(pd);
 udx = zeros(N,N);
+udx = gpuArray(udx);
 udy = zeros(N,N);
+udy = gpuArray(udy);
 % udy = zeros(N,N);
     for i2 = 1 : N-1
         if i2 <  ceil((N-2)/2)
@@ -88,7 +92,7 @@ udy = zeros(N,N);
 
 % diffmatrix =  1i.*-(((mgx(1:N,1:N) + mgy(1:N,1:N))./2) + ((mhx(1:N,1:N) + mhy(1:N,1:N))./2))./2; 
 diffmatrix =  1i.*(mgx(1:N,1:N)) ;
-
+diffmatrix = gpuArray(diffmatrix);
 
 PMLconst = ones(N,N);
 PMLconst = PMLconst .* (pi*N);
@@ -116,31 +120,33 @@ PMLdiff(PMLdiff > PMLdiffsetmax) = PMLdiffsetmax;
 % PMLdiff(1:PMLdepth) = (1/3.0).*(((PMLdepth-PMLdiff(1:PMLdepth))./PMLdepth).^3);
 % PMLdiff((N-PMLdepth+1):end) = (1/3.0).*(PMLdiff((N-PMLdepth+1):end)./PMLdepth).^3;
 PMLalphau = uconst*(1./(1+PMLdiff));
+PMLalphau = gpuArray(PMLalphau);
 PMLalphap = pconst*(1./(1+PMLdiff));
+PMLalphap = gpuArray(PMLalphap);
 PMLdiff = ((1-PMLdiff)./(1+PMLdiff));
-
+PMLdiff = gpuArray(PMLdiff);
 %% solve for some time
 % linkdata on;
 tic();
 for i = 1 : T/dt
-   [pd, udx, udy] = PSTD2Dfun(pd, udx, udy, diffmatrix,...
+   [pd, udx, udy] = PSTD2DfunGPU(pd, udx, udy, diffmatrix,...
      PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
     pd = PTSD2Dsrc(pd, src(i), srcloc);
-    reciever(i) = pd(ceil(N/2), ceil(N/2));
-    if mod(i, 100) < 1
-    mesh(abs(pd));
-    
-%     zlim([-10^-10 10^-10]);
-%     set(gca,'zlim',[-10^-12 10^-12]);
-%     caxis([-10^-12 10^-12])
-    shading interp;
-    title(sprintf('Time = %.6f s',dt*i));
-%     view([spin(i) 13]);
-% view(2);
-    drawnow;
-    end
+    reciever(i) = abs(gather(pd(ceil(N/2), ceil(N/2))));
+%     if mod(i, 100) < 1
+%     localpd = gather(pd);
+%     mesh(abs(localpd)); 
+% %     zlim([-10^-10 10^-10]);
+% %     set(gca,'zlim',[-10^-12 10^-12]);
+% %     caxis([-10^-12 10^-12])
+%     shading interp;
+%     title(sprintf('Time = %.6f s',dt*i));
+% %     view([spin(i) 13]);
+% % view(2);
+%     drawnow;
+%     end
 end
 toc();
-
+plot(reciever);
 %% Display the results
 
