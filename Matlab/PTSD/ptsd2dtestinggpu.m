@@ -6,12 +6,12 @@ clear all;
 % close all;
 
 %% Make Variables
-
+g = gpuDevice(1);
 
 %alpha 
 a = 1.0;
 %define FS
-fs = 4000.0;
+fs = 44100.0;
 %define density
 rho = 1.21;
 %define speed of sound
@@ -19,7 +19,7 @@ c = 343.0;
 %define total time
 T = 1.0;
 %define grid width
-gridWidth = 10.0;
+gridWidth = 30.0;
 %define timestep
 dt = (1/fs);
 %dfine grid spacing
@@ -41,7 +41,8 @@ tempdiffmatrix = zeros(1,N);
 %Calc source
 sStart = 44100 * 40;
 src = zeros(1,ceil(T/dt)+1);
-src(10:5010) = (10^-12)*10^(50/20) * sin(2*(pi/8000)*(1:5001));
+src = ((10^-12)*10^(50/10)) .* sin(1000*2*pi*(0:dt:1.0));
+% y = sin(Fn*2*pi*t);
 src = gpuArray(src);
 % music = audioread('track.mp3');
 % src = (10^-12)*10^(50/20) .* music(sStart:sStart + length(src));
@@ -133,19 +134,20 @@ for i = 1 : T/dt
      PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
     pd = PTSD2Dsrc(pd, src(i), srcloc);
     reciever(i) = abs(gather(pd(ceil(N/2), ceil(N/2))));
-%     if mod(i, 100) < 1
-%     localpd = gather(pd);
-%     mesh(abs(localpd)); 
-% %     zlim([-10^-10 10^-10]);
-% %     set(gca,'zlim',[-10^-12 10^-12]);
-% %     caxis([-10^-12 10^-12])
-%     shading interp;
-%     title(sprintf('Time = %.6f s',dt*i));
-% %     view([spin(i) 13]);
-% % view(2);
-%     drawnow;
-%     end
+    if mod(i, 100) < 1
+    localpd = gather(pd);
+    mesh(abs(localpd)); 
+%     zlim([-10^-10 10^-10]);
+%     set(gca,'zlim',[-10^-12 10^-12]);
+%     caxis([-10^-12 10^-12])
+    shading interp;
+    title(sprintf('Time = %.6f s',dt*i));
+%     view([spin(i) 13]);
+% view(2);
+    drawnow;
+    end
 end
+reset(g);
 toc();
 plot(reciever);
 %% Display the results

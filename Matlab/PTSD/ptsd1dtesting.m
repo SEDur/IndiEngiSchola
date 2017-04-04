@@ -17,7 +17,7 @@ c = 343.0;
 %define total time
 T = 1.1;
 %define grid width
-gridWidth = 10.0;
+gridWidth = 34.0;
 %define timestep
 dt = 1/fs;
 %dfine grid spacing
@@ -42,7 +42,7 @@ alphaR = 1.0;
 
 %Calc source
 src = zeros(1,ceil(T/(dt/2))+1);
-% src(10:1010) = (10^-12*10^(50/20)) * sin(2*(pi/1010)*(1:1001));
+src(10:1010) = (10^-12*10^(50/20)) * sin(2*(pi/1010)*(1:1001));
 % tnum = ceil(T/dt);
 % fc = 0.1;     % Cutoff frequency (normalised 0.5=nyquist)
 % n0 = 120;        % Initial delay (samples)
@@ -57,7 +57,9 @@ src = zeros(1,ceil(T/(dt/2))+1);
 % src = decimate(src, 2, 'fir');
 % src = interp(src, 2);
 % srcloc = PMLdepth+1;
-srcloc = ceil(N/2);
+% srcloc = ceil(N/2);
+srcloc = 31;
+
 reciever = zeros(1,ceil(T/dt));
 %calculate geometry matricies
 phat = zeros(1,N);
@@ -67,7 +69,7 @@ udiffhat = zeros(1,N);
 pd = zeros(1,N);
 ud = zeros(1,N);
 
-pd(PMLdepth:N-PMLdepth) = (10^-12*10^(50/20)) * sin(2*(pi/208)*(1:208));
+% pd(PMLdepth:N-PMLdepth) = (10^-12*10^(50/20)) * sin(2*(pi/208)*(1:208));
 
 linex = linspace(0, gridWidth - dx, N);
 
@@ -94,8 +96,6 @@ PMLdiff(N-(PMLdepth-1) : end) = (1.0/3.0)*(((PMLdiff(N-(PMLdepth-1) : end)-(N-(P
 PMLalphau = uconst*(1./(1+PMLdiff));
 PMLalphap = pconst*(1./(1+PMLdiff));
 PMLdiff = ((1.0-PMLdiff)./(1.0+PMLdiff));
-PMLdiff(1:PMLdepth) = PMLdiff(1:PMLdepth).* (alphaL);
-PMLdiff(N+1-PMLdepth:end) = PMLdiff(N+1-PMLdepth:end).* (alphaR);
 
 %% solve for some time
 % tic();
