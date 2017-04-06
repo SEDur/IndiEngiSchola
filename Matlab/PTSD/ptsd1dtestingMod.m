@@ -92,9 +92,6 @@ PMLdiff = zeros(1, N);
 PMLalphau = uconst*(1./(1+PMLdiff));
 PMLalphap = pconst*(1./(1+PMLdiff));
 PMLdiff = ((1.0-PMLdiff)./(1.0+PMLdiff));
-PMLdiff(1:PMLdepth) = PMLdiff(1:PMLdepth).* (alphaL);
-PMLdiff(N+1-PMLdepth:end) = PMLdiff(N+1-PMLdepth:end).* (alphaR);
-
 %% solve for some time
 % tic();
 for i = 1 : T/dt

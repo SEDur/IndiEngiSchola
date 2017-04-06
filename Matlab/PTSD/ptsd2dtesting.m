@@ -9,17 +9,21 @@ clear all;
 
 
 %alpha 
-a = 1.0;
+alphaXn = 1.0;
+alphaXp = 1.0;
+alphaYn = 1.0;
+alphaYp = 1.0;
+
 %define FS
-fs = 48000.0;
+fs = 4000.0;
 %define density
 rho = 1.21;
 %define speed of sound
 c = 343.0;
 %define total time
-T = 1.0;
+T = 20.0;
 %define grid width
-gridWidth = 30.0;
+gridWidth = 10.0;
 %define timestep
 dt = (1/fs);
 %dfine grid spacing
@@ -41,7 +45,10 @@ tempdiffmatrix = zeros(1,N);
 %Calc source
 sStart = 44100 * 40;
 src = zeros(1,ceil(T/dt)+1);
-src(10:5010) = (10^-12)*10^(50/20) * sin(2*(pi/8000)*(1:5001));
+src(10:10+ceil(1.0/dt)) = (10^-12)*10^(50/20) * sin(2*pi*1000*(0:dt:1.0));
+win = kaiser(ceil(1/dt)+1,2.0);
+src(10:10+ceil(1.0/dt)) = src(10:10+ceil(1.0/dt)) .* win';
+% clear('win');
 % music = audioread('track.mp3');
 % src = (10^-12)*10^(50/20) .* music(sStart:sStart + length(src));
 srcloc = ceil(N/3);
@@ -95,7 +102,7 @@ PMLconst = PMLconst .* (pi*N);
 PMLdiff = zeros(N,N);
 for i = 1 : N
 PMLdiff(i,1:PMLdepth) = 1:PMLdepth;
-PMLdiff(i,1:PMLdepth) = (a/3.0).*(((PMLdepth-PMLdiff(i,1:PMLdepth))./PMLdepth).^3);
+PMLdiff(i,1:PMLdepth) = (1.0/3.0).*(((PMLdepth-PMLdiff(i,1:PMLdepth))./PMLdepth).^3);
 end
 PMLdiff(:,N-PMLdepth+1:end) = fliplr(PMLdiff(:,1:PMLdepth));
 % mesh(PMLdiff);
@@ -119,11 +126,23 @@ PMLalphau = uconst*(1./(1+PMLdiff));
 PMLalphap = pconst*(1./(1+PMLdiff));
 PMLdiff = ((1-PMLdiff)./(1+PMLdiff));
 
+S = c*(dt/dx);
+Rxn = 1 - alphaXn;
+Rxp = 1 - alphaXp;
+Ryn = 1 - alphaYn;
+Ryp = 1 - alphaYp;
+xiXn = (1 + Rxn)/(1 + Rxn - 2 * S * Rxn);
+xiXp = (1 + Rxp)/(1 + Rxn - 2 * S * Rxp);
+xiYn = (1 + Ryn)/(1 + Ryn - 2 * S * Ryn);
+xiYp = (1 + Ryp)/(1 + Ryp - 2 * S * Ryp);
+
 %% solve for some time
 % linkdata on;
 tic();
 for i = 1 : T/dt
-   [pd, udx, udy] = PSTD2Dfun(pd, udx, udy, diffmatrix,...
+    [pd, udx, udy] = PTSD2Dboundary(pd, udx, udy, PMLdepth,...
+        xiXn, xiXp, xiYn, xiYp);
+    [pd, udx, udy] = PSTD2Dfun(pd, udx, udy, diffmatrix,...
      PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
     pd = PTSD2Dsrc(pd, src(i), srcloc);
     reciever(i) = pd(ceil(N/2), ceil(N/2));
