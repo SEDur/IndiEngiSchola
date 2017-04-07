@@ -17,7 +17,7 @@ alphaZn = 1.0;
 alphaZp = 1.0;
 
 %define FS
-fs = 400.0;
+fs = 1000.0;
 %define density
 rho = 1.21;
 %define speed of sound
@@ -25,37 +25,39 @@ c = 343.0;
 %define total time
 T = 10.0;
 %define grid width
-gridWidth = 5.0;
+gridWidth = 10.0;
+%Target stability number 
+St = 2/(pi*sqrt(3));
 %define timestep
 dt = (1/fs);
 %dfine grid spacing
-dx = c * sqrt(2) * dt;
+dx = c * dt * 1/St;
 %calculate pconst
 pconst = rho * c^2 * (dt/dx);
 %calculate uconst
 uconst = dt/(dx*rho);
 %define pml depth 
 % PMLdepth = ceil(abs(gridWidth/dx)/(2*(fs/c)));
-PMLdepth = 30;
+% PMLdepth = 30;
+PMLdepth = 60;
+
 %calc time steps
 timestep = abs(T/dt);
 %calc grid size
 N = ceil(abs(gridWidth/dx)+2*PMLdepth);
-%calculate differentiation matrix
-tempdiffmatrix = zeros(1,N);
 % temp = zeros(N, N);
 %Calc source
-sStart = 44100 * 40;
+% sStart = 44100 * 40;
 src = zeros(1,ceil(T/dt)+1);
-srctime = 0 : dt/2 : 0.2;
-srcf = 10;
+srctime = 0 : dt : 1.0;
+srcf = 20;
 src(10:10+length(srctime)-1) = (10^-12)*10^(50/20) * sin(2*pi*srcf.*srctime);
 win = kaiser(length(srctime) + 20,2.0);
 src(1:length(srctime) + 20) = src(1:length(srctime) + 20) .* win';
 clear('win');
 % music = audioread('track.mp3');
 % src = (10^-12)*10^(50/20) .* music(sStart:sStart + length(src));
-srcloc = ceil(N/3);
+srcloc = ceil(N/2);
 tempdiffmatrix = zeros(1,N);
 spin = -180 :0.005 : 180;     
 pd = zeros(N,N,N);
@@ -77,7 +79,7 @@ udz = zeros(N,N,N);
 [mgx mgy mgz] = meshgrid(tempdiffmatrix);
 diffmatrixX =  1i.* mgx ;
 diffmatrixY =  1i.* mgy ;
-diffmatrixZ =  1i.* mgx ;
+diffmatrixZ =  1i.* mgz ;
 
 PMLconst = ones(N,N,N);
 PMLconst = PMLconst .* (pi*N);
@@ -89,15 +91,15 @@ PMLdiff = zeros(N,N,N);
     end
 PMLdiff(N-PMLdepth+1:end,:,:) = fliplr(PMLdiff(PMLdepth:-1:1,:,:));
 PMLdiff2 = permute(PMLdiff, [2 1 3]);
-PMLdiff3 = sqrt(PMLdiff.^2 + PMLdiff2.^2);
+% PMLdiff3 = sqrt(PMLdiff.^2 + PMLdiff2.^2);
 PMLdiff4 = permute(PMLdiff, [3 2 1]);
-PMLdiff5 = sqrt((PMLdiff3.^2 + PMLdiff4.^2));
-% PMLdiff5 = nthroot((PMLdiff.^3 + PMLdiff2.^3 + PMLdiff3.^3),3);
+PMLdiff5 = ((PMLdiff) + (PMLdiff2) + (PMLdiff4))./3;
+% PMLdiff5 = nthroot((PMLdiff.^3 + PMLdiff2.^3 + PMLdiff4.^3),3);
 
 
-PMLdiffmax = max(max(PMLdiff5));
-PMLdiffsetmax = 0.3011;
-PMLdiff5(PMLdiff5 > PMLdiffsetmax) = PMLdiffsetmax;
+% PMLdiffmax = max(max(PMLdiff5));
+% PMLdiffsetmax = 0.3011;
+% PMLdiff5(PMLdiff5 > PMLdiffsetmax) = PMLdiffsetmax;
 % mesh(PMLdiff);
 
 % PMLdiff((N-PMLdepth+1):end) = 1 : PMLdepth;
@@ -125,8 +127,8 @@ xiZp = (1 + Rzp)/(1 + Rzp - 2 * S * Rzp);
 % linkdata on;
 % tic();
 for i = 1 : T/dt
-    [pd, udx, udy] = PTSD3Dboundary(pd, udx, udy, udz, PMLdepth,...
-        xiXn, xiXp, xiYn, xiYp, xiZn, xiZp);
+%     [pd, udx, udy] = PTSD3Dboundary(pd, udx, udy, udz, PMLdepth,...
+%         xiXn, xiXp, xiYn, xiYp, xiZn, xiZp);
     [pd, udx, udy, udz] = PSTD3Dfun(pd, udx, udy, udz,...
         diffmatrixX, diffmatrixY , diffmatrixZ,...
      PMLdiff5, PMLalphau, PMLalphap, PMLconst);
@@ -139,7 +141,7 @@ for i = 1 : T/dt
 %     set(gca,'zlim',[-10^-12 10^-12]);
     caxis([-10^-9 10^-9])
     shading interp;
-    title(sprintf('Time = %.6f s',dt*i));
+    title(sprintf('Time = %.6f s',dt*(i-1)));
 %     view([spin(i) 13]);
 %      view(2);
     drawnow;

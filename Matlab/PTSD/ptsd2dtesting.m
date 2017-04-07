@@ -23,20 +23,28 @@ c = 343.0;
 %define total time
 T = 20.0;
 %define grid width
-gridWidth = 40.0;
+gridWidth = 20.0;
+%Define Stability Condition
+St = 2/(pi * sqrt(2));
 %define timestep
 dt = (1/fs);
+% dt = 1/(2*fs);
 %dfine grid spacing
-dx = c * sqrt(2) * dt;
+dx = c * dt * 1/St;
+% dx = c * sqrt(2) * dt;
+% dx = 2 * dt * c;
+assert(isequal((c*dt/dx),St));
 %calculate pconst
 pconst = rho * c^2 * (dt/dx);
+% pconst = rho * c^2 * (dt/dx) * dt * c;
 %calculate uconst
 uconst = dt/(dx*rho);
+% uconst = (1/rho) * (dt/dx) * dt * c;
 %define pml depth 
 % PMLdepth = ceil(abs(gridWidth/dx)/(2*(fs/c)));
 PMLdepth = 30;
 %calc time steps
-timestep = abs(T/dt);
+timesteps = abs(T/dt);
 %calc grid size
 N = ceil(abs(gridWidth/dx)+2*PMLdepth);
 %calculate differentiation matrix
@@ -53,7 +61,7 @@ src(1:length(srctime) + 20) = src(1:length(srctime) + 20) .* win';
 clear('win');
 % music = audioread('track.mp3');
 % src = (10^-12)*10^(50/20) .* music(sStart:sStart + length(src));
-srcloc = ceil(N/3);
+srcloc = ceil(N/2);
 
 % tnum = ceil(T/dt);
 % fc = 0.25;     % Cutoff frequency (normalised 0.5=nyquist)
@@ -78,6 +86,10 @@ spin = -180 :0.005 : 180;
 pd = zeros(N,N);
 udx = zeros(N,N);
 udy = zeros(N,N);
+
+linex = 0 : dx : dx * (N-1);
+liney = 0 : dx : dx * (N-1);
+
 % udy = zeros(N,N);
     for i2 = 1 : N-1
         if i2 <  ceil((N-2)/2)
@@ -140,8 +152,8 @@ xiYp = (1 + Ryp)/(1 + Ryp - 2 * S * Ryp);
 
 %% solve for some time
 % linkdata on;
-tic();
-for i = 1 : T/dt
+% tic();
+for i = 1 : T/dt+1
     [pd, udx, udy] = PTSD2Dboundary(pd, udx, udy, PMLdepth,...
         xiXn, xiXp, xiYn, xiYp);
     [pd, udx, udy] = PSTD2Dfun(pd, udx, udy, diffmatrix,...
@@ -149,19 +161,19 @@ for i = 1 : T/dt
     pd = PTSD2Dsrc(pd, src(i), srcloc);
     reciever(i) = pd(ceil(N/2), ceil(N/2));
     if mod(i, 100) < 1
-    mesh(abs(pd));
+    mesh(linex, liney, abs(pd));
     
 %     zlim([-10^-10 10^-10]);
 %     set(gca,'zlim',[-10^-12 10^-12]);
     caxis([-10^-9 10^-9])
     shading interp;
-    title(sprintf('Time = %.6f s',dt*i));
+    title(sprintf('Time = %.6f s',dt*(i-1)));
 %     view([spin(i) 13]);
      view(2);
     drawnow;
     end
 end
 toc();
-
+% 
 %% Display the results
 
