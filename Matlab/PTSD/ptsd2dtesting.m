@@ -9,10 +9,10 @@ clear all;
 
 
 %alpha 
-alphaXn = 1.0;
-alphaXp = 1.0;
-alphaYn = 1.0;
-alphaYp = 1.0;
+alphaXn = 0.8;
+alphaXp = 0.8;
+alphaYn = 0.8;
+alphaYp = 0.8;
 
 %define FS
 fs = 4000.0;
@@ -23,7 +23,7 @@ c = 343.0;
 %define total time
 T = 20.0;
 %define grid width
-gridWidth = 10.0;
+gridWidth = 40.0;
 %define timestep
 dt = (1/fs);
 %dfine grid spacing
@@ -45,10 +45,12 @@ tempdiffmatrix = zeros(1,N);
 %Calc source
 sStart = 44100 * 40;
 src = zeros(1,ceil(T/dt)+1);
-src(10:10+ceil(1.0/dt)) = (10^-12)*10^(50/20) * sin(2*pi*1000*(0:dt:1.0));
-win = kaiser(ceil(1/dt)+1,2.0);
-src(10:10+ceil(1.0/dt)) = src(10:10+ceil(1.0/dt)) .* win';
-% clear('win');
+srctime = 0 : dt/2 : 0.2;
+srcf = 10;
+src(10:10+length(srctime)-1) = (10^-12)*10^(50/20) * sin(2*pi*srcf.*srctime);
+win = kaiser(length(srctime) + 20,2.0);
+src(1:length(srctime) + 20) = src(1:length(srctime) + 20) .* win';
+clear('win');
 % music = audioread('track.mp3');
 % src = (10^-12)*10^(50/20) .* music(sStart:sStart + length(src));
 srcloc = ceil(N/3);
@@ -151,11 +153,11 @@ for i = 1 : T/dt
     
 %     zlim([-10^-10 10^-10]);
 %     set(gca,'zlim',[-10^-12 10^-12]);
-%     caxis([-10^-12 10^-12])
+    caxis([-10^-9 10^-9])
     shading interp;
     title(sprintf('Time = %.6f s',dt*i));
 %     view([spin(i) 13]);
-% view(2);
+     view(2);
     drawnow;
     end
 end
