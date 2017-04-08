@@ -1,35 +1,89 @@
-\documentclass{svproc}
-\usepackage[english]{babel} % English language/hyphenation
-%\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\documentclass[graybox,envcountchap,sectrefs]{svmono}
+
+% choose options for [] as required from the list
+% in the Reference Guide
+
+\usepackage{mathptmx}
+\usepackage{helvet}
+\usepackage{courier}
+%
+\usepackage{type1cm}         
+
+\usepackage{makeidx}         % allows index generation
+\usepackage{graphicx}        % standard LaTeX graphics tool
+                             % when including figure files
+\usepackage{multicol}        % used for the two-column index
+\usepackage[bottom]{footmisc}% places footnotes at page bottom
+
 \usepackage{url}
+
 \usepackage{sectsty} % Allows customizing section commands
+
 \usepackage{graphicx}
-\usepackage{multicol}
 \usepackage{footmisc}
 \usepackage{cite}
 \bibliographystyle{unsrt}
 \graphicspath{{images/}{../images/}}
 \usepackage{subfiles}
 
+% see the list of further useful packages
+% in the Reference Guide
+
+\makeindex             % used for the subject index
+                       % please use the style svind.ist with
+                       % your makeindex program
+
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
 %----------------------------------------------------------------------------------------
 
-\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
 
-\title{Efficient Acoustic Modelling of Large Spaces using Time Domain Methods} % The assignment title
-\titlerunning{Time Domain Methods for Faster Acoustic Modelling}
-\author{Simon Durbridge} % Your name
-\authorrunning{S.Durbridge}
-%\date{\normalsize\today} % Today's date or a custom date
-\institute{Dept. Engineering, Mathematics \&\ Computing\\ University of Derby\\
-\email{s.durbridge1@unimail.derby.ac.uk} % optional, same for URL of homepage
-} % end of address field
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
-\maketitle % Print the title
+\author{Simon Durbridge} % Your name
 
+\title{Efficient Acoustic Modelling of Large Spaces using Time Domain Methods} % The assignment title
+
+\subtitle{Analysis of Time Domain Numerical Methods for Acoustic Modelling of Large Spaces}
+%\institute{Dept. Engineering, Mathematics \&\ Computing\\ University of Derby\\
+%\email{s.durbridge1@unimail.derby.ac.uk} % optional, same for URL of
+\maketitle
+
+\frontmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{sections/dedic}
+%\include{sections/foreword}
+%\include{sections/preface}
+\include{sections/acknow}
+
+\tableofcontents
+\include{sections/acronym}
+
+\mainmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{sections/introduction} %Part
+\include{sections/Numerical Methods} % Chapter
+\include{sections/Finite Difference Time Domain Method} %Chapter
+\include{sections/Sparse Finite Difference Time Domain Method} %Chapter
+\include{sections/Pseudo-spectral Time Domain Method} %Chapter
+\include{sections/Application} %Part
+\include{sections/Acoustic Modelling Strategies} %Chapter
+\include{sections/Profiling} %Chapter
+\include{sections/Optimisation & Parallelism} %Chapter
+\include{sections/Analysis} %Chapter
+\include{sections/Conclusion} %Chapter
+\include{sections/Further Work} %Chapter
+\include{sections/appendix}
+
+\backmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\include{sections/glossary}
+%\include{sections/solutions}
+\printindex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
 %----------------------------------------------------------------------------------------
 %	Abstract
 %----------------------------------------------------------------------------------------
@@ -70,6 +124,8 @@ An Abstract
 \newpage
 
 %------------------------------------------------
+\mainmatter
+
 \section{Acoustic Modelling}
 \subsection{Applications}
 Acoustic modelling has a broad range of applications from the very large to the very small, and there are a number of key methods used to model different problem types. Problems of interest to this study are the acoustically large i.e. problems that are significantly large compared to a high proportion of the wavelengths of interest~\cite{Everest2009}. These problems could include multiple sources and receivers in spaces such as stadiums, cathedrals, shopping centres, caverns, cityscapes, mountain ranges etc.\\ For problems of this nature ray based modelling methods are commonly used, and have even been imlpemented for real-time simulation in video games~\cite{Bengtsson2009}. Ray based methods have a significant number of compromises, such as they do not accommodate for modal or atmospheric behaviour~\cite{Elorza2005}. Further to this when considering a large number of sound sources and receivers in a single large simulation, some of the benefits of ray based methods may be outweighed with computational cost. Wave based modelling methods have a similar set of benefits and drawbacks, that have as yet reduced use to high detail simulation of smaller problems. As higher computational power becomes more widely available, wave based methods may become more practical to use for problems with varying numbers of sources and receivers (particularly moving sources and receivers) e.g. video games, building acoustic demonstrations, personalised audio for viewing moving pictures, pilot training simulation etc. Below is a brief discussion of ray and wave based methods, with a deeper focus on time domain wave methods.
@@ -164,6 +220,7 @@ In this report, a description of acoustic modelling and some applications was gi
 
 
 %----------------------------------------------------------------------------------------
+\backmatter
 \section{References}
 
 \bibliography{library}
