@@ -1,4 +1,3 @@
-
 \documentclass{svproc}
 \usepackage[english]{babel} % English language/hyphenation
 %\usepackage{amsmath,amsfonts,amsthm} % Math packages
@@ -7,8 +6,10 @@
 \usepackage{graphicx}
 \usepackage{multicol}
 \usepackage{footmisc}
-%\usepackage{cite}
+\usepackage{cite}
 \bibliographystyle{unsrt}
+\graphicspath{{images/}{../images/}}
+\usepackage{subfiles}
 
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
@@ -63,22 +64,10 @@ An Abstract
 %----------------------------------------------------------------------------------------
 
 \section{Introduction}
-Some Into Text
+ 
+\subfile{sections/introduction}
 
-\subsection{Context}
-
-\subsection{Problem Definition}
-Real time acoustic modelling could be of significant benefit to many applications; Engineers could make design changes and see results 'on the fly', and entertainment users could have more realistic experiences. These benefits should be possible for an arbitrary number of sources and receivers, in proportionally large environments with high quality results. Is it possible to further reduce computation time for simulations of large acoustic problems, to provide results in real time for the full human audio frequency range? There are two 'branches' of computation solution that should be considered: the direct solution i.e. direct outputs or audio samples from the simulation, and indirect solutions i.e. a system impulse response that may be convolved with mixed source signals in order to create an auralization of the system.//
-
-
-\begin{figure}
-\centering
-%\includegraphics[width=0.6\textwidth]{explicit2dfdtd.jpg}
-\centering
-\caption{A visualisation of a 2D explicit FDTD simulation ~\cite{Durbridge2016a}}
-\end{figure}
-
-%\newpage
+\newpage
 
 %------------------------------------------------
 \section{Acoustic Modelling}

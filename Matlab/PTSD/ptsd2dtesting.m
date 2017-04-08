@@ -15,7 +15,7 @@ alphaYn = 0.8;
 alphaYp = 0.8;
 
 %define FS
-fs = 4000.0;
+fs = 48000.0;
 %define density
 rho = 1.21;
 %define speed of sound
@@ -33,7 +33,7 @@ dt = (1/fs);
 dx = c * dt * 1/St;
 % dx = c * sqrt(2) * dt;
 % dx = 2 * dt * c;
-assert(isequal((c*dt/dx),St));
+% assert(isequal((c*dt/dx),St));
 %calculate pconst
 pconst = rho * c^2 * (dt/dx);
 % pconst = rho * c^2 * (dt/dx) * dt * c;
@@ -169,7 +169,8 @@ for i = 1 : T/dt+1
     shading interp;
     title(sprintf('Time = %.6f s',dt*(i-1)));
 %     view([spin(i) 13]);
-     view(2);
+    view(2);
+    axis tight;
     drawnow;
     end
 end
