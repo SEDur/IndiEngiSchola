@@ -9,7 +9,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function[pd, udx, udy] = PSTD2Dfun(pd, udx, udy, diffmatrix,...
-     PMLdiff, PMLalphau, PMLalphap, PMLconst, N)
+    PMLdiff, PMLalphau, PMLalphap, PMLconst, N)
+    phat = zeros(N,N);
+    uhat = zeros(N,N);
+    pdiffhatx = zeros(N,N);
+    pdiffhaty = zeros(N,N);
+    udiffhatx = zeros(N,N);
+    udiffhaty = zeros(N,N);
+
+    temp = zeros(N, N);
     %% Function solves using the PSTD method for a pressure vector,...
     %  velocity vector and differentiation impulse response in 1 dimension
     %  and returns the solved pressure and velocity vectors

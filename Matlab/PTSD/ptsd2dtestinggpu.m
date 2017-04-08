@@ -6,45 +6,33 @@ clear all;
 % close all;
 
 %% Make Variables
-
+g = gpuDevice(1);
 
 %alpha 
-alphaXn = 0.8;
-alphaXp = 0.8;
-alphaYn = 0.8;
-alphaYp = 0.8;
-
+a = 1.0;
 %define FS
-fs = 48000.0;
+fs = 44100.0;
 %define density
 rho = 1.21;
 %define speed of sound
 c = 343.0;
 %define total time
-T = 20.0;
+T = 1.0;
 %define grid width
-gridWidth = 20.0;
-%Define Stability Condition
-St = 2/(pi * sqrt(2));
+gridWidth = 30.0;
 %define timestep
 dt = (1/fs);
-% dt = 1/(2*fs);
 %dfine grid spacing
-dx = c * dt * 1/St;
-% dx = c * sqrt(2) * dt;
-% dx = 2 * dt * c;
-% assert(isequal((c*dt/dx),St));
+dx = c * sqrt(2) * dt;
 %calculate pconst
 pconst = rho * c^2 * (dt/dx);
-% pconst = rho * c^2 * (dt/dx) * dt * c;
 %calculate uconst
 uconst = dt/(dx*rho);
-% uconst = (1/rho) * (dt/dx) * dt * c;
 %define pml depth 
 % PMLdepth = ceil(abs(gridWidth/dx)/(2*(fs/c)));
 PMLdepth = 30;
 %calc time steps
-timesteps = abs(T/dt);
+timestep = abs(T/dt);
 %calc grid size
 N = ceil(abs(gridWidth/dx)+2*PMLdepth);
 %calculate differentiation matrix
@@ -53,15 +41,15 @@ tempdiffmatrix = zeros(1,N);
 %Calc source
 sStart = 44100 * 40;
 src = zeros(1,ceil(T/dt)+1);
-srctime = 0 : dt/2 : 0.2;
-srcf = 10;
-src(10:10+length(srctime)-1) = (10^-12)*10^(50/20) * sin(2*pi*srcf.*srctime);
-win = kaiser(length(srctime) + 20,2.0);
-src(1:length(srctime) + 20) = src(1:length(srctime) + 20) .* win';
+src = ((10^-12)*10^(50/10)) .* sin(1000*2*pi*(0:dt:1.0));
+win = kaiser(length(src),2.5);
+src = src .* win';
 clear('win');
+% y = sin(Fn*2*pi*t);
+src = gpuArray(src);
 % music = audioread('track.mp3');
 % src = (10^-12)*10^(50/20) .* music(sStart:sStart + length(src));
-srcloc = ceil(N/2);
+srcloc = ceil(N/3);
 
 % tnum = ceil(T/dt);
 % fc = 0.25;     % Cutoff frequency (normalised 0.5=nyquist)
@@ -84,12 +72,11 @@ spin = -180 :0.005 : 180;
 % pdiffhat = zeros(N,N);
 % udiffhat = zeros(N,N);
 pd = zeros(N,N);
+pd = gpuArray(pd);
 udx = zeros(N,N);
+udx = gpuArray(udx);
 udy = zeros(N,N);
-
-linex = 0 : dx : dx * (N-1);
-liney = 0 : dx : dx * (N-1);
-
+udy = gpuArray(udy);
 % udy = zeros(N,N);
     for i2 = 1 : N-1
         if i2 <  ceil((N-2)/2)
@@ -109,14 +96,14 @@ liney = 0 : dx : dx * (N-1);
 
 % diffmatrix =  1i.*-(((mgx(1:N,1:N) + mgy(1:N,1:N))./2) + ((mhx(1:N,1:N) + mhy(1:N,1:N))./2))./2; 
 diffmatrix =  1i.*(mgx(1:N,1:N)) ;
-
+diffmatrix = gpuArray(diffmatrix);
 
 PMLconst = ones(N,N);
 PMLconst = PMLconst .* (pi*N);
 PMLdiff = zeros(N,N);
 for i = 1 : N
 PMLdiff(i,1:PMLdepth) = 1:PMLdepth;
-PMLdiff(i,1:PMLdepth) = (1.0/3.0).*(((PMLdepth-PMLdiff(i,1:PMLdepth))./PMLdepth).^3);
+PMLdiff(i,1:PMLdepth) = (a/3.0).*(((PMLdepth-PMLdiff(i,1:PMLdepth))./PMLdepth).^3);
 end
 PMLdiff(:,N-PMLdepth+1:end) = fliplr(PMLdiff(:,1:PMLdepth));
 % mesh(PMLdiff);
@@ -137,44 +124,34 @@ PMLdiff(PMLdiff > PMLdiffsetmax) = PMLdiffsetmax;
 % PMLdiff(1:PMLdepth) = (1/3.0).*(((PMLdepth-PMLdiff(1:PMLdepth))./PMLdepth).^3);
 % PMLdiff((N-PMLdepth+1):end) = (1/3.0).*(PMLdiff((N-PMLdepth+1):end)./PMLdepth).^3;
 PMLalphau = uconst*(1./(1+PMLdiff));
+PMLalphau = gpuArray(PMLalphau);
 PMLalphap = pconst*(1./(1+PMLdiff));
+PMLalphap = gpuArray(PMLalphap);
 PMLdiff = ((1-PMLdiff)./(1+PMLdiff));
-
-S = c*(dt/dx);
-Rxn = 1 - alphaXn;
-Rxp = 1 - alphaXp;
-Ryn = 1 - alphaYn;
-Ryp = 1 - alphaYp;
-xiXn = (1 + Rxn)/(1 + Rxn - 2 * S * Rxn);
-xiXp = (1 + Rxp)/(1 + Rxn - 2 * S * Rxp);
-xiYn = (1 + Ryn)/(1 + Ryn - 2 * S * Ryn);
-xiYp = (1 + Ryp)/(1 + Ryp - 2 * S * Ryp);
-
+PMLdiff = gpuArray(PMLdiff);
 %% solve for some time
 % linkdata on;
-% tic();
-for i = 1 : T/dt+1
-    [pd, udx, udy] = PTSD2Dboundary(pd, udx, udy, PMLdepth,...
-        xiXn, xiXp, xiYn, xiYp);
-    [pd, udx, udy] = PSTD2Dfun(pd, udx, udy, diffmatrix,...
+tic();
+for i = 1 : T/dt
+   [pd, udx, udy] = PSTD2DfunGPU(pd, udx, udy, diffmatrix,...
      PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
     pd = PTSD2Dsrc(pd, src(i), srcloc);
-    reciever(i) = pd(ceil(N/2), ceil(N/2));
+    reciever(i) = abs(gather(pd(ceil(N/2), ceil(N/2))));
     if mod(i, 100) < 1
-    mesh(linex, liney, abs(pd));
-    
+    localpd = gather(pd);
+    mesh(abs(localpd)); 
 %     zlim([-10^-10 10^-10]);
 %     set(gca,'zlim',[-10^-12 10^-12]);
-    caxis([-10^-9 10^-9])
+%     caxis([-10^-12 10^-12])
     shading interp;
-    title(sprintf('Time = %.6f s',dt*(i-1)));
+    title(sprintf('Time = %.6f s',dt*i));
 %     view([spin(i) 13]);
-    view(2);
-    axis tight;
+% view(2);
     drawnow;
     end
 end
+reset(g);
 toc();
-% 
+plot(reciever);
 %% Display the results
 

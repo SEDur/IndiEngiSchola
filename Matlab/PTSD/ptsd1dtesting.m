@@ -1,23 +1,24 @@
 %% PTSD1D testing script
 
 %% Initz
+clf;
 clc;
-clear all;
+% clear all;
 % close all;
 figure(1);
 set(1,'windowstyle','docked');
 %% Make Variables
 
 %define FS
-fs = 10000.0;
+fs = 4000.0;
 %define density
 rho = 1.21;
 %define speed of sound
 c = 343.0;
 %define total time
-T = 1.1;
+T = 20.0;
 %define grid width
-gridWidth = 10.0;
+gridWidth = 20.0;
 %define timestep
 dt = 1/fs;
 %dfine grid spacing
@@ -29,7 +30,7 @@ pconst = rho * c^2 * (dt/dx);
 uconst = dt/(dx*rho);
 
 %define pml depth 
-PMLdepth = 30;
+PMLdepth = 60;
 %calc grid size
 N = ceil(abs(gridWidth/dx)+2*PMLdepth);
 %calculate differentiation matrix
@@ -37,12 +38,12 @@ tempdiffmatrix = zeros(1,N);
 temp = zeros(1, N);
 
 %Boundary Absorption Coefs (0 to 1)
-alphaL = 1.0;
-alphaR = 1.0;
+alphaL = 0.8;
+alphaR = 0.8;
 
 %Calc source
 src = zeros(1,ceil(T/(dt/2))+1);
-% src(10:1010) = (10^-12*10^(50/20)) * sin(2*(pi/1010)*(1:1001));
+src(10:1010) = (10^-12*10^(50/20)) * sin(2*(pi/1010)*(1:1001));
 % tnum = ceil(T/dt);
 % fc = 0.1;     % Cutoff frequency (normalised 0.5=nyquist)
 % n0 = 120;        % Initial delay (samples)
@@ -57,7 +58,9 @@ src = zeros(1,ceil(T/(dt/2))+1);
 % src = decimate(src, 2, 'fir');
 % src = interp(src, 2);
 % srcloc = PMLdepth+1;
+% srcloc = ceil(N/2);
 srcloc = ceil(N/2);
+
 reciever = zeros(1,ceil(T/dt));
 %calculate geometry matricies
 phat = zeros(1,N);
@@ -67,7 +70,7 @@ udiffhat = zeros(1,N);
 pd = zeros(1,N);
 ud = zeros(1,N);
 
-pd(PMLdepth:N-PMLdepth) = (10^-12*10^(50/20)) * sin(2*(pi/208)*(1:208));
+% pd(PMLdepth:N-PMLdepth) = (10^-12*10^(50/20)) * sin(2*(pi/208)*(1:208));
 
 linex = linspace(0, gridWidth - dx, N);
 
@@ -94,17 +97,24 @@ PMLdiff(N-(PMLdepth-1) : end) = (1.0/3.0)*(((PMLdiff(N-(PMLdepth-1) : end)-(N-(P
 PMLalphau = uconst*(1./(1+PMLdiff));
 PMLalphap = pconst*(1./(1+PMLdiff));
 PMLdiff = ((1.0-PMLdiff)./(1.0+PMLdiff));
-PMLdiff(1:PMLdepth) = PMLdiff(1:PMLdepth).* (alphaL);
-PMLdiff(N+1-PMLdepth:end) = PMLdiff(N+1-PMLdepth:end).* (alphaR);
+
+S = c*(dt/dx);
+Rleft = 1 - alphaL;
+Rright = 1 - alphaR;
+xiL = (1 + Rleft) / (1 + Rleft - 2 * S * Rleft);
+xiR = (1 + Rright)/ (1 + Rright - 2 * S * Rright);
+z = 0;
+
 
 %% solve for some time
 % tic();
 for i = 1 : T/dt
    [pd, ud] = PSTD1Dfun(pd, ud, diffmatrix,...
      PMLdiff, PMLalphau, PMLalphap, PMLconst);
+    [pd, ud] = PTSD1Dboundary(pd, ud, PMLdepth, xiL, xiR);
     pd = PTSD1Dsrc(pd, src(i), srcloc);
     plot(linex, real(pd));
-%     ylim([-10e-9 10e-9]);
+    ylim([-10e-9 10e-9]);
     title(sprintf('Time = %.6f s',dt*i));
     drawnow;
     reciever(i) = pd(floor(N-PMLdepth)-1);
