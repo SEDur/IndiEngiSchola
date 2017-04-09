@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.10.10)  8 APR 2017 11:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.10.10)  9 APR 2017 14:50
 entering extended mode
 **./Main.tex
 (Main.tex
@@ -268,7 +268,12 @@ Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
 
 Writing index file Main.idx
 (Main.aux (sections/dedic.aux) (sections/acknow.aux) (sections/acronym.aux)
-(sections/introduction.aux))
+(sections/introduction.aux) (sections/largeroomacoustics.aux)
+(sections/Numerical.aux) (sections/Finite.aux) (sections/Sparse.aux)
+(sections/Pseudo-spectral.aux) (sections/Application.aux)
+(sections/Acoustic.aux) (sections/Profiling.aux)
+(sections/optimisationandparallelism.aux) (sections/Analysis.aux)
+(sections/Conclusion.aux) (sections/Further.aux))
 \openout1 = `Main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
@@ -383,14 +388,46 @@ Package mathptmx Warning: There are no bold math fonts on input line 8.
 
 
 
-] (Main.toc)
+] (Main.toc
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
+LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 1.
+
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\psnfss\ot1ztmcm.fd"
+File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 1.
+
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\psnfss\omlztmcm.fd"
+File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 1.
+
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\psnfss\omsztmcm.fd"
+File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 1.
+
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\psnfss\omxztmcm.fd"
+File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
+)
 \tf@toc=\write4
 \openout4 = `Main.toc'.
 
  [9]
 \openout2 = `sections/acronym.aux'.
 
- (sections/acronym.tex [10
+
+(sections/acronym.tex [10
 
 
 
@@ -414,35 +451,159 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.5> not available
 
 LaTeX Warning: Citation `Durbridge2016a' on page 1 undefined on input line 15.
 
-[1
+) [1
 
 
 
-] (Main.aux (sections/dedic.aux) (sections/acknow.aux) (sections/acronym.aux) (
-sections/introduction.aux))
+]
+\openout2 = `sections/largeroomacoustics.aux'.
+
+ (sections/largeroomacoustics.tex [2
+
+
+
+
+]
+Chapter 2.
+LaTeX Font Info:    Calculating math sizes for size <8.5> on input line 35.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.29004> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 35.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5.10005> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 35.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8.5> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 35.
+[3]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
+
+
+LaTeX Warning: Reference `fig:1' on page 4 undefined on input line 52.
+
+
+LaTeX Warning: Reference `fig:2' on page 4 undefined on input line 90.
+
+[4]
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 97.
+ ("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\psnfss\omsptm.fd"
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 97.
+
+Overfull \hbox (0.61853pt too wide) in paragraph at lines 132--143
+[][]
+ []
+
+[5] [6]) [7]
+\openout2 = `sections/Numerical.aux'.
+
+
+No file sections/Numerical.tex.
+[8
+
+
+
+]
+\openout2 = `sections/Finite.aux'.
+
+
+No file sections/Finite.tex.
+[9
+
+
+]
+\openout2 = `sections/Sparse.aux'.
+
+
+No file sections/Sparse.tex.
+[10
+
+
+]
+\openout2 = `sections/Pseudo-spectral.aux'.
+
+
+No file sections/Pseudo-spectral.tex.
+[11
+
+
+]
+\openout2 = `sections/Application.aux'.
+
+
+No file sections/Application.tex.
+\openout2 = `sections/Acoustic.aux'.
+
+No file sections/Acoustic.tex.
+[12
+
+
+
+
+]
+\openout2 = `sections/Profiling.aux'.
+
+
+No file sections/Profiling.tex.
+\openout2 = `sections/optimisationandparallelism.aux'.
+
+No file sections/optimisationandparallelism.tex.
+\openout2 = `sections/Analysis.aux'.
+
+No file sections/Analysis.tex.
+\openout2 = `sections/Conclusion.aux'.
+
+No file sections/Conclusion.tex.
+\openout2 = `sections/Further.aux'.
+
+No file sections/Further.tex.
+[13
+
+
+
+
+
+
+
+
+
+
+] [14
+
+
+]
+No file Main.ind.
+(Main.aux (sections/dedic.aux) (sections/acknow.aux) (sections/acronym.aux)
+(sections/introduction.aux) (sections/largeroomacoustics.aux)
+(sections/Numerical.aux) (sections/Finite.aux) (sections/Sparse.aux)
+(sections/Pseudo-spectral.aux) (sections/Application.aux)
+(sections/Acoustic.aux) (sections/Profiling.aux)
+(sections/optimisationandparallelism.aux) (sections/Analysis.aux)
+(sections/Conclusion.aux) (sections/Further.aux))
 
 LaTeX Warning: There were undefined references.
 
- ) )
-(\end occurred when \iftrue on line 65 was incomplete)
-(\end occurred when \ifnum on line 65 was incomplete) 
+ ) 
 Here is how much of TeX's memory you used:
- 2830 strings out of 493334
- 39931 string characters out of 3136241
- 107804 words of memory out of 3000000
- 6276 multiletter control sequences out of 15000+200000
- 22418 words of font info for 39 fonts, out of 3000000 for 9000
+ 3024 strings out of 493334
+ 43567 string characters out of 3136241
+ 118499 words of memory out of 3000000
+ 6374 multiletter control sequences out of 15000+200000
+ 49522 words of font info for 91 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,5n,25p,887b,220s stack positions out of 5000i,500n,10000p,200000b,50000s
-{D:/MSC/Research Methose/M
-iKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<D:/MSC/Research Methose/MiKTeX 2.9/f
-onts/type1/urw/courier/ucrr8a.pfb><D:/MSC/Research Methose/MiKTeX 2.9/fonts/typ
-e1/urw/times/utmb8a.pfb><D:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/urw/tim
-es/utmr8a.pfb><D:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/urw/times/utmri8a
-.pfb>
-Output written on Main.pdf (11 pages, 53927 bytes).
+ 40i,12n,25p,890b,223s stack positions out of 5000i,500n,10000p,200000b,50000s
+{D:/MSC/Research Methose/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<D:/MSC/R
+esearch Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:/MSC/Re
+search Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/MSC/Rese
+arch Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/MSC/Resea
+rch Methose/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb><D:/MSC/Research Meth
+ose/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><D:/MSC/Research Methose/MiKTeX
+ 2.9/fonts/type1/urw/times/utmbi8a.pfb><D:/MSC/Research Methose/MiKTeX 2.9/font
+s/type1/urw/times/utmr8a.pfb><D:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/ur
+w/times/utmri8a.pfb>
+Output written on Main.pdf (24 pages, 109893 bytes).
 PDF statistics:
- 55 PDF objects out of 1000 (max. 8388607)
+ 112 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
