@@ -1,12 +1,14 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.10.10)  8 APR 2017 09:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.10.10)  9 APR 2017 14:50
 entering extended mode
 **./Main.tex
 (Main.tex
 LaTeX2e <2016/03/31> patch level 3
 Babel <3.9r> and hyphenation patterns for 75 language(s) loaded.
-(svproc.cls
-Document Class: svproc 2016/07/20 v1.3 
- LaTeX document class for Proceedings volumes
+(svmono.cls
+Document Class: svmono 2009/12/17 v5.5 
+Springer Verlag global LaTeX document class for monographs
+Class Springer-SVMono Info: extra/valid Springer sub-package 
+(Springer-SVMono)           not found in option list - using "global" style.
 ("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\base\article.cls"
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 ("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\base\size10.clo"
@@ -24,30 +26,180 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
+\svparindent=\dimen103
+\betweenumberspace=\dimen104
+\headlineindent=\dimen105
+\c@chapter=\count87
+\mottowidth=\dimen106
+\svitemindent=\dimen107
+\verbatimindent=\dimen108
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 832.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 833.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 834.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 835.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 836.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 837.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 838.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 839.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 840.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 841.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 842.
+\tocchpnum=\dimen109
+\tocsecnum=\dimen110
+\tocsectotal=\dimen111
+\tocsubsecnum=\dimen112
+\tocsubsectotal=\dimen113
+\tocsubsubsecnum=\dimen114
+\tocsubsubsectotal=\dimen115
+\tocparanum=\dimen116
+\tocparatotal=\dimen117
+\tocsubparanum=\dimen118
+\foot@parindent=\dimen119
+\spthmsep=\dimen120
+\c@theorem=\count88
+\c@case=\count89
+\c@conjecture=\count90
+\c@corollary=\count91
+\c@definition=\count92
+\c@example=\count93
+\c@exercise=\count94
+\c@lemma=\count95
+\c@note=\count96
+\c@problem=\count97
+\c@property=\count98
+\c@proposition=\count99
+\c@question=\count100
+\c@solution=\count101
+\c@remark=\count102
+\c@prob=\count103
+\instindent=\dimen121
+\figgap=\dimen122
+\bildb@x=\box26
+\figcapgap=\dimen123
+\tabcapgap=\dimen124
+\c@merk=\count104
+LaTeX Info: Redefining \abstract on input line 1898.
+)
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\graphics\color.sty"
+Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 147.
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def"
+File: pdftex.def 2016/07/10 v0.06j Graphics/color for pdfTeX
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count105
+))
+(C:\Users\Simon\AppData\Roaming\MiKTeX\2.9\tex\latex\framed\framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip43
+\fb@frw=\dimen125
+\fb@frh=\dimen126
+\FrameRule=\dimen127
+\FrameSep=\dimen128
+)
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\psnfss\mathptmx.sty"
+Package: mathptmx 2005/04/12 PSNFSS-v9.2a Times w/ Math, improved (SPQR, WaS) 
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 28.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/ztmcm/m/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/ztmcm/m/n on input line 28.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 29.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/ztmcm/m/it on input line 29.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/ztmcm/m/it on input line 29.
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 30.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/ztmcm/m/n on input line 30.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/ztmcm/m/n on input line 30.
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 31.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/ztmcm/m/n on input line 31.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/ztmcm/m/n on input line 31.
+\symbold=\mathgroup4
+\symitalic=\mathgroup5
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/ptm/bx/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/ptm/bx/n on input line 34.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/ptm/m/it on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/ptm/m/it on input line 35.
+LaTeX Info: Redefining \hbar on input line 50.
+)
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\psnfss\helvet.sty"
+Package: helvet 2005/04/12 PSNFSS-v9.2a (WaS) 
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+))
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\psnfss\courier.sty"
+Package: courier 2005/04/12 PSNFSS-v9.2a (WaS) 
+)
+(C:\Users\Simon\AppData\Roaming\MiKTeX\2.9\tex\latex\type1cm\type1cm.sty
+Package: type1cm 2002/09/05 v0.04 BlueSky/Y&Y Type1 CM font definitions (DPC, p
+atched RF)
+)
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\base\makeidx.sty"
+Package: makeidx 2014/09/29 v1.0m Standard LaTeX package
+)
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2016/07/10 v1.0t Standard LaTeX Graphics (DPC,SPQR)
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+)
+\Gin@req@height=\dimen129
+\Gin@req@width=\dimen130
+)
 ("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\tools\multicol.sty"
 Package: multicol 2016/04/07 v1.8p multicolumn formatting (FMi)
-\c@tracingmulticols=\count87
-\mult@box=\box26
-\multicol@leftmargin=\dimen103
-\c@unbalance=\count88
-\c@collectmore=\count89
-\doublecol@number=\count90
-\multicoltolerance=\count91
-\multicolpretolerance=\count92
-\full@width=\dimen104
-\page@free=\dimen105
-\premulticols=\dimen106
-\postmulticols=\dimen107
-\multicolsep=\skip43
-\multicolbaselineskip=\skip44
-\partial@page=\box27
-\last@line=\box28
-\maxbalancingoverflow=\dimen108
-\mult@rightbox=\box29
-\mult@grightbox=\box30
-\mult@gfirstbox=\box31
-\mult@firstbox=\box32
-\@tempa=\box33
+\c@tracingmulticols=\count106
+\mult@box=\box27
+\multicol@leftmargin=\dimen131
+\c@unbalance=\count107
+\c@collectmore=\count108
+\doublecol@number=\count109
+\multicoltolerance=\count110
+\multicolpretolerance=\count111
+\full@width=\dimen132
+\page@free=\dimen133
+\premulticols=\dimen134
+\postmulticols=\dimen135
+\multicolsep=\skip44
+\multicolbaselineskip=\skip45
+\partial@page=\box28
+\last@line=\box29
+\maxbalancingoverflow=\dimen136
+\mult@rightbox=\box30
+\mult@grightbox=\box31
+\mult@gfirstbox=\box32
+\mult@firstbox=\box33
 \@tempa=\box34
 \@tempa=\box35
 \@tempa=\box36
@@ -64,137 +216,21 @@ Package: multicol 2016/04/07 v1.8p multicolumn formatting (FMi)
 \@tempa=\box47
 \@tempa=\box48
 \@tempa=\box49
-\c@columnbadness=\count93
-\c@finalcolumnbadness=\count94
-\last@try=\dimen109
-\multicolovershoot=\dimen110
-\multicolundershoot=\dimen111
-\mult@nat@firstbox=\box50
-\colbreak@box=\box51
-\mc@col@check@num=\count95
-)
-("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\oberdiek\aliascnt.sty"
-Package: aliascnt 2016/05/16 v1.4 Alias counters (HO)
-
-("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\carlisle\remreset.sty"))
-\c@chapter=\count96
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 369.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 370.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 371.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 372.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 373.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 374.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 375.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 376.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 377.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 378.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 379.
-\tocchpnum=\dimen112
-\tocsecnum=\dimen113
-\tocsectotal=\dimen114
-\tocsubsecnum=\dimen115
-\tocsubsectotal=\dimen116
-\tocsubsubsecnum=\dimen117
-\tocsubsubsectotal=\dimen118
-\tocparanum=\dimen119
-\tocparatotal=\dimen120
-\tocsubparanum=\dimen121
-\@tempcntc=\count97
-\fnindent=\dimen122
-\c@@inst=\count98
-\c@@auth=\count99
-\c@auco=\count100
-\instindent=\dimen123
-\authrun=\box52
-\authorrunning=\toks14
-\tocauthor=\toks15
-\titrun=\box53
-\titlerunning=\toks16
-\toctitle=\toks17
-\c@theorem=\count101
-\c@case=\count102
-\c@conjecture=\count103
-\c@corollary=\count104
-\c@definition=\count105
-\c@example=\count106
-\c@exercise=\count107
-\c@lemma=\count108
-\c@note=\count109
-\c@problem=\count110
-\c@property=\count111
-\c@proposition=\count112
-\c@question=\count113
-\c@solution=\count114
-\c@remark=\count115
-\headlineindent=\dimen124
-)
-("D:\MSC\Research Methose\MiKTeX 2.9\tex\generic\babel\babel.sty"
-Package: babel 2016/04/23 3.9r The Babel package
-
-*************************************
-* Local config file bblopts.cfg used
-*
-(C:\Users\Simon\AppData\Roaming\MiKTeX\2.9\tex\latex\arabi\bblopts.cfg
-File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
- babel
-)
-("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\babel-english\english.ldf"
-Language: english 2012/08/20 v3.3p English support from the babel system
-
-("D:\MSC\Research Methose\MiKTeX 2.9\tex\generic\babel\babel.def"
-File: babel.def 2016/04/23 3.9r Babel common definitions
-\babel@savecnt=\count116
-\U@D=\dimen125
-)
-\l@canadian = a dialect from \language\l@american 
-\l@australian = a dialect from \language\l@british 
-\l@newzealand = a dialect from \language\l@british 
-))
-(C:\Users\Simon\AppData\Roaming\MiKTeX\2.9\tex\latex\url\url.sty
-\Urlmuskip=\muskip10
-Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-)
-(C:\Users\Simon\AppData\Roaming\MiKTeX\2.9\tex\latex\sectsty\sectsty.sty
-Package: sectsty 2002/02/25 v2.0.2 Commands to change all sectional heading sty
-les
-)
-("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
-Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
-
-("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks18
-)
-("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
-Package: graphics 2016/07/10 v1.0t Standard LaTeX Graphics (DPC,SPQR)
-
-("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\graphics\trig.sty"
-Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-)
-("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
-File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
-)
-Package graphics Info: Driver file: pdftex.def on input line 99.
-
-("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def"
-File: pdftex.def 2016/07/10 v0.06j Graphics/color for pdfTeX
-
-("D:\MSC\Research Methose\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
-Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
-)
-("D:\MSC\Research Methose\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
-Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
-)
-\Gread@gobject=\count117
-))
-\Gin@req@height=\dimen126
-\Gin@req@width=\dimen127
+\@tempa=\box50
+\c@columnbadness=\count112
+\c@finalcolumnbadness=\count113
+\last@try=\dimen137
+\multicolovershoot=\dimen138
+\multicolundershoot=\dimen139
+\mult@nat@firstbox=\box51
+\colbreak@box=\box52
+\mc@col@check@num=\count114
 )
 (C:\Users\Simon\AppData\Roaming\MiKTeX\2.9\tex\latex\footmisc\footmisc.sty
 Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
-\FN@temptoken=\toks19
-\footnotemargin=\dimen128
-\c@pp@next@reset=\count118
+\FN@temptoken=\toks15
+\footnotemargin=\dimen140
+\c@pp@next@reset=\count115
 Package footmisc Info: Declaring symbol style bringhurst on input line 855.
 Package footmisc Info: Declaring symbol style chicago on input line 863.
 Package footmisc Info: Declaring symbol style wiley on input line 872.
@@ -203,6 +239,14 @@ Package footmisc Info: Declaring symbol style lamport-robust on input line 883.
 Package footmisc Info: Declaring symbol style lamport* on input line 903.
 Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
 .
+)
+(C:\Users\Simon\AppData\Roaming\MiKTeX\2.9\tex\latex\url\url.sty
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(C:\Users\Simon\AppData\Roaming\MiKTeX\2.9\tex\latex\sectsty\sectsty.sty
+Package: sectsty 2002/02/25 v2.0.2 Commands to change all sectional heading sty
+les
 )
 (C:\Users\Simon\AppData\Roaming\MiKTeX\2.9\tex\latex\cite\cite.sty
 LaTeX Info: Redefining \cite on input line 302.
@@ -214,37 +258,54 @@ Package: subfiles 2012/05/23 Federico Garcia
 
 ("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\tools\verbatim.sty"
 Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks20
-\verbatim@line=\toks21
+\every@verbatim=\toks16
+\verbatim@line=\toks17
 \verbatim@in@stream=\read1
-)) (Main.aux)
+))
+\@indexfile=\write3
+\openout3 = `Main.idx'.
+
+
+Writing index file Main.idx
+(Main.aux (sections/dedic.aux) (sections/acknow.aux) (sections/acronym.aux)
+(sections/introduction.aux) (sections/largeroomacoustics.aux)
+(sections/Numerical.aux) (sections/Finite.aux) (sections/Sparse.aux)
+(sections/Pseudo-spectral.aux) (sections/Application.aux)
+(sections/Acoustic.aux) (sections/Profiling.aux)
+(sections/optimisationandparallelism.aux) (sections/Analysis.aux)
+(sections/Conclusion.aux) (sections/Further.aux))
 \openout1 = `Main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 43.
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.fd"
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
 (C:\Users\Simon\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count119
-\scratchdimen=\dimen129
-\scratchbox=\box54
-\nofMPsegments=\count120
-\nofMParguments=\count121
-\everyMPshowfont=\toks22
-\MPscratchCnt=\count122
-\MPscratchDim=\dimen130
-\MPnumerator=\count123
-\makeMPintoPDFobject=\count124
-\everyMPtoPDFconversion=\toks23
+\scratchcounter=\count116
+\scratchdimen=\dimen141
+\scratchbox=\box53
+\nofMPsegments=\count117
+\nofMParguments=\count118
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count119
+\MPscratchDim=\dimen142
+\MPnumerator=\count120
+\makeMPintoPDFobject=\count121
+\everyMPtoPDFconversion=\toks19
 ) ("D:\MSC\Research Methose\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
 Package: pdftexcmds 2016/05/21 v0.22 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -290,163 +351,259 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 31.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 31.
+\big@size=\dimen143
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 52.
 
-(sections/introduction.tex
+[1
 
-LaTeX Warning: Citation `Durbridge2016a' on page 1 undefined on input line 17.
+{C:/Users/Simon/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2
+
+
+]
+\openout2 = `sections/dedic.aux'.
+
+
+(sections/dedic.tex [5
+
+
+
+])
+\openout2 = `sections/acknow.aux'.
+
+ (sections/acknow.tex [6
+
+
+
+
+
+]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <16> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 8.
+
+
+Package mathptmx Warning: There are no bold math fonts on input line 8.
+
+) [7] [8
+
+
+
+] (Main.toc
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
+LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 1.
+
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\psnfss\ot1ztmcm.fd"
+File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 1.
+
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\psnfss\omlztmcm.fd"
+File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 1.
+
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\psnfss\omsztmcm.fd"
+File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
+)
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 1.
+
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\psnfss\omxztmcm.fd"
+File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
+)
+\tf@toc=\write4
+\openout4 = `Main.toc'.
+
+ [9]
+\openout2 = `sections/acronym.aux'.
+
+
+(sections/acronym.tex [10
+
+
+
+]
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 12.
+
+("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)) [11]
+[12
+
+
+
+]
+\openout2 = `sections/introduction.aux'.
+
+ (sections/introduction.tex
+Chapter 1.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 15.
+
+LaTeX Warning: Citation `Durbridge2016a' on page 1 undefined on input line 15.
 
 ) [1
 
-{C:/Users/Simon/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-
-LaTeX Warning: Citation `Everest2009' on page 2 undefined on input line 75.
 
 
-LaTeX Warning: Citation `Bengtsson2009' on page 2 undefined on input line 75.
+]
+\openout2 = `sections/largeroomacoustics.aux'.
 
-
-LaTeX Warning: Citation `Elorza2005' on page 2 undefined on input line 75.
-
-
-LaTeX Warning: Citation `Rober2007' on page 2 undefined on input line 80.
-
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 85.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 85.
-
-LaTeX Warning: Citation `Elorza2005' on page 2 undefined on input line 85.
-
-
-LaTeX Warning: Citation `Rober2007' on page 2 undefined on input line 85.
-
-
-LaTeX Warning: Citation `Rober2007' on page 2 undefined on input line 85.
-
-[2]
-
-LaTeX Warning: Citation `Bilbao2004' on page 3 undefined on input line 90.
-
-
-LaTeX Warning: Citation `Rienstra1952a' on page 3 undefined on input line 90.
-
-
-LaTeX Warning: Citation `Zienkiewicz2013' on page 3 undefined on input line 90.
+ (sections/largeroomacoustics.tex [2
 
 
 
-LaTeX Warning: Citation `Savioja2010' on page 3 undefined on input line 90.
 
+]
+Chapter 2.
+LaTeX Font Info:    Calculating math sizes for size <8.5> on input line 35.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.29004> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 35.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5.10005> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 35.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8.5> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 35.
 [3]
-
-LaTeX Warning: Citation `Yee1966' on page 4 undefined on input line 96.
-
-
-LaTeX Warning: Citation `Schneider2015' on page 4 undefined on input line 96.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
 
 
-LaTeX Warning: Citation `Hill2012' on page 4 undefined on input line 102.
+LaTeX Warning: Reference `fig:1' on page 4 undefined on input line 52.
 
 
-LaTeX Warning: Citation `Hill2012' on page 4 undefined on input line 102.
+LaTeX Warning: Reference `fig:2' on page 4 undefined on input line 90.
+
+[4]
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 97.
+ ("D:\MSC\Research Methose\MiKTeX 2.9\tex\latex\psnfss\omsptm.fd"
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 97.
+
+Overfull \hbox (0.61853pt too wide) in paragraph at lines 132--143
+[][]
+ []
+
+[5] [6]) [7]
+\openout2 = `sections/Numerical.aux'.
 
 
-LaTeX Warning: Citation `Abdulkadir2015' on page 4 undefined on input line 120.
+No file sections/Numerical.tex.
+[8
 
 
 
-LaTeX Warning: Citation `Oxnard2015' on page 4 undefined on input line 120.
+]
+\openout2 = `sections/Finite.aux'.
 
 
-LaTeX Warning: Citation `Bilbao2016' on page 4 undefined on input line 120.
+No file sections/Finite.tex.
+[9
 
 
-LaTeX Warning: Citation `Hamilton2014' on page 4 undefined on input line 120.
+]
+\openout2 = `sections/Sparse.aux'.
 
 
-LaTeX Warning: Citation `Savioja2010' on page 4 undefined on input line 120.
+No file sections/Sparse.tex.
+[10
 
 
-LaTeX Warning: Citation `Angus2010' on page 4 undefined on input line 120.
-
-[4] [5]
-
-LaTeX Warning: Citation `excluding some extra boundary handling to ensure stabi
-lity' on page 6 undefined on input line 126.
+]
+\openout2 = `sections/Pseudo-spectral.aux'.
 
 
-LaTeX Warning: Citation `Doerr2013' on page 6 undefined on input line 126.
+No file sections/Pseudo-spectral.tex.
+[11
 
 
-LaTeX Warning: Citation `Doerr2013' on page 6 undefined on input line 131.
+]
+\openout2 = `sections/Application.aux'.
 
 
-LaTeX Warning: Citation `Doerr2013' on page 6 undefined on input line 131.
+No file sections/Application.tex.
+\openout2 = `sections/Acoustic.aux'.
 
-[6]
-
-LaTeX Warning: Citation `Hornikx2016' on page 7 undefined on input line 138.
-
-
-LaTeX Warning: Citation `Angus2010' on page 7 undefined on input line 138.
+No file sections/Acoustic.tex.
+[12
 
 
-LaTeX Warning: Citation `Durbridg2016' on page 7 undefined on input line 148.
 
 
-LaTeX Warning: Citation `Durbridg2016' on page 7 undefined on input line 153.
+]
+\openout2 = `sections/Profiling.aux'.
 
 
-LaTeX Warning: Citation `Pirkle2013' on page 7 undefined on input line 157.
+No file sections/Profiling.tex.
+\openout2 = `sections/optimisationandparallelism.aux'.
+
+No file sections/optimisationandparallelism.tex.
+\openout2 = `sections/Analysis.aux'.
+
+No file sections/Analysis.tex.
+\openout2 = `sections/Conclusion.aux'.
+
+No file sections/Conclusion.tex.
+\openout2 = `sections/Further.aux'.
+
+No file sections/Further.tex.
+[13
 
 
-LaTeX Warning: Citation `Microsoft2016' on page 7 undefined on input line 157.
 
 
-LaTeX Warning: Citation `Galvez2016' on page 7 undefined on input line 157.
 
 
-LaTeX Warning: Citation `Microsoft2016' on page 7 undefined on input line 159.
 
 
-LaTeX Warning: Citation `Savioja2010' on page 7 undefined on input line 159.
 
-[7]
-No file Main.bbl.
-[8] (Main.aux)
+
+] [14
+
+
+]
+No file Main.ind.
+(Main.aux (sections/dedic.aux) (sections/acknow.aux) (sections/acronym.aux)
+(sections/introduction.aux) (sections/largeroomacoustics.aux)
+(sections/Numerical.aux) (sections/Finite.aux) (sections/Sparse.aux)
+(sections/Pseudo-spectral.aux) (sections/Application.aux)
+(sections/Acoustic.aux) (sections/Profiling.aux)
+(sections/optimisationandparallelism.aux) (sections/Analysis.aux)
+(sections/Conclusion.aux) (sections/Further.aux))
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 2749 strings out of 493334
- 38174 string characters out of 3136241
- 113657 words of memory out of 3000000
- 6238 multiletter control sequences out of 15000+200000
- 7802 words of font info for 28 fonts, out of 3000000 for 9000
+ 3024 strings out of 493334
+ 43567 string characters out of 3136241
+ 118499 words of memory out of 3000000
+ 6374 multiletter control sequences out of 15000+200000
+ 49522 words of font info for 91 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,8n,25p,1660b,252s stack positions out of 5000i,500n,10000p,200000b,50000s
-<D:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-><D:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-<D:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx9.pfb><D
-:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:
-/MSC/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><D:/M
-SC/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><D:/MSC
-/Research Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/MSC/R
-esearch Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><D:/MSC/Rese
-arch Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><D:/MSC/Researc
-h Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/MSC/Research M
-ethose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><D:/MSC/Research Meth
-ose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/MSC/Research Metho
-se/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><D:/MSC/Research Methos
-e/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on Main.pdf (8 pages, 176627 bytes).
+ 40i,12n,25p,890b,223s stack positions out of 5000i,500n,10000p,200000b,50000s
+{D:/MSC/Research Methose/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<D:/MSC/R
+esearch Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:/MSC/Re
+search Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/MSC/Rese
+arch Methose/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/MSC/Resea
+rch Methose/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb><D:/MSC/Research Meth
+ose/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><D:/MSC/Research Methose/MiKTeX
+ 2.9/fonts/type1/urw/times/utmbi8a.pfb><D:/MSC/Research Methose/MiKTeX 2.9/font
+s/type1/urw/times/utmr8a.pfb><D:/MSC/Research Methose/MiKTeX 2.9/fonts/type1/ur
+w/times/utmri8a.pfb>
+Output written on Main.pdf (24 pages, 109893 bytes).
 PDF statistics:
- 85 PDF objects out of 1000 (max. 8388607)
+ 112 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
