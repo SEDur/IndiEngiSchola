@@ -8,11 +8,29 @@
 %\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
 \chapter{Loudspeaker Systems \& Large Room Acoustics}
 
-\abstract{Acoustics is a branch of physics that aims to characterise Newton's law of motion applied to wave propagation, while obeying the physical conservation law and often focussing on propagation in an audible spectrum. This characterisation of sound propagation is intrinsically linked to many other branches of physics, as well as psychoacoustics and perception. Many aspects of acoustic modelling may be of interest when considering the design and application of loudspeaker systems. Both small and large scale simulations may allow a user to make informed decisions about the design and placement of a loudspeaker system, so that the performance of the system may be validated and optimised before application. In this chapter we will evaluate the lossless acoustic wave equation for gasses, and consider the application of the wave equation in bounded space. We will then consider some specific use cases for using such an equation,  }
+\abstract{Acoustics is a branch of physics that aims to characterise Newton's law of motion applied to wave propagation, while obeying the physical conservation law and often focussing on propagation in an audible spectrum. This characterisation of sound propagation is intrinsically linked to many other branches of physics, as well as psychoacoustics and perception. Many aspects of acoustic modelling may be of interest when considering the design and application of loudspeaker systems. Both small and large scale simulations may allow a user to make informed decisions about the design and placement of a loudspeaker system, so that the performance of the system may be validated and optimised before application. In this chapter we will evaluate the lossless acoustic wave equation for gasses, and consider the application of the wave equation in bounded space. We will then consider some specific use cases for applying such an equation for modelling loudspeaker system performance.}
 
 \section{The Acoustic Wave Equation}
 \label{sec:1}
-Use the template \emph{chapter.tex} together with the Springer document class SVMono (monograph-type books) or SVMult (edited books) to style the various elements of your chapter content in the Springer layout.
+In the Mcgraw-Hill Electronic and Electrical Engineering Series of books, the late L Beranek authored the Acoustics volume. This volume contains an elegant summary of the wave equation, that will be the subject of paraphrase in the following section.
+
+\subsection{The Wave Equations}
+Acoustic waves are classified as fluctuations of pressure in a given medium. In room acoustics and loudspeaker system engineering, these fluctuations are often cyclical in nature around an ambient pressure, as opposed to the jets described in aeroacoustic study. Similar to the behaviour of heat convection or fluid diffusion, these cyclical fluctuations propagate and spread through the medium of interest. As these fluctuations of pressure propagate energy is often lost, and eventually the medium will often come to a state of relative rest where the energy of the propagating waves have been almost entirely dissipated. It is possible to calculate an approximate solution the the propagation of pressure through a space, by solving a system of second order partial differential equations that can be collectively lumped into a 'Wave Equation'. Below, we will introduce the three building blocks of the wave equation in both one dimension, and three dimensions (based on vector notation). These building blocks are Newton's Second Law of Motion, the gas law, and the laws of conservation of mass.
+
+To consider the wave equation, we should use the analogy of a small \footnote{rectilinear} volume of gas, within a larger homogeneous medium.
+
+\begin{center}
+\begin{tabular}{|p{0.5\textwidth}|p{0.5\textwidth}|} 
+  \hline
+ One Dimension & Three Dimensions \\ [0.5ex] 
+ \hline
+Sound pressure $p$ propagates across the medium like a plane wave, from one side to the other in the $x$ direction at a rate equal to the change in space $\frac{\delta p}{\delta x}$  & Sound pressure $p$ propagates across the medium like a spherical wave, from one side to the other at a rate of \textbf{grad} $p = \textbf{i}\frac{\delta p}{\delta x} + \textbf{j}\frac{\delta p}{\delta y} + \textbf{k}\frac{\delta p}{\delta z}$\\ 
+ cell3 & cell4\\ 
+ cell5 & cell6\\ 
+ \hline
+\end{tabular}
+\end{center}
+
 
 \section{Loudspeaker Systems}
 \label{sec:2}
