@@ -17,16 +17,23 @@ In the Mcgraw-Hill Electronic and Electrical Engineering Series of books, the la
 \subsection{The Wave Equations}
 Acoustic waves are classified as fluctuations of pressure in a given medium. In room acoustics and loudspeaker system engineering, these fluctuations are often cyclical in nature around an ambient pressure, as opposed to the jets described in aeroacoustic study. Similar to the behaviour of heat convection or fluid diffusion, these cyclical fluctuations propagate and spread through the medium of interest. As these fluctuations of pressure propagate energy is often lost, and eventually the medium will often come to a state of relative rest where the energy of the propagating waves have been almost entirely dissipated. It is possible to calculate an approximate solution the the propagation of pressure through a space, by solving a system of second order partial differential equations that can be collectively lumped into a 'Wave Equation'. Below, we will introduce the three building blocks of the wave equation in both one dimension, and three dimensions (based on vector notation). These building blocks are Newton's Second Law of Motion, the gas law, and the laws of conservation of mass.
 
-To consider the wave equation, we should use the analogy of a small \footnote{rectilinear} volume of gas, within a larger homogeneous medium.
+To consider the wave equation, we should use the analogy of a small\footnote{rectilinear} volume of gas, within a larger homogeneous medium. The faces of the volume are frictionless, and only the pressure at any face impacts on the gas inside the volume.
 
 \begin{center}
 \begin{tabular}{|p{0.5\textwidth}|p{0.5\textwidth}|} 
   \hline
  One Dimension & Three Dimensions \\ [0.5ex] 
  \hline
-Sound pressure $p$ propagates across the medium like a plane wave, from one side to the other in the $x$ direction at a rate equal to the change in space $\frac{\delta p}{\delta x}$  & Sound pressure $p$ propagates across the medium like a spherical wave, from one side to the other at a rate of \textbf{grad} $p = \textbf{i}\frac{\delta p}{\delta x} + \textbf{j}\frac{\delta p}{\delta y} + \textbf{k}\frac{\delta p}{\delta z}$\\ 
- cell3 & cell4\\ 
- cell5 & cell6\\ 
+Sound pressure $p$ propagates across the medium like a plane wave, from one side to the other in the $x$ direction at a rate equal to the change in space $\frac{\delta p}{\delta x}$  & Sound pressure $p$ propagates across the medium like a spherical wave, from one side to the other at a rate of \textbf{grad} $p = \textbf{i}\frac{\delta p}{\delta x} + \textbf{j}\frac{\delta p}{\delta y} + \textbf{k}\frac{\delta p}{\delta z}$ where i, j and k are unit vectors in the directions x, y and z.\\ [2.5ex] 
+ Force acting on the volume in the positive $x$ direction can thus be described as $-(\frac{\delta p}{\delta x} \Delta x) \Delta y \Delta z$ & Force acting on the volume in the positive $x$ direction can thus be described as $-[i(\frac{\delta p}{\delta x} \Delta x) \Delta y \Delta z)+ j(\frac{\delta p}{\delta y} \Delta y) \Delta x \Delta z)+ k(\frac{\delta p}{\delta z} \Delta z) \Delta x \Delta y)]$\\ [2.5ex]
+ A positive gradient causes acceleration in the $-x$ direction & $\leftarrow$ \\ [2.5ex]
+ Force per unit volume is given by dividing both sides of the previous equation by the volume $V$, $\frac{\textit{f}}{V} = -\frac{\delta p}{\delta x}$ & Force per unit volume is given by dividing both sides of the previous equation by the volume $V$, $\frac{\textit{f}}{V} = - \textbf{grad} p$\\ [2.5ex] 
+ Newton's second law of motion dictates that the rate of change of momentum in the volume must balance with force per unit volume, and we can assume the mass of gas in the volume is constant. & $ \leftarrow$ \\ [3.0ex]
+The force mass balance can be described as $\frac{\textit{f}}{V} = -\frac{\delta p}{\delta x} = \frac{M}{M} \frac{\delta u}{\delta t} = \rho^{\prime}\frac{\delta u}{\delta t}$ & The force mass balance can be described as $\frac{\textit{f}}{V} = -\textbf{grad} p = \frac{M}{M} \frac{Dq}{Dt} = \rho^{\prime}\frac{Dq}{Dt}$\\ [1.5ex]
+ $u$ is the velocity of gas in the volume, $\rho^{\prime}$ is the density of the gas, and $M = \rho^{\prime} V$ is the mass of gas in the volume.  & where $q$ is the vector velocity, $\rho^{\prime}$ is the density of gas in the volume, $M = \rho^{\prime} V$ is the total mass of gas in the volume. $\frac{D}{Dt}$ represents the total rate of change of velocity of a section of gas in the volume, and can be composed as $\frac{Dq}{Dt}=\frac{\delta q}{\delta t}+ q_x\frac{\delta q}{\delta x}+q_y\frac{\delta q}{\delta y}+q_z\frac{\delta q}{\delta z}$ where $q_x$, $q_y$ and $q_z$ are the components of the particle velocity \textbf{$q$} in each direction. As this is a linear wave equation approximation, these velocity components have no cross terms.   \\ [3.0ex]
+If the change in density of gas in the volume is sufficiently small, the $\rho^{\prime}$ will be approximately equal to the average density $\rho_0$, thus simplifying the equations above to $-\frac{\delta p}{\delta x} = \rho_0 \frac{\delta u}{\delta t}$  & If the particle velocity vector is sufficiently small, the change of momentum of the gas is approximately the same as the momentum of the volume at any arbitrary point, and the density of gas within the volume $\rho^{\prime}$ will be approximately equal to the average density $\rho_0$. Thus the above can be written as $-grad p = \rho_0 \frac{\delta p}{\delta t} $ \\ [1.5ex]
+ cell5 & cell6\\ [1.5ex]
+ 
  \hline
 \end{tabular}
 \end{center}

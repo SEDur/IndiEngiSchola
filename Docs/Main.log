@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.22)  11 APR 2017 16:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.22)  12 APR 2017 11:00
 entering extended mode
 **./Main.tex
 (Main.tex
@@ -470,37 +470,43 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.29004> not available
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5.10005> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 20.
 
-Overfull \hbox (5.99998pt too wide) in paragraph at lines 23--32
+Overfull \hbox (5.99998pt too wide) in paragraph at lines 23--39
  [] 
  []
 
-LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8.5> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 53.
-
-LaTeX Warning: Reference `fig:1' on page 4 undefined on input line 70.
-
 [4]
+Overfull \vbox (53.14178pt too high) has occurred while \output is active []
 
-LaTeX Warning: Reference `fig:2' on page 5 undefined on input line 108.
 
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 115.
+[5]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8.5> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 60.
+
+
+LaTeX Warning: Reference `fig:1' on page 6 undefined on input line 77.
+
+[6]
+
+LaTeX Warning: Reference `fig:2' on page 7 undefined on input line 115.
+
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 122.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omsptm.fd"
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 115.
- [5]
-Overfull \hbox (0.61853pt too wide) in paragraph at lines 150--161
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 122.
+
+Overfull \hbox (0.61853pt too wide) in paragraph at lines 157--168
 [][]
  []
 
-[6] [7]) [8]
+[7] [8]) [9]
 \openout2 = `sections/Numerical.aux'.
 
 
 No file sections/Numerical.tex.
-[9
+[10
 
 
 
@@ -509,7 +515,7 @@ No file sections/Numerical.tex.
 
 
 No file sections/Finite.tex.
-[10
+[11
 
 
 ]
@@ -517,7 +523,7 @@ No file sections/Finite.tex.
 
 
 No file sections/Sparse.tex.
-[11
+[12
 
 
 ]
@@ -525,7 +531,7 @@ No file sections/Sparse.tex.
 
 
 No file sections/Pseudo-spectral.tex.
-[12
+[13
 
 
 ]
@@ -533,7 +539,7 @@ No file sections/Pseudo-spectral.tex.
 
 
 No file sections/Acoustic.tex.
-[13
+[14
 
 
 ]
@@ -553,7 +559,7 @@ No file sections/Conclusion.tex.
 \openout2 = `sections/Further.aux'.
 
 No file sections/Further.tex.
-[14
+[15
 
 
 
@@ -562,6 +568,9 @@ No file sections/Further.tex.
 
 
 
+
+
+] [16
 
 
 ]
@@ -577,13 +586,13 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3022 strings out of 493333
- 42686 string characters out of 3139179
- 119079 words of memory out of 3000000
+ 3026 strings out of 493333
+ 42707 string characters out of 3139179
+ 123081 words of memory out of 3000000
  6373 multiletter control sequences out of 15000+200000
- 51386 words of font info for 94 fonts, out of 3000000 for 9000
+ 52438 words of font info for 98 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,12n,25p,1160b,263s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 39i,12n,25p,1160b,223s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Program Files/Mi
 KTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9
 /fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
@@ -593,9 +602,9 @@ courier/ucrr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/symbol/usyr.pfb
 s/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files/MiKTeX 2.9/fon
 ts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/time
 s/utmri8a.pfb>
-Output written on Main.pdf (24 pages, 116809 bytes).
+Output written on Main.pdf (26 pages, 122848 bytes).
 PDF statistics:
- 116 PDF objects out of 1000 (max. 8388607)
+ 123 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
