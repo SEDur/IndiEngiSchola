@@ -20,22 +20,53 @@ Acoustic waves are classified as fluctuations of pressure in a given medium. In 
 To consider the wave equation, we should use the analogy of a small\footnote{rectilinear} volume of gas, within a larger homogeneous medium. The faces of the volume are frictionless, and only the pressure at any face impacts on the gas inside the volume.
 
 \begin{center}
-\begin{tabular}{|p{0.5\textwidth}|p{0.5\textwidth}|} 
+\begin{longtable}{|p{0.5\textwidth}|p{0.5\textwidth}|} 
   \hline
  One Dimension & Three Dimensions \\ [0.5ex] 
  \hline
-Sound pressure $p$ propagates across the medium like a plane wave, from one side to the other in the $x$ direction at a rate equal to the change in space $\frac{\delta p}{\delta x}$  & Sound pressure $p$ propagates across the medium like a spherical wave, from one side to the other at a rate of \textbf{grad} $p = \textbf{i}\frac{\delta p}{\delta x} + \textbf{j}\frac{\delta p}{\delta y} + \textbf{k}\frac{\delta p}{\delta z}$ where i, j and k are unit vectors in the directions x, y and z.\\ [2.5ex] 
- Force acting on the volume in the positive $x$ direction can thus be described as $-(\frac{\delta p}{\delta x} \Delta x) \Delta y \Delta z$ & Force acting on the volume in the positive $x$ direction can thus be described as $-[i(\frac{\delta p}{\delta x} \Delta x) \Delta y \Delta z)+ j(\frac{\delta p}{\delta y} \Delta y) \Delta x \Delta z)+ k(\frac{\delta p}{\delta z} \Delta z) \Delta x \Delta y)]$\\ [2.5ex]
- A positive gradient causes acceleration in the $-x$ direction & $\leftarrow$ \\ [2.5ex]
- Force per unit volume is given by dividing both sides of the previous equation by the volume $V$, $\frac{\textit{f}}{V} = -\frac{\delta p}{\delta x}$ & Force per unit volume is given by dividing both sides of the previous equation by the volume $V$, $\frac{\textit{f}}{V} = - \textbf{grad} p$\\ [2.5ex] 
+Sound pressure $p$ propagates across the medium like a plane wave, from one side to the other in the $x$ direction at a rate equal to the change in space $\frac{\delta p}{\delta x}$  & Sound pressure $p$ propagates across the medium like a spherical wave, from one side to the other at a rate of \textbf{grad} $p = \textbf{i}\frac{\delta p}{\delta x} + \textbf{j}\frac{\delta p}{\delta y} + \textbf{k}\frac{\delta p}{\delta z}$ where i, j and k are unit vectors in the directions x, y and z.\\
+\\
+ Force acting on the volume in the positive $x$ direction can thus be described as $-(\frac{\delta p}{\delta x} \Delta x) \Delta y \Delta z$ & Force acting on the volume in the positive $x$ direction can thus be described as $-[i(\frac{\delta p}{\delta x} \Delta x) \Delta y \Delta z)+ j(\frac{\delta p}{\delta y} \Delta y) \Delta x \Delta z)+ k(\frac{\delta p}{\delta z} \Delta z) \Delta x \Delta y)]$\\
+\\
+ A positive gradient causes acceleration in the $-x$ direction & $\leftarrow$ \\
+\\
+ Force per unit volume is given by dividing both sides of the previous equation by the volume $V$, $\frac{\textit{f}}{V} = -\frac{\delta p}{\delta x}$ & Force per unit volume is given by dividing both sides of the previous equation by the volume $V$, $\frac{\textit{f}}{V} = - \textbf{grad} p$\\
+\\
  Newton's second law of motion dictates that the rate of change of momentum in the volume must balance with force per unit volume, and we can assume the mass of gas in the volume is constant. & $ \leftarrow$ \\ [3.0ex]
 The force mass balance can be described as $\frac{\textit{f}}{V} = -\frac{\delta p}{\delta x} = \frac{M}{M} \frac{\delta u}{\delta t} = \rho^{\prime}\frac{\delta u}{\delta t}$ & The force mass balance can be described as $\frac{\textit{f}}{V} = -\textbf{grad} p = \frac{M}{M} \frac{Dq}{Dt} = \rho^{\prime}\frac{Dq}{Dt}$\\ [1.5ex]
- $u$ is the velocity of gas in the volume, $\rho^{\prime}$ is the density of the gas, and $M = \rho^{\prime} V$ is the mass of gas in the volume.  & where $q$ is the vector velocity, $\rho^{\prime}$ is the density of gas in the volume, $M = \rho^{\prime} V$ is the total mass of gas in the volume. $\frac{D}{Dt}$ represents the total rate of change of velocity of a section of gas in the volume, and can be composed as $\frac{Dq}{Dt}=\frac{\delta q}{\delta t}+ q_x\frac{\delta q}{\delta x}+q_y\frac{\delta q}{\delta y}+q_z\frac{\delta q}{\delta z}$ where $q_x$, $q_y$ and $q_z$ are the components of the particle velocity \textbf{$q$} in each direction. As this is a linear wave equation approximation, these velocity components have no cross terms.   \\ [3.0ex]
-If the change in density of gas in the volume is sufficiently small, the $\rho^{\prime}$ will be approximately equal to the average density $\rho_0$, thus simplifying the equations above to $-\frac{\delta p}{\delta x} = \rho_0 \frac{\delta u}{\delta t}$  & If the particle velocity vector is sufficiently small, the change of momentum of the gas is approximately the same as the momentum of the volume at any arbitrary point, and the density of gas within the volume $\rho^{\prime}$ will be approximately equal to the average density $\rho_0$. Thus the above can be written as $-grad p = \rho_0 \frac{\delta p}{\delta t} $ \\ [1.5ex]
- cell5 & cell6\\ [1.5ex]
- 
- \hline
-\end{tabular}
+ $u$ is the velocity of gas in the volume, $\rho^{\prime}$ is the density of the gas, and $M = \rho^{\prime} V$ is the mass of gas in the volume.  & where $q$ is the vector velocity, $\rho^{\prime}$ is the density of gas in the volume, $M = \rho^{\prime} V$ is the total mass of gas in the volume. $\frac{D}{Dt}$ represents the total rate of change of velocity of a section of gas in the volume, and can be composed as $\frac{Dq}{Dt}=\frac{\delta q}{\delta t}+ q_x\frac{\delta q}{\delta x}+q_y\frac{\delta q}{\delta y}+q_z\frac{\delta q}{\delta z}$ where $q_x$, $q_y$ and $q_z$ are the components of the particle velocity \textbf{$q$} in each direction. As this is a linear wave equation approximation, these velocity components have no cross terms.\\
+\\
+If the change in density of gas in the volume is sufficiently small, the $\rho^{\prime}$ will be approximately equal to the average density $\rho_0$, thus simplifying the equations above to $-\frac{\delta p}{\delta x} = \rho_0 \frac{\delta u}{\delta t}$  & If the particle velocity vector is sufficiently small, the change of momentum of the gas is approximately the same as the momentum of the volume at any arbitrary point, and the density of gas within the volume $\rho^{\prime}$ will be approximately equal to the average density $\rho_0$. Thus the above can be written as $-grad p = \rho_0 \frac{\delta q}{\delta t}$ \\
+\\
+ This kind of approximation may be appropriate as long as the maximum pressure is appropriately low, so that the behaviour of the air is linear, often quoted to be at or under the threshold of pain for human hearing or 120dB SIL.  & $ \leftarrow$\\
+\\
+$ \rightarrow$ & Assuming that the gas of the volume is ideal, then the gas law $ PV = RT $ should hold true. Here, T is the temperature in degrees Kelvin, and R is a constant based on the mass of the gas. For this approximation we assume that the system is adiabatic, and that T and R are lumped into a gas constant which for air is $\gamma = 1.4$.  \\
+\\
+In differential form, the relationship between pressure and volume for an adiabatic expansion the volume is $\frac{dP}{P} = \frac{-\gamma dV}{V} $ i.e. changes in pressure scale with changes in volume by this $\gamma$ value. & $\leftarrow$ \\
+\\
+$\rightarrow$ & If perturbations in pressure and volume due to a sound wave, $p$ for pressure and $\tau$ for volume respectively, are sufficiently small compared to the rest values $P_0$ and $V_0$; the time based derivative of the above equation can be written as follows: $\frac{1}{P_0} \frac{\delta p}{\delta t} = \frac{-\gamma}{V_0} \frac{\delta \tau}{\delta t}$  \\
+\\
+As the wave equation being derived is concerned with the transport of pressure within a volume, a continuity expression must be applied. The conservation of mass states that the total mass of gas in the volume must remain constant. This conservation law brings a unique relationship between discrete velocities at the boundary of the volume: & $\leftarrow$\\
+\\
+If the volume is displaced by some rate $\epsilon_x$, air particles at either boundary of the volume must be displaced at an equal rate for the mass of the volume to remain constant. As such if the left side of the volume is displaced with a velocity, in a given time step the particles at the right hand boundary must also be displaced. This can be written as $\epsilon_x + \frac{\delta \epsilon_x}{\delta x} \Delta x$ The difference between this velocity and a subsequent change in volume $\tau$ multiplied by the volume gives $\tau = V_0\frac{\delta \epsilon_x}{\delta x}.$ & If the mass of gas within the box must remain constant, the vector displacement will directly change the volume by some rate, as the two must balance to satisfy the continuity equation. This can be written as $\tau = V_0$ $div$ $\epsilon $ \\
+\\
+Differentiating this with respect to time gives: $\frac{\delta \tau}{\delta t} = V_0\frac{\delta u}{\delta x}$ where u is the instantaneous particle velocity & Differentiating this with respect to time gives: $\frac{\delta \tau}{\delta t} = V_0$ $div$ $q$ where q is the instantaneous particle velocity\\
+\\
+The one dimensional wave equation in rectangular coordinates can be created by combining the above statements about the equation of motion, the gas law and the continuity equation. The combination of the gas law and continuity equation gives $\frac{\delta p}{\delta t} = -\gamma P_0\frac{\delta u}{\delta x}$ & The three dimensional wave equation in rectangular coordinates can be created by combining the above statements about the equation of motion, the gas law and the continuity equation. The combination of the gas law and continuity equation gives $\frac{\delta p}{\delta t} = -\gamma P_0 div \textbf{q}$\\
+\\
+When differentiated with respect to time, this gives: $\frac{\delta^2 p}{\delta t^2} = -\gamma P_0\frac{\delta^2 u}{\delta t \delta x}$ & When differentiated with respect to time this gives: $\frac{\delta^2 p}{\delta t^2} = -\gamma P_0 div \frac{\delta q}{\delta t}$\\
+\\
+Differentiating the momentum equation derived above with respect to time gives $-\frac{\delta^2 p}{\delta t^2}=\rho_0\frac{\delta^2 u}{\delta x \delta t}$ & The divergence of the momentum equation derived above gives:\ $-div = \rho_0 div \frac{\delta q}{\delta t}$\ Replacing the divergence $(grad p)$ term with the Lapacian operator$\nabla^2 p$ produces\ $-\nabla^2 p = \rho_0 div \frac{\delta^2 p}{\delta t}$\\
+\\
+Combining the above equations gives:\ $\frac{\delta^2 p}{\delta x^2}=\frac{\rho_0}{\gamma P_0}\frac{\delta^2 p}{\delta t^2} $ & Combining the above equations gives:\ $\nabla^2 p = \frac{\rho_0}{\gamma P_0}\frac{\delta^2 p}{\delta t^2}$ \\
+\\
+If we define c as the speed of propagation in the medium of interest, then $c^2\approx \frac{\gamma P_0}{\rho_0}$ due to the fact that the speed of sound $c \approx (1.4\frac{10^5}{1.18})^\frac{1}{2}$ where the ambient air pressure at sea level is $10^5Pa$, 1.4 is the adiabatic constant $\gamma$ (ratio of specific heats) for air, and $\rho_0$ is the density of air is approximately $1.8kg/m^3 $   & $\leftarrow$ \\
+\\
+Finally we find that the 1 dimensional wave equation is:\ $\frac{\delta^2 p}{\delta x^2}=\frac{1}{c^2}\frac{\delta^2 p}{\delta t^2}$ & Finally we find that the 3 dimensional wave equation is:\ $\nabla^2 p = \frac{1}{c^2}\frac{\delta^2 p}{\delta t^2}$\ An explicit 3 dimensional expression of the pressure component of this equation is:\ $\nabla^2 p = \frac{\delta^2p}{\delta x^2}+\frac{\delta^2p}{\delta y^2}+\frac{\delta^2p}{\delta z^2}$ \\
+\\
+This equation can also be expressed in terms of the instantaneous velocity in the volume as:\ $\frac{\delta^2 u}{\delta x^2}=\frac{1}{c^2}\frac{\delta^2 u}{\delta t^2}$ & This equation can be expressed velocity vector $\nabla^2 q = \frac{1}{c^2}\frac{\delta^2 q}{\delta t^2}$ where $\nabla^2 q$ represents the gradient of pressure (velocity) in the volume.\\
+\hline
+\end{longtable}
 \end{center}
 
 
