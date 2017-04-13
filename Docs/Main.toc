@@ -4,16 +4,4 @@
 \contentsline {chapter}{\numberline {2}Loudspeaker Systems \& Large Room Acoustics}{3}
 \contentsline {section}{\numberline {2.1}The Acoustic Wave Equation}{3}
 \contentsline {subsection}{\numberline {2.1.1}The Wave Equations}{3}
-\contentsline {section}{\numberline {2.2}Loudspeaker Systems}{7}
-\contentsline {subsection}{\numberline {2.2.1}Subsection Heading}{8}
-\contentsline {subsubsection}{\numberline {2.2.1.1}Subsubsection Heading}{8}
-\contentsline {paragraph}{Paragraph Heading}{8}
-\contentsline {subparagraph}{Subparagraph Heading}{9}
-\contentsline {paragraph}{Run-in Heading Boldface Version}{9}
-\contentsline {paragraph}{Run-in Heading Italic Version}{9}
-\contentsline {section}{\numberline {2.3}Section Heading}{9}
-\contentsline {subsection}{\numberline {2.3.1}Subsection Heading}{10}
-\contentsline {subsubsection}{\numberline {2.3.1.1}Subsubsection Heading}{10}
-\contentsline {paragraph}{Paragraph Heading}{11}
-\contentsline {section}{Appendix}{11}
-\contentsline {section}{Problems}{11}
+\contentsline {section}{\numberline {2.2}Loudspeaker Systems}{8}
