@@ -22,7 +22,7 @@ $\frac{\delta^2 p}{\delta t^2} = \frac{1}{c^2} \frac{\delta^2 p}{\delta t^2}$\\
 $\frac{\delta^2 u}{\delta t^2} = \frac{1}{c^2} \frac{\delta^2 u}{\delta t^2}$\\
 \end{center}.
 As pressure (p) and velocity (u) have a reciprocal relationship in a similar way to H and E, it is possible to rearrange the acoustic wave equation to reflect this relationship for a FDTD computation.
-
+\subsection{Field Calculation}
 When treating the 1 dimensional linear acoustic wave equation with the FDTD method, it is possible to treat the p and u terms separately in time using the opposing terms for reciprocal calculation. As such, the p and u terms are reformulated as follows:\\
 \begin{center}
 $\frac{\delta^2 p}{\delta t^2} = p - \frac{\delta t}{\rho_0 \delta x} \frac{\delta^2 u}{\delta t^{2}}$\\
@@ -34,11 +34,23 @@ Following an implementation of the acoustic FDTD method by Hill~\cite{Hill2012},
 $u^{t + \frac{\delta t}{2}}_{x} = u^{t - \frac{\delta t}{2}}_{x} - \frac{\delta t}{\rho \delta x} [p^{t}_{x + \frac{\delta x}{2}} - p^{t}_{x - \frac{\delta x}{2}}]$\\
 $p^{t + \frac{\delta t}{2}}_{x} = p^{t - \frac{\delta t}{2}}_{x} - \frac{c^2 \rho \delta t}{\delta x} [u^{t}_{x + \frac{\delta x}{2}} - u^{t}_{x - \frac{\delta x}{2}}]$\\
 \end{center}
+\subsection{Boundary Handling}
+As a significant part of room acoustics involves analysing the effects of reverberation, it is important to be able to handle semi-absorbing boundary conditions in an acoustic simulation. That is, to model a boundary (wall) that will absorb and reflect some proportion of energy that is at the boundary. This can be handled by calculating semi-derivatives at the boundaries of the domain based on the acoustic impedance of the boundaries~\cite{Olesen1997}\cite{Hill2012}. p, u and impedance (z) are often applied in a relationship similar to Ohms law $v = i * r $.The absorbing and reflecting properties of boundaries in acoustics are often empirically defined as normalised quantities (between 0.0 and 1.0), related to the loss in energy when a portion of the material is tested under particular conditions such as energy loss modulation when placed in a reverberation chamber. The equation to calculate acoustic impedance based on absorption coefficient is as follows:\\
+\begin{center}
+$z = \rho c \frac{1 + \sqrt{1 - a}}{1 - \sqrt{1 - a}} $\\
+\end{center}
+Incorporating the 
 
+Due to the spatially staggered grids in FDTD, it is possible to handle the boundaries only in the velocity components by increasing the size of the  velocity matrices by 1 in the direction parallel to the axis of the velocity i.e. the length of a 3 dimensional $u_x$ matrix would be $u_{x_{x,y,z}} = (x = N+1, y = N, z = N)$ where the size of the pressure matrix is $p_{x,y,z} = N:N:N$. Rearranging the form of the velocity equation to include a semi-derivative acoustic impedance component can be given as follows:\\
+$ a = 1 $
+
+
+\subsection{Example Function for Solving}
 Below, is a function written in the Matlab \textregistered language, used to solve one time step of the wave equation using the FDTD method, in 3 dimensions:
 \lstinputlisting[language=Matlab]{../Matlab/FDTD/FDTD3Dfun.m}
 
 \subsection{Stability}
+ 
 
 \subsection{Handling Empirical Semi-Absorbing Boundary Conditions}
 
