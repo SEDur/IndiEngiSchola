@@ -420,7 +420,7 @@ passing it to article class \MessageBreak
 \def\@chapapp{\chaptername}
 
 \newdimen\mottowidth
-\newcommand\motto[2][77mm]{%
+\newcommand\motto[2][10mm]{%
 \setlength{\mottowidth}{#1}%
 \gdef\m@ttotext{#2}}
 %

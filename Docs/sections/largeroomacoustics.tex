@@ -7,11 +7,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
 %\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
 \chapter{Loudspeaker Systems \& Large Room Acoustics}
-
-\abstract{Acoustics is a branch of physics that aims to characterise Newton's law of motion applied to wave propagation, while obeying the physical conservation law and often focussing on propagation in an audible spectrum. This characterisation of sound propagation is intrinsically linked to many other branches of physics, as well as psychoacoustics and perception. Many aspects of acoustic modelling may be of interest when considering the design and application of loudspeaker systems. Both small and large scale simulations may allow a user to make informed decisions about the design and placement of a loudspeaker system, so that the performance of the system may be validated and optimised before application. In this chapter we will evaluate the lossless acoustic wave equation for gasses, and consider the application of the wave equation in bounded space. We will then consider some specific use cases for applying such an equation for modelling loudspeaker system performance.}
+\label{Introduction}
+Acoustics is a branch of physics that aims to characterise Newton's law of motion applied to wave propagation, while obeying the physical conservation law and often focussing on propagation in an audible spectrum. This characterisation of sound propagation is intrinsically linked to many other branches of physics, as well as psychoacoustics and perception. Many aspects of acoustic modelling may be of interest when considering the design and application of loudspeaker systems. Both small and large scale simulations may allow a user to make informed decisions about the design and placement of a loudspeaker system, so that the performance of the system may be validated and optimised before application. In this chapter we will evaluate the lossless acoustic wave equation for gasses, and consider the application of the wave equation in bounded space. We will then consider some specific use cases for applying such an equation for modelling loudspeaker system performance.
 
 \section{The Acoustic Wave Equation}
-\label{sec:1}
+
 In the Mcgraw-Hill Electronic and Electrical Engineering Series of books, the late L Beranek authored the Acoustics volume. This volume contains an elegant summary of the wave equation, that will be the subject of paraphrase in the following section.
 
 \subsection{The Wave Equations}
@@ -70,13 +70,3 @@ This equation can also be expressed in terms of the instantaneous velocity in th
 \end{center}
 
 In the above table we have derived wave equations, with forms of velocity and pressure as the independent variables. We have also shown that pressure, velocity, displacement and density are related within the system of equations, by differentiating and integrating with respect to space and time. As these forms of the wave equation are intrinsically coupled, it is possible to leverage this coupling when generating a numerical solution to the wave equation. It is also important to note that a significant number of assumptions have been taken when deriving these equations, and any solution to these equations may only be accurate when simulating a loss free, frictionless, homogeneous, ideal gas medium, where all perturbations are sufficiently small and fast that it is possible to reduce the complexity of the system.
-
-\section{Loudspeaker Systems}
-\label{sec:2}
-% Always give a unique label
-% and use \ref{<label>} for cross-references
-% and \cite{<label>} for bibliographic references
-% use \sectionmark{}
-% to alter or adjust the section heading in the running head
-Instead of simply listing headings of different levels we recommend to let every heading be followed by at least a short passage of text. Furtheron please use the \LaTeX\ automatism for all your cross-references and citations.
-

@@ -1,0 +1,53 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+\chapter{Finite Difference Time Domain Method}
+\label{Introduction}
+The Finite Difference Time Domain Method is a numerical method for solving partial differential equations. The power of this method lies in its simplicity and flexibility, and it can be used to solve partial differential equations of varying complexity. In this chapter we will discuss the application of the finite difference time domain method to the acoustic wave equation, including the application of empirical partially absorbing boundary conditions.
+
+\section{Introduction to the Finite Difference Time Domain Method}
+%\label{sec:1}
+Finite methods for solving partial differential equations have been of significant and continued research since the early 1900's, with mathematicians such as Courant, Fiedrichs and Hrennikof undertaking seminal work in the early 1920s, that formed a base for much of the finite methods used today. The Finite Difference Time Domain Method (FDTD) is a method for solving time domain problems (often wave equations) with loclised handling of time and space derivatives, and was first introduced for solving Maxwell's equations to simulate electromagnetic wave propagation by Yee \cite{Yee1966}. Yee proposed a method for which Maxwell's equations in partial differential form were applied to matrices staggered in partial steps in time and space, these matrices representing the magnetic (H) and electric (E) fields. In this explicit formulation, partial derivatives were used to solve H and E contiguously in a 'leapfrog' style, executing two sets of computations to solve for one time step. Multiple time steps would be solved from current time $t = 0$, in steps of $dt$ to the end of simulation time $T$.Each field is solved at half steps in time from each-other, thus H for a current time step $t + \delta t$ is calculated using the H values one time step ago $t$, and the E values half a time step ago $t + \frac{\delta t}{2} $. These two fields are also solved using central finite differences in space, in a staggered grid format i.e. E at index $x$ at time $t + \delta t$ is calculated using E at index $x$ at time $t$, and the finite difference between the local discrete values of H at $x - \frac{\delta x}{2} $ and at $x + \frac{\delta x}{2} $ at time $t + \frac{\delta t}{2}$. As such, it is possible to apply a simple kernel across many discretised points of a domain (H and E) to simulate electromagnetic wave propagation.
+
+\section{The Finite Difference Time Domain Method Applied To The Acoustic Wave Equation}
+%\label{sec:2}
+The FDTD method applied to solving the acoustic wave equation, follows an almost identical form to that of solving Maxwells Equations with FDTD~\cite{Scheirman2015}\footnote{In fact, the equations follow an almost identical form}. Bottledooren's~\cite{Botteldooren1993} seminal work applied the FDTD method to the acoustic wave equations for both Cartesian and quasi-Cartesian grid systems. As previously described in the room acoustics section, the linear acoustic wave equation is based on Newton's second law of motion, the gas law and the continuity equation, and follows the form for the changes in the pressure and velocity respectively within a volume:\\
+\begin{center}
+$\frac{\delta^2 p}{\delta t^2} = \frac{1}{c^2} \frac{\delta^2 p}{\delta t^2}$\\
+$\frac{\delta^2 u}{\delta t^2} = \frac{1}{c^2} \frac{\delta^2 u}{\delta t^2}$\\
+\end{center}.
+As pressure (p) and velocity (u) have a reciprocal relationship in a similar way to H and E, it is possible to rearrange the acoustic wave equation to reflect this relationship for a FDTD computation.
+
+When treating the 1 dimensional linear acoustic wave equation with the FDTD method, it is possible to treat the p and u terms separately in time using the opposing terms for reciprocal calculation. As such, the p and u terms are reformulated as follows:\\
+\begin{center}
+$\frac{\delta^2 p}{\delta t^2} = p - \frac{\delta t}{\rho_0 \delta x} \frac{\delta^2 u}{\delta t^{2}}$\\
+$\frac{\delta^2 u}{\delta t^2} = u - \frac{\delta t}{\rho_0 \delta x} \frac{\delta^2 u}{\delta t^{2}}$\\
+\end{center}
+However, this formulation is incomplete as it does not consider spatial or temporal discretisation of the field of interest, when applying the FDTD method. As the FDTD method relies on solving local finite difference approximations across a domain of interest, it is important to define a space and time index referencing method. In many mathematical texts, time step indexing is often represented by an i value, and spatial indexing often uses a j,k,l or l,m,n convention. For the aim of simplicity and as we will not directly address other forms of input output system in this text, we will use t for the time step indexing, and x, y and z for spatial indexing in each dimension.
+Following an implementation of the acoustic FDTD method by Hill~\cite{Hill2012}, we can generate the following p and u equations for FDTD applied to the acoustic wave equation:\\
+\begin{center}
+$u^{t + \frac{\delta t}{2}}_{x} = u^{t - \frac{\delta t}{2}}_{x} - \frac{\delta t}{\rho \delta x} [p^{t}_{x + \frac{\delta x}{2}} - p^{t}_{x - \frac{\delta x}{2}}]$\\
+$p^{t + \frac{\delta t}{2}}_{x} = p^{t - \frac{\delta t}{2}}_{x} - \frac{c^2 \rho \delta t}{\delta x} [u^{t}_{x + \frac{\delta x}{2}} - u^{t}_{x - \frac{\delta x}{2}}]$\\
+\end{center}
+
+Below, is a function written in the Matlab \textregistered language, used to solve one time step of the wave equation using the FDTD method, in 3 dimensions:
+\lstinputlisting[language=Matlab]{../Matlab/FDTD/FDTD3Dfun.m}
+
+\subsection{Stability}
+
+\subsection{Handling Empirical Semi-Absorbing Boundary Conditions}
+
+\section{A 2D Simulation with empirical partially absorbing boundary conditions}
+%\label{sec:3}
+% Always give a unique label
+% and use \ref{<label>} for cross-references
+% and \cite{<label>} for bibliographic references
+% use \sectionmark{}
+% to alter or adjust the section heading in the running head
+Instead of simply listing headings of different levels we recommend to let every heading be followed by at least a short passage of text. Furtheron please use the \LaTeX\ automatism for all your cross-references and citations.
+

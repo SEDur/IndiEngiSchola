@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.22)  13 APR 2017 09:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.22)  16 APR 2017 14:58
 entering extended mode
 **./Main.tex
 (Main.tex
@@ -240,6 +240,31 @@ Package footmisc Info: Declaring symbol style lamport* on input line 903.
 Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
 .
 )
+("C:\Program Files\MiKTeX 2.9\tex\latex\listings\listings.sty"
+\lst@mode=\count116
+\lst@gtempboxa=\box53
+\lst@token=\toks16
+\lst@length=\count117
+\lst@currlwidth=\dimen141
+\lst@column=\count118
+\lst@pos=\count119
+\lst@lostspace=\dimen142
+\lst@width=\dimen143
+\lst@newlines=\count120
+\lst@lineno=\count121
+\lst@maxwidth=\dimen144
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+\c@lstnumber=\count122
+\lst@skipnumbers=\count123
+\lst@framebox=\box54
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\listings\listings.cfg"
+File: listings.cfg 2015/06/04 1.6 listings configuration
+))
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
+
 ("C:\Program Files\MiKTeX 2.9\tex\latex\url\url.sty"
 \Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
@@ -254,30 +279,25 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \LTright=\skip47
 \LTpre=\skip48
 \LTpost=\skip49
-\LTchunksize=\count116
-\LTcapwidth=\dimen141
-\LT@head=\box53
-\LT@firsthead=\box54
-\LT@foot=\box55
-\LT@lastfoot=\box56
-\LT@cols=\count117
-\LT@rows=\count118
-\c@LT@tables=\count119
-\c@LT@chunks=\count120
-\LT@p@ftn=\toks16
-)
-("C:\Program Files\MiKTeX 2.9\tex\latex\cite\cite.sty"
-LaTeX Info: Redefining \cite on input line 302.
-LaTeX Info: Redefining \nocite on input line 332.
-Package: cite 2015/02/27  v 5.5
+\LTchunksize=\count124
+\LTcapwidth=\dimen145
+\LT@head=\box55
+\LT@firsthead=\box56
+\LT@foot=\box57
+\LT@lastfoot=\box58
+\LT@cols=\count125
+\LT@rows=\count126
+\c@LT@tables=\count127
+\c@LT@chunks=\count128
+\LT@p@ftn=\toks17
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\subfiles\subfiles.sty"
 Package: subfiles 2012/05/23 Federico Garcia
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\tools\verbatim.sty"
 Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks17
-\verbatim@line=\toks18
+\every@verbatim=\toks18
+\verbatim@line=\toks19
 \verbatim@in@stream=\read1
 ))
 \@indexfile=\write3
@@ -287,42 +307,45 @@ Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
 Writing index file Main.idx
 (Main.aux (sections/dedic.aux) (sections/acknow.aux) (sections/acronym.aux)
 (sections/introduction.aux) (sections/largeroomacoustics.aux)
-(sections/Numerical.aux) (sections/Finite.aux) (sections/Sparse.aux)
-(sections/Pseudo-spectral.aux) (sections/Acoustic.aux) (sections/Profiling.aux)
-(sections/optimisationandparallelism.aux) (sections/Analysis.aux)
-(sections/Conclusion.aux) (sections/Further.aux))
+(sections/fdtd.aux
+
+LaTeX Warning: Label `Introduction' multiply defined.
+
+) (sections/Sparse.aux) (sections/Pseudo-spectral.aux) (sections/Acoustic.aux)
+(sections/Profiling.aux) (sections/optimisationandparallelism.aux)
+(sections/Analysis.aux) (sections/Conclusion.aux) (sections/Further.aux))
 \openout1 = `Main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 43.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 67.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.fd"
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count121
-\scratchdimen=\dimen142
-\scratchbox=\box57
-\nofMPsegments=\count122
-\nofMParguments=\count123
-\everyMPshowfont=\toks19
-\MPscratchCnt=\count124
-\MPscratchDim=\dimen143
-\MPnumerator=\count125
-\makeMPintoPDFobject=\count126
-\everyMPtoPDFconversion=\toks20
+\scratchcounter=\count129
+\scratchdimen=\dimen146
+\scratchbox=\box59
+\nofMPsegments=\count130
+\nofMParguments=\count131
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count132
+\MPscratchDim=\dimen147
+\MPnumerator=\count133
+\makeMPintoPDFobject=\count134
+\everyMPtoPDFconversion=\toks21
 ) ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
 Package: pdftexcmds 2016/05/21 v0.22 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -368,9 +391,10 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
-\big@size=\dimen144
+\big@size=\dimen148
+\c@lstlisting=\count135
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 52.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 76.
  [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2
@@ -407,32 +431,32 @@ Package mathptmx Warning: There are no bold math fonts on input line 8.
 ] (Main.toc
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
-LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 1.
+LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 2.
 
  ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1ztmcm.fd"
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 1.
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 2.
 
  ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omlztmcm.fd"
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 1.
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 2.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omsztmcm.fd"
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 1.
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 2.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omxztmcm.fd"
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2.
 )
 \tf@toc=\write4
 \openout4 = `Main.toc'.
@@ -455,24 +479,30 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 
 
 ]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 89.
+ [1
+
+
+]
 \openout2 = `sections/introduction.aux'.
 
 
-(sections/introduction.tex
-Chapter 1.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 15.
-
-LaTeX Warning: Citation `Durbridge2016a' on page 1 undefined on input line 15.
-
-) [1
+(sections/introduction.tex [2
 
 
 
 ]
+Chapter 1.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 15.
+
+LaTeX Warning: Citation `Durbridge2016a' on page 3 undefined on input line 15.
+
+) [3]
 \openout2 = `sections/largeroomacoustics.aux'.
 
- (sections/largeroomacoustics.tex [2
+ (sections/largeroomacoustics.tex [4
 
 
 
@@ -481,7 +511,7 @@ LaTeX Warning: Citation `Durbridge2016a' on page 1 undefined on input line 15.
 Chapter 2.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 17.
-[3]
+[5]
 LaTeX Font Info:    Calculating math sizes for size <8.5> on input line 20.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.29004> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 20.
@@ -532,34 +562,71 @@ Overfull \hbox (5.99998pt too wide) in alignment at lines 46--66
  [] [] 
  []
 
-[4]
+[6]
 Overfull \hbox (5.99998pt too wide) in alignment at lines 66--69
  [] [] 
  []
 
-[5] [6]) [7] [8]
-\openout2 = `sections/Numerical.aux'.
+[7] [8]) [9]
+\openout2 = `sections/fdtd.aux'.
+
+ (sections/fdtd.tex [10
 
 
-No file sections/Numerical.tex.
-[9
-
-
-
-]
-\openout2 = `sections/Finite.aux'.
-
-
-No file sections/Finite.tex.
-[10
 
 
 ]
+Chapter 3.
+
+LaTeX Warning: Citation `Yee1966' on page 11 undefined on input line 15.
+
+[11]
+
+LaTeX Warning: Citation `Scheirman2015' on page 12 undefined on input line 19.
+
+
+LaTeX Warning: Citation `Botteldooren1993' on page 12 undefined on input line 1
+9.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--20
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 26--27
+
+ []
+
+
+LaTeX Warning: Citation `Hill2012' on page 12 undefined on input line 32.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--33
+
+ []
+
+[12]
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 38.
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omsptm.fd"
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 38.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+(../Matlab/FDTD/FDTD3Dfun.m
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <8.5> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 24.
+ [13])) [14] [15]
 \openout2 = `sections/Sparse.aux'.
 
 
 No file sections/Sparse.tex.
-[11
+[16
+
 
 
 ]
@@ -567,7 +634,7 @@ No file sections/Sparse.tex.
 
 
 No file sections/Pseudo-spectral.tex.
-[12
+[17
 
 
 ]
@@ -575,7 +642,7 @@ No file sections/Pseudo-spectral.tex.
 
 
 No file sections/Acoustic.tex.
-[13
+[18
 
 
 ]
@@ -595,7 +662,11 @@ No file sections/Conclusion.tex.
 \openout2 = `sections/Further.aux'.
 
 No file sections/Further.tex.
-[14
+(Main.bbl
+
+LaTeX Warning: Empty `thebibliography' environment on input line 3.
+
+) [19
 
 
 
@@ -604,40 +675,47 @@ No file sections/Further.tex.
 
 
 
+
+
+] [20
 
 
 ]
 No file Main.ind.
 (Main.aux (sections/dedic.aux) (sections/acknow.aux) (sections/acronym.aux)
 (sections/introduction.aux) (sections/largeroomacoustics.aux)
-(sections/Numerical.aux) (sections/Finite.aux) (sections/Sparse.aux)
-(sections/Pseudo-spectral.aux) (sections/Acoustic.aux) (sections/Profiling.aux)
+(sections/fdtd.aux) (sections/Sparse.aux) (sections/Pseudo-spectral.aux)
+(sections/Acoustic.aux) (sections/Profiling.aux)
 (sections/optimisationandparallelism.aux) (sections/Analysis.aux)
 (sections/Conclusion.aux) (sections/Further.aux))
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 3093 strings out of 493333
- 43371 string characters out of 3139179
- 143285 words of memory out of 3000000
- 6441 multiletter control sequences out of 15000+200000
- 50866 words of font info for 96 fonts, out of 3000000 for 9000
+ 4838 strings out of 493333
+ 67253 string characters out of 3139179
+ 403631 words of memory out of 3000000
+ 8159 multiletter control sequences out of 15000+200000
+ 55592 words of font info for 105 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,9n,25p,1160b,295s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 39i,9n,45p,1896b,2098s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Program Files/Mi
 KTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9
 /fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/
-courier/ucrr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/symbol/usyr.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Program Files
-/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/
-utmri8a.pfb>
-Output written on Main.pdf (24 pages, 112838 bytes).
+pe1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/courier/u
+crr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Prog
+ram Files/MiKTeX 2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Program Files/MiKTeX 2
+.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/ur
+w/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.p
+fb>
+Output written on Main.pdf (30 pages, 138403 bytes).
 PDF statistics:
- 116 PDF objects out of 1000 (max. 8388607)
+ 139 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
