@@ -1,6 +1,6 @@
 function FDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0)
 
-        figure(1);
+%         figure(1);
         xslice = xcells-1; 
         yslice = ycells-1; 
         zslice = (ceil(zcells-1)/2);
@@ -15,6 +15,7 @@ function FDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0)
             'Color',[0 0 0],'FontSize', 14);
 %         xlabel('Width (meters)', 'Color', [0 0 0]);
 %         ylabel('Length (meters)', 'Color', [0 0 0]);
+        shading('interp');
         drawnow;
 
 end

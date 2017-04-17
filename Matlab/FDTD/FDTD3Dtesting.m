@@ -8,11 +8,17 @@
 %Units
 figure(1);
 set(1, 'WindowStyle', 'Docked');
+cstab = 2/(pi*sqrt(3));
+meters = 1;
+hertz = 1;
+c = 343;
+p0 = 10^-12;
+rho = 1.21;
 
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 48000 * hertz;
+fmax = 44100 * hertz;
 
 %grid size
 gx = c * (1/fmax) / cstab;
@@ -33,24 +39,26 @@ zcells = ceil(lz/gz);
 snum = 2;
 %source locations
 sourcelocations = [ceil((ly/gy)/2) ceil((lx/gx)/2) ceil((lz/gz)/2);...
-                    ceil((ly/gy)/4) ceil((lx/gx)/2) ceil((lz/gz)/4)];%source frequency
+                    ceil((ly/gy)/2)+1 ceil((lx/gx)/2)+1 ceil((lz/gz)/2)+1];
 s1Freq = 400;
 s2Freq = 400;
 %source phase
 s1Phase = 0;
 s2Phase = 0;
-%Source amplitude 
+%Source amplitude s
 A = 1;
 
 %recieves position
-recieverleftloc = [floor((ycells/2) - (0.1/gy)) ceil((xcells/2)-2) ceil(zcells/2)];
+% recieverleftloc = [floor((ycells/2) - (0.1/gy)) ceil((xcells/2)-2) ceil(zcells/2)];
+recieverleftloc = [ceil(ycells/2) ceil(xcells/2) ceil(zcells/2)];
+
 recieverrightloc = [ceil((ycells/2) + (0.1/gy)) ceil((xcells/2)+2) ceil(zcells/2)];
 
 %Time of sim
 % dt = 1/ (c*sqrt(3/(gx)^2));
 dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))+(1/(gz^2))));
 % dt = 3.35563e-4;
-T = 1 * seconds ;
+T = 1;
 
 % generate the source(s) & determine number of time steps needed
 
@@ -68,10 +76,14 @@ for n = 37 : length(source1)
        source1(n) = 0; 
     end
 end
+
+% source1 = (sin(2*pi*500*[0:dt:T-dt])).*(p0*10^(100/10));
+% source2 = (sin(2*pi*500*[0:dt:T-dt])).*(p0*10^(100/10));
         
 % initialize the velocity and pressure matrices (matrices are set up in a
 % y by x fashion to properly display the 2D space (y = rows, x = columns))
-p = ones(ycells - 1, xcells - 1, zcells - 1) .* 10^-12*10^(40/20);
+% p = ones(ycells - 1, xcells - 1, zcells - 1) .* 10^-12*10^(40/20);
+p = zeros(ycells - 1, xcells - 1, zcells - 1);
 ux = zeros(ycells - 1, xcells, zcells - 1);
 uy = zeros(ycells, xcells - 1, zcells - 1);
 uz = zeros(ycells - 1, xcells - 1, zcells);
@@ -89,12 +101,12 @@ pCz = c^2*rho*dt/gz;
 % impedance.
 
 %Boundary Absorption Coefs (0 to 1)
-alphaL = 0.5;
-alphaR = 0.5;
-alphaF = 0.5;
-alphaB = 0.5;
-alphaT = 0.5;
-alphaG = 0.5;
+alphaL = 1.0;
+alphaR = 1.0;
+alphaF = 1.0;
+alphaB = 0.1; % This diverges
+alphaT = 1.0;
+alphaG = 1.0;
 
 if alphaR == 0
    alphaR = 1e-016; 
@@ -142,7 +154,7 @@ meanpstore = zeros(1,tnum);
 
 [xvec, yvec, zvec] = meshgrid(0 : gx : gx * (xcells-2),...
     0 : gy : gy * (ycells-2), 0 : gz : gz * (zcells-2));
-
+%%
 %Set zsliceloc
 % zslice = (s1loc(3));
 % loop to update the velocities and pressures over the time steps, n

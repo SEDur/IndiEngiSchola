@@ -12,6 +12,5 @@
 \contentsline {subsection}{\numberline {3.2.2}Boundary Handling}{13}
 \contentsline {subsection}{\numberline {3.2.3}Example Function for Solving}{13}
 \contentsline {subsection}{\numberline {3.2.4}Stability}{15}
-\contentsline {subsection}{\numberline {3.2.5}Handling Empirical Semi-Absorbing Boundary Conditions}{15}
-\contentsline {section}{\numberline {3.3}A 2D Simulation with empirical partially absorbing boundary conditions}{15}
-\contentsline {section}{References}{19}
+\contentsline {section}{\numberline {3.3}A 2D Simulation with empirical partially absorbing boundary conditions}{16}
+\contentsline {section}{References}{24}

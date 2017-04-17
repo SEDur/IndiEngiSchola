@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.22)  16 APR 2017 17:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.22)  17 APR 2017 12:12
 entering extended mode
 **./Main.tex
 (Main.tex
@@ -608,22 +608,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 31--33
 
 [12]
 
-LaTeX Warning: Citation `Olesen1997' on page 13 undefined on input line 38.
+LaTeX Warning: Citation `Olesen1997' on page 13 undefined on input line 39.
 
 
-LaTeX Warning: Citation `Hill2012' on page 13 undefined on input line 38.
+LaTeX Warning: Citation `Hill2012' on page 13 undefined on input line 39.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--39
+Underfull \hbox (badness 10000) in paragraph at lines 39--40
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 47.
+
+Underfull \hbox (badness 10000) in paragraph at lines 43--44
+
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 49.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omsptm.fd"
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 47.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 49.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2015/06/04 1.6 listings language file
@@ -631,12 +636,36 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 (../Matlab/FDTD/FDTD3Dfun.m [13]
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <8.5> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 24.
- [14])) [15]
+ [14])
+Underfull \hbox (badness 10000) in paragraph at lines 53--54
+
+ []
+
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 57--58
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--63
+
+ []
+
+(../Matlab/FDTD/FDTD2Dtesting.m [16] [17] [18]
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 164.
+
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omlptm.fd"
+File: omlptm.fd 
+)
+LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <8.5> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 164.
+ [19])) [20]
 \openout2 = `sections/Sparse.aux'.
 
 
 No file sections/Sparse.tex.
-[16
+[21
 
 
 
@@ -645,7 +674,7 @@ No file sections/Sparse.tex.
 
 
 No file sections/Pseudo-spectral.tex.
-[17
+[22
 
 
 ]
@@ -653,7 +682,7 @@ No file sections/Pseudo-spectral.tex.
 
 
 No file sections/Acoustic.tex.
-[18
+[23
 
 
 ]
@@ -677,7 +706,7 @@ No file sections/Further.tex.
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [19
+) [24
 
 
 
@@ -686,9 +715,6 @@ LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
 
 
-
-
-] [20
 
 
 ]
@@ -707,26 +733,27 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4839 strings out of 493333
- 67265 string characters out of 3139179
- 415108 words of memory out of 3000000
- 8160 multiletter control sequences out of 15000+200000
- 55592 words of font info for 105 fonts, out of 3000000 for 9000
+ 4922 strings out of 493333
+ 68248 string characters out of 3139179
+ 418895 words of memory out of 3000000
+ 8231 multiletter control sequences out of 15000+200000
+ 57281 words of font info for 111 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,9n,45p,1896b,2100s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Program Files/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/courier/u
-crr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Program Files/MiKTeX 2
-.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/ur
-w/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.p
-fb>
-Output written on Main.pdf (30 pages, 141618 bytes).
+KTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
+sy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/ur
+w/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Main.pdf (34 pages, 178510 bytes).
 PDF statistics:
- 139 PDF objects out of 1000 (max. 8388607)
+ 160 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
