@@ -5,8 +5,7 @@ A level-1 auxiliary file: sections/acknow.aux
 A level-1 auxiliary file: sections/acronym.aux
 A level-1 auxiliary file: sections/introduction.aux
 A level-1 auxiliary file: sections/largeroomacoustics.aux
-A level-1 auxiliary file: sections/Numerical.aux
-A level-1 auxiliary file: sections/Finite.aux
+A level-1 auxiliary file: sections/fdtd.aux
 A level-1 auxiliary file: sections/Sparse.aux
 A level-1 auxiliary file: sections/Pseudo-spectral.aux
 A level-1 auxiliary file: sections/Acoustic.aux
@@ -15,6 +14,8 @@ A level-1 auxiliary file: sections/optimisationandparallelism.aux
 A level-1 auxiliary file: sections/Analysis.aux
 A level-1 auxiliary file: sections/Conclusion.aux
 A level-1 auxiliary file: sections/Further.aux
-I found no \bibdata command---while reading file Main.aux
-Warning--I didn't find a database entry for "Durbridge2016a"
-(There was 1 error message)
+Database file #1: library.bib
+Warning--empty journal in Scheirman2015
+Warning--empty journal in Hill2012
+Warning--there's a number but no volume in Hill2012
+(There were 3 warnings)

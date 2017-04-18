@@ -12,9 +12,9 @@ The Finite Difference Time Domain Method is a numerical method for solving parti
 
 \section{Introduction to the Finite Difference Time Domain Method}
 %\label{sec:1}
-Finite methods for solving partial differential equations have been of significant and continued research since the early 1900's, with mathematicians such as Courant, Fiedrichs and Hrennikof undertaking seminal work in the early 1920s, that formed a base for much of the finite methods used today. The Finite Difference Time Domain Method (FDTD) is a method for solving time domain problems (often wave equations) with localised handling of spatial derivatives, and was first introduced for solving Maxwell's equations to simulate electromagnetic wave propagation by Yee \cite{Yee1966}.\\
+Finite methods for solving partial differential equations have been of significant and continued research since the early 1900's; with mathematicians such as Courant, Fiedrichs and Hrennikof undertaking seminal work in the early 1920s, that formed a base for much of the finite methods used today. The Finite Difference Time Domain Method (FDTD) is a numerical method for solving time domain problems (often wave equations) with localised handling of spatial derivatives, and was first introduced for solving Maxwell's equations to simulate electromagnetic wave propagation by Yee \cite{Yee1966}.\\
 Yee proposed a method for which Maxwell's equations in partial differential form were applied to matrices staggered in partial steps in time and space, these matrices representing the magnetic (H) and electric (E) fields. In this explicit formulation, partial derivatives were used to solve H and E contiguously in a 'leapfrog' style, executing two sets of computations to solve for one time step. Multiple time steps would be solved from current time $t = 0$, in steps of $dt$ to the end of simulation time $T$.Each field is solved at half steps in time from each-other, thus H for a current time step $t + \delta t$ is calculated using the H values one time step ago $t$, and the E values half a time step ago $t + \frac{\delta t}{2} $. These two fields are also solved using central finite differences in space, in a staggered grid format i.e. E at index $x$ at time $t + \delta t$ is calculated using E at index $x$ at time $t$, and the finite difference between the local discrete values of H at $x - \frac{\delta x}{2} $ and at $x + \frac{\delta x}{2} $ at time $t + \frac{\delta t}{2}$. As such, it is possible to apply a simple kernel across many discretised points of a domain (H and E) to simulate electromagnetic wave propagation.\\
-In acoustics, FDTD can be used to simulate a wide range of problems such as diffraction and diffusion, aeroacoustics, meteorological, and mixed medium, without having to perform multiple simulations for different frequencies or geometry characteristics.
+In acoustics, FDTD can be used to simulate a wide range of problems such as diffraction and diffusion, aeroacoustics, meteorological \& environmental and mixed medium, without having to perform multiple simulations for different frequencies or geometry characteristics \footnote{as would have to be required in frequency domain simulations such as some Finite Element and Boundary Element simulations}.
 
 \section{The Finite Difference Time Domain Method Applied To The Acoustic Wave Equation}
 %\label{sec:2}
@@ -22,7 +22,7 @@ The FDTD method applied to solving the acoustic wave equation, follows an almost
 \begin{center}
 $\frac{\delta^2 p}{\delta t^2} = \frac{1}{c^2} \frac{\delta^2 p}{\delta t^2}$\\
 $\frac{\delta^2 u}{\delta t^2} = \frac{1}{c^2} \frac{\delta^2 u}{\delta t^2}$\\
-\end{center}.
+\end{center}
 As pressure (p) and velocity (u) have a reciprocal relationship in a similar way to H and E, it is possible to rearrange the acoustic wave equation to reflect this relationship for a FDTD computation.
 \subsection{Field Calculation}
 When treating the 1 dimensional linear acoustic wave equation with the FDTD method, it is possible to treat the p and u terms separately in time using the opposing terms for reciprocal calculation. As such, the p and u terms are reformulated as follows:\\
@@ -70,9 +70,12 @@ Further study of the Bilbao FVTD thing and VonNeuman analysis is necesarry to ge
 %$ CFL = c \frac{\delta t}{\sqrt{\Sigma_{1}^{N_D} \delta {N_{D}}^2}} \leq \frac{2}{\pi \sqrt{N_D}}$\\
 %\end{center}
 
-\section{A 2D Simulation with empirical partially absorbing boundary conditions}
-%\label{sec:3}
-Below is an example of a 2D simulation:
+\section{Sparse FDTD}
+The sparse FDTD method is a variant of the FDTD method proposed by Doerr \cite{Doerr} for use in the modelling of optical problems with significantly large domains such as for PIC micro-controllers. This is not to be confused with sparse matrix solvers used for decomposing large sparse matrices in implicit FDTD methods. Doerr's method relies on maintaining a list of 'indices to be computed' and updating this list as values fluctuate over the domain~\cite{Doerr2015}.
 
-\lstinputlisting[language=Matlab]{../Matlab/FDTD/FDTD2Dtesting.m}
+
+
+
+
+
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.22)  18 APR 2017 10:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.22)  18 APR 2017 16:38
 entering extended mode
 **./Main.tex
 (Main.tex
@@ -311,7 +311,7 @@ Writing index file Main.idx
 
 LaTeX Warning: Label `Introduction' multiply defined.
 
-) (sections/Sparse.aux) (sections/Pseudo-spectral.aux) (sections/Acoustic.aux)
+) (sections/Pseudo-spectral.aux) (sections/Acoustic.aux)
 (sections/Profiling.aux) (sections/optimisationandparallelism.aux)
 (sections/Analysis.aux) (sections/Conclusion.aux) (sections/Further.aux))
 \openout1 = `Main.aux'.
@@ -496,9 +496,6 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
 Chapter 1.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.5> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 15.
-
-LaTeX Warning: Citation `Durbridge2016a' on page 3 undefined on input line 15.
-
 ) [3]
 \openout2 = `sections/largeroomacoustics.aux'.
 
@@ -577,58 +574,37 @@ Overfull \hbox (5.99998pt too wide) in alignment at lines 66--69
 
 ]
 Chapter 3.
-
-LaTeX Warning: Citation `Yee1966' on page 11 undefined on input line 15.
-
 [11]
-
-LaTeX Warning: Citation `Scheirman2015' on page 12 undefined on input line 19.
-
-
-LaTeX Warning: Citation `Botteldooren1993' on page 12 undefined on input line 1
-9.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 19--20
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 26--27
+Underfull \hbox (badness 10000) in paragraph at lines 28--29
 
  []
 
 
-LaTeX Warning: Citation `Hill2012' on page 12 undefined on input line 32.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 31--33
+Underfull \hbox (badness 10000) in paragraph at lines 33--35
 
  []
 
 [12]
-
-LaTeX Warning: Citation `Olesen1997' on page 13 undefined on input line 39.
-
-
-LaTeX Warning: Citation `Hill2012' on page 13 undefined on input line 39.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 39--40
+Underfull \hbox (badness 10000) in paragraph at lines 41--42
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 43--44
+Underfull \hbox (badness 10000) in paragraph at lines 45--46
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 49.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 51.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omsptm.fd"
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 49.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 51.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2015/06/04 1.6 listings language file
@@ -637,44 +613,33 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <8.5> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 24.
  [14])
-Underfull \hbox (badness 10000) in paragraph at lines 53--54
+Underfull \hbox (badness 10000) in paragraph at lines 55--56
 
  []
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 57--58
+Underfull \hbox (badness 10000) in paragraph at lines 59--60
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--63
+Underfull \hbox (badness 10000) in paragraph at lines 64--65
 
  []
 
-(../Matlab/FDTD/FDTD2Dtesting.m [16] [17] [18]
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 164.
+
+LaTeX Warning: Citation `Doerr' on page 16 undefined on input line 74.
 
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omlptm.fd"
-File: omlptm.fd 
-)
-LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <8.5> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 164.
- [19])) [20]
-\openout2 = `sections/Sparse.aux'.
+LaTeX Warning: Citation `Doerr2015' on page 16 undefined on input line 74.
 
-
-No file sections/Sparse.tex.
-[21
-
-
-
-]
+) [16]
 \openout2 = `sections/Pseudo-spectral.aux'.
 
 
 No file sections/Pseudo-spectral.tex.
-[22
+[17
+
 
 
 ]
@@ -682,7 +647,7 @@ No file sections/Pseudo-spectral.tex.
 
 
 No file sections/Acoustic.tex.
-[23
+[18
 
 
 ]
@@ -702,11 +667,7 @@ No file sections/Conclusion.tex.
 \openout2 = `sections/Further.aux'.
 
 No file sections/Further.tex.
-(Main.bbl
-
-LaTeX Warning: Empty `thebibliography' environment on input line 3.
-
-) [24
+(Main.bbl) [19
 
 
 
@@ -715,16 +676,18 @@ LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
 
 
+
+
+] [20
 
 
 ]
 No file Main.ind.
 (Main.aux (sections/dedic.aux) (sections/acknow.aux) (sections/acronym.aux)
 (sections/introduction.aux) (sections/largeroomacoustics.aux)
-(sections/fdtd.aux) (sections/Sparse.aux) (sections/Pseudo-spectral.aux)
-(sections/Acoustic.aux) (sections/Profiling.aux)
-(sections/optimisationandparallelism.aux) (sections/Analysis.aux)
-(sections/Conclusion.aux) (sections/Further.aux))
+(sections/fdtd.aux) (sections/Pseudo-spectral.aux) (sections/Acoustic.aux)
+(sections/Profiling.aux) (sections/optimisationandparallelism.aux)
+(sections/Analysis.aux) (sections/Conclusion.aux) (sections/Further.aux))
 
 LaTeX Warning: There were undefined references.
 
@@ -733,27 +696,26 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4926 strings out of 493333
- 68281 string characters out of 3139179
- 392904 words of memory out of 3000000
- 8235 multiletter control sequences out of 15000+200000
- 57281 words of font info for 111 fonts, out of 3000000 for 9000
+ 4841 strings out of 493333
+ 67216 string characters out of 3139179
+ 400297 words of memory out of 3000000
+ 8161 multiletter control sequences out of 15000+200000
+ 58060 words of font info for 111 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,9n,45p,1896b,2100s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 39i,9n,45p,1290b,2100s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Program Files/Mi
 KTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9
 /fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-sy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Program Files/MiKTeX 
-2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/ur
-w/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pf
-b><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Main.pdf (34 pages, 179240 bytes).
+ype1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/
+utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Main.pdf (30 pages, 156474 bytes).
 PDF statistics:
- 160 PDF objects out of 1000 (max. 8388607)
+ 143 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

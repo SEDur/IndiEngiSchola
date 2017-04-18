@@ -12,5 +12,5 @@
 \contentsline {subsection}{\numberline {3.2.2}Boundary Handling}{13}
 \contentsline {subsection}{\numberline {3.2.3}Example Function for Solving}{13}
 \contentsline {subsection}{\numberline {3.2.4}Stability}{15}
-\contentsline {section}{\numberline {3.3}A 2D Simulation with empirical partially absorbing boundary conditions}{16}
-\contentsline {section}{References}{24}
+\contentsline {section}{\numberline {3.3}Sparse FDTD}{16}
+\contentsline {section}{References}{19}

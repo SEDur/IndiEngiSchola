@@ -178,10 +178,9 @@ while ((n*dt <= T)||(meanpstore(n) > (max(meanpstore)-60)))
 end
 figure(2);
         subplot(2,1,1);
-        plot(dt:dt:n*dt, leftear(1:n));
+        plot(0:dt:(n-2)*dt, reciever(1:n-1));
         hold on;
-        plot(dt:dt:n*dt, rightear(1:n));
-        plot(dt:dt:n*dt, meanpstore(1:n));
+        plot(0:dt:(n-2)*dt, meanpstore(1:n-1));
         hold off;
         legend('left','right', 'mean over grid')
         title((sprintf('Current P recieved by listener = %.3f dB & The total sim time was %.6f',(rightear(n)),n*dt)),...

@@ -30,31 +30,33 @@ gigahertz   = 1e9 * hertz;
 c     = 343 * meters / seconds; %Speed of sound m/s
 rho    = 1.21; %Density of air kg/m^3
 p0 = 10^-12;
-cstab = sqrt(1/2);
+% cstab = sqrt(1/2);
+cstab = 2/(pi*sqrt(2));
 % cstab = 1;
 
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 5000 * hertz;
+fmax = 44100 * hertz;
 %grid size
-% gx = c * (1/fmax) / cstab;
-% gy = c * (1/fmax) / cstab;
-gx = 1/5 * c/fmax;
-gy = 1/5 * c/fmax;
+gx = c * (1/fmax) / cstab;
+gy = c * (1/fmax) / cstab;
+% gx = 1/5 * c/fmax;
+% gy = 1/5 * c/fmax;
 %Dims
 %Dim Size (m)
+% lx = 5*meters;
+% ly = 5*meters;
 lx = 5*meters;
-ly = 5*meters;
-
+ly = 4*meters;
 xcells = ceil(lx/gx);
 ycells = ceil(lx/gy);
 
 %Boundary Absorption Coefs (0 to 1)
-alphaL = 1.0;
-alphaR = 0.1;
-alphaF = 1.0;
-alphaB = 1.0;
+alphaL = 0.5;
+alphaR = 0.5;
+alphaF = 0.5;
+alphaB = 0.5;
 
 %number of sources
 snum = 2;
@@ -73,25 +75,28 @@ s2Phase = 0;
 A = 1;
 
 %recieves position
+recieverleftloc = [ceil(ycells/2) ceil(xcells/2)];
 % recieverleftloc = [ceil(lx/gx/2.42) ceil(ly/gx/8)];
 % recieverrightloc = [ceil(lx/gx/2.27) ceil(ly/gx/8)];
-recieverleftloc = [ceil(xcells/2) ycells-2];
-recieverrightloc = [ceil(lx/gx/2.27) ceil(ly/gx/8)];
+% recieverleftloc = [ceil(xcells/2) ycells-2];
+% recieverrightloc = [ceil(lx/gx/2.27) ceil(ly/gx/8)];
 
 
 %Time of sim
 % dt = 1/ (c*sqrt(3/(gx)^2));
 % dt = 1/ (c*sqrt((1/(gx^2))+(1/(gy^2))));
 % dt = 3.35563e-4;
-dt = gx * cstab/c;
-T = 1*seconds ;
+% dt = gx * cstab/c;
+dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))));
+
+T = 1;
 
 % generate the source(s) & determine number of time steps needed
 
 tnum = ceil(T/dt);
 source1 = zeros(1,tnum);
 source2 = zeros(1,tnum);
-fc = 0.025;     % Cutoff frequency (normalised 0.5=nyquist)
+fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
 n0 = 30;        % Initial delay (samples)
 sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
 n=0:tnum;
@@ -177,7 +182,8 @@ while n <= (T/dt)
     p(s1loc(1),s1loc(2)) = p(s1loc(1),s1loc(2)) - source1(n);
 %     p(s2loc(1),s2loc(2)) = p(s2loc(1),s2loc(2)) + -source2(n);
 %     power(n) = 20*log10(abs(max(p)));
-    leftear(n) = abs(p(recieverleftloc(1),recieverleftloc(2)));
+%     leftear(n) = abs(p(recieverleftloc(1),recieverleftloc(2)));
+    reciever(n) = p(recieverleftloc(1),recieverleftloc(2));
 %     rightear(n) = abs(p(recieverrightloc(1),recieverrightloc(2)));
     %PLOTTING SECTION
         surf(linex, liney, p);
