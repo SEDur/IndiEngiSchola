@@ -4,7 +4,7 @@
 \contentsline {section}{\numberline {1.2}Problem Definition}{3}
 \contentsline {chapter}{\numberline {2}Loudspeaker Systems \& Large Room Acoustics}{5}
 \contentsline {section}{\numberline {2.1}The Acoustic Wave Equation}{5}
-\contentsline {subsection}{\numberline {2.1.1}The Wave Equations}{5}
+\contentsline {subsection}{\numberline {2.1.1}The Wave Equation}{5}
 \contentsline {chapter}{\numberline {3}Finite Difference Time Domain Method}{11}
 \contentsline {section}{\numberline {3.1}Introduction to the Finite Difference Time Domain Method}{11}
 \contentsline {section}{\numberline {3.2}The Finite Difference Time Domain Method Applied To The Acoustic Wave Equation}{12}

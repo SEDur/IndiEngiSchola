@@ -101,12 +101,12 @@ pCz = c^2*rho*dt/gz;
 % impedance.
 
 %Boundary Absorption Coefs (0 to 1)
-alphaL = 1.0;
-alphaR = 1.0;
-alphaF = 1.0;
-alphaB = 0.1; % This diverges
-alphaT = 1.0;
-alphaG = 1.0;
+alphaL = 0.5;
+alphaR = 0.5;
+alphaF = 0.5;
+alphaB = 0.5; % This diverges
+alphaT = 0.5;
+alphaG = 0.5;
 
 if alphaR == 0
    alphaR = 1e-016; 
@@ -173,7 +173,7 @@ while ((n*dt <= T)||(meanpstore(n) > (max(meanpstore)-60)))
     %PLOTTING SECTION
     signal(n) = real(10*log10(source1(n)/p0));
     meanpstore(n) = 10*log10(mean(mean(mean(abs(real(p)))))/p0);
-%     FDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0);
+    FDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0);
         
 end
 figure(2);
