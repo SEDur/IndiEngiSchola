@@ -1,0 +1,81 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+\chapter{Finite Difference Time Domain Method}
+\label{Introduction}
+The Finite Difference Time Domain Method is a numerical method for solving partial differential equations. The power of this method lies in its simplicity and flexibility, and it can be used to solve partial differential equations of varying complexity. In this chapter we will discuss the application of the finite difference time domain method to the acoustic wave equation, including the application of empirical partially absorbing boundary conditions.
+
+\section{Introduction to the Finite Difference Time Domain Method}
+%\label{sec:1}
+Finite methods for solving partial differential equations have been of significant and continued research since the early 1900's; with mathematicians such as Courant, Fiedrichs and Hrennikof undertaking seminal work in the early 1920s, that formed a base for much of the finite methods used today. The Finite Difference Time Domain Method (FDTD) is a numerical method for solving time domain problems (often wave equations) with localised handling of spatial derivatives, and was first introduced for solving Maxwell's equations to simulate electromagnetic wave propagation by Yee \cite{Yee1966}.\\
+Yee proposed a method for which Maxwell's equations in partial differential form were applied to matrices staggered in partial steps in time and space, these matrices representing the magnetic (H) and electric (E) fields. In this explicit formulation, partial derivatives were used to solve H and E contiguously in a 'leapfrog' style, executing two sets of computations to solve for one time step. Multiple time steps would be solved from current time $t = 0$, in steps of $dt$ to the end of simulation time $T$.Each field is solved at half steps in time from each-other, thus H for a current time step $t + \delta t$ is calculated using the H values one time step ago $t$, and the E values half a time step ago $t + \frac{\delta t}{2} $. These two fields are also solved using central finite differences in space, in a staggered grid format i.e. E at index $x$ at time $t + \delta t$ is calculated using E at index $x$ at time $t$, and the finite difference between the local discrete values of H at $x - \frac{\delta x}{2} $ and at $x + \frac{\delta x}{2} $ at time $t + \frac{\delta t}{2}$. As such, it is possible to apply a simple kernel across many discretised points of a domain (H and E) to simulate electromagnetic wave propagation.\\
+In acoustics, FDTD can be used to simulate a wide range of problems such as diffraction and diffusion, aeroacoustics, meteorological \& environmental and mixed medium, without having to perform multiple simulations for different frequencies or geometry characteristics \footnote{as would have to be required in frequency domain simulations such as some Finite Element and Boundary Element simulations}.
+
+\section{The Finite Difference Time Domain Method Applied To The Acoustic Wave Equation}
+%\label{sec:2}
+The FDTD method applied to solving the acoustic wave equation, follows an almost identical form to that of solving Maxwells Equations with FDTD~\cite{Scheirman2015}\footnote{In fact, the equations follow an almost identical form}. Bottledooren's~\cite{Botteldooren1993} seminal work applied the FDTD method to the acoustic wave equations for both Cartesian and quasi-Cartesian grid systems. As previously described in the room acoustics section, the linear acoustic wave equation is based on Newton's second law of motion, the gas law and the continuity equation, and follows the form for the changes in the pressure and velocity respectively within a volume:\\
+\begin{center}
+$\frac{\delta^2 p}{\delta t^2} = \frac{1}{c^2} \frac{\delta^2 p}{\delta t^2}$\\
+$\frac{\delta^2 u}{\delta t^2} = \frac{1}{c^2} \frac{\delta^2 u}{\delta t^2}$\\
+\end{center}
+As pressure (p) and velocity (u) have a reciprocal relationship in a similar way to H and E, it is possible to rearrange the acoustic wave equation to reflect this relationship for a FDTD computation.
+\subsection{Field Calculation}
+When treating the 1 dimensional linear acoustic wave equation with the FDTD method, it is possible to treat the p and u terms separately in time using the opposing terms for reciprocal calculation. As such, the p and u terms are reformulated as follows:\\
+\begin{center}
+$\frac{\delta^2 p}{\delta t^2} = p - \frac{\delta t}{\rho_0 \delta x} \frac{\delta^2 u}{\delta t^{2}}$\\
+$\frac{\delta^2 u}{\delta t^2} = u - \frac{\delta t}{\rho_0 \delta x} \frac{\delta^2 u}{\delta t^{2}}$\\
+\end{center}
+However, this formulation is incomplete as it does not consider spatial or temporal discretisation of the field of interest, when applying the FDTD method. As the FDTD method relies on solving local finite difference approximations across a domain of interest, it is important to define a space and time index referencing method. In many mathematical texts, time step indexing is often represented by an i value, and spatial indexing often uses a j,k,l or l,m,n convention. For the aim of simplicity and as we will not directly address other forms of input output system in this text, we will use t for the time step indexing, and x, y and z for spatial indexing in each dimension.
+Following an implementation of the acoustic FDTD method by Hill~\cite{Hill2012}, we can generate the following p and u equations for FDTD applied to the acoustic wave equation:\\
+\begin{center}
+$u^{t + \frac{\delta t}{2}}_{x} = u^{t - \frac{\delta t}{2}}_{x} - \frac{\delta t}{\rho \delta x} \left[p^{t}_{x + \frac{\delta x}{2}} - p^{t}_{x - \frac{\delta x}{2}}\right]$\\
+$p^{t + \frac{\delta t}{2}}_{x} = p^{t - \frac{\delta t}{2}}_{x} - \frac{c^2 \rho \delta t}{\delta x} \left[u^{t}_{x + \frac{\delta x}{2}} - u^{t}_{x - \frac{\delta x}{2}}\right]$\\
+\end{center}
+
+\subsection{Boundary Handling}
+As a significant part of room acoustics involves analysing the effects of reverberation, it is important to be able to handle semi-absorbing boundary conditions in an acoustic simulation. That is, to model a boundary (wall) that will absorb and reflect some proportion of energy that is at the boundary. This can be handled by calculating semi-derivatives at the boundaries of the domain based on the acoustic impedance of the boundaries~\cite{Olesen1997}\cite{Hill2012}. p, u and impedance (z) are often applied in a relationship similar to Ohms law $v = i * r $.The absorbing and reflecting properties of boundaries in acoustics are often empirically defined as normalised quantities (between 0.0 and 1.0), related to the loss in energy when a portion of the material is tested under particular conditions such as energy loss modulation when placed in a reverberation chamber. The equation to calculate acoustic impedance based on absorption coefficient is as follows:\\
+\begin{center}
+$z = \rho c \frac{1 + \sqrt{1 - a}}{1 - \sqrt{1 - a}} $\\
+\end{center}
+Due to the spatially staggered grids in FDTD, it is possible to handle the boundaries only in the velocity components by increasing the size of the  velocity matrices by 1 in the direction parallel to the axis of the velocity i.e. the length of a 3 dimensional $u_x$ matrix would be $u_{x_{x,y,z}} = (x = N+1, y = N, z = N)$ where the size of the pressure matrix is $p_{x,y,z} = N:N:N$. For convenience and simplicity, local constant terms for the boundary can  be lumped into an R parameter $R = \frac{\rho \delta x}{0.5 \delta t}$. Rearranging the form of the velocity equation to include a semi-derivative acoustic impedance component at the negative x boundary can be given as follows:\\
+\begin{center}
+$ u^{t + \frac{\delta t}{2}}_{x} = \frac{R - Z}{R + Z} u^{t - \frac{\delta t}{2}}_{x} - \frac{2}{R + Z} p^{t}_{x+ \frac{\delta x}{2}} $\\
+\end{center}
+
+\subsection{Example Function for Solving}
+Below, is a function written in the Matlab \textregistered language, used to solve one time step of the wave equation using the FDTD method, in 3 dimensions:
+\lstinputlisting[language=Matlab]{../Matlab/FDTD/FDTD3Dfun.m}
+
+\subsection{Stability}
+Surrounding this formulation of the FDTD method for the acoustic wave equation, it may be important to ensure appropriate conditions are met for a converging and stable solution. As this is an explicit time marching method, the Courant-Friedrichs-Lewy (CFL) stability condition may provide a guide for generating appropriate spatial and temporal discretisation steps. The CFL condition implies that spatial $\delta x$ and temporal $\delta t$ discretization of a wave propagation model must be sufficiently small, that a single step in time is equal to or smaller than the time required for a wave to cross a spatial discretization step. This concerns both the speed of wave propagation $c$, the number of dimensions $N_D$ and maximum simulation frequency $f_{max}$. The 2 dimensional CFL condition can be computed as such, where the CFL limit $C_{max}$ is approximately 1 due to the use of an explicit time stepping solver:\\
+\begin{center}
+$ CFL = c \frac{\delta t}{\sqrt{\Sigma_{1}^{N_D} \delta {N_{D}}^2}} \leq C_{max}$\\
+\end{center}
+However, although having a CFL that is less than the $C_{max}$ of 1 is a necessary condition to satisfy, this does not guarantee numerical stability. As this acoustic simulation is a discrete computation of a continuous system, the Nyquist sampling theorem must be considered. This suggests and $\delta t \leq \frac{f_{max}}{2}$ and as $\delta x$ and $\delta t$ are linked by the CFL condition, $\delta x \leq c \delta t C_{max} $. Although some stability analysis techniques are available  for analysing the stability of simply shaped unbounded models such as VonNeuman analysis, such a tool is not appropriate for analysing domains with partially absorbing boundary conditions. Some sources such as Celestinos and Murphy suggest $\delta x$ should be between 5 and 10 points per smallest wavelength $(\lambda)$ of interest. As such, the following equations can  be used to calculate $\delta x$ and $\delta t$ terms for stable simulation:\\
+\begin{center}
+$\delta x = \frac{1}{5} \frac{c}{f_{max}}$\\
+$\delta t = \delta x \frac{C_{max}}{c} $\\
+\end{center}
+Further study of the Bilbao FVTD thing and VonNeuman analysis is necesarry to get a better stability condition that a fifth of lambda.\\
+
+%SAVE THIS FOR PSTD
+%
+%A more conservative estimate may be provided by substituting the empirical $C_{max}$ term with the a term related to 
+%\begin{center}
+%$ CFL = c \frac{\delta t}{\sqrt{\Sigma_{1}^{N_D} \delta {N_{D}}^2}} \leq \frac{2}{\pi \sqrt{N_D}}$\\
+%\end{center}
+
+\section{Sparse FDTD}
+The sparse FDTD method is a variant of the FDTD method proposed by Doerr \cite{Doerr} for use in the modelling of optical problems with significantly large domains such as for PIC micro-controllers. This is not to be confused with sparse matrix solvers used for decomposing large sparse matrices in implicit FDTD methods. Doerr's method relies on maintaining a list of 'indices to be computed' and updating this list as values fluctuate over the domain~\cite{Doerr2015}.
+
+
+
+
+
+
+

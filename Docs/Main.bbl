@@ -1,0 +1,40 @@
+\begin{thebibliography}{1}
+
+\bibitem{Durbridge2016a}
+Simon Durbridge.
+\newblock {Improvements in Acoustic Modelling for Analysis {\&} Auralization}.
+\newblock Technical report, University of Derby, Derby, 2016.
+
+\bibitem{Yee1966}
+Kane~S Yee.
+\newblock {Numerical solution of initial boundary value problems involving
+  Maxwell's equations in isotropic media}.
+\newblock {\em IEEE Transactions on Antennas and Propagation}, 14(3):302--307,
+  1966.
+
+\bibitem{Scheirman2015}
+David Scheirman.
+\newblock {Large-Scale Loudspeaker Arrays : Past , Present and Future ( Part
+  One - Computer Control , User Interface and Networked Audio Considerations
+  )}.
+\newblock pages 1--12, 2015.
+
+\bibitem{Botteldooren1993}
+D~Botteldooren.
+\newblock {Acoustical finite-difference time-domain simulation in a
+  quasi-Cartesian grid}.
+\newblock {\em Acoustical Society of America}, 95(5):2313--2319, 1993.
+
+\bibitem{Hill2012}
+Adam~J Hill.
+\newblock {Analysis , Modeling and Wide-Area Spatiotemporal Control of
+  Low-Frequency Sound Reproduction}.
+\newblock (January), 2012.
+
+\bibitem{Olesen1997}
+Soren~Krarup Olesen.
+\newblock {Low Frequency Room Simulation using Finite Difference Equations}.
+\newblock {\em Proceedings of the 102nd Audio Engineering Society Convention},
+  1997.
+
+\end{thebibliography}

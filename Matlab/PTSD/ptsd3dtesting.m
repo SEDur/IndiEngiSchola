@@ -6,15 +6,15 @@ clear all;
 % close all;
 
 %% Make Variables
-
+p0 = 10^(-12);
 
 %alpha 
-alphaXn = 1.0;
-alphaXp = 1.0;
-alphaYn = 1.0;
-alphaYp = 1.0;
-alphaZn = 1.0;
-alphaZp = 1.0;
+alphaXn = 0.5;
+alphaXp = 0.5;
+alphaYn = 0.5;
+alphaYp = 0.5;
+alphaZn = 0.5;
+alphaZp = 0.5;
 
 %define FS
 fs = 1000.0;
@@ -25,7 +25,7 @@ c = 343.0;
 %define total time
 T = 10.0;
 %define grid width
-gridWidth = 10.0;
+gridWidth = 5.0;
 %Target stability number 
 St = 2/(pi*sqrt(3));
 %define timestep
@@ -122,7 +122,9 @@ xiYn = (1 + Ryn)/(1 + Ryn - 2 * S * Ryn);
 xiYp = (1 + Ryp)/(1 + Ryp - 2 * S * Ryp);
 xiZn = (1 + Rzn)/(1 + Rzn - 2 * S * Rzn);
 xiZp = (1 + Rzp)/(1 + Rzp - 2 * S * Rzp);
-
+xcells = N;
+ycells = N;
+zcells = N;
 %% solve for some time
 % linkdata on;
 % tic();
@@ -136,15 +138,16 @@ for i = 1 : T/dt
     reciever(i) = pd(ceil(N/2), ceil(N/2), ceil(N/2));
     if mod(i, 100) < 1
     mesh(abs(pd(:, :, ceil(N/2))));
-    
+    PSTD3Dplotdomain(p, xcells, ycells, zcells, i, dt, p0);
+
 %     zlim([-10^-10 10^-10]);
 %     set(gca,'zlim',[-10^-12 10^-12]);
-    caxis([-10^-9 10^-9])
-    shading interp;
-    title(sprintf('Time = %.6f s',dt*(i-1)));
-%     view([spin(i) 13]);
-%      view(2);
-    drawnow;
+%     caxis([-10^-9 10^-9])
+%     shading interp;
+%     title(sprintf('Time = %.6f s',dt*(i-1)));
+% %     view([spin(i) 13]);
+% %      view(2);
+%     drawnow;
     end
 end
 % toc();
