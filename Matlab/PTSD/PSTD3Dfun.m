@@ -42,7 +42,7 @@ function[pd, udx, udy, udz] = PSTD3Dfun(pd, udx, udy, udz,...
     
 %% Pressure in 3d
     uhat = fftn(udz);
-    temp = uhat .* diffmatrixY;
+    temp = uhat .* diffmatrixZ;
     udiffhatz = ifftn(temp);
 
 %% Total Pressure

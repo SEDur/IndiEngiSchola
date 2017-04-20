@@ -66,7 +66,7 @@ handles.hppford = 4;
 handles.hppfco = 250;
 %Do Filtering for HF loss due to distance
 
-handles.Fs = 48000; %sample rate
+handles.Fs = 44100; %sample rate
 handles.output = hObject;
 guidata(hObject, handles);
 plotter_Callback(hObject, eventdata, handles)

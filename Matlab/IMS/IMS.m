@@ -33,7 +33,9 @@ Fs = handles.Fs;
 N = get(handles.MRO, 'Value'); % Order of reflections
 % lpfco = 8000; %low pass filter cut off
 % filtord = 6; %filter order#
-dE = 0.2; %distance between ears
+% dE = 0.2; %distance between ears
+dE = 0; %distance between ears
+
 % astart = 20;%start of audio to process (s)
 % afinish = 40;%end of audio to process (s)
 %%

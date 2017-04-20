@@ -12,18 +12,20 @@ cstab = 2/(pi*sqrt(3));
 meters = 1;
 hertz = 1;
 c = 343;
-p0 = 10^-12;
+p0 = 2*10^-5;
 rho = 1.21;
 
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
 fmax = 44100 * hertz;
+% dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))+(1/(gz^2))));
+dt = 1/fmax;
 
 %grid size
-gx = c * (1/fmax) / cstab;
-gy = c * (1/fmax) / cstab;
-gz = c * (1/fmax) / cstab;
+gx = c * dt / cstab;
+gy = c * dt / cstab;
+gz = c * dt / cstab;
 
 %Dims
 %Dim Size (m)
@@ -38,8 +40,10 @@ zcells = ceil(lz/gz);
 %number of sources
 snum = 2;
 %source locations
-sourcelocations = [ceil((ly/gy)/2) ceil((lx/gx)/2) ceil((lz/gz)/2);...
-                    ceil((ly/gy)/2)+1 ceil((lx/gx)/2)+1 ceil((lz/gz)/2)+1];
+% sourcelocations = [ceil((ly/gy)/2) ceil((lx/gx)/2) ceil((lz/gz)/2);...
+%                     ceil((ly/gy)/2)+1 ceil((lx/gx)/2)+1 ceil((lz/gz)/2)+1];
+sourcelocations = [ceil((1/gy)) ceil(1/gx) ceil(1/gz);...
+                    ceil((1/gy)) ceil(1/gx) ceil(1/gz)];
 s1Freq = 400;
 s2Freq = 400;
 %source phase
@@ -56,9 +60,9 @@ recieverrightloc = [ceil((ycells/2) + (0.1/gy)) ceil((xcells/2)+2) ceil(zcells/2
 
 %Time of sim
 % dt = 1/ (c*sqrt(3/(gx)^2));
-dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))+(1/(gz^2))));
+% dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))+(1/(gz^2))));
 % dt = 3.35563e-4;
-T = 1;
+T = 0.3;
 
 % generate the source(s) & determine number of time steps needed
 
@@ -70,7 +74,7 @@ fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
 n0 = 30;        % Initial delay (samples)
 sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
 n=0:tnum;
-source1=exp(-dt^2*(n-n0).^2/(2*sigma^2)).*(10^-12*10^(80/20));
+source1=exp(-dt^2*(n-n0).^2/(2*sigma^2)).*((2*10^-5)*10^(100/20));
 for n = 37 : length(source1)
     if(source1(n) < 0)
        source1(n) = 0; 
@@ -101,12 +105,12 @@ pCz = c^2*rho*dt/gz;
 % impedance.
 
 %Boundary Absorption Coefs (0 to 1)
-alphaL = 0.5;
-alphaR = 0.5;
-alphaF = 0.5;
-alphaB = 0.5; % This diverges
-alphaT = 0.5;
-alphaG = 0.5;
+alphaL = 0.45;
+alphaR = 0.45;
+alphaF = 0.45;
+alphaB = 0.45; % This diverges
+alphaT = 0.45;
+alphaG = 0.45;
 
 if alphaR == 0
    alphaR = 1e-016; 

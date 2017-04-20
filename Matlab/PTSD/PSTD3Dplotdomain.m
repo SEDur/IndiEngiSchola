@@ -4,7 +4,8 @@ function PSTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0)
         xslice = xcells-1; 
         yslice = ycells-1; 
         zslice = (ceil(zcells-1)/2);
-        slice(abs(p),xslice,yslice,zslice)
+%         slice(abs(p),xslice,yslice,zslice)
+        mesh(abs(p(:,:,20)));
 %         slice(xvec,yvec,zvec,abs(p),xslice,yslice,zslice)
 
 %         zslice = (ceil(zcells-1)/2);
