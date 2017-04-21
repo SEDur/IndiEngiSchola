@@ -17,7 +17,7 @@ alphaZn = 0.45;
 alphaZp = 0.45;
 
 %define FS
-fs = 20000.0;
+fs = 1000.0;
 %define density
 rho = 1.21;
 %define speed of sound
@@ -63,13 +63,14 @@ Nz = ceil(abs(gridWidthZ/dx)+2*PMLdepth);
 % src = (10^-12)*10^(50/20) .* music(sStart:sStart + length(src));
 tnum = ceil(T/dt);
 fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
-n0 = 30;        % Initial delay (samples)
+n0 = 1;        % Initial delay (samples)
 sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
 n=0:tnum;
 source1=exp(-dt^2*(n-n0).^2/(2*sigma^2)).*((2*10^-5)*10^(100/20));
 source1 = source1 ./ max(source1);
 
-srcloc = PMLdepth + ceil(1/dx);
+% srcloc = PMLdepth + ceil(1/dx);
+srcloc = [ceil(Ny/2) ceil(Nx/2) ceil(Nz/2)];
 tempdiffmatrixX = zeros(1,Nx);
 tempdiffmatrixY = zeros(1,Ny);
 tempdiffmatrixZ = zeros(1,Nz);
@@ -114,10 +115,10 @@ udz = zeros(Ny,Nx,Nz);
         end
     end
 
-% [mgx mgy mgz] = meshgrid(tempdiffmatrixX,tempdiffmatrixY,tempdiffmatrixZ);
-mgx = reshape(tempdiffmatrixX,[1,Nx,1]);
-mgy = reshape(tempdiffmatrixY,[Ny,1,1]);
-mgz = reshape(tempdiffmatrixZ,[1,1,Nz]);
+[mgx mgy mgz] = meshgrid(tempdiffmatrixX,tempdiffmatrixY,tempdiffmatrixZ);
+% mgx = reshape(tempdiffmatrixX,[1,Nx,1]);
+% mgy = reshape(tempdiffmatrixY,[Ny,1,1]);
+% mgz = reshape(tempdiffmatrixZ,[1,1,Nz]);
 diffmatrixX =  1i.* mgx ;
 diffmatrixY =  1i.* mgy ;
 diffmatrixZ =  1i.* mgz ;

@@ -9,10 +9,10 @@ clear all;
 
 
 %alpha 
-alphaXn = 0.8;
-alphaXp = 0.8;
-alphaYn = 0.8;
-alphaYp = 0.8;
+alphaXn = 0.45;
+alphaXp = 0.45;
+alphaYn = 0.45;
+alphaYp = 0.45;
 
 %define FS
 fs = 48000.0;
@@ -21,9 +21,9 @@ rho = 1.21;
 %define speed of sound
 c = 343.0;
 %define total time
-T = 20.0;
+T = 10.0;
 %define grid width
-gridWidth = 20.0;
+gridWidth = 5.0;
 %Define Stability Condition
 St = 2/(pi * sqrt(2));
 %define timestep
@@ -35,7 +35,7 @@ dx = c * dt * 1/St;
 % dx = 2 * dt * c;
 % assert(isequal((c*dt/dx),St));
 %calculate pconst
-pconst = rho * c^2 * (dt/dx);
+pconst = c^2 * rho * dt/dx;
 % pconst = rho * c^2 * (dt/dx) * dt * c;
 %calculate uconst
 uconst = dt/(dx*rho);
@@ -51,14 +51,24 @@ N = ceil(abs(gridWidth/dx)+2*PMLdepth);
 tempdiffmatrix = zeros(1,N);
 % temp = zeros(N, N);
 %Calc source
-sStart = 44100 * 40;
-src = zeros(1,ceil(T/dt)+1);
-srctime = 0 : dt/2 : 0.2;
-srcf = 10;
-src(10:10+length(srctime)-1) = (10^-12)*10^(50/20) * sin(2*pi*srcf.*srctime);
-win = kaiser(length(srctime) + 20,2.0);
-src(1:length(srctime) + 20) = src(1:length(srctime) + 20) .* win';
-clear('win');
+% sStart = 44100 * 40;
+% src = zeros(1,ceil(T/dt)+1);
+% srctime = 0 : dt/2 : 0.2;
+% srcf = 10;
+% src(10:10+length(srctime)-1) = (10^-12)*10^(50/20) * sin(2*pi*srcf.*srctime);
+% win = kaiser(length(srctime) + 20,2.0);
+% src(1:length(srctime) + 20) = src(1:length(srctime) + 20) .* win';
+% clear('win');
+
+tnum = ceil(T/dt);
+src = zeros(1,tnum);
+fc = 0.005;     % Cutoff frequency (normalised 0.5=nyquist)
+n0 = 30;        % Initial delay (samples)
+sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
+n=0:tnum;
+src = exp(-dt^2*(n-n0).^2/(2*sigma^2));
+scr = ((2*10^-5)*10^(100/20))*src;
+
 % music = audioread('track.mp3');
 % src = (10^-12)*10^(50/20) .* music(sStart:sStart + length(src));
 srcloc = ceil(N/2);
@@ -160,19 +170,20 @@ for i = 1 : T/dt+1
      PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
     pd = PTSD2Dsrc(pd, src(i), srcloc);
     reciever(i) = pd(ceil(N/2), ceil(N/2));
-    if mod(i, 100) < 1
-    mesh(linex, liney, abs(pd));
+%     if mod(i, 100) < 1
+    mesh(linex, liney, abs(real(pd)));
     
 %     zlim([-10^-10 10^-10]);
+     zlim([-1 1]);
 %     set(gca,'zlim',[-10^-12 10^-12]);
-    caxis([-10^-9 10^-9])
+%     caxis([-10^-9 10^-9])
     shading interp;
     title(sprintf('Time = %.6f s',dt*(i-1)));
 %     view([spin(i) 13]);
     view(2);
     axis tight;
     drawnow;
-    end
+%     end
 end
 toc();
 % 

@@ -1,11 +1,11 @@
 function PSTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0)
 
 %         figure(1);
-        xslice = xcells-1; 
-        yslice = ycells-1; 
-        zslice = (ceil(zcells-1)/2);
-%         slice(abs(p),xslice,yslice,zslice)
-        mesh(abs(p(:,:,20)));
+        xslice = ceil(size(p,2)/2); 
+        yslice = ceil(size(p,1)/2);  
+        zslice = ceil(size(p,3)/3);
+        slice(abs(p),xslice,yslice,zslice)
+%         mesh(abs(p(:,:,70)));
 %         slice(xvec,yvec,zvec,abs(p),xslice,yslice,zslice)
 
 %         zslice = (ceil(zcells-1)/2);
