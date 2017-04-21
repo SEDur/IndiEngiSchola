@@ -75,11 +75,7 @@ n0 = 30;        % Initial delay (samples)
 sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
 n=0:tnum;
 source1=exp(-dt^2*(n-n0).^2/(2*sigma^2)).*((2*10^-5)*10^(100/20));
-for n = 37 : length(source1)
-    if(source1(n) < 0)
-       source1(n) = 0; 
-    end
-end
+source1= source1 ./ max(source1);
 
 % source1 = (sin(2*pi*500*[0:dt:T-dt])).*(p0*10^(100/10));
 % source2 = (sin(2*pi*500*[0:dt:T-dt])).*(p0*10^(100/10));
