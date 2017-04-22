@@ -4,25 +4,25 @@ function [pd, udx, udy, udz] = PTSD3Dboundary(pd, udx, udy, udz,...
 if xiXn <= 1
     pd(PMLdepth+1,:,:) = pd(PMLdepth+1,:,:) .* xiXn;
 else
-    udx(PMLdepth+1,:,:) = udx(PMLdepth+1,:,:) .* (1/xiXn);
+    udy(PMLdepth+1,:,:) = udy(PMLdepth+1,:,:) .* (1/xiXn);
 end
 
 if xiXp <= 1
     pd(end-PMLdepth,:,:) = pd(end-PMLdepth,:,:) .* xiXp;
 else
-    udx(end-PMLdepth,:,:) = udx(end-PMLdepth,:,:) .* (1/xiXp);
+    udy(end-PMLdepth,:,:) = udy(end-PMLdepth,:,:) .* (1/xiXp);
 end
 
 if xiYn <= 1
     pd(:,PMLdepth+1,:) = pd(:,PMLdepth+1,:) .* xiYn;
 else
-    udy(:,PMLdepth+1,:) = udy(:,PMLdepth+1,:) .* (1/xiYn);
+    udx(:,PMLdepth+1,:) = udx(:,PMLdepth+1,:) .* (1/xiYn);
 end
 
 if xiYp <= 1
     pd(:,end-PMLdepth,:) = pd(:,end-PMLdepth,:) .* xiYp;
 else
-    udy(:,end-PMLdepth,:) = udy(:,end-PMLdepth,:) .* (1/xiYp);
+    udx(:,end-PMLdepth,:) = udx(:,end-PMLdepth,:) .* (1/xiYp);
 end
 
 if xiZn <= 1
@@ -32,8 +32,8 @@ else
 end
 
 if xiZp <= 1
-    pd(:,:,end-PMLdepth,:) = pd(:,:,end-PMLdepth) .* xiZp;
+    pd(:,:,end-PMLdepth) = pd(:,:,end-PMLdepth) .* xiZp;
 else
-    udz(:,:,end-PMLdepth,:) = udz(:,:,end-PMLdepth) .* (1/xiZp);
+    udz(:,:,end-PMLdepth) = udz(:,:,end-PMLdepth) .* (1/xiZp);
 end
 end

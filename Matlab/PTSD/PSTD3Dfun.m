@@ -21,9 +21,9 @@ function[pd, udx, udy, udz] = PSTD3Dfun(pd, udx, udy, udz,...
     temp2 = phat .* diffmatrixY;
     temp3 = phat .* diffmatrixZ;
     
-    pdiffhatx = ifftn(temp1);
-    pdiffhaty = ifftn(temp2);
-    pdiffhatz = ifftn(temp3);
+    pdiffhatx = ifftn(temp1,'symmetric');
+    pdiffhaty = ifftn(temp2,'symmetric');
+    pdiffhatz = ifftn(temp3,'symmetric');
     
 %% Total Velocity
     udx = udx .* PMLdiff - PMLalphau .* (pdiffhatx./PMLconst);
@@ -33,21 +33,21 @@ function[pd, udx, udy, udz] = PSTD3Dfun(pd, udx, udy, udz,...
 %% Pressure in 3d
     uhat = fftn(udx);
     temp = uhat .* diffmatrixX;
-    udiffhatx = ifftn(temp);
+    udiffhatx = ifftn(temp,'symmetric');
     
 %% Pressure in 3d
     uhat = fftn(udy);
     temp = uhat .* diffmatrixY;
-    udiffhaty = ifftn(temp);
+    udiffhaty = ifftn(temp,'symmetric');
     
 %% Pressure in 3d
     uhat = fftn(udz);
     temp = uhat .* diffmatrixZ;
-    udiffhatz = ifftn(temp);
+    udiffhatz = ifftn(temp,'symmetric');
 
 %% Total Pressure
-    pd = pd .* PMLdiff -(PMLalphap .* (udiffhatx./(PMLconst./2)))...
-        - (PMLalphap .* (udiffhaty./(PMLconst./2)))...
-        - (PMLalphap .* (udiffhatz./(PMLconst./2)));
+    pd = pd .* PMLdiff -(PMLalphap .* (udiffhatx./(PMLconst)))...
+        - (PMLalphap .* (udiffhaty./(PMLconst)))...
+        - (PMLalphap .* (udiffhatz./(PMLconst)));
 
 end

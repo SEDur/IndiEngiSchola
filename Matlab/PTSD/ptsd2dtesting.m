@@ -15,30 +15,31 @@ alphaYn = 0.45;
 alphaYp = 0.45;
 
 %define FS
-fs = 48000.0;
+fs = 44100.0;
 %define density
 rho = 1.21;
 %define speed of sound
 c = 343.0;
 %define total time
-T = 10.0;
+T = 0.1;
 %define grid width
-gridWidth = 5.0;
+gridWidthX = 5.0;
+gridWidthY = 4.0;
 %Define Stability Condition
 St = 2/(pi * sqrt(2));
 %define timestep
 dt = (1/fs);
 % dt = 1/(2*fs);
 %dfine grid spacing
-dx = c * dt * 1/St;
+dx = c * dt / St;
 % dx = c * sqrt(2) * dt;
 % dx = 2 * dt * c;
 % assert(isequal((c*dt/dx),St));
 %calculate pconst
-pconst = c^2 * rho * dt/dx;
+pconst = pi * 100 * (c^2 * rho * dt/dx);
 % pconst = rho * c^2 * (dt/dx) * dt * c;
 %calculate uconst
-uconst = dt/(dx*rho);
+uconst = dt / (dx*rho);
 % uconst = (1/rho) * (dt/dx) * dt * c;
 %define pml depth 
 % PMLdepth = ceil(abs(gridWidth/dx)/(2*(fs/c)));
@@ -46,9 +47,11 @@ PMLdepth = 30;
 %calc time steps
 timesteps = abs(T/dt);
 %calc grid size
-N = ceil(abs(gridWidth/dx)+2*PMLdepth);
+Nx = ceil(abs(gridWidthX/dx)+2*PMLdepth);
+Ny = ceil(abs(gridWidthY/dx)+2*PMLdepth);
 %calculate differentiation matrix
-tempdiffmatrix = zeros(1,N);
+tempdiffmatrixX = zeros(1,Nx);
+tempdiffmatrixY = zeros(1,Ny);
 % temp = zeros(N, N);
 %Calc source
 % sStart = 44100 * 40;
@@ -62,8 +65,8 @@ tempdiffmatrix = zeros(1,N);
 
 tnum = ceil(T/dt);
 src = zeros(1,tnum);
-fc = 0.005;     % Cutoff frequency (normalised 0.5=nyquist)
-n0 = 30;        % Initial delay (samples)
+fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
+n0 = 10;        % Initial delay (samples)
 sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
 n=0:tnum;
 src = exp(-dt^2*(n-n0).^2/(2*sigma^2));
@@ -71,7 +74,7 @@ scr = ((2*10^-5)*10^(100/20))*src;
 
 % music = audioread('track.mp3');
 % src = (10^-12)*10^(50/20) .* music(sStart:sStart + length(src));
-srcloc = ceil(N/2);
+srcloc = [PMLdepth+ceil(1/dx) PMLdepth+ceil(1/dx)];
 
 % tnum = ceil(T/dt);
 % fc = 0.25;     % Cutoff frequency (normalised 0.5=nyquist)
@@ -93,51 +96,61 @@ spin = -180 :0.005 : 180;
 % uhat = zeros(N,N);
 % pdiffhat = zeros(N,N);
 % udiffhat = zeros(N,N);
-pd = zeros(N,N);
-udx = zeros(N,N);
-udy = zeros(N,N);
+% pd = zeros(Nx,Ny);
+udx = zeros(Nx,Ny);
+udy = zeros(Nx,Ny);
+pd = ones(Nx,Ny)*(2*10^-5);
 
-linex = 0 : dx : dx * (N-1);
-liney = 0 : dx : dx * (N-1);
+linex = 0 : dx : dx * (Nx-1-(2*PMLdepth));
+liney = 0 : dx : dx * (Ny-1-(2*PMLdepth));
 
 % udy = zeros(N,N);
-    for i2 = 1 : N-1
-        if i2 <  ceil((N-2)/2)
-            tempdiffmatrix(i2) =  (i2-1);
+    for i2 = 1 : Nx-1
+        if i2 <  ceil((Nx-2)/2)
+            tempdiffmatrixX(i2) =  (i2-1);
         end
-        if i2 ==  ceil((N-1)/2)
-            tempdiffmatrix(i2) = 0 * (1+0j);
+        if i2 ==  ceil((Nx-1)/2)
+            tempdiffmatrixX(i2) = 0 * (1+0j);
         end
-        if i2 >  ceil((N-1)/2)
-            tempdiffmatrix(i2) = (i2 - 1 - N) ;
+        if i2 >  ceil((Nx-1)/2)
+            tempdiffmatrixX(i2) = (i2 - 1 - Nx) ;
         end
     end
-% diffmatrix = 1i * tempdiffmatrix;
+    
+     for i2 = 1 : Ny-1
+        if i2 <  ceil((Ny-2)/2)
+            tempdiffmatrixY(i2) =  (i2-1);
+        end
+        if i2 ==  ceil((Ny-1)/2)
+            tempdiffmatrixY(i2) = 0 * (1+0j);
+        end
+        if i2 >  ceil((Ny-1)/2)
+            tempdiffmatrixY(i2) = (i2 - 1 - Ny) ;
+        end
+    end
+[mgx, mgy] = meshgrid(tempdiffmatrixY, tempdiffmatrixX);
+diffmatrixX =  1i.*mgx ;
+diffmatrixY =  1i.*mgy ;
 
-[mgx mgy] = meshgrid([tempdiffmatrix tempdiffmatrix]);
-[mhx mhy] = meshgrid(-[fliplr(tempdiffmatrix) -fliplr(tempdiffmatrix)]);
-
-% diffmatrix =  1i.*-(((mgx(1:N,1:N) + mgy(1:N,1:N))./2) + ((mhx(1:N,1:N) + mhy(1:N,1:N))./2))./2; 
-diffmatrix =  1i.*(mgx(1:N,1:N)) ;
-
-
-PMLconst = ones(N,N);
-PMLconst = PMLconst .* (pi*N);
-PMLdiff = zeros(N,N);
-for i = 1 : N
+PMLconst = ones(Nx,Ny);
+PMLconst = PMLconst .* (pi*sqrt(Nx^2 + Ny^2));
+PMLdiff = zeros(Nx,Ny);
+PMLdiff2 = zeros(Nx,Ny);
+for i = 1 : Nx
 PMLdiff(i,1:PMLdepth) = 1:PMLdepth;
 PMLdiff(i,1:PMLdepth) = (1.0/3.0).*(((PMLdepth-PMLdiff(i,1:PMLdepth))./PMLdepth).^3);
 end
-PMLdiff(:,N-PMLdepth+1:end) = fliplr(PMLdiff(:,1:PMLdepth));
-% mesh(PMLdiff);
-% for i = PMLdepth : N-PMLdepth+1
-%     PMLdiff(1:PMLdepth,i) = 1:PMLdepth';
-% PMLdiff((N-PMLdepth+1):end, i) = 1 : PMLdepth';
-% end
-PMLdiff2 = PMLdiff';
+PMLdiff(:,Ny-PMLdepth+1:end) = fliplr(PMLdiff(:,1:PMLdepth));
+for i = 1 : Ny
+PMLdiff2(1:PMLdepth,i) = 1:PMLdepth;
+PMLdiff2(1:PMLdepth,i) = (1.0/3.0).*(((PMLdepth-PMLdiff2(1:PMLdepth,i))./PMLdepth).^3);
+end
+PMLdiff2(end:-1:Nx-PMLdepth+1,:) = fliplr(PMLdiff2(1:PMLdepth,:));
+% PMLdiff2 = PMLdiff';
 % mesh(PMLdiff2);
 
 PMLdiff = sqrt(PMLdiff.^2 + PMLdiff2.^2);
+%%
 PMLdiffmax = max(max(PMLdiff));
 PMLdiffsetmax = 0.3011;
 PMLdiff(PMLdiff > PMLdiffsetmax) = PMLdiffsetmax;
@@ -164,28 +177,31 @@ xiYp = (1 + Ryp)/(1 + Ryp - 2 * S * Ryp);
 % linkdata on;
 % tic();
 for i = 1 : T/dt+1
+    tic();
     [pd, udx, udy] = PTSD2Dboundary(pd, udx, udy, PMLdepth,...
         xiXn, xiXp, xiYn, xiYp);
-    [pd, udx, udy] = PSTD2Dfun(pd, udx, udy, diffmatrix,...
-     PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
+    [pd, udx, udy] = PSTD2Dfun(pd, udx, udy, diffmatrixX,diffmatrixY,...
+     PMLdiff, PMLalphau, PMLalphap, PMLconst);
     pd = PTSD2Dsrc(pd, src(i), srcloc);
-    reciever(i) = pd(ceil(N/2), ceil(N/2));
+    exTime(i) = toc();
+    reciever(i) = pd(ceil(Nx/2), ceil(Ny/2));
 %     if mod(i, 100) < 1
-    mesh(linex, liney, abs(real(pd)));
+    mesh(liney, linex, real(pd(PMLdepth:end-PMLdepth-1,...
+        PMLdepth:end-PMLdepth-1)));
     
-%     zlim([-10^-10 10^-10]);
+%     zlim([-0.04 0.04]);
      zlim([-1 1]);
-%     set(gca,'zlim',[-10^-12 10^-12]);
-%     caxis([-10^-9 10^-9])
+%     set(gca,'zlim',[-0.04 0.04]);
+    caxis([-0.04 0.04]);
     shading interp;
-    title(sprintf('Time = %.6f s',dt*(i-1)));
+    title(sprintf('Time = %.6f s,ExecTime = %.4f',dt*(i-1),exTime(i)));
 %     view([spin(i) 13]);
-    view(2);
+%     view(2);
     axis tight;
     drawnow;
 %     end
 end
-toc();
+plot(0:dt:(length(reciever)-1)*dt,reciever)
 % 
 %% Display the results
 
