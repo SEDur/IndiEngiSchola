@@ -1,40 +1,32 @@
 function [idx] = SPARSEfun3D(p, thresholddB)
 
-threshold = 10^-12 * 10^(thresholddB/10);
+threshold =  2*10^-5 * 10^(thresholddB/20);
 
 p(end+1,1:end,1:end) = 0;
 p(1:end,end+1,1:end) = 0;
 p(1:end,1:end,end+1) = 0;
-
-temp = abs(p) ./ threshold;
-
-temp = floor(temp);
-
-temp(temp > 1) = 1;
-
-for i = 1 : size(temp, 1)
-    for i1 = 1 : size(temp,3)
-        temp2(i,:,i1) = decimate(temp(i,:,i1), 2);
+for i2 = 1 : size(p, 3)
+    for i = 1 : size(p, 1)
+        temp(i,:,i2) = decimate(p(i,:,i2), 2);
     end
-end
-for i = 1 : size(temp2, 2)
-    for i1 = 1 : size(temp,3)
-        temp3(:,i,i1) = decimate(temp2(:,i,i1), 2);
+    for i = 1 : size(temp, 2)
+        temp2(:,i) = decimate(temp(:,i), 2);
     end
+    temp3(:,:,i2) = temp2;
 end
 for i = 1 : size(temp3, 1)
-    for i1 = 1 : size(temp3,2)
-        temp4(i,i1,:) = decimate(temp3(i,i1,:), 2);
+    for i2 = 1 : size(temp3, 2)
+        temp4(i,i2,:) = decimate(temp3(i,i2,:), 2);
     end
 end
+temp5 = abs(temp4) ./ threshold;
 
+temp5 = floor(temp5);
 
-temp4(temp4 > 0.1) = 1.0;
-temp4 = round(temp4);
+temp5(temp5 > 1) = 1;
 
-temp5 = interp3(temp4);
-% figure(2);
-% spy(temp5(:,:,ceil(size(temp5,2)/2)));
-% drawnow;
-idx = temp5();
+temp6 = ceil(interp3(temp5));
+
+idx = temp6(1:end-1, 1:end, 1:end-1);
+
 end

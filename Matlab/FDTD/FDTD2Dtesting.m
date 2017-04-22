@@ -29,7 +29,7 @@ gigahertz   = 1e9 * hertz;
 % constants
 c     = 343 * meters / seconds; %Speed of sound m/s
 rho    = 1.21; %Density of air kg/m^3
-p0 = 10^-12;
+p0 = 2*10^-5;
 % cstab = sqrt(1/2);
 cstab = 2/(pi*sqrt(2));
 % cstab = 1;
@@ -53,10 +53,10 @@ xcells = ceil(lx/gx);
 ycells = ceil(lx/gy);
 
 %Boundary Absorption Coefs (0 to 1)
-alphaL = 0.5;
-alphaR = 0.5;
-alphaF = 0.5;
-alphaB = 0.5;
+alphaL = 0.45;
+alphaR = 0.45;
+alphaF = 0.45;
+alphaB = 0.45;
 
 %number of sources
 snum = 2;

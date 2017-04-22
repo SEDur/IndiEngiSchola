@@ -29,8 +29,8 @@ gigahertz   = 1e9 * hertz;
 % constants
 c     = 343 * meters / seconds; %Speed of sound m/s
 rho    = 1.21; %Density of air kg/m^3
-p0 = 10^-12;
-cstab = sqrt(1/3);
+p0 = 2*10^-5;
+cstab = 2/(pi*sqrt(3));
 %% Initz Winodws
 figure(1);
 set(1, 'WindowStyle', 'Docked')
@@ -39,36 +39,41 @@ set(2, 'WindowStyle', 'Docked')
 %% Hard Coded Variables
 
 %Maximum calculation frequency
-fmax = 5000 * hertz;
+fmax = 10000 * hertz;
+dt = 1/fmax;
 %grid size
-gx = c * (1/fmax) / cstab;
-gy = c * (1/fmax) / cstab;
-gz = c * (1/fmax) / cstab;
+gx = c * dt / cstab;
+gy = c * dt / cstab;
+gz = c * dt / cstab;
 %Dims
 %Dim Size (m)
 lx = 5*meters;
-ly = 5*meters;
-lz = 5*meters;
+ly = 4*meters;
+lz = 3*meters;
 
 xcells = ceil(lx/gx);
 ycells = ceil(ly/gy);
 zcells = ceil(lz/gz);
 
 %Boundary Absorption Coefs (0 to 1)
-alphaL = 0.5;
-alphaR = 0.5;
-alphaF = 0.5;
-alphaB = 0.5;
-alphaT = 0.5;
-alphaG = 0.5;
+alphaL = 0.45;
+alphaR = 0.45;
+alphaF = 0.45;
+alphaB = 0.45;
+alphaT = 0.45;
+alphaG = 0.45;
 
 %number of sources
 snum = 2;
 %source locations
 % s1loc = [ceil(xcells/3) ceil(ycells/3)];
 % s2loc = [ceil(xcells/1.5) ceil(ycells/1.5)];%source frequency
-s1loc = [ceil((ly/gy)/2) ceil((lx/gx)/2) ceil((lz/gz)/2)] ;
-s2loc = [ceil((ly/gy)/4) ceil((lx/gx)/2) ceil((lz/gz)/4)];%source frequency
+% s1loc = [ceil((ly/gy)/2) ceil((lx/gx)/2) ceil((lz/gz)/2)] ;
+% s2loc = [ceil((ly/gy)/4) ceil((lx/gx)/2) ceil((lz/gz)/4)];%source frequency
+% sourcelocations = [ceil((1/gy)) ceil(1/gx) ceil(1/gz);...
+%                     ceil((1/gy)) ceil(1/gx) ceil(1/gz)];
+sourcelocations = [ceil(xcells/2) ceil(ycells/2) ceil(zcells/2);...
+                    ceil(xcells/2) ceil(ycells/2) ceil(zcells/2)];
 s1Freq = 400;
 s2Freq = 400;
 %source phase
@@ -80,14 +85,18 @@ A = 1;
 %recieves position
 % recieverleftloc = [ceil(lx/gx/2.42) ceil(ly/gx/8) ceil((lz/gz)/2)];
 % recieverrightloc = [ceil(lx/gx/2.27) ceil(ly/gx/8) ceil((lz/gz)/2)];
-recieverleftloc = [floor((ycells/2) - (0.1/gy)) ceil((xcells/2)-2) ceil(zcells/2)];
+% recieverleftloc = [floor((ycells/2) - (0.1/gy)) ceil((xcells/2)-2) ceil(zcells/2)];
+% recieverrightloc = [ceil((ycells/2) + (0.1/gy)) ceil((xcells/2)+2) ceil(zcells/2)];
+recieverleftloc = [ceil(ycells/2) ceil(xcells/2) ceil(zcells/2)];
+
 recieverrightloc = [ceil((ycells/2) + (0.1/gy)) ceil((xcells/2)+2) ceil(zcells/2)];
+
 
 %Time of sim
 % dt = 1/ (c*sqrt(3/(gx)^2));
-dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))+(1/(gz^2))));
+% dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))+(1/(gz^2))));
 % dt = 3.35563e-4;
-T = 10*seconds ;
+T = 0.3 ;
 
 % generate the source(s) & determine number of time steps needed
 
@@ -118,14 +127,14 @@ source2 = zeros(1,tnum);
 %     end
 % end
 %% Source 1 step
-source1(1,5:7) = ones(1,3).*(10^-12*10^(40/20));
-for n = ceil(tnum/10) : 1 : ceil(tnum/10) + 9 
-source1(n) = source1((n-1) * 2);       
-source2(n) = source2((n-1) * 2);
-end
+% source1(1,5:7) = ones(1,3).*(10^-12*10^(40/20));
+% for n = ceil(tnum/10) : 1 : ceil(tnum/10) + 9 
+% source1(n) = source1((n-1) * 2);       
+% source2(n) = source2((n-1) * 2);
+% end
 
-source1 = decimate(source1, 2, 'fir')';
-source1 = interp(source1, 2);
+% source1 = decimate(source1, 2, 'fir')';
+% source1 = interp(source1, 2);
 % source1=filter([1 -1], [1 -0.995], source1); % DC Blocker
 % source1 = source1 .* (p0*10^(100/10));
 % for n = ceil(tnum/10) : 1 : ceil(tnum/10) + 9 
@@ -142,10 +151,21 @@ source1 = interp(source1, 2);
 %             temp(1 : ceil(length(y)/10)) = gain;
 %             y = y.*temp;
 %             source2(1, t0 : t0 + ceil(T/dt) - 1) = y;
-        
+figure(4);
+fc = 0.005;     % Cutoff frequency (normalised 0.5=nyquist)
+n0 = 100;        % Initial delay (samples)
+sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
+n=0:tnum;
+source1=exp(-dt^2*(n-n0).^2/(2*sigma^2));
+source1 = -(((2*10^-5)*10^(100/20))*source1);
+source1(source1 > (2*10^-5)) = (2*10^-5);
+plot(0:dt:(length(source1)-1)*dt,source1);
+xlim([0 0.03]);
+drawnow;
+figure(2);
 % initialize the velocity and pressure matrices (matrices are set up in a
 % y by x fashion to properly display the 2D space (y = rows, x = columns))
-p = zeros(ycells - 1, xcells - 1, zcells - 1);
+p = ones(ycells - 1, xcells - 1, zcells - 1)*(2*10^-5);
 ux = zeros(ycells - 1, xcells, zcells - 1);
 uy = zeros(ycells, xcells - 1, zcells - 1);
 uz = zeros(ycells - 1, xcells - 1, zcells);
@@ -202,58 +222,73 @@ rightear = zeros(1,tnum);
 meanpstore = zeros(1,tnum);
 
 %Set zsliceloc
-zslice = (s1loc(3));
+[xvec, yvec, zvec] = meshgrid(0 : gx : gx * (xcells-2),...
+    0 : gy : gy * (ycells-2), 0 : gz : gz * (zcells-2));
 
 % loop to update the velocities and pressures over the time steps, n
 n = 1;
 % while or((mean(mean(mean(abs(real(p(:,:,:)))))) > (p0 * 10^(60/10))),(n < (1600)))
-while or((meanpstore(n) > (max(meanpstore)-60)),(n < (1600)))
-    n = n + 1;
-    if mod(n,100)
-    (100/tnum)*n
-    end
-    [idx] = SPARSEfun3D(p, 40);
-    [p, ux, uy] = SFDTD3Dfun(p, pCx, pCy, pCz, ux, uy, uz, uCx, uCy, uCz, Rx, Ry, Rz, ZL, ZR, ZT, ZB, ZF, ZB, idx);
+% while or((meanpstore(n) > (max(meanpstore)-60)),(n < (1600)))
+for n = 1:T/dt    
+%     n = n + 1;
+%     if mod(n,100)
+%     (100/tnum)*n
+%     end
+    [idx] = SPARSEfun3Db(p, 20);
+    [p, ux, uy, uz] = SFDTD3Dfun(p, pCx, pCy, pCz, ux, uy, uz, uCx, uCy, uCz, Rx, Ry, Rz, ZL, ZR, ZT, ZB, ZF, ZB, idx);
     
     % Input source
-    p(s1loc(1),s1loc(2),s1loc(3)) = p(s1loc(1),s1loc(2),s1loc(3)) - source1(n);
+    p(sourcelocations(1),sourcelocations(2),sourcelocations(3)) = p(sourcelocations(1),sourcelocations(2),sourcelocations(3)) - source1(n);
 %     p(s2loc(1),s2loc(2)) = p(s2loc(1),s2loc(2)) + -source2(n);
 %     power(n) = 20*log10(abs(max(p)));
-    leftear(n) = 10*log10(abs(real(p(recieverleftloc(1),recieverleftloc(2),recieverleftloc(3))))/p0);
-    rightear(n) = 10*log10(abs(real(p(recieverrightloc(1),recieverrightloc(2),recieverrightloc(3))))/p0);
-    %PLOTTING SECTION
-    leftear = real(10*log10(leftear/p0));
-    rightear = real(10*log10(rightear/p0));
+%     leftear(n) = 10*log10(abs(real(p(recieverleftloc(1),recieverleftloc(2),recieverleftloc(3))))/p0);
+%     rightear(n) = 10*log10(abs(real(p(recieverrightloc(1),recieverrightloc(2),recieverrightloc(3))))/p0);
+%     %PLOTTING SECTION
+%     leftear = real(10*log10(leftear/p0));
+%     rightear = real(10*log10(rightear/p0));
+    reciever(n) = p(recieverleftloc(1),recieverleftloc(2),recieverleftloc(3));
     signal(n) = real(10*log10(source1(n)/p0));
     meanpstore(n) = 10*log10(mean(mean(mean(abs(real(p)))))/p0);
-        xslice = ceil(xcells/2); 
-        yslice = ycells-1; 
+    SFDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0);
+%     patch(isocaps(idx,1),...
+%    'FaceColor','interp','EdgeColor','none');
+%     p1 = patch(isosurface(idx,1),...
+%    'FaceColor','blue','EdgeColor','none');
+%     isonormals(idx,p1);
+%     view(3); 
+%     axis vis3d tight
+%     camlight left
+%     colormap('jet');
+%     lighting gouraud
+%     drawnow;
+    %         xslice = ceil(xcells/2); 
+%         yslice = ycells-1; 
+% %         zslice = (ceil(zcells-1)/2);
+% %         slice(abs(p),xslice,yslice,zslice)
 %         zslice = (ceil(zcells-1)/2);
-%         slice(abs(p),xslice,yslice,zslice)
-        zslice = (ceil(zcells-1)/2);
-%         figure(1);
-        slice(abs(p),[xcells-1 ceil(xcells/2)],ycells-1,zslice) 
-%         shading interp;
-        title(sprintf('Time = %.6f s Max P = %.3f dB',n*dt,10*log10(real(max(max(max(abs(p(:,:,:))))))/p0)),...
-            'Color',[0 0 0],'FontSize', 14);
-        xlabel('Width (meters)', 'Color', [0 0 0]);
-        ylabel('Length (meters)', 'Color', [0 0 0]);
-
-        drawnow();
+% %         figure(1);
+%         slice(abs(p),[xcells-1 ceil(xcells/2)],ycells-1,zslice) 
+% %         shading interp;
+%         title(sprintf('Time = %.6f s Max P = %.3f dB',n*dt,10*log10(real(max(max(max(abs(p(:,:,:))))))/p0)),...
+%             'Color',[0 0 0],'FontSize', 14);
+%         xlabel('Width (meters)', 'Color', [0 0 0]);
+%         ylabel('Length (meters)', 'Color', [0 0 0]);
+% 
+%         drawnow();
 end
-figure(3);
-        subplot(2,1,1);
-        plot(dt:dt:n*dt, leftear(1:n));
-        hold on;
-        plot(dt:dt:n*dt, rightear(1:n));
-        plot(dt:dt:n*dt, meanpstore(1:n));
-        hold off;
-        legend('left','right', 'mean over grid')
-        title((sprintf('Current P recieved by listener = %.3f dB & The total sim time was %.6f',(rightear(n)),n*dt)),...
-            'Color',[0 0 0],'FontSize', 14);
-        ylim([0 max(signal)]);
-        subplot(2,1,2);
-        plot(dt:dt:n*dt, signal(1:n));
-        title('whats sent out by the source');
-        ylim([-100 max(signal)]);
+% figure(3);
+%         subplot(2,1,1);
+%         plot(dt:dt:n*dt, leftear(1:n));
+%         hold on;
+%         plot(dt:dt:n*dt, rightear(1:n));
+%         plot(dt:dt:n*dt, meanpstore(1:n));
+%         hold off;
+%         legend('left','right', 'mean over grid')
+%         title((sprintf('Current P recieved by listener = %.3f dB & The total sim time was %.6f',(rightear(n)),n*dt)),...
+%             'Color',[0 0 0],'FontSize', 14);
+%         ylim([0 max(signal)]);
+%         subplot(2,1,2);
+%         plot(dt:dt:n*dt, signal(1:n));
+%         title('whats sent out by the source');
+%         ylim([-100 max(signal)]);
 

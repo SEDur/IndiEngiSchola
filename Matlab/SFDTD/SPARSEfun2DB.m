@@ -1,6 +1,6 @@
 function [idx] = SPARSEfun2DB(p, thresholddB)
 
-threshold = 10^-12 * 10^(thresholddB/10);
+threshold = 2*10^-5 * 10^(thresholddB/20);
 
 p(end+1,1:end) = 0;
 p(1:end,end+1) = 0;
@@ -24,7 +24,7 @@ temp3(temp3 > 1) = 1;
 
 temp4 = ceil(interp2(temp3));
 % figure(2);
-mesh(temp4);
-drawnow;
+% mesh(temp4);
+% drawnow;
 idx = temp4(1:end-1, 1:end-1);
 end

@@ -60,9 +60,9 @@ uz(:, :, 1) = ((Rz - ZG)/(Rz + ZG))*uz(:, :, 1) - ...
     (2/(Rz + ZG))*p(:, :, 1);
 
 if(size(idx(idx > 0),1) > 100)
-    for i = 1 : size(p,1)
-        for i1 = 1 : size(p,2)
-            for i2 = 1 : size(p,3)
+    for i = 1 : size(p,1)-1
+        for i1 = 1 : size(p,2)-1
+            for i2 = 1 : size(p,3)-1
                 if(idx(i, i1, i2) > 0)
                     p(i,i1,i2) = p(i,i1,i2) - pCx*(ux(i, i1 + 1, i2) - ux(i, i1, i2))...
                         - pCy*(uy(i+1, i1, i2) - uy(i, i1, i2))...
