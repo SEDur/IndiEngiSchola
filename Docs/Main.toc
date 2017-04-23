@@ -13,4 +13,5 @@
 \contentsline {subsection}{\numberline {3.2.3}Example Function for Solving}{13}
 \contentsline {subsection}{\numberline {3.2.4}Stability}{15}
 \contentsline {section}{\numberline {3.3}Sparse FDTD}{16}
-\contentsline {section}{References}{19}
+\contentsline {subsection}{\numberline {3.3.1}2D implementation}{17}
+\contentsline {section}{References}{20}

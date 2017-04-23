@@ -234,7 +234,7 @@ for n = 1:T/dt
 %     if mod(n,100)
 %     (100/tnum)*n
 %     end
-    [idx] = SPARSEfun3Db(p, 30);
+    [idx] = SPARSEfun3Db(p, 60);
     [p, ux, uy, uz] = SFDTD3Dfun(p, pCx, pCy, pCz, ux, uy, uz, uCx, uCy, uCz, Rx, Ry, Rz, ZL, ZR, ZT, ZB, ZF, ZB, idx);
     
     % Input source

@@ -1,17 +1,17 @@
 function [p, ux, uy, uz] = SFDTD3Dfun(p, pCx, pCy, pCz, ux, uy, uz, uCx, uCy, uCz, Rx, Ry, Rz, ZL, ZR, ZT, ZB, ZF, ZG, idx)
-    sizemat = size(p) - 1;
+    sizemat = size(p);
 % if(size(idx(idx > 0),1) > 100)
 if length(idx) > 100
 % %     %  mat(col, row)
 [suby, subx, subz] = ind2sub(sizemat,idx);
-suby = suby + 1;
-subx = subx + 1;
-subz = subz + 1;
-for i = 1 : length(suby)
+% suby = suby + 1;
+% subx = subx + 1;
+% subz = subz + 1;
+% for i = 1 : length(suby)
     ux(suby,subx,subz) = ux(suby,subx,subz) - uCx*(p(suby,subx,subz)-p(suby,subx-1,subz));
     uy(suby,subx,subz) = uy(suby,subx,subz) - uCx*(p(suby,subx,subz)-p(suby-1,subx,subz));
     uz(suby,subx,subz) = uz(suby,subx,subz) - uCx*(p(suby,subx,subz)-p(suby,subx,subz-1));
-end
+% end
 else
     % update the non-boundary condition nodes for velocity
     ux(:, 2:end-1, :) = ux(:, 2:end-1,:) - uCx*(p(:, 2:end,:) - p(:, 1:end-1, :));
@@ -59,13 +59,13 @@ uz(:, :, 1) = ((Rz - ZG)/(Rz + ZG))*uz(:, :, 1) - ...
 %         - pCz*(uz(:, :, idx+1) - uz(:, :, idx));
 if length(idx) > 100
 %     %  mat(col, row)
-for i = 1 : length(suby)
+% for i = 1 : length(suby)
         
         p(suby,subx,subz) = p(suby,subx,subz)...
             - pCx*(ux(suby,subx+1,subz) - ux(suby,subx,subz))...
             - pCy*(uy(suby+1,subx,subz) - uy(suby,subx,subz))...
             - pCz*(uz(suby,subx,subz+1) - uz(suby,subx,subz));
-end
+% end
 else
     p = p - pCx*(ux(:, 2:end, :) - ux(:, 1:end-1, :))...
         - pCy*(uy(2:end, :, :) - uy(1:end-1, :, :))...

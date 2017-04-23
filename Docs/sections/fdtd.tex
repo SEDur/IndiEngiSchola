@@ -71,9 +71,16 @@ Further study of the Bilbao FVTD thing and VonNeuman analysis is necesarry to ge
 %\end{center}
 
 \section{Sparse FDTD}
-The sparse FDTD method is a variant of the FDTD method proposed by Doerr~\cite{Doerr} for use in the modelling of optical problems with significantly large domains such as for PIC micro-controllers. This is not to be confused with sparse matrix solvers used for decomposing large sparse matrices in implicit FDTD methods. Doerr's method relies on maintaining a list of 'indices to be computed' and updating this list as values fluctuate over the domain~\cite{Doerr2015}.\\
+The sparse FDTD method (SFDTD) is a variant of the FDTD method proposed by Doerr~\cite{Doerr} for use in the modelling of optical problems with significantly large domains such as for PIC micro-controllers. This is not to be confused with sparse matrix solvers used for decomposing large sparse matrices in implicit FDTD methods. The SFDTD method relies on setting an appropriate threshold, and uses this threshold to compute points in the simulation domain that should be solved, and points that should be ignored. This is analogous to applying a gate or window to the domain being computed, similar to the moving window FDTD method implemented by \textit{Schuster et al}~\cite{Schuster2004}.
 
-The implementation of the sparse FDTD method (SFDTD) in this study attempts to leverage some signal processing techniques instead of search algorithms, in order to generate an indexing matrix similar to the list mentioned in Doerr's implementation. 
+Doerr's method relies on maintaining a list of 'indices to be computed' and updating this list as values fluctuate over the domain~\cite{Doerr2015}.\\
+
+\subsection{2D implementation}
+The implementation of the sparse FDTD method (SFDTD) for 2D simulation in this study attempts to leverage some signal processing techniques instead of search algorithms, in order to generate an indexing matrix similar to the list mentioned in Doerr's implementation.\\
+
+
+
+
 
 
 
