@@ -71,12 +71,18 @@ Further study of the Bilbao FVTD thing and VonNeuman analysis is necesarry to ge
 %\end{center}
 
 \section{Sparse FDTD}
-The sparse FDTD method (SFDTD) is a variant of the FDTD method proposed by Doerr~\cite{Doerr} for use in the modelling of optical problems with significantly large domains such as for PIC micro-controllers. This is not to be confused with sparse matrix solvers used for decomposing large sparse matrices in implicit FDTD methods. The SFDTD method relies on setting an appropriate threshold, and uses this threshold to compute points in the simulation domain that should be solved, and points that should be ignored. This is analogous to applying a gate or window to the domain being computed, similar to the moving window FDTD method implemented by \textit{Schuster et al}~\cite{Schuster2004}.
+The sparse FDTD method (SFDTD) is a variant of the FDTD method proposed by Doerr~\cite{Doerr} for use in the modelling of optical problems with significantly large domains such as for PIC micro-controllers. This is not to be confused with sparse matrix solvers used for decomposing large sparse matrices in implicit FDTD methods. The SFDTD method relies on setting an appropriate threshold, and uses this threshold to compute points in the simulation domain that should be solved, and points that should be ignored. This is analogous to applying a gate or window to the domain being computed, where computing parts of the domain with sufficient energy may significantly reduce computation time.\\
 
-Doerr's method relies on maintaining a list of 'indices to be computed' and updating this list as values fluctuate over the domain~\cite{Doerr2015}.\\
+The approach suggested by Doerr is similar to the moving window FDTD method implemented by \textit{Schuster et al}~\cite{Schuster2004}, in that the number of computations undertaken at any one time is significantly reduced, and thus may improve computation time in a large simulation. However unlike moving window FDTD, the SFDTD implementation suggested by Doerr dynamically accommodates high and low energy points as the simulation continues. This is achieved by maintaining a set of lists of currently active points, previously active points and an array that parallels the field and contains list indices. However Doerr's method relies on constantly maintaining lists, and a pointing array that is the same size as the domain.\\
 
 \subsection{2D implementation}
-The implementation of the sparse FDTD method (SFDTD) for 2D simulation in this study attempts to leverage some signal processing techniques instead of search algorithms, in order to generate an indexing matrix similar to the list mentioned in Doerr's implementation.\\
+The implementation of the sparse FDTD method (SFDTD) for 2D simulation in this study attempts to leverage some signal processing techniques instead of search algorithms or individual checks like Doerrs method, in order to generate an indexing matrix that is used as opposed to having an indexing matrix and lists. The aim of this implementation is to create a single array of points that can be used as a mask, in less time than it would take to compute a full field for the time of propagation of wave-fronts. Below a function is presented for calculating such a matrix:\\
+
+\lstinputlisting[language=Matlab]{../Matlab/SFDTD/SPARSEfun2D.m}
+
+An implemented FDTD algorithm can then be adjusted to read through this matrix and operate at non-zero coordinates, calculating not only the regions with appropriate amounts of power but also the surrounding cells.
+
+Depending on the intention of the persons implementing the simulation and thus the level of the threshold value, if may be possible to set the threshold low enough to allow a diffuse field to be calculated. However if an appropriate lossy wave equation was implemented, it may be possible to use a relatively high threshold to compute propagation loss for wavefronts such as strong and early reflections.\\
 
 
 
