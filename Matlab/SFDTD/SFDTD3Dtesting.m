@@ -39,7 +39,7 @@ set(2, 'WindowStyle', 'Docked')
 %% Hard Coded Variables
 
 %Maximum calculation frequency
-fmax = 10000 * hertz;
+fmax = 20000 * hertz;
 dt = 1/fmax;
 %grid size
 gx = c * dt / cstab;
@@ -152,8 +152,8 @@ source2 = zeros(1,tnum);
 %             y = y.*temp;
 %             source2(1, t0 : t0 + ceil(T/dt) - 1) = y;
 figure(4);
-fc = 0.005;     % Cutoff frequency (normalised 0.5=nyquist)
-n0 = 100;        % Initial delay (samples)
+fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
+n0 = 10;        % Initial delay (samples)
 sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
 n=0:tnum;
 source1=exp(-dt^2*(n-n0).^2/(2*sigma^2));
@@ -234,7 +234,7 @@ for n = 1:T/dt
 %     if mod(n,100)
 %     (100/tnum)*n
 %     end
-    [idx] = SPARSEfun3Db(p, 20);
+    [idx] = SPARSEfun3Db(p, 30);
     [p, ux, uy, uz] = SFDTD3Dfun(p, pCx, pCy, pCz, ux, uy, uz, uCx, uCy, uCz, Rx, Ry, Rz, ZL, ZR, ZT, ZB, ZF, ZB, idx);
     
     % Input source
