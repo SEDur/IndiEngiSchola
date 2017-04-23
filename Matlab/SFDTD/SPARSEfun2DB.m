@@ -1,6 +1,6 @@
-function [idx] = SPARSEfun2DB(p, thresholddB)
+function [idx] = SPARSEfun2DB(p, thresholddB, p0)
 
-threshold = 2*10^-5 * 10^(thresholddB/20);
+threshold = p0 * 10^(thresholddB/20);
 
 p(end+1,1:end) = 0;
 p(1:end,end+1) = 0;

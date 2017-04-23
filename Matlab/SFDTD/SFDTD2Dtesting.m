@@ -187,7 +187,7 @@ n = 1;
 for n = 1:T/dt    
 % n = n + 1;
     tic;
-    [idx] = SPARSEfun2DB(p, 0);
+    [idx] = SPARSEfun2DB(p, 0, p0);
     [p, ux, uy] = SFDTD2Dfun(p, pCx, pCy, ux, uy, uCx, uCy, Rx, Ry, ZL,...
         ZR, ZT, ZB, idx);
     extime(n) = toc;
