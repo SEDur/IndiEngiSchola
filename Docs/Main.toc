@@ -14,4 +14,9 @@
 \contentsline {subsection}{\numberline {3.2.4}Stability}{15}
 \contentsline {section}{\numberline {3.3}Sparse FDTD}{16}
 \contentsline {subsection}{\numberline {3.3.1}2D implementation}{17}
-\contentsline {section}{References}{20}
+\contentsline {chapter}{\numberline {4}PseudoSpectral Time Domain Method}{19}
+\contentsline {section}{\numberline {4.1}A Background to the Pseudospectral Time Domain Method}{19}
+\contentsline {section}{\numberline {4.2}The Pseudospectral Time Domain Method Applied To The Wave Equation}{19}
+\contentsline {subsection}{\numberline {4.2.1}Absorbing Boundary Conditions}{19}
+\contentsline {section}{\numberline {4.3}A 2D Simulation with empirical partially absorbing boundary conditions}{19}
+\contentsline {section}{References}{21}
