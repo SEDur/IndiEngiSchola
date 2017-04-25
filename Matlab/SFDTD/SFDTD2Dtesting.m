@@ -33,7 +33,7 @@ cstab = 2/(pi*sqrt(2));
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 10000 * hertz;
+fmax = 44100 * hertz;
 dt = 1/fmax;
 %grid size
 gx = c * dt / cstab;
