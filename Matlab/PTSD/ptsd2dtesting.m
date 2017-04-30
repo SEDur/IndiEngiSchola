@@ -101,8 +101,11 @@ udx = zeros(Nx,Ny);
 udy = zeros(Nx,Ny);
 pd = ones(Nx,Ny)*(2*10^-5);
 
-linex = 0 : dx : dx * (Nx-1-(2*PMLdepth));
-liney = 0 : dx : dx * (Ny-1-(2*PMLdepth));
+% linex = 0 : dx : dx * (Nx-1-(2*PMLdepth));
+% liney = 0 : dx : dx * (Ny-1-(2*PMLdepth));
+
+linex = 0 : dx : dx * (Nx-1);
+liney = 0 : dx : dx * (Ny-1);
 
 % udy = zeros(N,N);
     for i2 = 1 : Nx-1
@@ -133,7 +136,7 @@ diffmatrixX =  1i.*mgx ;
 diffmatrixY =  1i.*mgy ;
 
 PMLconst = ones(Nx,Ny);
-PMLconst = PMLconst .* (pi*sqrt(Nx^2 + Ny^2));
+PMLconst = 1./(PMLconst .* (pi*sqrt(Nx^2 + Ny^2)));
 PMLdiff = zeros(Nx,Ny);
 PMLdiff2 = zeros(Nx,Ny);
 for i = 1 : Nx
@@ -186,8 +189,9 @@ for i = 1 : T/dt+1
     exTime(i) = toc();
     reciever(i) = pd(ceil(Nx/2), ceil(Ny/2));
 %     if mod(i, 100) < 1
-    mesh(liney, linex, real(pd(PMLdepth:end-PMLdepth-1,...
-        PMLdepth:end-PMLdepth-1)));
+%     mesh(liney, linex, real(pd(PMLdepth:end-PMLdepth-1,...
+%         PMLdepth:end-PMLdepth-1)));
+mesh(liney, linex, pd);
     
 %     zlim([-0.04 0.04]);
      zlim([-1 1]);

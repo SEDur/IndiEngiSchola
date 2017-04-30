@@ -36,8 +36,8 @@ function[pd, udx, udy] = PSTD2Dfun(pd, udx, udy, diffmatrixX, diffmatrixY,...
     pdiffhaty = ifft2(temp2,'symmetric');
 
 %% Total Velocity
-    udx = udx .* PMLdiff - PMLalphau .* (pdiffhatx./PMLconst);
-    udy = udy .* PMLdiff - PMLalphau .* (pdiffhaty./PMLconst);
+    udx = udx .* PMLdiff - PMLalphau .* (pdiffhatx.*PMLconst);
+    udy = udy .* PMLdiff - PMLalphau .* (pdiffhaty.*PMLconst);
 %% Pressure in 2d
     uhat = fft2(udx);
     temp = uhat .* diffmatrixX;
@@ -62,8 +62,8 @@ function[pd, udx, udy] = PSTD2Dfun(pd, udx, udy, diffmatrixX, diffmatrixY,...
 %     udiffhat = (udiffhat + ifft(temp,N,1)) ./2;
 
 %% Total Pressure
-    pd = pd .* PMLdiff -(PMLalphap .* (udiffhatx./PMLconst))...
-        - (PMLalphap .* (udiffhaty./PMLconst));
+    pd = pd .* PMLdiff -(PMLalphap .* (udiffhatx.*PMLconst))...
+        - (PMLalphap .* (udiffhaty.*PMLconst));
 
 
 end

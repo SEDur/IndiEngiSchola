@@ -1,0 +1,36 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+\chapter{Pseudo-Spectral Time Domain Method}
+
+\abstract{The Fourier Pseudo-spectral Time Domain Method [PSTD] is a numerical method that can be used for solving partial differential equations. The advantage of this method lies in leveraging the computational speed of performing a discrete Fourier transform, both providing fast frequency domain differentiation and differentiation with higher order accuracy than the FDTD method. In this chapter we will discuss the application of the PSTD method to the acoustic wave equation, including the use of empirical partially absorbing boundary conditions and the perfectly matched layer (PML).
+
+\section{A Background to the Pseudo-Spectral Time Domain Method}
+\label{sec:1}
+The PSTD method is of a branch of spectral methods that are useful for solving some hyperbolic partial differential equations, and was first proposed by Orszag~\cite{Orszag1971}, and was further expanded by Kriess and Oliger~\cite{Kreiss1972}. Fourier Pseudospectral methods have been advanced considerably since then, and have found applications in weather prediction particle physics, electromagnetics and acoustics. More recently Trefethen~\cite{Trefethen2000} presented a classic text showcasing both the power of spectral methods and how simply they could be implemented. The Fourier PSTD method used in this study is advanced from that presented by Angus \& Caunce ~\cite{Angus2010}, with expansion into 2 and 3 dimensions and implementation of partially absorbing boundary conditions.                                               
+
+\section{The Pseudospectral Time Domain Method Applied To The Wave Equation}
+\label{sec:2}
+
+The acoustic wave equation has been previously defined with two resolving parts:\\
+$\frac{\delta^2 p}{\delta t^2} = \frac{1}{c^2} \frac{\delta^2 p}{\delta t^2}$\\
+$\frac{\delta^2 u}{\delta t^2} = \frac{1}{c^2} \frac{\delta^2 u}{\delta t^2}$\\
+
+
+
+\subsection{Absorbing Boundary Conditions}
+
+\section{A 2D Simulation with empirical partially absorbing boundary conditions}
+\label{sec:3}
+% Always give a unique label
+% and use \ref{<label>} for cross-references
+% and \cite{<label>} for bibliographic references
+% use \sectionmark{}
+% to alter or adjust the section heading in the running head
+Instead of simply listing headings of different levels we recommend to let every heading be followed by at least a short passage of text. Furtheron please use the \LaTeX\ automatism for all your cross-references and citations.
+

@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{Durbridge2016a}
 Simon Durbridge.
@@ -37,10 +37,51 @@ Soren~Krarup Olesen.
 \newblock {\em Proceedings of the 102nd Audio Engineering Society Convention},
   1997.
 
-\bibitem{Doerr2015}
-C~Doerr.
-\newblock {3D Sparse Finite-Difference Time-Domain Simulation of Silicon
-  Photonic Integrated Circuits}.
-\newblock i:4--6, 2015.
+\bibitem{Schuster2004}
+J~W Schuster, K~C Wu, R~R Ohs, and R~J Luebbers.
+\newblock {Application of moving window FDTD to predicting path loss over
+  forest covered irregular terrain}.
+\newblock {\em IEEE Antennas and Propagation Society Symposium, 2004.}, pages
+  1607----1610 Vol.2, 2004.
+
+\bibitem{Orszag1971}
+Steven~a. Orszag.
+\newblock {Numerical simulation of incompressible flows within simple
+  boundaries: accuracy}.
+\newblock {\em Journal of Fluid Mechanics}, 49(01):75, 1971.
+
+\bibitem{Kreiss1972}
+Heinz-Otto Kreiss and Joseph Oliger.
+\newblock {Comparison of accurate methods for the integration of hyperbolic
+  equations}.
+\newblock {\em Tellus}, 24(3):199--215, 1972.
+
+\bibitem{Trefethen2000}
+Lloyd~N Trefethen.
+\newblock {Spectral Methods in Matlab}.
+\newblock {\em Lloydia Cincinnati}, 10:184, 2000.
+
+\bibitem{Angus2010}
+Jamie A~S Angus and Andrew Caunce.
+\newblock {A GPGPU Approach to Improved Acoustic Finite Difference Time Domain
+  Calculations}.
+\newblock {\em 128th Audio Engineering Society Convention}, 2010.
+
+\bibitem{Berenger1994}
+Jean~P Berenger.
+\newblock {A perfectly matched layer for the absorption of electromagnetic
+  waves}.
+\newblock {\em J. Comput. Phys.}, 114:185--200, 1994.
+
+\bibitem{Liu1997}
+Qing-Huo Liu and Jianping Tao.
+\newblock {The perfectly matched layer for acoustic waves}.
+\newblock {\em J. Acoust. Soc. Am.}, 102(4):2072--2082, 1997.
+
+\bibitem{Spa2011}
+Carlos Spa, Jose Escolano, and Adan Garriga.
+\newblock {Semi-empirical boundary conditions for the linearized acoustic Euler
+  equations using Pseudo-Spectral Time-Domain methods}.
+\newblock {\em Applied Acoustics}, 72(4):226--230, 2011.
 
 \end{thebibliography}

@@ -1,4 +1,4 @@
-%% PTSD2D testing script
+%% PTSD3D testing script
 
 %% Initz
 clc;

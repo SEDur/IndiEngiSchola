@@ -1,22 +1,22 @@
-\contentsline {part}{I\hspace {1em}Background \& Theory}{1}
-\contentsline {chapter}{\numberline {1}Introduction}{3}
-\contentsline {section}{\numberline {1.1}Context}{3}
-\contentsline {section}{\numberline {1.2}Problem Definition}{3}
-\contentsline {chapter}{\numberline {2}Loudspeaker Systems \& Large Room Acoustics}{5}
-\contentsline {section}{\numberline {2.1}The Acoustic Wave Equation}{5}
-\contentsline {subsection}{\numberline {2.1.1}The Wave Equation}{5}
-\contentsline {chapter}{\numberline {3}Finite Difference Time Domain Method}{11}
-\contentsline {section}{\numberline {3.1}Introduction to the Finite Difference Time Domain Method}{11}
-\contentsline {section}{\numberline {3.2}The Finite Difference Time Domain Method Applied To The Acoustic Wave Equation}{12}
-\contentsline {subsection}{\numberline {3.2.1}Field Calculation}{12}
-\contentsline {subsection}{\numberline {3.2.2}Boundary Handling}{13}
-\contentsline {subsection}{\numberline {3.2.3}Example Function for Solving}{13}
-\contentsline {subsection}{\numberline {3.2.4}Stability}{15}
-\contentsline {section}{\numberline {3.3}Sparse FDTD}{16}
-\contentsline {subsection}{\numberline {3.3.1}2D implementation}{17}
-\contentsline {chapter}{\numberline {4}PseudoSpectral Time Domain Method}{19}
-\contentsline {section}{\numberline {4.1}A Background to the Pseudospectral Time Domain Method}{19}
-\contentsline {section}{\numberline {4.2}The Pseudospectral Time Domain Method Applied To The Wave Equation}{19}
-\contentsline {subsection}{\numberline {4.2.1}Absorbing Boundary Conditions}{19}
-\contentsline {section}{\numberline {4.3}A 2D Simulation with empirical partially absorbing boundary conditions}{19}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {1.1}Context}{1}
+\contentsline {section}{\numberline {1.2}Problem Definition}{1}
+\contentsline {chapter}{\numberline {2}Loudspeaker Systems \& Large Room Acoustics}{3}
+\contentsline {section}{\numberline {2.1}The Acoustic Wave Equation}{3}
+\contentsline {subsection}{\numberline {2.1.1}The Wave Equation}{3}
+\contentsline {chapter}{\numberline {3}Finite Difference Time Domain Method}{9}
+\contentsline {section}{\numberline {3.1}Introduction to the Finite Difference Time Domain Method}{9}
+\contentsline {section}{\numberline {3.2}The Finite Difference Time Domain Method Applied To The Acoustic Wave Equation}{10}
+\contentsline {subsection}{\numberline {3.2.1}Field Calculation}{10}
+\contentsline {subsection}{\numberline {3.2.2}Boundary Handling}{11}
+\contentsline {subsection}{\numberline {3.2.3}Example Function for Solving}{11}
+\contentsline {subsection}{\numberline {3.2.4}Stability}{13}
+\contentsline {section}{\numberline {3.3}Sparse FDTD}{14}
+\contentsline {subsection}{\numberline {3.3.1}2D implementation}{15}
+\contentsline {chapter}{\numberline {4}Pseudo-Spectral Time Domain Method}{17}
+\contentsline {section}{\numberline {4.1}A Background to the Pseudo-Spectral Time Domain Method}{17}
+\contentsline {section}{\numberline {4.2}The Pseudospectral Time Domain Method Applied To The Wave Equation}{17}
+\contentsline {subsection}{\numberline {4.2.1}Absorbing Boundary Conditions}{18}
+\contentsline {subsection}{\numberline {4.2.2}Partially Absorbing Boundary Conditions}{19}
+\contentsline {section}{\numberline {4.3}A 2D Simulation with empirical partially absorbing boundary conditions}{20}
 \contentsline {section}{References}{21}

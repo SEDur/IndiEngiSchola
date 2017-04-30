@@ -1,14 +1,14 @@
 \documentclass[graybox,envcountchap,sectrefs]{svmono}
 
+
 % choose options for [] as required from the list
 % in the Reference Guide
 
 \usepackage{mathptmx}
 \usepackage{helvet}
 \usepackage{courier}
-%
+\usepackage{amsmath}
 \usepackage{type1cm}         
-
 \usepackage{makeidx}         % allows index generation
 \usepackage{graphicx}        % standard LaTeX graphics tool
                              % when including figure files
@@ -16,7 +16,7 @@
 \usepackage[bottom]{footmisc}% places footnotes at page bottom
 \usepackage{listings}
 \usepackage{color}
- 
+
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
@@ -45,13 +45,10 @@
 \usepackage{longtable}
 \usepackage{graphicx}
 \usepackage{footmisc}
-%\usepackage{cite}
+\usepackage{cite}
 \bibliographystyle{unsrt}
 \graphicspath{{images/}{../images/}}
 \usepackage{subfiles}
-
-% see the list of further useful packages
-% in the Reference Guide
 
 \makeindex             % used for the subject index
                        % please use the style svind.ist with
@@ -77,37 +74,37 @@
 
 \frontmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\include{sections/dedic}
+%\include{sections/dedic}
 %\include{sections/foreword}
 %\include{sections/preface}
-\include{sections/acknow}
+%\include{sections/acknow}
 
 \tableofcontents
-\include{sections/acronym}
+%\include{sections/acronym}
 
 \mainmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Background \& Theory}
-\include{sections/introduction} %Chapter
-\include{sections/largeroomacoustics} %Chapter
+%\part{Background \& Theory}
+\subfile{sections/introduction} %Chapter
+\subfile{sections/largeroomacoustics} %Chapter
 %\include{sections/Numerical Methods} % Chapter
-\include{sections/fdtd} %Chapter
+\subfile{sections/fdtd} %Chapter
 %\include{sections/Sparse Finite Difference Time Domain Method} %Chapter
-\include{sections/pstd} %Chapter
-\include{sections/Acoustic Modelling Strategies} %Chapter
-\include{sections/Profiling} %Chapter
-\include{sections/optimisationandparallelism} %Chapter
-\include{sections/Analysis} %Chapter
-\include{sections/Conclusion} %Chapter
-\include{sections/Further Work} %Chapter
+\subfile{sections/pstd} %Chapter
+%\include{sections/Acoustic Modelling Strategies} %Chapter
+%\include{sections/Profiling} %Chapter
+%\include{sections/optimisationandparallelism} %Chapter
+%\include{sections/Analysis} %Chapter
+%\include{sections/Conclusion} %Chapter
+%\include{sections/Further Work} %Chapter
 %\include{sections/appendix}
-\bibliography{library}
+
 
 \backmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliography{library}
 %\include{sections/glossary}
 %\include{sections/solutions}
-\printindex
+%\printindex
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
-

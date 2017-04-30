@@ -1,22 +1,48 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: Main.aux
 The style file: unsrt.bst
-A level-1 auxiliary file: sections/dedic.aux
-A level-1 auxiliary file: sections/acknow.aux
-A level-1 auxiliary file: sections/acronym.aux
-A level-1 auxiliary file: sections/introduction.aux
-A level-1 auxiliary file: sections/largeroomacoustics.aux
-A level-1 auxiliary file: sections/fdtd.aux
-A level-1 auxiliary file: sections/Pseudo-spectral.aux
-A level-1 auxiliary file: sections/Acoustic.aux
-A level-1 auxiliary file: sections/Profiling.aux
-A level-1 auxiliary file: sections/optimisationandparallelism.aux
-A level-1 auxiliary file: sections/Analysis.aux
-A level-1 auxiliary file: sections/Conclusion.aux
-A level-1 auxiliary file: sections/Further.aux
 Database file #1: library.bib
+Repeated entry---line 4103 of file library.bib
+ : @techreport{Durbridge2016a
+ :                           ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 5859 of file library.bib
+ : @article{Spa2011
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 6808 of file library.bib
+ : @article{Schuster2004
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8001 of file library.bib
+ : @article{Olesen1997
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8203 of file library.bib
+ : @article{Trefethen2000
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8273 of file library.bib
+ : @article{Scheirman2015
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10830 of file library.bib
+ : @article{Hill2012
+ :                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10971 of file library.bib
+ : @article{Angus2010
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 13001 of file library.bib
+ : @article{Botteldooren1993
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 13228 of file library.bib
+ : @article{Yee1966
+ :                 ,
+I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "Doerr"
 Warning--empty journal in Scheirman2015
 Warning--empty journal in Hill2012
 Warning--there's a number but no volume in Hill2012
-Warning--empty journal in Doerr2015
-(There were 5 warnings)
+(There were 10 error messages)

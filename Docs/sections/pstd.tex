@@ -6,27 +6,93 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
 %\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
-\chapter{PseudoSpectral Time Domain Method}
+\chapter{Pseudo-Spectral Time Domain Method}
+The Fourier Pseudo-spectral Time Domain Method [PSTD] is a numerical method that can be used for solving partial differential equations. The advantage of this method lies in leveraging the computational speed of performing a discrete Fourier transform, both providing fast frequency domain differentiation and differentiation with higher order accuracy than the FDTD method. In this chapter we will discuss the application of the PSTD method to the acoustic wave equation, including the use of empirical partially absorbing boundary conditions and the perfectly matched layer (PML).
 
-\abstract{The Pseudo-spectral Time Domain Method [PSTD] is a numerical method that can be used for solving partial differential equations. The power of this method lies in leveraging the speed of performing a discrete Fourier transform, both providing fast frequency domain differentiation and differentiation with higher order accuracy than the FDTD method. In this chapter we will discuss the application of the finite difference time domain method to the acoustic wave equation, including the application of empirical partially absorbing boundary conditions.}
-
-\section{A Background to the Pseudospectral Time Domain Method}
+\section{A Background to the Pseudo-Spectral Time Domain Method}
 \label{sec:1}
-
-
+The PSTD method is of a branch of spectral methods that are useful for solving some hyperbolic partial differential equations, and was first proposed by Orszag~\cite{Orszag1971}, and was further expanded by Kriess and Oliger~\cite{Kreiss1972}. Fourier Pseudospectral methods have been advanced considerably since then, and have found applications in weather prediction particle physics, electromagnetics and acoustics. More recently Trefethen~\cite{Trefethen2000} presented a classic text showcasing both the power of spectral methods and how simply they could be implemented. The Fourier PSTD method used in this study is advanced from that presented by Angus and Caunce ~\cite{Angus2010}, with expansion into 2 and 3 dimensions and implementation of partially absorbing boundary conditions.                                               
 
 \section{The Pseudospectral Time Domain Method Applied To The Wave Equation}
 \label{sec:2}
 
+The acoustic wave equation has been previously defined with two resolving parts:\\
+\begin{center}
+$\frac{\delta^2 p}{\delta t^2} = \frac{1}{c^2} \frac{\delta^2 p}{\delta t^2}$\\
+$\frac{\delta^2 u}{\delta t^2} = \frac{1}{c^2} \frac{\delta^2 u}{\delta t^2}$\\
+\end{center}
+Applying a continuous time Euler solving method to the above relationship with respect to space brings the following:\\
+\begin{center}
+$\rho_0 \frac{\delta}{\delta x}\left[\frac{\delta u}{\delta t}\right] =\frac{1}{c^2} \frac{\delta ^2 p}{\delta t^2} $\\
+\end{center}
+Implementing a discrete time and space version of this equation using an FDTD scheme yields:\\
+\begin{center}
+$u^{t + \frac{\delta t}{2}}_{x} = u^{t - \frac{\delta t}{2}}_{x} - \frac{\delta t}{\rho \delta x} \left[p^{t}_{x + \frac{\delta x}{2}} - p^{t}_{x - \frac{\delta x}{2}}\right]$\\
+$p^{t + \frac{\delta t}{2}}_{x} = p^{t - \frac{\delta t}{2}}_{x} - \frac{c^2 \rho \delta t}{\delta x} \left[u^{t}_{x + \frac{\delta x}{2}} - u^{t}_{x - \frac{\delta x}{2}}\right]$\\
+\end{center}
+The PSTD method applies differentiation in the frequency or $k-space$ domain. This can be represented as:\\
+\begin{center}
+$u^{t + \frac{\delta t}{2}}_{x} = u^{t - \frac{\delta t}{2}}_{x} - \frac{\delta t}{\rho \delta x} \textbf{\textit{F}}^{-1}\left(\epsilon \textbf{\textit{F}}\left[p^{t}\right] \right)$\\
+$p^{t + \frac{\delta t}{2}}_{x} = p^{t - \frac{\delta t}{2}}_{x} - \frac{c^2 \rho \delta t}{\delta x} \textbf{\textit{F}}^{-1}\left( \epsilon \textbf{\textit{F}} \left[ u^{t} \right] \right)$\\
+\end{center}
+Where $\textbf{\textit{F}}$ represents the forward and inverse Fourier Transforms respectively, and $\epsilon$ is a differentiating function representing:\\
+\begin{center}
+$\textbf{JK}_N \exp^{-jk_N\frac{\delta x}{2}}$\\
+\end{center}
+Which is the impulse response of a differentiating function in the complex domain, where N is the 1D size of the domain in the dimension of interest i.e. each dimension requires a differentiator function. This is compounded by velocity components in each dimension not having cross terms.
 
 \subsection{Absorbing Boundary Conditions}
+The Fourier PSTD is fast and performs well for problems with smoothly varying properties. However, this method suffers from Gibbs phenomenon as the domain is periodic and has discontinuity at its boundaries. This is manifested as aliasing in the domain. A way to reduce this aliasing is to increase the area of the domain and implement a perfectly matched layer (PML). A PML is a totally absorbing boundary condition that absorbs waves travelling into it without reflection, as opposed to a more simple boundary condition such as Dirchlet (fixed) that will cause reflections. The PML was first developed for Maxwell's Equations in Computational Electromagnetics by Berenger~\cite{Berenger1994}, and was quickly developed for other applications such as acoustic FDTD and FE~\cite{Liu1997}.\\
+
+Three kinds of PML available are the split field PML, Uniaxial PML and the Convolutional PML. For the sake of time saving and simplicity, the uniaxial perfectly matched layer is implemented in this study. The PML is implemented as a matrix with the same dimensions as the domain, which has been extended in each dimension by the number of cells matching the desired depth of the PML $N_{pml}$. In the PML region, the value of the PML contribution to the $p$ and $u$ update equations $\sigma$, reduces in value from 1 to 0 towards the final boudnary of the domain, continuously and smoothly impeding acoustic waves in any direction within the PML, thus causing no reflection of waves from the PML back into the domain proper.\\
+
+The modified 1D update equation for this is as follows:\\
+\begin{center}
+$u^{t + \frac{\delta t}{2}}_{x} = u^{t - \frac{\delta t}{2}}_{x} \sigma_a - \frac{\delta t}{\rho \delta x} \sigma_b \textbf{\textit{F}}^{-1}\left(\epsilon \textbf{\textit{F}}\left[p^{t}\right] \right)$\\
+$p^{t + \frac{\delta t}{2}}_{x} = p^{t - \frac{\delta t}{2}}_{x} \sigma_a - \frac{c^2 \rho \delta t}{\delta x} \sigma_b \textbf{\textit{F}}^{-1}\left( \epsilon \textbf{\textit{F}} \left[ u^{t} \right] \right)$\\
+\end{center}
+Where:\\
+\begin{equation}
+\begin{aligned}
+\sigma_a & = \frac{1-a}{1+a} \\
+\sigma_b & = \frac{1}{1 + a} \\
+d & = PML Depth\\
+N & = Total Array Length \\
+i & = 1,2... N-1\\
+i < d \quad a & = \frac{1}{3}\frac{i}{d}^3\\
+d < i < N - d \quad a & = 0\\
+i > N-d \quad a & = \frac{1}{2}\frac{N - i}{d}^3 \\ 
+\end{aligned}
+\end{equation}
+As the maximum number in the matrix is 1, a multidimensional implementation of the PML regions involved creating orthogonal arrays of these 1D sections and applying an average summation of the regions values i.e. sum of squares in 2D and a sum of 3D matrices divided by the number of matrices.
+
+\subsection{Partially Absorbing Boundary Conditions}
+Partially absorbing boundary conditions for PSTD are implemented using the methods explored by \textit{Spa et al.}~\cite{Spa2011}, where a real, normalised value can be defined and used to define a frequency independent absorption characteristic for acoustic PSTD simulations. This method applies a weighting to the relationship between pressure and velocity at a point in the grid, reflecting and passing a proportion of energy.\\
+
+At the point where the partially absorbing boundary occurs, the scaling term $\xi$ is set to either scale the $p$ or $u$ value depending on the value if $\xi$ at that point. The value of $\xi$ is determined by normalising the relationship between specified absorption value $\alpha$, and the numerical stability of the simulation$S$:\\
+\begin{equation}
+\begin{aligned}
+S & = \frac{\delta t}{\delta x} \\
+\xi_n & = 1 - \alpha \\
+\xi & = \frac{(1 + \xi_n)}{(1 + \xi_n - 2 * S * \xi_n)}\\
+\end{aligned}
+\end{equation}
+The update equations are then modified to handle $\xi$ at the point of interest at the boundary of the domain:\\
+\begin{equation}
+\begin{aligned}
+\textrm{For} \xi \leq 1: & \\
+p^{t + \frac{\delta t}{2}}_{x} &= \xi \left[ p^{t - \frac{\delta t}{2}}_{x} \sigma_a - \frac{c^2 \rho \delta t}{\delta x} \sigma_b \textbf{\textit{F}}^{-1}\left( \epsilon \textbf{\textit{F}} \left[ u^{t} \right] \right) \right] \\
+\textrm{For} \xi \geq 1: & \\
+u^{t + \frac{\delta t}{2}}_{x} &= \frac{1}{\xi} \left[ u^{t - \frac{\delta t}{2}}_{x} \sigma_a - \frac{\delta t}{\rho \delta x} \sigma_b \textbf{\textit{F}}^{-1}\left(\epsilon \textbf{\textit{F}}\left[p^{t}\right] \right) \right] \\
+\end{aligned}
+\end{equation}
 
 \section{A 2D Simulation with empirical partially absorbing boundary conditions}
 \label{sec:3}
 % Always give a unique label
 % and use \ref{<label>} for cross-references
 % and \cite{<label>} for bibliographic references
-% use \sectionmark{}
+% use \sectionmark{ }
 % to alter or adjust the section heading in the running head
-Instead of simply listing headings of different levels we recommend to let every heading be followed by at least a short passage of text. Furtheron please use the \LaTeX\ automatism for all your cross-references and citations.
+%Instead of simply listing headings of different levels we recommend to let every heading be followed by at least a short passage of text. Furtheron please use the \LaTeX\ automatism for all your cross-references and citations.
 
