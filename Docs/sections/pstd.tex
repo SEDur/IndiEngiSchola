@@ -45,7 +45,7 @@ Which is the impulse response of a differentiating function in the complex domai
 The Fourier PSTD is fast and performs well for problems with smoothly varying properties. However, this method suffers from Gibbs phenomenon as the domain is periodic and has discontinuity at its boundaries. This is manifested as aliasing in the domain. A way to reduce this aliasing is to increase the area of the domain and implement a perfectly matched layer (PML). A PML is a totally absorbing boundary condition that absorbs waves travelling into it without reflection, as opposed to a more simple boundary condition such as Dirchlet (fixed) that will cause reflections. The PML was first developed for Maxwell's Equations in Computational Electromagnetics by Berenger~\cite{Berenger1994}, and was quickly developed for other applications such as acoustic FDTD and FE~\cite{Liu1997}.\\
 
 Three kinds of PML available are the split field PML, Uniaxial PML and the Convolutional PML. For the sake of time saving and simplicity, the uniaxial perfectly matched layer is implemented in this study. The PML is implemented as a matrix with the same dimensions as the domain, which has been extended in each dimension by the number of cells matching the desired depth of the PML $N_{pml}$. In the PML region, the value of the PML contribution to the $p$ and $u$ update equations $\sigma$, reduces in value from 1 to 0 towards the final boudnary of the domain, continuously and smoothly impeding acoustic waves in any direction within the PML, thus causing no reflection of waves from the PML back into the domain proper.\\
-
+ 
 The modified 1D update equation for this is as follows:\\
 \begin{center}
 $u^{t + \frac{\delta t}{2}}_{x} = u^{t - \frac{\delta t}{2}}_{x} \sigma_a - \frac{\delta t}{\rho \delta x} \sigma_b \textbf{\textit{F}}^{-1}\left(\epsilon \textbf{\textit{F}}\left[p^{t}\right] \right)$\\
@@ -87,8 +87,8 @@ u^{t + \frac{\delta t}{2}}_{x} &= \frac{1}{\xi} \left[ u^{t - \frac{\delta t}{2}
 \end{aligned}
 \end{equation}
 
-\section{A 2D Simulation with empirical partially absorbing boundary conditions}
-\label{sec:3}
+%\section{Validation: A 3D Simulation with empirical partially absorbing boundary conditions}
+%\label{sec:3}
 % Always give a unique label
 % and use \ref{<label>} for cross-references
 % and \cite{<label>} for bibliographic references

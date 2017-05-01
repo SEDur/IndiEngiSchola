@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.4.29)  30 APR 2017 17:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.4.29)  1 MAY 2017 13:39
 entering extended mode
 **./Main.tex
 (Main.tex
@@ -375,6 +375,9 @@ Writing index file Main.idx
 
 LaTeX Warning: Label `Introduction' multiply defined.
 
+
+LaTeX Warning: Label `Introduction' multiply defined.
+
 )
 \openout1 = `Main.aux'.
 
@@ -497,20 +500,19 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
-)
-\tf@toc=\write4
-\openout4 = `Main.toc'.
-
  [5
 
 
-] [6
+])
+\tf@toc=\write4
+\openout4 = `Main.toc'.
 
-
-]
+ [6]
 (sections/introduction.tex
 Chapter 1.
 ) (sections/largeroomacoustics.tex [1
+
+
 
 
 ] [2
@@ -518,72 +520,92 @@ Chapter 1.
 
 ]
 Chapter 2.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 17.
-[3]
-LaTeX Font Info:    Calculating math sizes for size <8.5> on input line 20.
+LaTeX Font Info:    Calculating math sizes for size <8.5> on input line 11.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 20.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 11.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.29004> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 20.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 11.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5.10005> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 20.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 11.
 
-Underfull \hbox (badness 1377) in paragraph at lines 45--45
+Underfull \hbox (badness 10000) in paragraph at lines 17--18
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--20
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+
+ []
+
+[3]
+Underfull \hbox (badness 1377) in paragraph at lines 46--46
 \OT1/ptm/m/n/10 a-batic ex-pan-sion the vol-ume is $[] \OT1/ztmcm/m/n/10 =
  []
 
 
-Overfull \hbox (5.99998pt too wide) in alignment at lines 23--46
+Overfull \hbox (5.99998pt too wide) in alignment at lines 24--47
  [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 46
+Underfull \vbox (badness 10000) detected at line 47
  []
 
 
-Underfull \hbox (badness 1270) in paragraph at lines 47--48
+Underfull \hbox (badness 1270) in paragraph at lines 48--49
 \OT1/ptm/m/n/10 due to a sound wave, $\OML/ztmcm/m/it/10 p$ \OT1/ptm/m/n/10 for
  pres-sure
  []
 
 
-Underfull \hbox (badness 1237) in paragraph at lines 49--49
+Underfull \hbox (badness 1237) in paragraph at lines 50--50
 \OT1/ptm/m/n/10 within a vol-ume, a con-ti-nu-ity ex-pres-
  []
 
 
-Underfull \hbox (badness 1221) in paragraph at lines 61--61
+Underfull \hbox (badness 1221) in paragraph at lines 62--62
 []|\OT1/ptm/m/n/10 Combining the above equa-tions gives:
  []
 
 
-Underfull \hbox (badness 1221) in paragraph at lines 61--62
+Underfull \hbox (badness 1221) in paragraph at lines 62--63
 []|\OT1/ptm/m/n/10 Combining the above equa-tions gives:
  []
 
 
-Underfull \hbox (badness 1028) in paragraph at lines 65--66
+Underfull \hbox (badness 1028) in paragraph at lines 66--67
 \OT1/ptm/m/n/10 plicit 3 di-men-sional ex-pres-sion of the
  []
 
 
-Overfull \hbox (5.99998pt too wide) in alignment at lines 46--66
+Overfull \hbox (5.99998pt too wide) in alignment at lines 47--67
  [] [] 
  []
 
 [4]
-Overfull \hbox (5.99998pt too wide) in alignment at lines 66--69
+Overfull \hbox (5.99998pt too wide) in alignment at lines 67--70
  [] [] 
  []
 
-[5] [6]) (sections/fdtd.tex [7] [8
+[5] [6]
+Underfull \hbox (badness 10000) in paragraph at lines 73--74
+
+ []
+
+[7]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 78.
+) (sections/fdtd.tex [8]
+Chapter 3.
+[9
 
 
 ]
-Chapter 3.
-[9]
 Underfull \hbox (badness 10000) in paragraph at lines 21--22
 
  []
@@ -734,10 +756,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 79--81
 
  []
 
-) [20] (Main.bbl) [21
+) (sections/validation.tex [20]
+Chapter 5.
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--30
+
+ []
+
+) [21
 
 
-] (Main.aux)
+] [22
+
+
+] (Main.bbl) [23] (Main.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -746,10 +778,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5443 strings out of 493328
- 73967 string characters out of 3139124
- 406704 words of memory out of 3000000
- 8812 multiletter control sequences out of 15000+200000
+ 5445 strings out of 493328
+ 74016 string characters out of 3139124
+ 406693 words of memory out of 3000000
+ 8811 multiletter control sequences out of 15000+200000
  56180 words of font info for 109 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,11n,44p,1290b,2165s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -765,9 +797,9 @@ pfb><C:/Users/sedur/AppData/Roaming/MiKTeX/2.9/fonts/type1/urw/symbol/usyr.pfb>
 /MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files/MiKTeX 2.9/font
 s/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times
 /utmri8a.pfb>
-Output written on Main.pdf (25 pages, 174757 bytes).
+Output written on Main.pdf (27 pages, 178851 bytes).
 PDF statistics:
- 132 PDF objects out of 1000 (max. 8388607)
+ 138 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
