@@ -1,5 +1,5 @@
-\documentclass[graybox,envcountchap,sectrefs]{svmono}
-
+%\documentclass[graybox,envcountchap,sectrefs]{svmono}
+\documentclass[]{svmono}
 
 % choose options for [] as required from the list
 % in the Reference Guide
@@ -16,7 +16,7 @@
 \usepackage[bottom]{footmisc}% places footnotes at page bottom
 \usepackage{listings}
 \usepackage{color}
-
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
@@ -39,8 +39,12 @@
     showtabs=false,                  
     tabsize=2
 }
+\makeatletter
+\patchcmd{\@makechapterhead}{\vspace*{50\p@}}{\vspace*{10pt}}{}{}% Removes space above \chapter head
+\patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{\vspace*{10pt}}{}{}% Removes space above \chapter* head
+\makeatother
 \usepackage{url}
-\lstset{style=mystyle}
+%\lstset{style=mystyle}
 \usepackage{sectsty} % Allows customizing section commands
 \usepackage{longtable}
 \usepackage{graphicx}
@@ -101,6 +105,7 @@
 
 
 \backmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{References}
 \bibliography{library}
 %\include{sections/glossary}
 %\include{sections/solutions}

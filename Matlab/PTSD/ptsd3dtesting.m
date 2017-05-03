@@ -18,14 +18,14 @@ alphaZp = 0.45;
 
 %define FS
 % fs = 44100.0;
-fs = 5000.0;
+fs = 44100.0;
 
 %define density
 rho = 1.21;
 %define speed of sound
 c = 343.0;
 %define total time
-T = 0.1;
+T = 0.12;
 %define grid width
 gridWidthX = 5.0;
 gridWidthY = 4.0;
@@ -65,7 +65,7 @@ Nz = ceil(abs(gridWidthZ/dx)+2*PMLdepth);
 % src = (10^-12)*10^(50/20) .* music(sStart:sStart + length(src));
 tnum = ceil(T/dt);
 fc = 0.25;     % Cutoff frequency (normalised 0.5=nyquist)
-n0 = 10;        % Initial delay (samples)
+n0 = 100;        % Initial delay (samples)
 sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
 n=0:tnum;
 source1=exp(-dt^2*(n-n0).^2/(2*sigma^2));
@@ -79,7 +79,7 @@ tempdiffmatrixX = zeros(1,Nx);
 tempdiffmatrixY = zeros(1,Ny);
 tempdiffmatrixZ = zeros(1,Nz);
 % spin = -180 :0.005 : 180;     
-pd = ones(Nx,Ny,Nz).*p0;
+pd = ones(Nx,Ny,Nz);
 udx = zeros(Nx,Ny,Nz);
 udy = zeros(Nx,Ny,Nz);
 udz = zeros(Nx,Ny,Nz);
@@ -206,7 +206,7 @@ for i = 1 : T/dt
     pd = PTSD3Dsrc(pd, source1(i), srcloc);
     reciever(i) = pd(ceil(Ny/2), ceil(Nx/2), ceil(Nz/2));
     roundtime(i) = toc();
-    PSTD3Dplotdomain(pd, xcells, ycells, zcells, i, dt, p0, roundtime(i), PMLdepth);
+%     PSTD3Dplotdomain(pd, xcells, ycells, zcells, i, dt, p0, roundtime(i), PMLdepth);
 
 %     zlim([-10^-10 10^-10]);
 %     set(gca,'zlim',[-10^-12 10^-12]);
