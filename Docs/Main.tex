@@ -40,8 +40,8 @@
     tabsize=2
 }
 \makeatletter
-\patchcmd{\@makechapterhead}{\vspace*{50\p@}}{\vspace*{10pt}}{}{}% Removes space above \chapter head
-\patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{\vspace*{10pt}}{}{}% Removes space above \chapter* head
+\patchcmd{\@makechapterhead}{\vspace{50\p@}}{}{}{}% Removes space above \chapter head
+\patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{}{}{}% Removes space above \chapter* head
 \makeatother
 \usepackage{url}
 %\lstset{style=mystyle}
@@ -99,7 +99,9 @@
 %\include{sections/Profiling} %Chapter
 %\include{sections/optimisationandparallelism} %Chapter
 %\include{sections/Analysis} %Chapter
+\subfile{sections/analysis}
 %\include{sections/Conclusion} %Chapter
+\subfile{sections/conclusion}
 %\include{sections/Further Work} %Chapter
 %\include{sections/appendix}
 
