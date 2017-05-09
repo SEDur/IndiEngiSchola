@@ -33,8 +33,8 @@ cstab = 2/(pi*sqrt(2));
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 44100 * hertz;
-dt = 1/fmax;
+fmax = 10000 * hertz;
+dt = (1/fmax)/3;
 %grid size
 gx = c * dt / cstab;
 gy = c * dt / cstab;
@@ -194,7 +194,9 @@ for n = 1:T/dt
     % set the pressure at the source location
     % NOTE: source vectors for unused drivers will be zeros
     p(sourcelocations(1),sourcelocations(2)) = p(sourcelocations(1),sourcelocations(2)) - source1(n);
-%     p(s2loc(1),s2loc(2)) = p(s2loc(1),s2loc(2)) + -source2(n);
+    extime(n) = toc;
+
+    %     p(s2loc(1),s2loc(2)) = p(s2loc(1),s2loc(2)) + -source2(n);
 %     power(n) = 20*log10(abs(max(p)));
 %     leftear(n) = abs(p(recieverleftloc(1),recieverleftloc(2)));
 %     rightear(n) = abs(p(recieverrightloc(1),recieverrightloc(2)));
@@ -208,8 +210,8 @@ for n = 1:T/dt
             'Color',[0 0 0],'FontSize', 14);
         xlabel('Width (meters)', 'Color', [0 0 0]);
         ylabel('Length (meters)', 'Color', [0 0 0]);
-%         view(2);
-% %         view([25.6 61.2]);
+        view(2);
+        shading('interp');
         drawnow;
         
 end

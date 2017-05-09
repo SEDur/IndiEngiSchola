@@ -1,4 +1,5 @@
-\documentclass[graybox,envcountchap,sectrefs]{svmono}
+%\documentclass[graybox,envcountchap,sectrefs]{svmono}
+\documentclass[graybox,envcountchap,sectrefs]{report}
 
 \usepackage{mathptmx}
 \usepackage{helvet}
@@ -12,7 +13,6 @@
 \usepackage[bottom]{footmisc}% places footnotes at page bottom
 \usepackage{listings}
 \usepackage{color}
-\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
@@ -44,10 +44,12 @@
 \bibliographystyle{unsrt}
 \graphicspath{{images/}{../images/}}
 \usepackage{subfiles}
-%\makeatletter
-%\patchcmd{\@makechapterhead}{\vspace{10\p@}}{}{}{}% Removes space above \chapter head
-%\patchcmd{\@makeschapterhead}{\vspace*{10\p@}}{}{}{}% Removes space above \chapter* head
-%\makeatother
+\usepackage{showframe}% http://ctan.org/pkg/showframe
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\makeatletter
+\patchcmd{\@makechapterhead}{\vspace*{50\p@}}{}{}{}% Removes space above \chapter head
+\patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{}{}{}% Removes space above \chapter* head
+\makeatother
 
 \makeindex             % used for the subject index
                        % please use the style svind.ist with
@@ -66,18 +68,18 @@
 
 \title{Efficient Acoustic Modelling of Large Spaces using Time Domain Methods} % The assignment title
 
-\subtitle{Analysis of Time Domain Numerical Methods for Acoustic Modelling of Large Spaces}
+%\subtitle{Analysis of Time Domain Numerical Methods for Acoustic Modelling of Large Spaces}
 %\institute{Dept. Engineering, Mathematics \&\ Computing\\ University of Derby\\
 %\email{s.durbridge1@unimail.derby.ac.uk} % optional, same for URL of
 \maketitle
 
-\frontmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\frontmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\include{sections/summary}
 %\include{sections/acknow}
 %\include{sections/acronym}
 \tableofcontents
 
-\mainmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\mainmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subfile{sections/introduction} %Chapter
 \subfile{sections/largeroomacoustics} %Chapter
 %\include{sections/Numerical Methods} % Chapter
@@ -96,8 +98,8 @@
 %\include{sections/appendix}
 
 
-\backmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{References}
+%\backmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\chapter{References}
 \bibliography{library}
 %\include{sections/glossary}
 %\include{sections/solutions}

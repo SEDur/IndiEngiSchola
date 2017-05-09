@@ -1,22 +1,21 @@
-\contentsline {chapter}{\numberline {1}Introduction}{1}
-\contentsline {section}{\numberline {1.1}Context}{1}
-\contentsline {section}{\numberline {1.2}Problem Definition}{1}
-\contentsline {section}{\numberline {1.3}Aim of the study}{1}
-\contentsline {chapter}{\numberline {2}Acoustic Principals}{3}
-\contentsline {section}{\numberline {2.1}The Acoustic Wave Equation}{3}
-\contentsline {section}{\numberline {2.2}Acoustic Properties of Interest in Basic Simulations}{7}
-\contentsline {subsection}{\numberline {2.2.1}Inverse Square Law \& Propagation time}{8}
-\contentsline {subsection}{\numberline {2.2.2}Reverberation}{8}
-\contentsline {subsubsection}{\numberline {2.2.2.1}Acoustic Absorption}{9}
-\contentsline {subsection}{\numberline {2.2.3}Room Modes}{9}
-\contentsline {chapter}{\numberline {3}Finite Difference Time Domain Method}{11}
-\contentsline {section}{\numberline {3.1}Introduction to the Finite Difference Time Domain Method}{11}
-\contentsline {section}{\numberline {3.2}The Finite Difference Time Domain Method Applied To The Acoustic Wave Equation}{12}
-\contentsline {subsection}{\numberline {3.2.1}Field Calculation}{12}
-\contentsline {subsection}{\numberline {3.2.2}Boundary Handling}{13}
-\contentsline {subsection}{\numberline {3.2.3}Example Function for Solving}{13}
-\contentsline {subsection}{\numberline {3.2.4}Stability}{15}
-\contentsline {section}{\numberline {3.3}Sparse FDTD}{16}
+\contentsline {chapter}{\numberline {1}Introduction}{2}
+\contentsline {section}{\numberline {1.1}Problem Definition}{2}
+\contentsline {section}{\numberline {1.2}Aim of the study}{2}
+\contentsline {chapter}{\numberline {2}Acoustic Principals}{4}
+\contentsline {section}{\numberline {2.1}The Acoustic Wave Equation}{4}
+\contentsline {section}{\numberline {2.2}Acoustic Properties of Interest in Basic Simulations}{9}
+\contentsline {subsection}{\numberline {2.2.1}Inverse Square Law \& Propagation time}{9}
+\contentsline {subsection}{\numberline {2.2.2}Reverberation}{10}
+\contentsline {subsubsection}{Acoustic Absorption}{10}
+\contentsline {subsection}{\numberline {2.2.3}Room Modes}{10}
+\contentsline {chapter}{\numberline {3}Finite Difference Time Domain Method}{12}
+\contentsline {section}{\numberline {3.1}Introduction to the Finite Difference Time Domain Method}{12}
+\contentsline {section}{\numberline {3.2}The Finite Difference Time Domain Method Applied To The Acoustic Wave Equation}{13}
+\contentsline {subsection}{\numberline {3.2.1}Field Calculation}{13}
+\contentsline {subsection}{\numberline {3.2.2}Boundary Handling}{14}
+\contentsline {subsection}{\numberline {3.2.3}Example Function for Solving}{14}
+\contentsline {subsection}{\numberline {3.2.4}Stability}{16}
+\contentsline {section}{\numberline {3.3}Sparse FDTD}{17}
 \contentsline {subsection}{\numberline {3.3.1}2D implementation}{17}
 \contentsline {chapter}{\numberline {4}Pseudo-Spectral Time Domain Method}{19}
 \contentsline {section}{\numberline {4.1}A Background to the Pseudo-Spectral Time Domain Method}{19}
@@ -25,9 +24,6 @@
 \contentsline {subsection}{\numberline {4.2.2}Partially Absorbing Boundary Conditions}{21}
 \contentsline {chapter}{\numberline {5}Validation}{23}
 \contentsline {section}{\numberline {5.1}A Model Environment}{23}
-\contentsline {section}{\numberline {5.2}Results}{24}
-\contentsline {chapter}{\numberline {6}Execution Time and Analysis}{25}
-\contentsline {section}{\numberline {6.1}Results}{25}
-\contentsline {chapter}{\numberline {7}Conclusion}{27}
-\contentsline {chapter}{References}{29}
-\contentsline {section}{References}{29}
+\contentsline {section}{\numberline {5.2}Results}{23}
+\contentsline {chapter}{\numberline {6}Execution Time and Analysis}{24}
+\contentsline {section}{\numberline {6.1}Results}{24}
