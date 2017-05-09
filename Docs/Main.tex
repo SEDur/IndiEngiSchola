@@ -1,8 +1,4 @@
-%\documentclass[graybox,envcountchap,sectrefs]{svmono}
-\documentclass[]{svmono}
-
-% choose options for [] as required from the list
-% in the Reference Guide
+\documentclass[graybox,envcountchap,sectrefs]{svmono}
 
 \usepackage{mathptmx}
 \usepackage{helvet}
@@ -39,20 +35,19 @@
     showtabs=false,                  
     tabsize=2
 }
-\makeatletter
-\patchcmd{\@makechapterhead}{\vspace{50\p@}}{}{}{}% Removes space above \chapter head
-\patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{}{}{}% Removes space above \chapter* head
-\makeatother
 \usepackage{url}
-%\lstset{style=mystyle}
+\lstset{style=mystyle}
 \usepackage{sectsty} % Allows customizing section commands
 \usepackage{longtable}
-\usepackage{graphicx}
 \usepackage{footmisc}
 \usepackage{cite}
 \bibliographystyle{unsrt}
 \graphicspath{{images/}{../images/}}
 \usepackage{subfiles}
+%\makeatletter
+%\patchcmd{\@makechapterhead}{\vspace{10\p@}}{}{}{}% Removes space above \chapter head
+%\patchcmd{\@makeschapterhead}{\vspace*{10\p@}}{}{}{}% Removes space above \chapter* head
+%\makeatother
 
 \makeindex             % used for the subject index
                        % please use the style svind.ist with
@@ -77,17 +72,12 @@
 \maketitle
 
 \frontmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%\include{sections/dedic}
-%\include{sections/foreword}
-%\include{sections/preface}
+%\include{sections/summary}
 %\include{sections/acknow}
-
-\tableofcontents
 %\include{sections/acronym}
+\tableofcontents
 
 \mainmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\part{Background \& Theory}
 \subfile{sections/introduction} %Chapter
 \subfile{sections/largeroomacoustics} %Chapter
 %\include{sections/Numerical Methods} % Chapter

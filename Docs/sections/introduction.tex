@@ -4,8 +4,23 @@ The intro Text
 
 \section{Context}
 
+What acoustic modelling is used for.
+
 \section{Problem Definition}
-Real time acoustic modelling could be of significant benefit to many applications; Engineers could make design changes and see results 'on the fly', and entertainment users could have more realistic experiences. These benefits should be possible for an arbitrary number of sources and receivers, in proportionally large environments with high quality results. Is it possible to further reduce computation time for simulations of large acoustic problems, to provide results in real time for the full human audio frequency range? There are two 'branches' of computation solution that should be considered: the direct solution i.e. direct outputs or audio samples from the simulation, and indirect solutions i.e. a system impulse response that may be convolved with mixed source signals in order to create an auralization of the system.//
+
+Current commercially available acoustic modelling tools for large (cathedrals, arenas etc) electro acoustic simulations rely on some limiting assumptions based around plane wave propagation. These models are only accurate when assuming that detail of the domain features are significantly larger than the wavelengths of interested, and that no diffraction effects occur. These ray based methods to approximate the performance of the system and simulation domain. These methods have been successfully used to model large systems at mid and high frequencies, but may not accurately simulate low frequency wave propagation and wave interaction.\\
+
+Accurate acoustic modelling of low frequency propagation could be of significant benefit to many applications. Wave based acoustic modelling methods have been previously implemented in commercial software packages with great success. However, these packages can only be used to simulate relatively small domains with high spatial accuracy due to some limitations with numerical solutions to wave based methods. \\
+
+%These benefits should be possible for an arbitrary number of sources and receivers, in proportionally large environments with high quality results. Further, these studies should be possible for both transient and steady state solutions, for which time domain methods may be more appropriate.\\
+%Is it possible to further reduce computation time for simulations of large acoustic problems, to provide results in real time for the full human audio frequency range? 
+
+%There are two 'branches' of computation solution that should be considered: the direct solution i.e. direct outputs or audio samples from the simulation, and indirect solutions i.e. a system impulse response that may be convolved with mixed source signals in order to create an auralization of the system.\\
+
+\section{Aim of the study}
+
+The aim of this study is to test three numerical methods of solving the acoustic wave equation, that result in time domain solutions. These methods will be tested for speed of execution with relatively large domains. The methods of interested in this studying are the finite-difference time domain method, the sparse finite difference time domain method and the pseudo-spectral time domain method. The outcome will be the identification of a method that may warrant further optimisation and could be potentially used for real-time solving in the future.\\
+
 
 
 %\begin{figure}

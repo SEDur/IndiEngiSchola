@@ -1875,7 +1875,7 @@ to\z@{\kern0.55\wd0\vrule\@height0.45\ht0\hss}\box0}}}}
     {\large \@date}%          % Date set in \large size.
     \par
     \vskip 1.5em               % Vertical space after date.
- {\Large Submitted for in part-fulfilment of the requirements for the MSc in Audio Engineering. \par}          
+ {\Large Submitted in part-fulfilment of the requirements for the MSc in Audio Engineering. \par}          
   \fi
  \vfill
 % {\Large Springer\par}

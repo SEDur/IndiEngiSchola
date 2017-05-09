@@ -6,15 +6,31 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
 %\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
-\chapter{Analysis}
+\chapter{Execution Time and Analysis}
 \label{Introduction}
-We will do some code profiling  
+The interest of this study is to analyse the execution times of the three algorithms described above, to determine which method executes in the fastest time and thus might be most appropriate for using to solve large problems. The execution times will be measured for each method for domains of the following sizes at 10kHz sample rate:\\
+\begin{center}
+\begin{tabular}{|c|c|c|c|} 
+  \hline
+ Dimension ($m^2$) & FDTD Cells & SFDTDCells & PSTD Cells \\
+ \hline
+ 2 & 121104	& 121104 & 24025\\ 
+ 4 & 483025 & 483025 & 62500\\  
+ 8 & 1932100 & 1932100 & 192721\\ 
+ 16 & 7722841 & 7722841 & 667489\\ 
+ 32 & 30880249 & 30880249 & 2474329\\ 
+ 64 & 123498769 & 123498769 & 9517225\\ 
+ 128 & 493950625 & 493950625 & 37319881\\ 
+ 256 & 1975802500 & 1975802500 & 147816964\\
+ 512 & 7903210000 & 7903210000 & 588353536\\
+ \hline
+\end{tabular}\\
+\end{center}
+As the implementation of SFDTD has not been successfully implemented  in 3D, all simulations will be performed in 2D. Matlabs Tic/Toc methods are used to calculate execution times within the loop, for $100ms$ of calculation time. The time steps for each method are:\\
 
-\section{A Model Environment}
-
-30m by 30m by 15m domain at 44100.
 
 \section{Results}
+The average execution time for each domain is given below: \\
 
 As domains get bigger, sfdtd and pstd dominate.
 

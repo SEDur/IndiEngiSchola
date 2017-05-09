@@ -93,8 +93,19 @@ Below is a graph showing the difference between intensity over distance for an i
 Although the wave equation considered and solved in this study is lossless i.e. we do not consider viscous or thermal losses in the basic linearised acoustic wave equation, we would expect to see a reduction in absolute pressure between a source and receiver. As sound travels at some finite distance over time $c$, we would also expect to see a uniform time between a wave being radiated from a source, and being recorded at some receiver location for all simulation methods\footnote{For an interesting review of the relationship between 1D, 2D and 3D sound propagation being derivative, please see the appendices}.\\ 
 
 \subsection{Reverberation}
-For this study we will consider spaces or domains of finite size. These domains have boundaries, and those boundaries will either absorb or reflect sound waves. In acoustic engineering, the proportion of sound energy absorbed or reflected by a material is often described as an absorption coefficient, and is a normalised value between 0 (totally reflecting) and 1 (totally absorbing). If a sound source propagates a signal of appropriate speed and amplitude, the sound wave will reach the boundaries and be partially absorbed or reflected in reciprocal directions, and these reflections will scatter and eventually decay beyond audibility. The reverberant sound field is the steady-state of diffusely scattered sound energy in a space due to the high order reflection from boundaries. The amplitude of the diffusely scattered reflections are such as to balance in amplitude with the rate of decay and absorption of the sound field~\cite{Everest2009}.\\ 
+For this study we will consider spaces or domains of finite size. These domains have boundaries, and those boundaries will either absorb or reflect sound waves. In acoustic engineering the proportion of sound energy absorbed or reflected by a material is often described as an absorption coefficient $\alpha$, which is a normalised value between 0 (totally reflecting) and 1 (totally absorbing)~\cite{beranek1954acoustics}.\\
+If a sound source propagates a signal of appropriate speed and amplitude, the sound wave will reach the boundaries and be partially absorbed or reflected in reciprocal directions. These reflections will continue to scatter and will eventually decay beyond audibility. The reverberant sound field is the steady-state of diffusely scattered sound energy (reflections), due to perturbation by a sound source in bounded space. The amplitude of the diffusely scattered reflections balance in with the rate of decay and absorption of the sound field~\cite{Everest2009}.\\ 
 
+\subsubsection{Acoustic Absorption}
+
+The decay rate of a reverberant sound field is often quantified by the time taken for a steady state sound field to reduce in level by $60{dB}$, once the sound source has finished propagating. This is defined as the $RT_{60}$ of the domain, and was first proposed by WC Sabine in 1900~\cite{Everest2009}. There have been a multitude of expansions on Sabines original formula, notably in this study by Eyring, who expanded the denominator of the reverberation time equation to calculate more realistically for average absorption values above $0.1$. The Eyring reverberation time equation is as follows:\\
+\begin{center}
+$T = 0.161\frac{V}{-\ln(1 - \alpha)S} $\\
+Where $S$ is the surface area, $V$ is the volume of the domain and $\alpha$ is the average absorption coefficient and can be calculated as such:\\
+$\alpha = (S_{leftwall} \alpha_{leftwall})+(S_{rightwall} \alpha_{rightwall}+...)/S_{total}$ \\
+\end{center}
+The use of $RT_{60}$ as the preferred metric of decay time is valid, assuming that the acoustics system is linear and time-invariant.
+A more comprehensive description of reverberation and overview of the associated parameters is given by Rossing~\cite{rossing2007springer}. \\
 %\begin{figure}[H]
 %\centering
 %\includegraphics[width=0.4\textwidth]{reflection_diagran.jpg}
@@ -102,22 +113,20 @@ For this study we will consider spaces or domains of finite size. These domains 
 %\caption{A conceptualisation of direct and reflected sound~\cite{Everest2009}}
 %\end{figure}
 
-Low order reflections often described as early reflections in relation to psychoacoustics, may occur above the steady state amplitude (echos) ~\cite{Everest2009} if the steady state amplitude decreases appropriately. Early and strong reflections are of significant interest in the auralization and perception of sound fields (auditory scene analysis), due to the cues humans receive from perception of them e.g. room size and source direction information. The decay rate of a reverberant sound field is often quantified by the time taken for a steady state sound field to reduce in level by $60{dB}$, once the sound source has finished propagating. This is defined as the $RT_{60}$ of the domain, and was first proposed by WC Sabine in 1900~\cite{Everest2009}. There have been a multitude of expansions on Sabines original formula, notably in this study by Eyring, who expanded the denominator of the reverberation time equation to calculate more realistically for average absorption values above $0.1$. The Eyring reverberation time equation is as follows:\\
-
-
-
-The use of $RT_{60}$ as the preferred metric of decay time is valid, assuming that the acoustics system is linear and time-invariant.
-A more comprehensive description of reverberation and overview of the associated parameters is given by Rossing~\cite{rossing2007springer}. 
-
-
-\subsubsection{Acoustic Absorption}
+Low order reflections often described as early reflections in relation to psychoacoustics, may occur above the steady state amplitude (echos)~\cite{Everest2009} if the steady state amplitude decreases appropriately. Early and strong reflections are of significant interest in acoustic modelling, and the auralization and perception of sound fields due to the cues humans receive from perception of them e.g. room size and source direction information.\\
 
 \subsection{Room Modes}
+As the domains of interest in this study are fully bounded (much like a room), sound waves propagating in the domain are subject to periodicity relative to the dimensions of the domain. That is at wavelengths relative to the dimensions of the domain, standing waves may occur within the domain i.e. there will be regions maximal and minimal pressure change at points $\frac{\lambda}{4}$ relative to a dimension of the domain, where $\lambda$ = wavelength. These standing waves are often called room modes, and for oblique modes in a 3 dimensional rectangular domain the frequencies of the  modes can be calculated as such:\\
+\begin{center}
+$\textit{f}_{n_xn_yn_z} = \frac{c}{2} \sqrt{\left(\frac{n_x}{l_x}\right)^2 + \left(\frac{n_y}{l_y}\right)^2 + \left(\frac{n_z}{l_z}\right)^2} $\\
+Where $n_x, n_y, n_z$ is the order of the standing wave in the dimension.\\
+\end{center} 
 
-\subsubsection{Schroeder Frequency}
-
-\subsection{Perception of Early Reflections}
-
-\subsection{Auditory Scene Analysis}
+%\subsubsection{Schroeder Frequency}
+As modes are calculated to higher order, the density of these modes tend to converge. The frequency at which these modes converge is known as the Schroeder frequency, and that is calculated by:\\
+\begin{center}
+$ \textit{f}_{Schroeder} = 2000 \sqrt{\frac{RT_{60}}{V}} $\\
+\end{center}
+An accurate solution to the wave equation may include modal behaviours.
 
 

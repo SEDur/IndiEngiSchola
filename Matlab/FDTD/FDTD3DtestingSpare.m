@@ -18,9 +18,10 @@ rho = 1.21;
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 44100 * hertz;
+% fmax = 44100 * hertz;
+fmax = 10000 * hertz;
 % dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))+(1/(gz^2))));
-dt = (1/fmax);
+dt = (1/fmax)/3;
 
 %grid size
 gx = c * dt / cstab;
@@ -62,7 +63,7 @@ recieverrightloc = [ceil((ycells/2) + (0.1/gy)) ceil((xcells/2)+2) ceil(zcells/2
 % dt = 1/ (c*sqrt(3/(gx)^2));
 % dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))+(1/(gz^2))));
 % dt = 3.35563e-4;
-T = 0.3;
+T = 1.3;
 
 % generate the source(s) & determine number of time steps needed
 
@@ -70,7 +71,7 @@ tnum = ceil(T/dt);
 source1 = zeros(1,tnum);
 source2 = zeros(1,tnum);
 
-fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
+fc = 0.1;     % Cutoff frequency (normalised 0.5=nyquist)
 n0 = 30;        % Initial delay (samples)
 sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
 n=0:tnum;

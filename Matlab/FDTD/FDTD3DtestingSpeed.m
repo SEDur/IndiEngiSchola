@@ -6,8 +6,8 @@
 % clear all;
 % close all;
 %Units
-figure(1);
-set(1, 'WindowStyle', 'Docked');
+% figure(1);
+% set(1, 'WindowStyle', 'Docked');
 cstab = 2/(pi*sqrt(3));
 meters = 1;
 hertz = 1;
@@ -15,10 +15,11 @@ c = 343;
 p0 = 2*10^-5;
 rho = 1.21;
 
-%%
+%% 
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 44100 * hertz;
+% fmax = 44100 * hertz;
+fmax = 2000 * hertz;
 % dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))+(1/(gz^2))));
 dt = (1/fmax);
 
@@ -27,11 +28,15 @@ gx = c * dt / cstab;
 gy = c * dt / cstab;
 gz = c * dt / cstab;
 
+dim = [2 4 8 16 32 64];
+
+for i = 1 : 6
+
 %Dims
 %Dim Size (m)
-lx = 5*meters;
-ly = 4*meters;
-lz = 3*meters;
+lx = dim(i) *meters;
+ly = dim(i) *meters;
+lz = dim(i) *meters;
 
 xcells = ceil(lx/gx);
 ycells = ceil(ly/gy);
@@ -62,7 +67,7 @@ recieverrightloc = [ceil((ycells/2) + (0.1/gy)) ceil((xcells/2)+2) ceil(zcells/2
 % dt = 1/ (c*sqrt(3/(gx)^2));
 % dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))+(1/(gz^2))));
 % dt = 3.35563e-4;
-T = 0.3;
+T = dt*201;
 
 % generate the source(s) & determine number of time steps needed
 
@@ -70,8 +75,8 @@ tnum = ceil(T/dt);
 source1 = zeros(1,tnum);
 source2 = zeros(1,tnum);
 
-fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
-n0 = 30;        % Initial delay (samples)
+fc = 0.1;     % Cutoff frequency (normalised 0.5=nyquist)
+n0 = 2;        % Initial delay (samples)
 sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
 n=0:tnum;
 source1=exp(-dt^2*(n-n0).^2/(2*sigma^2)).*((2*10^-5)*10^(100/20));
@@ -160,33 +165,14 @@ meanpstore = zeros(1,tnum);
 % loop to update the velocities and pressures over the time steps, n
 n = 1;
 % while or((mean(mean(mean(abs(real(p(:,:,:)))))) > (p0 * 10^(60/10))),(n < (1600)))
-while ((n*dt <= T)||(meanpstore(n) > (max(meanpstore)-60)))
-    n = n + 1;
-    if mod(n,100)
-    n*dt
-    end    
+while ((n*dt) <= T)
+    tic;
     [p, ux, uy, uz] = FDTD3Dfun(p, pCx, pCy, pCz, ux, uy, uz, uCx,...
         uCy, uCz, Rx, Ry, Rz, ZL, ZR, ZF, ZB, ZT, ZG);
     p = FDTD3Dsources(p,sourcelocations ,source1(n) , 'soft');
     reciever(n) = p(recieverleftloc(1),recieverleftloc(2),recieverleftloc(3));
-%     rightear(n) = p(recieverrightloc(1),recieverrightloc(2),recieverrightloc(3)/p0);
-    %PLOTTING SECTION
-    signal(n) = real(10*log10(source1(n)/p0));
-    meanpstore(n) = 10*log10(mean(mean(mean(abs(real(p)))))/p0);
-    FDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0);
-        
+    exectime(n) = toc();  
+    n = n + 1; 
 end
-figure(2);
-        subplot(2,1,1);
-        plot(0:dt:(n-2)*dt, reciever(1:n-1));
-        hold on;
-        plot(0:dt:(n-2)*dt, meanpstore(1:n-1));
-        hold off;
-        legend('left','right', 'mean over grid')
-        title((sprintf('Current P recieved by listener = %.3f dB & The total sim time was %.6f',(rightear(n)),n*dt)),...
-            'Color',[0 0 0],'FontSize', 14);
-        ylim([0 max(signal)]);
-        subplot(2,1,2);
-        plot(dt:dt:n*dt, signal(1:n));
-        title('whats sent out by the source');
-        ylim([-100 max(signal)]);
+FDTDexectime(:,i) = exectime;
+end

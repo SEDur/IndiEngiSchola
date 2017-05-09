@@ -15,7 +15,7 @@ function FDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0)
             'Color',[0 0 0],'FontSize', 14);
 %         xlabel('Width (meters)', 'Color', [0 0 0]);
 %         ylabel('Length (meters)', 'Color', [0 0 0]);
-        shading('interp');
+%         shading('interp');
         drawnow;
 
 end

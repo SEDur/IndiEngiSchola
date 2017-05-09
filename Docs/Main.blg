@@ -1,48 +1,53 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: Main.aux
 The style file: unsrt.bst
 Database file #1: library.bib
-Repeated entry---line 4103 of file library.bib
- : @techreport{Durbridge2016a
- :                           ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 5859 of file library.bib
- : @article{Spa2011
- :                 ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 6808 of file library.bib
- : @article{Schuster2004
- :                      ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 8001 of file library.bib
- : @article{Olesen1997
- :                    ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 8203 of file library.bib
- : @article{Trefethen2000
- :                       ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 8273 of file library.bib
- : @article{Scheirman2015
- :                       ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 10830 of file library.bib
- : @article{Hill2012
- :                  ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 10971 of file library.bib
+Repeated entry---line 5608 of file library.bib
  : @article{Angus2010
  :                   ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 13001 of file library.bib
- : @article{Botteldooren1993
- :                          ,
+Repeated entry---line 5625 of file library.bib
+ : @article{Schneider2015
+ :                       ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 13228 of file library.bib
+Repeated entry---line 6060 of file library.bib
+ : @article{Hill2012
+ :                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 6461 of file library.bib
+ : @article{Spa2011
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 6930 of file library.bib
+ : @book{beranek1954acoustics
+ :                           ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8514 of file library.bib
+ : @article{Trefethen2000
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 11996 of file library.bib
+ : @article{Doerr2013
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 12989 of file library.bib
+ : @article{Schuster2004
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 13798 of file library.bib
  : @article{Yee1966
  :                 ,
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "Doerr"
-Warning--empty journal in Scheirman2015
+Repeated entry---line 14402 of file library.bib
+ : @article{Botteldooren1993
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 14459 of file library.bib
+ : @article{Olesen1997
+ :                    ,
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "rossing2007springer"
+Warning--empty publisher in Everest2009
+Warning--empty journal in Schneider2015
 Warning--empty journal in Hill2012
 Warning--there's a number but no volume in Hill2012
-(There were 10 error messages)
+(There were 11 error messages)
