@@ -108,13 +108,31 @@ A more comprehensive description of reverberation and overview of the associated
 Low order reflections often described as early reflections in relation to psychoacoustics, may occur above the steady state amplitude (echos)~\cite{Everest2009} if the steady state amplitude decreases appropriately. Early and strong reflections are of significant interest in acoustic modelling, and the auralization and perception of sound fields due to the cues humans receive from perception of them e.g. room size and source direction information.\\
 
 \subsection{Room Modes}
-As the domains of interest in this study are fully bounded (much like a room), sound waves propagating in the domain are subject to periodicity relative to the dimensions of the domain. That is at wavelengths relative to the dimensions of the domain, standing waves may occur within the domain i.e. there will be regions maximal and minimal pressure change at points $\frac{\lambda}{4}$ relative to a dimension of the domain, where $\lambda$ = wavelength. These standing waves are often called room modes, and for oblique modes in a 3 dimensional rectangular domain the frequencies of the  modes can be calculated as such:\\
+As the domains of interest in this study are fully bounded (much like a room), sound waves propagating in the domain are subject to periodicity relative to the dimensions of the domain. That is at wavelengths relative to the dimensions of the domain, standing waves may occur within the domain i.e. there will be regions maximal and minimal pressure change at points $\frac{\lambda}{4}$ relative to a dimension of the domain, where $\lambda$ is the spatial dimension of one cycle otherwise known as a wavelength. These standing waves are often called room modes, and for oblique modes in a 3 dimensional rectangular domain the frequencies of the  modes can be calculated as such:\\
 \begin{center}
 $\textit{f}_{n_xn_yn_z} = \frac{c}{2} \sqrt{\left(\frac{n_x}{l_x}\right)^2 + \left(\frac{n_y}{l_y}\right)^2 + \left(\frac{n_z}{l_z}\right)^2} $\\
 Where $n_x, n_y, n_z$ is the order of the standing wave in the dimension.\\
 \end{center} 
 
+These modes are defined in spatial reciprocity as axial, tangential and oblique, depending on the order of dimensions involved in the periodicity i.e. When using such an equation as that above to calculate the theoretical modes of a rectangular domain, a state table such as the one below may be used to define the $n_{x/y/z}$ order \footnote{number of cycles within the dimension} component of each term:\\
 
+\begin{center}
+\begin{tabular}{|c|c|c|c|} 
+  \hline
+ Mode Type & x order & y order & z order \\
+ \hline
+ Axial & 0 & 0 & 1 \\ 
+ Axial & 0 & 1 & 0 \\  
+ Axial & 1 & 0 & 0 \\
+ Tangential & 0 & 1 & 1 \\ 
+ Tangential & 1 & 1 & 0 \\  
+ Tangential & 1 & 0 & 1 \\
+ Oblique & 1 & 1 & 1 \\ 
+ Oblique & 1 & 1 & 2 \\  
+ Oblique & 1 & 2 & 1 \\        
+ \hline
+\end{tabular}\\
+\end{center}
 
 As modes are calculated to higher order, the density of these modes tend to converge. The frequency at which these modes converge is known as the Schroeder frequency, and that is calculated by:\\
 \begin{center}
