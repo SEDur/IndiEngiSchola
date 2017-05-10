@@ -10,8 +10,6 @@
 \label{Introduction}
 Acoustics is a branch of physics\footnote{though often considered to be interdisciplinary} that aims to characterise Newton's law of motion applied to mechanical wave propagation, while obeying the physical conservation law and often focussing on propagation in an audible spectrum. This characterisation of sound propagation is intrinsically linked to many other disciplines of science and engineering, as well as psychological and perceptual study. In this section we will review the acoustic wave equation, and discuss some properties of interest in acoustic modelling.
 
-%Many aspects of acoustic modelling may be of interest when considering the design and application of loudspeaker systems. Both small and large scale simulations may allow a user to make informed decisions about the design and placement of a loudspeaker system, so that the performance of the system may be validated and optimised before application. In this chapter we will evaluate the lossless acoustic wave equation for gasses, and consider the application of the wave equation in bounded space. We will then consider some specific use cases for applying such an equation for modelling loudspeaker system performance.
-
 \section{The Acoustic Wave Equation}
 
 In the Mcgraw-Hill Electronic and Electrical Engineering Series of books, the late Leo Beranek authored the Acoustics volume~\cite{beranek1954acoustics}. This volume contains an elegant summary of the wave equation, that will be the subject of paraphrase in the following section.\\
@@ -23,7 +21,7 @@ To consider the wave equation, we should use the analogy of a small\footnote{rec
 \begin{center}
 \begin{longtable}{|p{0.45\textwidth}|p{0.45\textwidth}|} 
   \hline
- One Dimension Standard & Three Dimension Vector \\ [0.5ex] 
+ One Dimension Standard & Three Dimension Vector \\ [3.0ex] 
  \hline
 Sound pressure $p$ propagates across the medium like a plane wave, from one side to the other in the $x$ direction at a rate equal to the change in space $\frac{\delta p}{\delta x}$  & Sound pressure $p$ propagates across the medium like a spherical wave, from one side to the other at a rate of \textbf{grad} $p = \textbf{i}\frac{\delta p}{\delta x} + \textbf{j}\frac{\delta p}{\delta y} + \textbf{k}\frac{\delta p}{\delta z}$ where i, j and k are unit vectors in the directions x, y and z.\\
 \\
@@ -34,7 +32,7 @@ Sound pressure $p$ propagates across the medium like a plane wave, from one side
  Force per unit volume is given by dividing both sides of the previous equation by the volume $V$, $\frac{\textit{f}}{V} = -\frac{\delta p}{\delta x}$ & Force per unit volume is given by dividing both sides of the previous equation by the volume $V$, $\frac{\textit{f}}{V} = - \textbf{grad} p$\\
 \\
  Newton's second law of motion dictates that the rate of change of momentum in the volume must balance with force per unit volume, and we can assume the mass of gas in the volume is constant. & $ \leftarrow$ \\ [3.0ex]
-The force mass balance can be described as $\frac{\textit{f}}{V} = -\frac{\delta p}{\delta x} = \frac{M}{M} \frac{\delta u}{\delta t} = \rho^{\prime}\frac{\delta u}{\delta t}$ & The force mass balance can be described as $\frac{\textit{f}}{V} = -\textbf{grad} p = \frac{M}{M} \frac{Dq}{Dt} = \rho^{\prime}\frac{Dq}{Dt}$\\ [1.5ex]
+The force mass balance can be described as $\frac{\textit{f}}{V} = -\frac{\delta p}{\delta x} = \frac{M}{M} \frac{\delta u}{\delta t} = \rho^{\prime}\frac{\delta u}{\delta t}$ & The force mass balance can be described as $\frac{\textit{f}}{V} = -\textbf{grad} p = \frac{M}{M} \frac{Dq}{Dt} = \rho^{\prime}\frac{Dq}{Dt}$\\ [3.0ex]
  $u$ is the velocity of gas in the volume, $\rho^{\prime}$ is the density of the gas, and $M = \rho^{\prime} V$ is the mass of gas in the volume.  & where $q$ is the vector velocity, $\rho^{\prime}$ is the density of gas in the volume, $M = \rho^{\prime} V$ is the total mass of gas in the volume. $\frac{D}{Dt}$ represents the total rate of change of velocity of a section of gas in the volume, and can be composed as $\frac{Dq}{Dt}=\frac{\delta q}{\delta t}+ q_x\frac{\delta q}{\delta x}+q_y\frac{\delta q}{\delta y}+q_z\frac{\delta q}{\delta z}$ where $q_x$, $q_y$ and $q_z$ are the components of the particle velocity \textbf{$q$} in each direction. As this is a linear wave equation approximation, these velocity components have no cross terms.\\
 \\
 If the change in density of gas in the volume is sufficiently small, the $\rho^{\prime}$ will be approximately equal to the average density $\rho_0$, thus simplifying the equations above to $-\frac{\delta p}{\delta x} = \rho_0 \frac{\delta u}{\delta t}$  & If the particle velocity vector is sufficiently small, the change of momentum of the gas is approximately the same as the momentum of the volume at any arbitrary point, and the density of gas within the volume $\rho^{\prime}$ will be approximately equal to the average density $\rho_0$. Thus the above can be written as $-grad p = \rho_0 \frac{\delta q}{\delta t}$ \\
@@ -72,7 +70,7 @@ This equation can also be expressed in terms of the instantaneous velocity in th
 
 In the above table we have derived wave equations, with forms of velocity and pressure as the independent variables. We have also shown that pressure, velocity, displacement and density are related within the system of equations, by differentiating and integrating with respect to space and time. As these forms of the wave equation are intrinsically coupled, it is possible to leverage this coupling when generating a numerical solution to the wave equation. It is also important to note that a significant number of assumptions have been taken when deriving these equations, and any solution to these equations may only be accurate when simulating a loss free, frictionless, homogeneous, ideal gas medium, where all perturbations are sufficiently small and fast that it is possible to reduce the complexity of the system.\\
 
-\section{Acoustic Properties of Interest in Basic Simulations}
+\section{Acoustic Properties of Interest in This Study}
 Now that we have an understanding of the mathematics behind sound propagation from the wave equation, it is important to have an understanding of what acoustic phenomena can be observed through solving the wave equation. In the next section we shall discuss three components of acoustics behaviour, two of which are intrinsic to the acoustics of rooms and one is more general.\\
 
 \subsection{Inverse Square Law \& Propagation time}
@@ -106,12 +104,6 @@ $\alpha = (S_{leftwall} \alpha_{leftwall})+(S_{rightwall} \alpha_{rightwall}+...
 \end{center}
 The use of $RT_{60}$ as the preferred metric of decay time is valid, assuming that the acoustics system is linear and time-invariant.
 A more comprehensive description of reverberation and overview of the associated parameters is given by Rossing~\cite{rossing2007springer}. \\
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=0.4\textwidth]{reflection_diagran.jpg}
-%\centering
-%\caption{A conceptualisation of direct and reflected sound~\cite{Everest2009}}
-%\end{figure}
 
 Low order reflections often described as early reflections in relation to psychoacoustics, may occur above the steady state amplitude (echos)~\cite{Everest2009} if the steady state amplitude decreases appropriately. Early and strong reflections are of significant interest in acoustic modelling, and the auralization and perception of sound fields due to the cues humans receive from perception of them e.g. room size and source direction information.\\
 
@@ -122,7 +114,8 @@ $\textit{f}_{n_xn_yn_z} = \frac{c}{2} \sqrt{\left(\frac{n_x}{l_x}\right)^2 + \le
 Where $n_x, n_y, n_z$ is the order of the standing wave in the dimension.\\
 \end{center} 
 
-%\subsubsection{Schroeder Frequency}
+
+
 As modes are calculated to higher order, the density of these modes tend to converge. The frequency at which these modes converge is known as the Schroeder frequency, and that is calculated by:\\
 \begin{center}
 $ \textit{f}_{Schroeder} = 2000 \sqrt{\frac{RT_{60}}{V}} $\\

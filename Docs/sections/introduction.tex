@@ -1,29 +1,17 @@
 \chapter{Introduction}
 
-Modelling and replicating the effects of acoustic systems has been of continued interest to many industries, from the creation of scale models for concert halls to the architecture of individualised audio in video games. Acoustic modelling is not only a tool for those wishing to design acoustic systems, but may be of increasing interest for those wishing to experience an acoustic system\footnote{In this context we consider an acoustic system as whole i.e. sound sources, receivers, the propagation medium and the domain boundaries} while in another environment. Simulating the acoustic behaviour of large systems with multiple sources and receivers may not be a trivial undertaking, with significant computational resources required to model such systems. 
+Modelling and replicating the effects of acoustic systems has been of continued interest to a number of industries, from the creation of scale models for concert halls to the architecture of individualised audio in video games. Acoustic modelling is not only a tool for those wishing to design acoustic systems, but may be of increasing interest for those wishing to experience an acoustic system\footnote{In this context we consider an acoustic system as whole i.e. sound sources, receivers, the propagation medium and the domain boundaries} while in another environment. Simulating the acoustic behaviour of large systems with multiple sources and receivers may not be a trivial undertaking, with significant computational resources required to model such systems. 
 
 \section{Problem Definition}
 
-Current commercially available acoustic modelling tools for large (cathedrals, arenas, video game maps etc) electro acoustic simulations rely on some limiting assumptions based around plane wave propagation. These models are only accurate when assuming that detail of the domain features are significantly larger than the wavelengths of interested, and that no diffraction effects occur. These ray based methods to approximate the performance of the system and simulation domain. These methods have been successfully used to model large systems at mid and high frequencies, but may not accurately simulate low frequency wave propagation and wave interaction.\\
+Current commercially available acoustic modelling tools for large (cathedrals, arenas, video game maps etc) electro acoustic simulations rely on assumptions based around plane wave propagation. These models are only accurate when assuming that detail of the domain features are significantly larger than the wavelengths of interested, and that no diffraction effects occur. These ray based methods such as the image source method,
+ray or beam tracing methods approximate the performance of the system and simulation domain without solving the full physics of an acoustic system. These methods have been successfully used to approximate large systems at mid and high frequencies, but may not accurately simulate low frequency wave propagation and wave interaction.\\
 
-Accurate acoustic modelling of low frequency propagation could be of significant benefit to many applications. Wave based acoustic modelling methods have been previously implemented in commercial software packages with great success. However, these packages can only be used to simulate relatively small domains with high spatial accuracy due to some limitations with numerical solutions to wave based methods. \\
+Wave based acoustic modelling methods have been previously implemented in commercial software packages with great success, and are often used to model complex acoustic systems such as loudspeakers and other transducers. However, these packages are difficult to apply to simulating large domain problems, due to some limitations with numerical solutions to wave based methods. This is due in part to the extreme memory requirements of simulating large domains, but also due to the significant computation time required to 'crunch the numbers' and solve for adequate amounts of time. One such package known as Comsol that is a finite element solver, has recently added ray tracing to the internal tools, potentially to accommodate this restriction.\\
 
- The primary objective of acoustic modelling in this study, is to replicate the propagation of sound in spaces that are large relative to the wavelengths of interest.
+\section{Aim of the Study}
 
-%These benefits should be possible for an arbitrary number of sources and receivers, in proportionally large environments with high quality results. Further, these studies should be possible for both transient and steady state solutions, for which time domain methods may be more appropriate.\\
-%Is it possible to further reduce computation time for simulations of large acoustic problems, to provide results in real time for the full human audio frequency range? 
+The aim of this study is to test three numerical methods of solving the acoustic wave equation that result in time domain solutions. These methods will be tested for speed of execution with consecutively large domains. The methods of interested in this studying are the finite-difference time domain method, the sparse finite difference time domain method and the pseudo-spectral time domain method. The outcome will be the identification of a method that may warrant further optimisation and could be potentially used for real-time solving in the future.\\
 
-%There are two 'branches' of computation solution that should be considered: the direct solution i.e. direct outputs or audio samples from the simulation, and indirect solutions i.e. a system impulse response that may be convolved with mixed source signals in order to create an auralization of the system.\\
-
-\section{Aim of the study}
-
-The aim of this study is to test three numerical methods of solving the acoustic wave equation, that result in time domain solutions. These methods will be tested for speed of execution with relatively large domains. The methods of interested in this studying are the finite-difference time domain method, the sparse finite difference time domain method and the pseudo-spectral time domain method. The outcome will be the identification of a method that may warrant further optimisation and could be potentially used for real-time solving in the future.\\
-
-
-
-%\begin{figure}
-%\centering
-%\includegraphics[width=0.6\textwidth]{explicit2dfdtd.jpg}
-%\centering
-%\caption{A visualisation of a 2D explicit FDTD simulation ~\cite{Durbridge2016a}}
-%\end{figure}
+\section{Format of the Report}
+At first we will discuss the acoustic wave equation, and some properties of acoustics that we might expect to approximate in a wave equation solving model. Following this, we will introduce the finite difference time domain and pseudo-spectral time domain methods for solving the acoustic wave equation, and we will discuss semi-empirical partially absorbing boundary conditions applied to these methods. While discussing the finite difference time domain method, we will introduce the idea of the sparse finite difference time domain method. Finally We will attempt to validate the models as they were developed, and review the execution speed of each method. We will then discuss some concepts that may significantly improve the execution of these methods.\\

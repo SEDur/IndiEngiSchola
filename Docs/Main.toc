@@ -1,6 +1,7 @@
 \contentsline {chapter}{\numberline {1}Introduction}{2}
 \contentsline {section}{\numberline {1.1}Problem Definition}{2}
-\contentsline {section}{\numberline {1.2}Aim of the study}{2}
+\contentsline {section}{\numberline {1.2}Aim of the Study}{3}
+\contentsline {section}{\numberline {1.3}Format of the Report}{3}
 \contentsline {chapter}{\numberline {2}Acoustic Principals}{4}
 \contentsline {section}{\numberline {2.1}The Acoustic Wave Equation}{4}
 \contentsline {section}{\numberline {2.2}Acoustic Properties of Interest in Basic Simulations}{9}
