@@ -61,69 +61,18 @@ alphaB = 0.45;
 %number of sources
 snum = 2;
 %source locations
-% s1loc = [ceil(xcells/3) ceil(ycells/3)];
-% s2loc = [ceil(xcells/1.5) ceil(ycells/1.5)];%source frequency
-% s1loc = [ceil((lx/gx)/2)-1 ceil((lx/gy)/2)-1];
-% s2loc = [ceil((ly/gx)/4) ceil((ly/gy)/2)];%source frequency
 sourcelocations = [ceil((1/gy)) ceil(1/gx)];
-s1Freq = 400;
-s2Freq = 400;
-%source phase
-s1Phase = 0;
-s2Phase = 0;
 %Source amplitude 
 A = 1;
 
 %recieves position
-% recieverleftloc = [ceil(lx/gx/2.42) ceil(ly/gx/8)];
-% recieverrightloc = [ceil(lx/gx/2.27) ceil(ly/gx/8)];
 recieverleftloc = [ceil(ycells/2) ceil(xcells/2)];
 
-recieverrightloc = [ceil((ycells/2) + (0.1/gy)) ceil((xcells/2)+2)];
-
-
 %Time of sim
-% dt = 1/ (c*sqrt(3/(gx)^2));
-% dt = 1/ (c*sqrt((1/(gx^2))+(1/(gy^2))));
-% dt = 3.35563e-4;
 T = 0.3 ;
 
 % generate the source(s) & determine number of time steps needed
-
 tnum = ceil(T/dt);
-source1 = zeros(1,tnum);
-source2 = zeros(1,tnum);
-% %           t0 = ceil(T/dt) + 1;
-%             t0 = 10;
-%             t1 = 0 : dt : T;
-%             phi = s1Phase*pi;
-%             y = A*sin(2*pi*s1Freq*t1 + phi);
-%             gain = linspace(0, 1, ceil(length(y)/10));
-%             temp = ones(1, length(y));
-%             temp(1 : ceil(length(y)/10)) = gain;
-%             y = y.*temp;
-%             source1(1, t0 : t0 + ceil(T/dt) - 1) = y;
-% source1(1,11:1811) = (sin(0:(pi/1800)*2:(2*pi)))*(p0*10^(100/10));
-% source2(1,11:1811) = (sin(0:(pi/1800)*2:(2*pi)))*(p0*10^(100/10));
-% source1(1,11:20) = ones(1,10).*(10^-12*10^(90/10));
-% for n = ceil(tnum/10) : 1 : ceil(tnum/10) + 9 
-% source1(n) = source1((n-1) * 2);       
-% source2(n) = source2((n-1) * 2);
-% end
-% 
-% source1 = decimate(source1, 2, 'fir')';
-% source1 = interp(source1, 2);
-% %             t0 = ceil(T/dt) + 1;
-%             t0 = 10;
-%             t1 = 0 : dt : T;
-%             phi = s2Phase*pi;
-%             y = A*sin(2*pi*s2Freq*t1 + phi);
-%             gain = linspace(0, 1, ceil(length(y)/10));
-%             temp = ones(1, length(y));
-%             temp(1 : ceil(length(y)/10)) = gain;
-%             y = y.*temp;
-%             source2(1, t0 : t0 + ceil(T/dt) - 1) = y;
-
 fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
 n0 = 30;        % Initial delay (samples)
 sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
@@ -136,9 +85,7 @@ source1= source1 ./ max(source1);
 p = zeros(ycells - 1, xcells - 1);
 ux = zeros(ycells - 1, xcells);
 uy = zeros(ycells, xcells - 1);
-
 idx3 = uy;
-
 % set up the multiplication constants for the update equations
 uCx = dt/(gx*rho);
 uCy = dt/(gy*rho);
