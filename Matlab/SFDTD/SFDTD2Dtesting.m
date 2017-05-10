@@ -77,8 +77,8 @@ fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
 n0 = 30;        % Initial delay (samples)
 sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
 n=0:tnum;
-source1=exp(-dt^2*(n-n0).^2/(2*sigma^2)).*((2*10^-5)*10^(100/20));
-source1= source1 ./ max(source1);
+source1=exp(-dt^2*(n-n0).^2/(2*sigma^2));
+source1= (source1 ./ max(source1)).*((2*10^-5)*10^(100/20));
 
 % initialize the velocity and pressure matrices (matrices are set up in a
 % y by x fashion to properly display the 2D space (y = rows, x = columns))
