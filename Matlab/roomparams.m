@@ -36,9 +36,9 @@ fl = c/2 .* n/l;
 fw = c/2 .* n/w;
 fh = c/2 .* n/h;
 % Tangential modes
-nl = 1:4;
-nw = 1:4;
-nh = 1:4;
+nl = 1:10;
+nw = 1:10;
+nh = 1:10;
 flw = c/2 * sqrt(bsxfun(@plus, (nl.'/l).^2, (nw/w).^2));
 fwh = c/2 * sqrt(bsxfun(@plus, (nw.'/w).^2, (nh/h).^2));
 flh = c/2 * sqrt(bsxfun(@plus, (nl.'/l).^2, (nh/h).^2));
@@ -46,3 +46,11 @@ flh = c/2 * sqrt(bsxfun(@plus, (nl.'/l).^2, (nh/h).^2));
 flwh = c/2 * sqrt(bsxfun(@plus,(flw(1:2,1:2) * 2/c).^2, permute(nh(1:2)/h,[3 1 2]).^2));
 
 [srt, idx] = sort([fl(:);fw(:);fh(:);flw(:);fwh(:);flh(:);flwh(:)]);
+
+freqs = 0 : 800;
+vals = zeros(length(freqs),1);
+for i = 1 : length(srt)
+    vals(round(srt(i))) = vals(round(srt(i))) + 1;
+end
+
+vals = vals ./ max(vals);

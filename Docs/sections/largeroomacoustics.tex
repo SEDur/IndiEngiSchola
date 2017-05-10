@@ -74,25 +74,22 @@ In the above table we have derived wave equations, with forms of velocity and pr
 Now that we have an understanding of the mathematics behind sound propagation from the wave equation, it is important to have an understanding of what acoustic phenomena can be observed through solving the wave equation. In the next section we shall discuss three components of acoustics behaviour, two of which are intrinsic to the acoustics of rooms and one is more general.\\
 
 \subsection{Inverse Square Law \& Propagation time}
-As previously noted, sound propagates as longitudinal waves through a medium such as air or water. These waves are often conceptualised as simple rays travelling through a space\footnote{It may be appropriate to always consider space to be 3 dimensional (3D), or a lower order approximation of a 3D space}, much like planar waves. However, the properties of a sound source such as the directivity and shape, can have a significant effect on the behaviour of sound wave propagation. An example of this is the difference in energy spread over distance for theoretically ideal point and line sources. Ideal point sources that propagate sound omni-directionally obey the inverse square law, and ideal line sources do not, as they propagate sound cylindrically. The inverse square law is sound propagations is defined as:\\
+As previously noted, sound propagates as longitudinal waves through a medium such as air or water. These waves are often conceptualised as simple rays~\cite{beranek1954acoustics} travelling through a space\footnote{It may be appropriate to often consider space to be 3 dimensional (3D), or a lower order approximation of a 3D space}, much like planar waves. However, the properties of a sound source such as the directivity and shape can have a significant effect on the behaviour of sound wave propagation. An example of this is the difference in energy spread over distance for theoretically ideal point and line sources. Ideal point sources that propagate sound omni-directionally obey the inverse square law and propagate sound spherically, and ideal line sources do not as they propagate sound cylindrically. The inverse square law is sound propagations is defined as:\\
 \begin{center}
 $I = \frac{P}{4 \pi r^2}$\\
 \end{center}
-Where I is the intensity over the area of the sphere, P is the propagated energy at the source and r is the radius of the sphere i.e. the distance between the source and the point of inquiry.\\
-
-
-
-However, as line sources propagate cylindrically, the equation above can be modified to account for this change:\\
+Where I is the intensity over the area of the sphere, P is the propagated energy at the source and r is the radius of the sphere i.e. the distance between the source and the point of inquiry. This equation denotes that as an acoustic pressure wave radiates outward like an expanding sphere, as the area of the surface of the sphere increase the energy-per-unit-area of the surface of the sphere decreases. That is, as $r$ increases, $ I $ decreases, assuming $ P $ is a constant pressure of interest.\\
+As ideal line sources propagate pressure waves cylindrically, the equation above can be modified to account for this change:\\
 \begin{center}
 $I = \frac{P}{2 \pi r}$\\
 \end{center}
-Below is a graph showing the difference between intensity over distance for an ideal point and line source:\\
+These two similar equations show a change in relationship between acoustic power over distance for different acoustic sources. If you were to evaluate the change of $I$ for different values of $r$ with the point source equation, you would find that as $r$ is doubled $I$ decreases by $6dB$. Doing the same for the line source equation would yield a $3dB$ change. This is in part due to the fact that we assume the cylinder is infinitely long, and thus we are evaluating a 2D simplification of a 3D problem. The area of the cylinder for any value of $r$ is less than the equivalent sphere, and so the theoretical distribution of energy is also reduced. This may be an important concept when considering the 2D approximation of 3D simulations in acoustic studies. Below is a graph showing the difference between intensity over distance for an ideal point and line source:\\
 
 Although the wave equation considered and solved in this study is lossless i.e. we do not consider viscous or thermal losses in the basic linearised acoustic wave equation, we would expect to see a reduction in absolute pressure between a source and receiver. As sound travels at some finite distance over time $c$, we would also expect to see a uniform time between a wave being radiated from a source, and being recorded at some receiver location for all simulation methods\footnote{For an interesting review of the relationship between 1D, 2D and 3D sound propagation being derivative, please see the appendices}.\\ 
 
 \subsection{Reverberation}
-For this study we will consider spaces or domains of finite size. These domains have boundaries, and those boundaries will either absorb or reflect sound waves. In acoustic engineering the proportion of sound energy absorbed or reflected by a material is often described as an absorption coefficient $\alpha$, which is a normalised value between 0 (totally reflecting) and 1 (totally absorbing)~\cite{beranek1954acoustics}.\\
-If a sound source propagates a signal of appropriate speed and amplitude, the sound wave will reach the boundaries and be partially absorbed or reflected in reciprocal directions. These reflections will continue to scatter and will eventually decay beyond audibility. The reverberant sound field is the steady-state of diffusely scattered sound energy (reflections), due to perturbation by a sound source in bounded space. The amplitude of the diffusely scattered reflections balance in with the rate of decay and absorption of the sound field~\cite{Everest2009}.\\ 
+For this study we will consider spaces or domains of finite size. These domains have boundaries, and those boundaries will either absorb or reflect sound waves by some ratio. In acoustic engineering the proportion of sound energy absorbed or reflected by a material is often described as an absorption or reflection coefficient $\alpha$, which is often expressed as a normalised value between 0 (totally reflecting) and 1 (totally absorbing)~\cite{beranek1954acoustics}.\\
+If a sound source propagates a signal of appropriate speed and amplitude, the sound wave will reach the boundaries and be partially absorbed or reflected in reciprocal directions. These reflections will continue to scatter and will eventually decay beyond audibility. The reverberant sound field is the steady-state of diffusely scattered sound energy (reflections), due to perturbation by a sound source in bounded space. The amplitude of the sound source and diffusely scattered reflections balance with the rate of decay (diffusion and absorption) of the sound field~\cite{Everest2009}.\\
 
 \subsubsection{Acoustic Absorption}
 
@@ -100,7 +97,7 @@ The decay rate of a reverberant sound field is often quantified by the time take
 \begin{center}
 $T = 0.161\frac{V}{-\ln(1 - \alpha)S} $\\
 Where $S$ is the surface area, $V$ is the volume of the domain and $\alpha$ is the average absorption coefficient and can be calculated as such:\\
-$\alpha = (S_{leftwall} \alpha_{leftwall})+(S_{rightwall} \alpha_{rightwall}+...)/S_{total}$ \\
+$\alpha = (\left( S_{leftwall} \alpha_{leftwall})+(S_{rightwall} \alpha_{rightwall})+... \right) /S_{total}$ \\
 \end{center}
 The use of $RT_{60}$ as the preferred metric of decay time is valid, assuming that the acoustics system is linear and time-invariant.
 A more comprehensive description of reverberation and overview of the associated parameters is given by Rossing~\cite{rossing2007springer}. \\
@@ -134,10 +131,12 @@ These modes are defined in spatial reciprocity as axial, tangential and oblique,
 \end{tabular}\\
 \end{center}
 
-As modes are calculated to higher order, the density of these modes tend to converge. The frequency at which these modes converge is known as the Schroeder frequency, and that is calculated by:\\
+In a room of the dimensions $5m$ by $4m$ by $3m$, modes up to the 10th order may occur at the following frequencies:\\
+
+As modes occur at higher orders, the spatial change of the intensity of a particular frequency due to modes decreases to the point where the human ear may be insensitive these changes. Further, at higher orders of modes the frequency density of modes may tend to converge, such that many modes occur around the same frequencies and so may appear to be diffusely occurring. The frequency at which modes tend to become difficult to observe by ear due to these properties for a particular domain is known as the Schroeder frequency, and that is calculated by:\\
 \begin{center}
 $ \textit{f}_{Schroeder} = 2000 \sqrt{\frac{RT_{60}}{V}} $\\
 \end{center}
-An accurate solution to the wave equation may include modal behaviours.
+When considering the use of wave equation based solvers to compute large domains, it may be appropriate to consider calculating only up to a frequency of interest such as the Schroeder frequency. This will reduce the required spatial resolution for the solution and thus will reduce total memory used and the time to completion per-time-step. However, calculating low frequency propagation may require to solve for longer total time to remain accurate. In environments such as stadia, arenas and cathedrals, $RT_{60}$ may vary from $1.2$ to beyond $10s$. The mesh plot below shows Schroeder frequency as a function of $RT_{60}$ and room volume: \\
 
 
