@@ -11,7 +11,7 @@
 While it may be beneficial and interesting to review the behaviour of a wave propagating in a fictitious or simulated domain, model validation could be considered an important step towards creating a such a robust and useful tool. Below we shall discuss a scenario that is used for the validation of the simulation tools described in this study, and we shall review the performance of such tools in comparison to the hand calculated properties of the scenario and the results of an Image Source model.  
 
 \section{A Model Environment}
-The model environment used for validation in this study shall be a fully enclosed room of the following dimensions:\\
+The model environment used for validation in this study was a fully enclosed room of the following dimensions:\\
 
 \begin{center}
 \begin{tabular}{|c|c|} 
@@ -25,13 +25,20 @@ The model environment used for validation in this study shall be a fully enclose
 \end{tabular}\\
 \end{center}
 
-This gives a volume of $ v = 60m^3$, and a boundary surface area of $S = 94m^2$.\\
-The boundaries shall have a uniform absorption coefficient of $\alpha = 0.45 $. As the boundaries are uniformly absorbing and the coefficient average is above 0.1, it may be appropriate to use the Eyring reverberation time equation which yields $RT_{60} = 0.1719s $.\\
+This had a volume of $ v = 60m^3$, and a boundary surface area of $S = 94m^2$.\\
+The boundaries had a uniform absorption coefficient of $\alpha = 0.45 $. As the boundaries are uniformly absorbing and the coefficient average is above 0.1, it may be appropriate to use the Eyring reverberation time equation to approximate the required decay time, which yields $RT_{60} = 0.1719s $.\\
 The average number of reflections before the energy of a wave-front has decayed below the noise floor will be $N_{reflections} = 30.7$, and the mean free path between reflections will be $MFP = 2.55m$.\\
-The Schroeder frequency of the room will be $f_{schroeder} = 107Hz $, and the axial, tangential and oblique modes below the Schroeder frequency are calculated as follows:\\
+The Schroeder frequency of the room will be $f_{schroeder} = 107Hz $, and the axial, tangential and oblique modes below the Schroeder frequency are calculated as:\\
+
+The stimulus position in each domain was $1.0m$ in each direction from the bottom left corner, and the receiver position was the exact middle of the domain. The stimulus source type was a soft source, as described in the FDTD section of the document. The source content was a log chirp that was generated using the Matlab DSP Systems Toolbox, with a start frequency of 100Hz and a stop frequency of half the maximum target frequency (or a quarter of Nyquist), that was normalised to $100dBSPL$ and has a sweep time of $0.4s$. Before normalisation, a Hann window was applied to the signal to minimize the discontinuity of introducing the source. The maximum frequency of interest in this validation was $5kHz$, giving a $0.333e^{-5}$ step time for the FDTD simulation, and a $0.1e^{-4}$ step time for the PSTD simulation. A plot of the source signal amplitude with respect to time is given below:\\
 
 \section{Results}
+Below is a plot of the spectral power of the source signal, the FDTD receiver position and the PSTD receiver position for the simulation described above. The receiver signals are normalised the maximum of the source position amplitude, as described in~\cite{Murphy2014}.\\ 
+
+It can be seen that both simulations exhibit similar inclusion of the frequency domain properties of the stimulus. Both simulations include the dip from Dc to 55Hz, and both exhibit the slope from 2400Hz that is caused by the window function. However, the PSTD results include a considerable spectral tilt, which may be partially caused by the implementation of a soft source as opposed to a transparent source.\\
 
 
+\section{Validating The SFDTD Method}
+As noted previously, the SFDTD method was implemented only to 2D and thus cannot be validated against he performance of the 3D FDTD and PSTD methods as above. Below is a comparative plot of the SFDTD receiver signal and the source signal. The threshold for windowing of the SFDTD algorithm was set to 30dB.\\
 
-
+As can be seen in the plot above, though the frequency content of the received signal is similar to the source, there is a continually increasing noise level that may be caused by the discontinuity of the fluctuating mask. Due to this noise level it is not appropriate to successfully validate this simulation method, as so the inclusion of this method in the next section is purely to explore the potential of the method.\\ 

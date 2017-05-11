@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.22)  10 MAY 2017 16:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.22)  11 MAY 2017 14:00
 entering extended mode
 **./Main.tex
 (Main.tex
@@ -814,9 +814,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 28--32
 
  []
 
-) (sections/analysis.tex [24
+
+Underfull \hbox (badness 10000) in paragraph at lines 33--34
+
+ []
+
+[24
 
 ]
+
+LaTeX Warning: Citation `Murphy2014' on page 25 undefined on input line 37.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 37--38
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--40
+
+ []
+
+) (sections/analysis.tex [25]
 Chapter 6.
 
 Underfull \hbox (badness 10000) in paragraph at lines 11--12
@@ -833,13 +852,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 33--34
 
  []
 
-) (sections/conclusion.tex [25
+) (sections/conclusion.tex [26
 
-]) (Main.bbl [26
+]) (Main.bbl [27
 
-] [27
+] [28
 
-]) [28] (Main.aux)
+]) [29] (Main.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -848,10 +867,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5471 strings out of 493333
- 75524 string characters out of 3139179
+ 5472 strings out of 493333
+ 75536 string characters out of 3139179
  443594 words of memory out of 3000000
- 8823 multiletter control sequences out of 15000+200000
+ 8824 multiletter control sequences out of 15000+200000
  57830 words of font info for 117 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,16n,44p,1290b,2168s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -866,9 +885,9 @@ m Files/MiKTeX 2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Program Files/MiKTeX 2.9
 /fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/
 times/utmbi8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb
 ><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Main.pdf (29 pages, 200120 bytes).
+Output written on Main.pdf (30 pages, 202343 bytes).
 PDF statistics:
- 144 PDF objects out of 1000 (max. 8388607)
+ 147 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

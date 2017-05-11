@@ -25,6 +25,6 @@
 \contentsline {subsection}{\numberline {4.2.2}Partially Absorbing Boundary Conditions}{22}
 \contentsline {chapter}{\numberline {5}Validation}{24}
 \contentsline {section}{\numberline {5.1}A Model Environment}{24}
-\contentsline {section}{\numberline {5.2}Results}{24}
-\contentsline {chapter}{\numberline {6}Execution Time and Analysis}{25}
-\contentsline {section}{\numberline {6.1}Results}{25}
+\contentsline {section}{\numberline {5.2}Results}{25}
+\contentsline {chapter}{\numberline {6}Execution Time and Analysis}{26}
+\contentsline {section}{\numberline {6.1}Results}{26}
