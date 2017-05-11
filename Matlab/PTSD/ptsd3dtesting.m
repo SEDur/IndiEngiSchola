@@ -18,14 +18,14 @@ alphaZp = 0.45;
 
 %define FS
 % fs = 44100.0;
-fs = 44100.0;
+fs = 10000;
 
 %define density
 rho = 1.21;
 %define speed of sound
 c = 343.0;
 %define total time
-T = 0.12;
+T = 1.0;
 %define grid width
 gridWidthX = 5.0;
 gridWidthY = 4.0;
@@ -53,6 +53,24 @@ Ny = ceil(abs(gridWidthY/dx)+2*PMLdepth);
 Nz = ceil(abs(gridWidthZ/dx)+2*PMLdepth);
 % temp = zeros(N, N);
 %Calc source
+w1 = window(@hamming,0.4/(dt)); 
+fir = dsp.FIRFilter;
+fir.Numerator = w1';
+chirp = dsp.Chirp(...
+    'SweepDirection', 'Unidirectional', ...
+    'TargetFrequency', ceil((fs/2)/2), ...
+    'InitialFrequency', 100,...
+    'TargetTime', 0.4, ...
+    'SweepTime', 0.4, ...
+    'SamplesPerFrame', 0.4/dt, ...
+    'SampleRate', 1/dt);
+% plot(chirp());
+% source1 = fir(chirp());
+source1 = w1.*chirp();
+% source1 = chirp();
+source1 = [zeros(10,1); source1];
+source1 = [source1; zeros((T/dt) - length(source1),1)].*((2*10^-5)*10^(100/20));
+
 % sStart = 44100 * 40;
 % src = zeros(1,ceil(T/dt)+1);
 % srctime = 0 : dt : 1.0;
@@ -63,14 +81,14 @@ Nz = ceil(abs(gridWidthZ/dx)+2*PMLdepth);
 % clear('win');
 % music = audioread('track.mp3');
 % src = (10^-12)*10^(50/20) .* music(sStart:sStart + length(src));
-tnum = ceil(T/dt);
-fc = 0.25;     % Cutoff frequency (normalised 0.5=nyquist)
-n0 = 100;        % Initial delay (samples)
-sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
-n=0:tnum;
-source1=exp(-dt^2*(n-n0).^2/(2*sigma^2));
-source1 = -(((2*10^-5)*10^(100/20))*source1);
-source1(source1 > (2*10^-5)) = (2*10^-5);
+% tnum = ceil(T/dt);
+% fc = 0.25;     % Cutoff frequency (normalised 0.5=nyquist)
+% n0 = 100;        % Initial delay (samples)
+% sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
+% n=0:tnum;
+% source1=exp(-dt^2*(n-n0).^2/(2*sigma^2));
+% source1 = -(((2*10^-5)*10^(100/20))*source1);
+% source1(source1 > (2*10^-5)) = (2*10^-5);
 % source1 = -source1;
 % srcloc = PMLdepth + ceil(1/dx);
 % srcloc = [ceil(Ny/2) ceil(Nx/2) ceil(Nz/2)];
@@ -205,7 +223,9 @@ for i = 1 : T/dt
      PMLdiff5, PMLalphau, PMLalphap, PMLconst);
     pd = PTSD3Dsrc(pd, source1(i), srcloc);
     reciever(i) = pd(ceil(Ny/2), ceil(Nx/2), ceil(Nz/2));
+    srcnorm(i) = pd(srcloc(1,1),srcloc(1,2),srcloc(1,3));
     roundtime(i) = toc();
+    T - (i*dt)
 %     PSTD3Dplotdomain(pd, xcells, ycells, zcells, i, dt, p0, roundtime(i), PMLdepth);
 
 %     zlim([-10^-10 10^-10]);
@@ -222,7 +242,7 @@ subplot(3,1,1);
 plot(0:dt:((length(reciever)-1)*dt),reciever)
 axis('tight')
 subplot(3,1,2);
-plot(0:dt:((length(reciever))*dt),source1)
+plot(0:dt:((length(reciever)-1)*dt),source1)
 % xlim([0 0.01])
 subplot(3,1,3);
 plot(0:dt:((length(reciever)-1)*dt),roundtime)
