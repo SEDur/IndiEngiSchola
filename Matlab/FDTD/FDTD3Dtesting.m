@@ -18,15 +18,18 @@ rho = 1.21;
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 5000 * hertz;
+fmax = 500 * hertz;
 % dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))+(1/(gz^2))));
-dt = (1/fmax)/6;
+% dt = 1/(2*fmax);
 
 %grid size
-gx = c * dt / cstab;
-gy = c * dt / cstab;
-gz = c * dt / cstab;
-
+% gx = c * dt / cstab;
+% gy = c * dt / cstab;
+% gz = c * dt / cstab;
+gx = (c / (6*fmax));
+gy = (c / (6*fmax));
+gz = (c / (6*fmax));
+dt = ((1/c)*gx)/2;
 %Dims
 %Dim Size (m)
 lx = 5*meters;
@@ -64,7 +67,7 @@ fir.Numerator = w1';
 chirp = dsp.Chirp(...
     'SweepDirection', 'Unidirectional', ...
     'TargetFrequency', ceil(fmax/2), ...
-    'InitialFrequency', 100,...
+    'InitialFrequency', 10,...
     'TargetTime', 0.4, ...
     'SweepTime', 0.4, ...
     'SamplesPerFrame', 0.4/dt, ...
@@ -164,7 +167,7 @@ while n*dt < T
     reciever(n) = p(recieverleftloc(1),recieverleftloc(2),recieverleftloc(3));
     srcnorm(n) = p(sourcelocations(1,1),sourcelocations(1,2),sourcelocations(1,3));
     exectime(n) = toc();
-%     FDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0); 
+    FDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0); 
 end
 % figure(2);
 subplot(3,1,1);

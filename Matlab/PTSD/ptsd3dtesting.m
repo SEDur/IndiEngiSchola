@@ -23,7 +23,9 @@ fs = 10000;
 %define density
 rho = 1.21;
 %define speed of sound
-c = 343.0;
+% c = 343;
+% c = 3430; << works for 2k
+c = 34300;
 %define total time
 T = 1.0;
 %define grid width
@@ -32,14 +34,26 @@ gridWidthY = 4.0;
 gridWidthZ = 3.0;
 %Target stability number 
 St = 2/(pi*sqrt(3));
+dx = (c / fs);
 %define timestep
-dt = (1/fs);
+% dt = (1/fs);
+dt = ((1/c)*dx)/2;
 %dfine grid spacing
-dx = c * dt / St;
+% dx = c * dt / St;
 %calculate pconst
-pconst = pi * 100 * (rho * c^2 * dt/dx);
+% pconst = pi * 100 * (rho * c^2 * dt/dx);
+% pconst = rho * c^2 * dt;
+% pconst = rho * c^2 * (dt/dx);
+% pconst = dt/(dx*rho);
+pconst = rho * c^2 * (dt/dx);
 %calculate uconst
-uconst = dt/(dx*rho);
+uconst = (1/rho)*(dt/dx);
+% pconst = c^2*rho*dt/dx;
+%calculate uconst
+% uconst = dt/(dx*rho);
+% uconst = (1/rho)*(dt/dx);
+% uconst = dt/(dx*rho);
+% uconst = c^2*rho*dt/dx;
 %define pml depth 
 % PMLdepth = ceil(abs(gridWidth/dx)/(2*(fs/c)));
 % PMLdepth = 30;
@@ -53,51 +67,34 @@ Ny = ceil(abs(gridWidthY/dx)+2*PMLdepth);
 Nz = ceil(abs(gridWidthZ/dx)+2*PMLdepth);
 % temp = zeros(N, N);
 %Calc source
-w1 = window(@hamming,0.4/(dt)); 
-fir = dsp.FIRFilter;
-fir.Numerator = w1';
+% w1 = window(@gausswin,0.4/(dt),2.5); 
+precursor = -(sin(2*pi*0.5*(0:0.001:2))).*0.01;
 chirp = dsp.Chirp(...
     'SweepDirection', 'Unidirectional', ...
-    'TargetFrequency', ceil((fs/2)/2), ...
-    'InitialFrequency', 100,...
+    'TargetFrequency', ceil((fs/4)/2), ...
+    'InitialFrequency', 10,...
     'TargetTime', 0.4, ...
     'SweepTime', 0.4, ...
     'SamplesPerFrame', 0.4/dt, ...
     'SampleRate', 1/dt);
-% plot(chirp());
-% source1 = fir(chirp());
-source1 = w1.*chirp();
+% % plot(chirp());
+% % source1 = fir(chirp());
 % source1 = chirp();
-source1 = [zeros(10,1); source1];
-source1 = [source1; zeros((T/dt) - length(source1),1)].*((2*10^-5)*10^(100/20));
+% source1(1:76) = 0;
+source1 = GenerateMLSSequence(2,11,0).*((2*10^-5)*10^(100/20));
+T = length(source1)*dt;
+% source1 = source1(1:(T/dt));
+w1 = window(@gausswin,length(source1),2.5); 
+% source1 = source1 .* w1;
+% source1 = [precursor'; source1];
+% source1 = [source1; zeros((T/dt) - length(source1),1)].*((2*10^-5)*10^(100/20));
 
-% sStart = 44100 * 40;
-% src = zeros(1,ceil(T/dt)+1);
-% srctime = 0 : dt : 1.0;
-% srcf = 20;
-% src(10:10+length(srctime)-1) = (10^-12)*10^(50/20) * sin(2*pi*srcf.*srctime);
-% win = kaiser(length(srctime) + 20,2.0);
-% src(1:length(srctime) + 20) = src(1:length(srctime) + 20) .* win';
-% clear('win');
-% music = audioread('track.mp3');
-% src = (10^-12)*10^(50/20) .* music(sStart:sStart + length(src));
-% tnum = ceil(T/dt);
-% fc = 0.25;     % Cutoff frequency (normalised 0.5=nyquist)
-% n0 = 100;        % Initial delay (samples)
-% sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
-% n=0:tnum;
-% source1=exp(-dt^2*(n-n0).^2/(2*sigma^2));
-% source1 = -(((2*10^-5)*10^(100/20))*source1);
-% source1(source1 > (2*10^-5)) = (2*10^-5);
-% source1 = -source1;
-% srcloc = PMLdepth + ceil(1/dx);
-% srcloc = [ceil(Ny/2) ceil(Nx/2) ceil(Nz/2)];
 srcloc = [PMLdepth+ceil(1/dx) PMLdepth+ceil(1/dx) PMLdepth+ceil(1/dx)];
 tempdiffmatrixX = zeros(1,Nx);
 tempdiffmatrixY = zeros(1,Ny);
 tempdiffmatrixZ = zeros(1,Nz);
 % spin = -180 :0.005 : 180;     
-pd = ones(Nx,Ny,Nz);
+pd =  zeros(Nx,Ny,Nz);
 udx = zeros(Nx,Ny,Nz);
 udy = zeros(Nx,Ny,Nz);
 udz = zeros(Nx,Ny,Nz);
@@ -222,11 +219,11 @@ for i = 1 : T/dt
         diffmatrixX, diffmatrixY , diffmatrixZ,...
      PMLdiff5, PMLalphau, PMLalphap, PMLconst);
     pd = PTSD3Dsrc(pd, source1(i), srcloc);
-    reciever(i) = pd(ceil(Ny/2), ceil(Nx/2), ceil(Nz/2));
+    reciever(i) = real(pd(ceil(Ny/2), ceil(Nx/2), ceil(Nz/2)));
     srcnorm(i) = pd(srcloc(1,1),srcloc(1,2),srcloc(1,3));
     roundtime(i) = toc();
     T - (i*dt)
-%     PSTD3Dplotdomain(pd, xcells, ycells, zcells, i, dt, p0, roundtime(i), PMLdepth);
+    PSTD3Dplotdomain(pd, xcells, ycells, zcells, i, dt, p0, roundtime(i), PMLdepth);
 
 %     zlim([-10^-10 10^-10]);
 %     set(gca,'zlim',[-10^-12 10^-12]);
@@ -238,16 +235,52 @@ for i = 1 : T/dt
 %     drawnow;
 
 end
-subplot(3,1,1);
-plot(0:dt:((length(reciever)-1)*dt),reciever)
-axis('tight')
-subplot(3,1,2);
-plot(0:dt:((length(reciever)-1)*dt),source1)
-% xlim([0 0.01])
-subplot(3,1,3);
-plot(0:dt:((length(reciever)-1)*dt),roundtime)
-axis('tight')
-% toc();
+%% Some really minor postprocessing
+% Hd = postprocessingDCfilter;
+norec = reciever ./ max(abs(reciever));
+recanal = AnalyseMLSSequence(reciever',0,2,11,0,0);
+% norec = Hd(norec);
+% [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
+[lpsd, lf] = pwelch(norec,hann(2000),[],200,fs);
+% clear('Hd');
+% Hd = postprocessingDCfilter;
+srcnrm = srcnorm ./ max(abs(srcnorm));
+% srcnrm = Hd(srcnrm);
+% [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
+[spsd, sf] = pwelch(srcnrm,hann(2000),[],200,fs);
 
 %% Display the results
+subplot(5,1,1);
+plot(0:dt:((length(reciever)-1)*dt),reciever)
+hold on;
+plot(0:dt:((length(reciever)-1)*dt),source1(1:length(reciever)))
+hold off;
+axis('tight')
+legend('reciever','source');
+title('raw input and output');
+subplot(5,1,2);
+plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
+hold on;
+plot(0:dt:((length(srcnrm)-1)*dt),srcnrm)
+hold off;
+axis('tight')
+legend('reciever','source');
+title('normalised input and output');
+subplot(5,1,3);
+plot(lf, db(lpsd));
+hold on;
+plot(sf, db(spsd));
+hold off;
+legend('reciever','source');
+grid('on');
+title('power spectral density of input and output');
+subplot(5,1,4);
+plot(0:dt:((length(reciever)-1)*dt),roundtime)
+axis('tight')
+ttlstr = sprintf('computation time per cycle, total time is %d',sum(roundtime));
+title(ttlstr);
+subplot(5,1,5);
+plot(0:dt:((length(recanal)-1)*dt),recanal);
+title('MLS Analysed');
+
 

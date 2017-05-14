@@ -1,5 +1,10 @@
 \begin{thebibliography}{10}
 
+\bibitem{Rossing2007}
+T.~D. Rossing.
+\newblock {Springer Handbook of Acoustics}.
+\newblock {\em Book}, (JANUARY 2007):1182, 2007.
+
 \bibitem{beranek1954acoustics}
 L~L Beranek.
 \newblock {\em {Acoustics}}.
@@ -11,17 +16,33 @@ F.~Alton Everest and Neil~A. Shaw.
 \newblock {\em {Master Handbook of Acoustics, 5th Edition}}, volume 110.
 \newblock 5th edition, 2009.
 
+\bibitem{Beranek2006}
+Leo~L. Beranek.
+\newblock {Analysis of Sabine and Eyring equations and their application to
+  concert hall audience and chair absorption}.
+\newblock {\em J. Acoust. Soc. Am.}, 120(3):1399--1410, 2006.
+
+\bibitem{Davis2014}
+Don Davis and Eugene Patronis.
+\newblock {\em {Sound System Engineering}}.
+\newblock Focal Press, New York, 4th edition, 2014.
+
+\bibitem{Bilbao2004a}
+Stefan Bilbao.
+\newblock {\em {Wave and Scattering Methods for Numerical Simulation}}.
+\newblock John Wiley {\&} Sons, 1st edition, 2004.
+
+\bibitem{Schneider2015}
+John~B Schneider.
+\newblock {Understanding the Finite-Difference Time-Domain Method}.
+\newblock pages 1--403, 2015.
+
 \bibitem{Yee1966}
 Kane~S Yee.
 \newblock {Numerical solution of initial boundary value problems involving
   Maxwell's equations in isotropic media}.
 \newblock {\em IEEE Transactions on Antennas and Propagation}, 14(3):302--307,
   1966.
-
-\bibitem{Schneider2015}
-John~B Schneider.
-\newblock {Understanding the Finite-Difference Time-Domain Method}.
-\newblock pages 1--403, 2015.
 
 \bibitem{Botteldooren1993}
 D~Botteldooren.
@@ -41,17 +62,55 @@ Soren~Krarup Olesen.
 \newblock {\em Proceedings of the 102nd Audio Engineering Society Convention},
   1997.
 
+\bibitem{Angus2010}
+Jamie A~S Angus and Andrew Caunce.
+\newblock {A GPGPU Approach to Improved Acoustic Finite Difference Time Domain
+  Calculations}.
+\newblock {\em 128th Audio Engineering Society Convention}, 2010.
+
+\bibitem{Sakuma2014}
+Tetsuya Sakuma, Shinichi Sakamoto, and Toru Otsuru.
+\newblock {\em {Computational simulation in architectural and environmental
+  acoustics: Methods and applications of wave-based computation}}, volume
+  9784431544.
+\newblock 2014.
+
+\bibitem{Bilbao2009}
+Stefan Bilbao.
+\newblock {\em {Numerical Sound Synthesis: Finite Difference Schemes and
+  Simulation in Musical Acoustics}}.
+\newblock 2009.
+
+\bibitem{VanMourik2014}
+Jelle {Van Mourik} and Damian Murphy.
+\newblock {Explicit higher-order FDTD schemes for 3D room acoustic simulation}.
+\newblock {\em IEEE/ACM Transactions on Speech and Language Processing},
+  22(12):2003--2011, 2014.
+
+\bibitem{Hamilton2013a}
+Brian Hamilton and Stefan Bilbao.
+\newblock {Fourth-Order and Optimised Finite Difference Schemes for the 2-D
+  Wave Equation}.
+\newblock {\em Research.Ed.Ac.Uk}, 2(2):1--8, 2013.
+
 \bibitem{Doerr2013}
 Christopher Doerr.
 \newblock {Sparse Finite Difference Time Domain Method}.
-\newblock {\em IEEE Photonics Technology Letters}, 25(23):1, 2013.
+\newblock {\em IEEE Photonics Technology Letters}, 25(23):1--1, 2013.
 
 \bibitem{Schuster2004}
-J.W. Schuster, K.C. Wu, R.R. Ohs, and R.J. Luebbers.
+J~W Schuster, K~C Wu, R~R Ohs, and R~J Luebbers.
 \newblock {Application of moving window FDTD to predicting path loss over
   forest covered irregular terrain}.
 \newblock {\em IEEE Antennas and Propagation Society Symposium, 2004.}, pages
-  1607--1610 Vol.2, 2004.
+  1607----1610 Vol.2, 2004.
+
+\bibitem{Saarelma2016}
+Jukka Saarelma, Jonathan Botts, Brian Hamilton, and Lauri Savioja.
+\newblock {Audibility of dispersion error in room acoustic finite-difference
+  time-domain simulation as a function of simulation distance}.
+\newblock {\em The Journal of the Acoustical Society of America},
+  139(4):1822--1832, 2016.
 
 \bibitem{Orszag1971}
 Steven~a. Orszag.
@@ -70,12 +129,6 @@ Lloyd~N Trefethen.
 \newblock {Spectral Methods in Matlab}.
 \newblock {\em Lloydia Cincinnati}, 10:184, 2000.
 
-\bibitem{Angus2010}
-Jamie A~S Angus and Andrew Caunce.
-\newblock {A GPGPU Approach to Improved Acoustic Finite Difference Time Domain
-  Calculations}.
-\newblock {\em 128th Audio Engineering Society Convention}, 2010.
-
 \bibitem{Berenger1994}
 Jean~P Berenger.
 \newblock {A perfectly matched layer for the absorption of electromagnetic
@@ -92,5 +145,11 @@ Carlos Spa, Jose Escolano, and Adan Garriga.
 \newblock {Semi-empirical boundary conditions for the linearized acoustic Euler
   equations using Pseudo-Spectral Time-Domain methods}.
 \newblock {\em Applied Acoustics}, 72(4):226--230, 2011.
+
+\bibitem{Murphy2014}
+Damian~T Murphy, Alex Southern, and Lauri Savioja.
+\newblock {Source excitation strategies for obtaining impulse responses in
+  finite difference time domain room acoustics simulation}.
+\newblock {\em Applied Acoustics}, 82:6--14, 2014.
 
 \end{thebibliography}

@@ -33,16 +33,16 @@ cstab = 2/(pi*sqrt(2));
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 10000 * hertz;
-dt = (1/fmax)/3;
-%grid size
-gx = c * dt / cstab;
-gy = c * dt / cstab;
+fmax = 1000 * hertz;
+
+gx = (c / (6*fmax));
+gy = (c / (6*fmax));
+dt = ((1/c)*gx)/2;
 
 %Dims
 %Dim Size (m)
-lx = 5*meters;
-ly = 4*meters;
+lx = 50*meters;
+ly = 40*meters;
 
 pidxRow = [];
 pidxCol = [];
@@ -61,24 +61,42 @@ alphaB = 0.45;
 %number of sources
 snum = 2;
 %source locations
-sourcelocations = [ceil((1/gy)) ceil(1/gx)];
+% sourcelocations = [ceil((1/gy)) ceil(1/gx)];
+sourcelocations = [ceil((ycells/2)) ceil(xcells/2)];
+
 %Source amplitude 
 A = 1;
 
 %recieves position
-recieverleftloc = [ceil(ycells/2) ceil(xcells/2)];
+recieverleftloc = [ceil(ycells/2) ceil(xcells/4)];
 
-%Time of sim
-T = 0.3 ;
-
-% generate the source(s) & determine number of time steps needed
+% %Time of sim
+T = 0.1 ;
+% 
+% % generate the source(s) & determine number of time steps needed
 tnum = ceil(T/dt);
-fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
-n0 = 30;        % Initial delay (samples)
-sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
-n=0:tnum;
-source1=exp(-dt^2*(n-n0).^2/(2*sigma^2)).*((2*10^-5)*10^(100/20));
-source1= source1 ./ max(source1);
+% fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
+% n0 = 30;        % Initial delay (samples)
+% sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
+% n=0:tnum;
+% source1=exp(-dt^2*(n-n0).^2/(2*sigma^2)).*((2*10^-5)*10^(100/20));
+% source1= source1 ./ max(source1);
+
+w1 = window(@hamming,0.4/(dt)); 
+fir = dsp.FIRFilter;
+fir.Numerator = w1';
+chirp = dsp.Chirp(...
+    'SweepDirection', 'Unidirectional', ...
+    'TargetFrequency', ceil(fmax/2), ...
+    'InitialFrequency', 10,...
+    'TargetTime', 0.4, ...
+    'SweepTime', 0.4, ...
+    'SamplesPerFrame', 0.4/dt, ...
+    'SampleRate', 1/dt);
+% plot(chirp());
+source1 = w1.*chirp();
+source1 = [zeros(10,1); source1];
+source1 = [source1; zeros((T/dt) - length(source1),1)].*((2*10^-5)*10^(120/20));
 
 % initialize the velocity and pressure matrices (matrices are set up in a
 % y by x fashion to properly display the 2D space (y = rows, x = columns))
@@ -134,34 +152,101 @@ n = 1;
 for n = 1:T/dt    
 % n = n + 1;
     tic;
-    [idx] = SPARSEfun2DB(p, 0, p0);
+    [idx] = SPARSEfun2DC(p, 20, p0);
     [p, ux, uy] = SFDTD2Dfun(p, pCx, pCy, ux, uy, uCx, uCy, Rx, Ry, ZL,...
         ZR, ZT, ZB, idx);
     extime(n) = toc;
     % set the pressure at the source location
     % NOTE: source vectors for unused drivers will be zeros
     p(sourcelocations(1),sourcelocations(2)) = p(sourcelocations(1),sourcelocations(2)) - source1(n);
-    extime(n) = toc;
+    reciever(n) = p(recieverleftloc(1),recieverleftloc(2));
+    srcnorm(n) = p(sourcelocations(1,1),sourcelocations(1,2));
+    exectime(n) = toc();
 
     %     p(s2loc(1),s2loc(2)) = p(s2loc(1),s2loc(2)) + -source2(n);
 %     power(n) = 20*log10(abs(max(p)));
 %     leftear(n) = abs(p(recieverleftloc(1),recieverleftloc(2)));
 %     rightear(n) = abs(p(recieverrightloc(1),recieverrightloc(2)));
-      reciever(n) = p(recieverleftloc(1),recieverleftloc(2));
+%       reciever(n) = p(recieverleftloc(1),recieverleftloc(2));
 
 %PLOTTING SECTION
 %         figure(1);
-        surf(linex, liney, abs(p));
+%         surf(linex, liney, abs(p));
+%         surf(linex, liney, idx);
+% 
 %         shading interp;
-        title(sprintf('Time = %.6f s, Executes at %.6f s',n*dt,extime(n)),...
-            'Color',[0 0 0],'FontSize', 14);
-        xlabel('Width (meters)', 'Color', [0 0 0]);
-        ylabel('Length (meters)', 'Color', [0 0 0]);
-        view(2);
-        shading('interp');
-        drawnow;
+%         title(sprintf('Time = %.6f s, Executes at %.6f s',n*dt,extime(n)),...
+%             'Color',[0 0 0],'FontSize', 14);
+%         xlabel('Width (meters)', 'Color', [0 0 0]);
+%         ylabel('Length (meters)', 'Color', [0 0 0]);
+%         view(2);
+%         shading('interp');
+%         drawnow;
         
 end
+norec = reciever ./ max(abs(reciever));
+% recanal = AnalyseMLSSequence(reciever',0,2,11,0,0);
+% norec = Hd(norec);
+% [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
+% [lpsd, lf] = pwelch(norec,hann(2000),[],200,1/dt);
+[lpsd, lf] = pwelch(norec,hann(200),[],200,1/dt);
+
+% clear('Hd');
+% Hd = postprocessingDCfilter;
+srcnrm = srcnorm ./ max(abs(srcnorm));
+% srcnrm = Hd(srcnrm);
+% [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
+% [spsd, sf] = pwelch(srcnrm,hann(2000),[],200,1/dt);
+[spsd, sf] = pwelch(srcnrm,hann(200),[],200,1/dt);
+
+%% Display the results
+subplot(4,1,1);
+plot(0:dt:((length(reciever)-1)*dt),reciever)
+hold on;
+plot(0:dt:((length(reciever)-1)*dt),source1(1:length(reciever)))
+hold off;
+axis('tight')
+legend('reciever','source');
+title('raw input and output');
+subplot(4,1,2);
+plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
+hold on;
+plot(0:dt:((length(srcnrm)-1)*dt),srcnrm)
+hold off;
+axis('tight')
+legend('reciever','source');
+title('normalised input and output');
+subplot(4,1,3);
+plot(lf, db(lpsd),'--','Linewidth',2.0);
+hold on;
+plot(sf, db(spsd));
+hold off;
+legend('reciever','source');
+grid('on');
+title('power spectral density of input and output');
+subplot(4,1,4);
+plot(0:dt:((length(reciever)-1)*dt),exectime)
+axis('tight')
+ttlstr = sprintf('computation time per cycle, total time is %d',sum(exectime));
+title(ttlstr);
+% subplot(5,1,5);
+% plot(0:dt:((length(recanal)-1)*dt),recanal);
+% title('MLS Analysed');
+
+
+
+
+% figure(2);
+% subplot(3,1,1);
+% plot(0:dt:((length(reciever)-1)*dt),reciever)
+% axis('tight')
+% subplot(3,1,2);
+% plot(0:dt:((length(reciever)-1)*dt),source1)
+% % xlim([0 0.01])
+% subplot(3,1,3);
+% plot(0:dt:((length(reciever)-1)*dt),exectime)
+% axis('tight')
+
 % leftear = real(10*log10(leftear/p0));
 % rightear = real(10*log10(rightear/p0));
 % signal = real(10*log10(source1/p0));
