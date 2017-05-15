@@ -8,7 +8,7 @@
 \usepackage{type1cm}         
 \usepackage{makeidx}         % allows index generation
 \usepackage{graphicx}        % standard LaTeX graphics tool
-                             % when including figure files
+\usepackage{float}           % when including figure files
 \usepackage{multicol}        % used for the two-column index
 \usepackage[bottom]{footmisc}% places footnotes at page bottom
 \usepackage{listings}
@@ -35,6 +35,7 @@
     showtabs=false,                  
     tabsize=2
 }
+\usepackage{grffile}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
 \usepackage{url}
@@ -44,14 +45,14 @@
 \usepackage{footmisc}
 \usepackage{cite}
 \bibliographystyle{unsrt}
-\graphicspath{{E:/GIT/IndiEngiSchola/Docs/graphics/}}
+%\graphicspath{./graphics/}
 \usepackage{subfiles}
 \usepackage{showframe}% http://ctan.org/pkg/showframe
 \usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
-\makeatletter
-\patchcmd{\@makechapterhead}{\vspace*{50\p@}}{}{}{}% Removes space above \chapter head
-\patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{}{}{}% Removes space above \chapter* head
-\makeatother
+%\makeatletter
+%\patchcmd{\@makechapterhead}{\vspace*{50\p@}}{}{}{}% Removes space above \chapter head
+%\patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{}{}{}% Removes space above \chapter* head
+%\makeatother
 
 \makeindex             % used for the subject index
                        % please use the style svind.ist with

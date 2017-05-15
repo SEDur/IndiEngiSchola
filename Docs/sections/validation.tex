@@ -1,17 +1,10 @@
-%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% sample chapter
-%
-% Use this file as a template for your own input.
-%
-%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
-%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
-\chapter{Validation}
-\label{Introduction}
-While it may be beneficial and interesting to review the behaviour of a wave propagating in a fictitious or simulated domain, model validation could be considered an important step towards creating a such a robust and useful tool. Below we shall discuss a scenario that is used for the validation of the simulation tools described in this study, and we shall review the performance of such tools in comparison to the hand calculated properties of the scenario and the results of an Image Source model.  
 
-\section{A Model Environment}
-The model environment used for validation in this study was a fully enclosed room of the following dimensions:\\
+\chapter{Validation}
+\section{Validation Strategy}
+Model validation could be considered an important step towards creating a robust and useful simulation tool, though there is little dedicated literature referring to the process of successfully validating wave solving acoustic simulation software. A greater volume of literature is availalbe for the validation of Ray based methods such as~\cite{Ahnert2005,Tsingos2002}, and the validation of a hybrid scheme by Murphy \textit{et al} is available ~\cite{Southern2013}. Studies such as Hill~\cite{Hill2012}. This section will review an attempt to validate the FDTD and PSTD tools described above, with a small 3D domain.\\
+
+\subsection{The Domain}
+The domain used for validation in this study was a fully bounded room of the following dimensions:\\
 
 \begin{center}
 \begin{tabular}{|c|c|} 
@@ -31,6 +24,9 @@ The average number of reflections before the energy of a wave-front has decayed 
 The Schroeder frequency of the room will be $f_{schroeder} = 107Hz $, and the axial, tangential and oblique modes below the Schroeder frequency are calculated as:\\
 
 The stimulus position in each domain was $1.0m$ in each direction from the bottom left corner, and the receiver position was the exact middle of the domain. The stimulus source type was a soft source, as described in the FDTD section of the document. The source content was a log chirp that was generated using the Matlab DSP Systems Toolbox, with a start frequency of 100Hz and a stop frequency of half the maximum target frequency (or a quarter of Nyquist), that was normalised to $100dBSPL$ and has a sweep time of $0.4s$. Before normalisation, a Hann window was applied to the signal to minimize the discontinuity of introducing the source. The maximum frequency of interest in this validation was $5kHz$, giving a $0.333e^{-5}$ step time for the FDTD simulation, and a $0.1e^{-4}$ step time for the PSTD simulation. A plot of the source signal amplitude with respect to time is given below:\\
+
+\subsection{Post Processing}
+The aim of the validation will be to show that there is minimal error in the normalised power spectral density between source and receiver location. This will show that waves are travelling from source to receiver with minimal error i.e. without aliasing or unexpected loss in the frequency range of interest. Some modal influence is expected, as is DC offset. To reduce the effect of the dc term, a DC blocking filter will be used when post processing the source and receiver recorded signals.
 
 \section{Results}
 Below is a plot of the spectral power of the source signal, the FDTD receiver position and the PSTD receiver position for the simulation described above. The receiver signals are normalised the maximum of the source position amplitude, as described in~\cite{Murphy2014}.\\ 

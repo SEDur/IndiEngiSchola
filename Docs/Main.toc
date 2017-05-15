@@ -1,38 +1,46 @@
-\contentsline {chapter}{\numberline {1}Introduction}{2}
-\contentsline {section}{\numberline {1.1}Problem Definition}{2}
-\contentsline {section}{\numberline {1.2}Aim of the Study}{3}
-\contentsline {section}{\numberline {1.3}Format of the Report}{3}
-\contentsline {chapter}{\numberline {2}Acoustic Principals}{4}
-\contentsline {section}{\numberline {2.1}The Acoustic Wave Equation}{4}
-\contentsline {subsection}{\numberline {2.1.1}Wave Equation In One Dimension}{5}
-\contentsline {subsubsection}{Equation Of Motion}{5}
-\contentsline {subsubsection}{Gas Law}{5}
-\contentsline {subsubsection}{Conservation Of Mass}{6}
-\contentsline {subsubsection}{Wave Equation}{6}
-\contentsline {section}{\numberline {2.2}Acoustic Properties of Interest in This Study}{7}
-\contentsline {subsection}{\numberline {2.2.1}Inverse Square Law \& Propagation time}{8}
-\contentsline {subsection}{\numberline {2.2.2}Reverberation}{9}
-\contentsline {subsubsection}{Acoustic Absorption}{9}
-\contentsline {subsubsection}{Modified Hopkins-Stryker Equation}{10}
-\contentsline {subsection}{\numberline {2.2.3}Room Modes}{11}
-\contentsline {chapter}{\numberline {3}Finite Difference Time Domain Method}{13}
-\contentsline {section}{\numberline {3.1}Introduction to the Finite Difference Time Domain Method}{13}
-\contentsline {section}{\numberline {3.2}The Finite Difference Time Domain Method Applied To The Acoustic Wave Equation}{14}
-\contentsline {subsection}{\numberline {3.2.1}Field Calculation}{14}
-\contentsline {subsection}{\numberline {3.2.2}Block Diagram}{15}
-\contentsline {subsection}{\numberline {3.2.3}Boundary Handling}{17}
-\contentsline {subsection}{\numberline {3.2.4}Example Function for Solving}{18}
-\contentsline {subsection}{\numberline {3.2.5}Stability}{19}
-\contentsline {section}{\numberline {3.3}Sparse FDTD}{20}
-\contentsline {subsection}{\numberline {3.3.1}2D implementation}{21}
-\contentsline {chapter}{\numberline {4}Pseudo-Spectral Time Domain Method}{24}
-\contentsline {section}{\numberline {4.1}A Background to the Pseudo-Spectral Time Domain Method}{24}
-\contentsline {section}{\numberline {4.2}The Pseudospectral Time Domain Method Applied To The Wave Equation}{24}
-\contentsline {subsection}{\numberline {4.2.1}Absorbing Boundary Conditions}{25}
-\contentsline {subsection}{\numberline {4.2.2}Partially Absorbing Boundary Conditions}{26}
-\contentsline {chapter}{\numberline {5}Validation}{28}
-\contentsline {section}{\numberline {5.1}A Model Environment}{28}
-\contentsline {section}{\numberline {5.2}Results}{29}
-\contentsline {section}{\numberline {5.3}Validating The SFDTD Method}{29}
-\contentsline {chapter}{\numberline {6}Execution Time and Analysis}{30}
-\contentsline {section}{\numberline {6.1}Results}{30}
+\contentsline {chapter}{\numberline {1}Introduction}{3}
+\contentsline {section}{\numberline {1.1}Problem Definition}{3}
+\contentsline {section}{\numberline {1.2}Aim of the Study}{4}
+\contentsline {section}{\numberline {1.3}Format of the Report}{4}
+\contentsline {chapter}{\numberline {2}Acoustic Principals}{5}
+\contentsline {section}{\numberline {2.1}The Acoustic Wave Equation}{5}
+\contentsline {subsection}{\numberline {2.1.1}Wave Equation In One Dimension}{6}
+\contentsline {subsubsection}{Equation Of Motion}{6}
+\contentsline {subsubsection}{Gas Law}{6}
+\contentsline {subsubsection}{Conservation Of Mass}{7}
+\contentsline {subsubsection}{Wave Equation}{7}
+\contentsline {section}{\numberline {2.2}Acoustic Properties of Interest in This Study}{8}
+\contentsline {subsection}{\numberline {2.2.1}Inverse Square Law \& Propagation time}{9}
+\contentsline {subsection}{\numberline {2.2.2}Reverberation}{10}
+\contentsline {subsubsection}{Acoustic Absorption}{10}
+\contentsline {subsubsection}{Modified Hopkins-Stryker Equation}{11}
+\contentsline {subsection}{\numberline {2.2.3}Room Modes}{12}
+\contentsline {chapter}{\numberline {3}Time Domain Numerical Methods}{14}
+\contentsline {section}{\numberline {3.1}Finite Difference Time Domain Method}{14}
+\contentsline {subsection}{\numberline {3.1.1}Introduction to the Finite Difference Time Domain Method}{14}
+\contentsline {subsection}{\numberline {3.1.2}The Finite Difference Time Domain Method Applied To The Acoustic Wave Equation}{15}
+\contentsline {subsection}{\numberline {3.1.3}Field Calculation}{15}
+\contentsline {subsection}{\numberline {3.1.4}Block Diagram}{16}
+\contentsline {subsection}{\numberline {3.1.5}Boundary Handling}{18}
+\contentsline {subsection}{\numberline {3.1.6}Example Function for Solving}{19}
+\contentsline {subsection}{\numberline {3.1.7}Stability}{20}
+\contentsline {section}{\numberline {3.2}Sparse FDTD}{21}
+\contentsline {subsection}{\numberline {3.2.1}Introduction to the Sparse Finite Difference Time Domain Method}{21}
+\contentsline {subsection}{\numberline {3.2.2}Acoustic Implementation of SFDTD in Two Dimensions}{22}
+\contentsline {section}{\numberline {3.3}Pseudo-Spectral Time Domain Method}{26}
+\contentsline {subsection}{\numberline {3.3.1}A Background to the Pseudo-Spectral Time Domain Method}{27}
+\contentsline {subsection}{\numberline {3.3.2}Block Diagram}{27}
+\contentsline {subsection}{\numberline {3.3.3}The Pseudospectral Time Domain Method Applied To The Wave Equation}{29}
+\contentsline {subsection}{\numberline {3.3.4}Absorbing Boundary Conditions}{31}
+\contentsline {subsection}{\numberline {3.3.5}Partially Absorbing Boundary Conditions}{32}
+\contentsline {section}{\numberline {3.4}Sound Source Terms}{33}
+\contentsline {section}{\numberline {3.5}Signals}{34}
+\contentsline {chapter}{\numberline {4}Validation}{35}
+\contentsline {section}{\numberline {4.1}A Model Environment}{35}
+\contentsline {section}{\numberline {4.2}Results}{36}
+\contentsline {section}{\numberline {4.3}Validating The SFDTD Method}{36}
+\contentsline {chapter}{\numberline {5}Execution Time and Analysis}{37}
+\contentsline {section}{\numberline {5.1}Results}{37}
+\contentsline {chapter}{\numberline {6}Conclusion and Further Work}{38}
+\contentsline {section}{\numberline {6.1}Conclusion}{38}
+\contentsline {section}{\numberline {6.2}Further Work}{38}

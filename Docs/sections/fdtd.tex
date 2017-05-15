@@ -6,11 +6,11 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
 %\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
-\chapter{Finite Difference Time Domain Method}
-
+\chapter{Time Domain Numerical Methods}
+\section{Finite Difference Time Domain Method}
 The Finite Difference Time Domain (FDTD) Method is a numerical method for solving partial differential equations. The power of this method lies in simplicity and flexibility, and it can be used to solve partial differential equations of varying complexity~\cite{Schneider2015}. This chapter will discuss the application of the finite difference time domain method to the acoustic wave equation, including partially absorbing boundary conditions and the introduction of the sparse finite difference time domain method for acoustics.
 
-\section{Introduction to the Finite Difference Time Domain Method}
+\subsection{Introduction to the Finite Difference Time Domain Method}
 Methods for solving partial differential equations have been of significant and continued research since the early 1900s. Mathematicians such as Courant, Fiedrichs and Hrennikof undertook seminal work in the early 1920s that formed a base for much of the finite methods used today. The FDTD Method is a numerical method for solving time domain problems (often wave equations) with localised handling of spatial derivatives, and was first introduced for solving Maxwell's equations to simulate electromagnetic wave propagation by Yee \cite{Yee1966}.\\
 
 Yee proposed a method for solving Maxwell's equations in partial differential form by applying them to staggered matrices in partial steps of time and space. These matrices represented the magnetic (H) and electric (E) fields, where the relationship between H and E means one perturbs the other. In this explicit formulation H and E are solved contiguously in a 'leapfrog' style, executing two sets of computations to solve for one time step. Multiple time steps would be solved from current time $t = 0$, in steps of $dt$ to the end of simulation time $T$.\\
@@ -20,7 +20,7 @@ Each field is solved at half steps in time from the other, thus H for the curren
 As such it is possible to apply a simple 'kernel' across many discrete points in a domain to simulate electromagnetic wave propagation.\\
 In acoustics FDTD can be used to simulate a wide range of problems such as diffraction and diffusion, aeroacoustic, meteorological \& environmental and mixed medium, without having to perform multiple simulations for different frequencies or simulation characteristics \footnote{as would have to be required in frequency domain simulations such as some Finite Element and Boundary Element simulations}. 
 
-\section{The Finite Difference Time Domain Method Applied To The Acoustic Wave Equation}
+\subsection{The Finite Difference Time Domain Method Applied To The Acoustic Wave Equation}
 The FDTD method applied to solving the acoustic wave equation follows a similar form to that of solving Maxwells Equations with FDTD~\cite{Schneider2015}. Bottledoorens~\cite{Botteldooren1993} seminal work applied the FDTD method to the acoustic wave equations for both Cartesian and quasi-Cartesian grid systems. As previously described in the room acoustics section, the linear acoustic wave equation is based on Newton's second law of motion, the gas law and the conservation of mass. The equation has the following form for changes in the pressure and velocity respectively within a volume:\\
 \begin{center}
 $\frac{\delta^2 p}{\delta t^2} = \frac{1}{c^2} \frac{\delta^2 p}{\delta t^2}$\\
@@ -58,20 +58,20 @@ A basic block diagram of a program for solving the the acoustic FDTD method is g
     \node [block] (init) {initialize model};
    %\node [cloud, left of=init] (expert) {expert};
    %\node [cloud, right of=init] (system) {system};
-    \node [block, below of=init] (source) {add source terms};
-    \node [block, below of=source] (evaluateu) {update velocities};
+    \node [block, below of=init] (evaluateu) {update velocities};
     \node [block, below of=evaluateu] (evaluateb) {update boundaries};
     \node [block, below of=evaluateb] (evaluatep) {update pressures};
-    \node [block, below of=evaluatep] (record) {record at reciever, $t = t + \delta t$};
+    \node [block, below of=evaluatep] (source) {add source terms};
+    \node [block, below of=source] (record) {record at reciever, $t = t + \delta t$};
     \node [block, left of=evaluateb, node distance=3cm] (display) {display model};
     \node [decision, below of=record] (decide) {$t = T?$};
     \node [block, below of=decide, node distance=3cm] (stop) {stop and postprocess};
     % Draw edges
-    \path [line] (init) -- (source);
-    \path [line] (source) -- (evaluateu);
+    \path [line] (init) -- (evaluateu);
     \path [line] (evaluateu) -- (evaluateb);
     \path [line] (evaluateb) -- (evaluatep);
-    \path [line] (evaluatep) -- (record);
+    \path [line] (evaluatep) -- (source);
+    \path [line] (source) -- (record);
     \path [line] (record) -- (decide);
     \path [line] (decide) -| node [near start] {no} (display);
     \path [line] (display) |- (source);
@@ -115,49 +115,53 @@ $ CFL = c \frac{\delta t}{\sqrt{\Sigma_{1}^{N_D} \delta {N_{D}}^2}} \leq C_{max}
 As the number of dimensions increases and the spatial step decreases, the time step must decrease for the simulation to remain stable. Although a simulation must have a CFL coefficient that is less than the $C_{max}$, this does not guarantee numerical stability and there is a lower limit of time step that can be observed in a poorly defined simulation.\\
 As this acoustic simulation is a discrete computation of a continuous system, the Nyquist sampling theorem must be considered. This suggests that $\delta t \leq \frac{f_{max}}{2}$. It has been suggested in various studies~\cite{Hill2012,VanMourik2014} that between 5 and 10 points per shortest wavelength are required for accurate stable simulation $\delta_x = c / (\textit{f}_{max} 6)$. As $\delta x$ and $\delta t$ are linked by the CFL condition, $\delta t \leq \frac{\frac{1}{c} \delta_x}{2}$. Stability analysis techniques are available for analysing the stability of simply shaped unbounded models such as VonNeuman analysis~\cite{Bilbao2009,Hamilton2013a}. Due to time constraints VonNeuman Analysis was not implemented in this study.
 
-%SAVE THIS FOR PSTD
-%
-%A more conservative estimate may be provided by substituting the empirical $C_{max}$ term with the a term related to 
-%\begin{center}
-%$ CFL = c \frac{\delta t}{\sqrt{\Sigma_{1}^{N_D} \delta {N_{D}}^2}} \leq \frac{2}{\pi \sqrt{N_D}}$\\
-%\end{center}
-
 \section{Sparse FDTD}
+\subsection{Introduction to the Sparse Finite Difference Time Domain Method}
 The sparse FDTD method (SFDTD) is a variant of the FDTD method proposed by Doerr~\cite{Doerr2013} for use in the modelling of optical problems with significantly large domains such as PIC micro-controllers. This is not to be confused with sparse matrix solvers used for decomposing large sparse matrices in implicit FDTD methods. The SFDTD method relies on setting an appropriate threshold, and uses this threshold to determine points in the simulation domain that should be solved and points that should be ignored. This is analogous to applying a gate or window to the domain being computed, where ignoring parts of the domain with sufficient energy may significantly reduce computation time.\\
 
 The approach suggested by Doerr is similar to the moving window FDTD method implemented by Schuster \textit{et al}~\cite{Schuster2004}, in that the number of computations undertaken at any one time is significantly reduced and may improve computation time in a large simulation. However unlike moving window FDTD, the SFDTD implementation suggested by Doerr dynamically accommodates high and low energy points as the simulation continues. This is achieved by maintaining a set of lists of currently active points, previously active points and a matrix that parallels the domain and contains list indices. Doerr's method relies on constantly maintaining lists, and a pointing array that is the same size as the domain.\\
 
 Maintaining multiple large lists in memory may be detrimental to the speed of execution in of a large system where non-contiguous memory accesses are expensive in time. This may be of further concern when considering the difference in behaviour between electromagnetic and acoustics waves. Electromagnetic waves are transverse and can travel through a vacuum, acoustic waves are longitudinal and mechanical i.e. are fluctuations in a medium. Mechanical waves diffuse but photons in a PIC simulation may not, and the addressing of multiple lists with diffusing mechanical waves may be less practical than in PIC simulations. As such another method of windowing is explored below. \\
 
-\subsection{2D implementation}
+\subsection{Acoustic Implementation of SFDTD in Two Dimensions}
 The implementation of the SFDTD for 2D simulation in this study attempts to leverage some signal processing techniques instead of search algorithms or individual checks like Doerrs method. The aim of is to generate a single indexing matrix as opposed to having an indexing matrix and lists. The points of the matrix will be used as a mask, where points with an absolute pressure above a threshold and surrounding points will be computed.\\
 
-The domains of interest in this study are large and contain many points. To generate index points around those with adequate pressure to be calculated, some smoothing of the pressures in the matrix is required. This could be thought of as similar to blurring in image processing. 
-
-Below is a Matlab function for calculating such a matrix:\\
+The domains of interest in this study are large and contain many points. To generate index points around those with adequate pressure to be calculated, some smoothing of the pressures in the matrix is required. This could be thought of as similar to a blurring effect or smoothing in image processing~\cite{Blanchet2006}, which is the process of convolving an image with a Gaussian function and essentially low-pass filtering the image. This process reduces noise and details of an image, and thus should smooth around the threshold window and allow the processing mask in the SFDTD method to work just outside of the confines of the areas where the pressure is above the threshold. Below is a Matlab function for calculating such a matrix:\\
 
 \lstinputlisting[language=Matlab]{../Matlab/SFDTD/SPARSEfun2DC.m}
 
 Below is an example surf plot of the indexing matrix for a 50m by 40m simulation with a maximum sampling frequency of $1kHz$ and a windows threshold of 40dB. 
-\begin{figure}
+\begin{figure}[H]
 \centering
-  \includegraphics[width=\textwidth]{E:/GIT/IndiEngiSchola/Docs/graphics/Example Window 1.png}
+  \includegraphics[width=0.75\textwidth]{./graphics/Example Window 1.png} %./graphics/Example Window 1.png
   \caption{Window of an expanding wave in an SFDTD simulation}
 \end{figure}
 It can be seen that the dispersion error caused by the rectilinear system is imprinted on the window. Dispersion error is the phase error with which different frequencies travel in an FDTD simuation~\cite{Saarelma2016}, and low order staggered schemes may sufferd consideribly from this error. There is ongoing research as to the perceptual effects of disperison error in different FDTD schemes, when calculating impulse responses for auralization. Further experimentation using a higher order FDTD scheme may reduce numerical dispersion~\cite{Hamilton2013a,VanMourik2014} and improve the effectiveness of the window in reducing computation area to wave-fronts.\\
 
 The figure below shows the window shape for a similar simulation to the one above, but with a threshold of 60dB.\\
-\begin{figure}[hbt]
+\begin{figure}[H]
 \centering
-  \includegraphics[width=\textwidth]{E:/GIT/IndiEngiSchola/Docs/graphics/Example Window 3 60 threshold.png}
+  \includegraphics[width=0.75\textwidth]{./graphics/Example Window 3 60 threshold.png}
   \caption{Window of an expanding wave in an SFDTD simulation}
 \end{figure}
 
-It can be seen that the dispersion around the wave-front has significantly truncated. This is reflected in the figure below that shows the power spectrum for a receiver 12m away from the sound source for three simulations.
+It can be seen that the dispersion trailing the outer wave-front has been truncated. This is reflected in the figure below that shows the power spectrum for a receiver 12m away from the sound source for three simulations. This suggests that the SFDTD methods is essentially reducing the level of the spectrum, and is reducing the signal to noise ratio. Below is a plot of the execution speed of time steps as the same simulations progress, for a number of threshold: \\
 
-This shows that the SFDTD methods is essentially truncating the dispersion error and is potentially less accurate than the FDTD of PSTD methods for high frequency simulation when using a low order scheme.
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\textwidth]{./graphics/sfdtd execution speed.png}
+  \caption{Smoothed rate of time step execution for the SFDTD method during simulations, for different threshold levels}
+\end{figure}
 
+The figure below shows that simulations in small domains using the SFDTD method can still exhibit tradition wave patterns:\\
 
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.75\textwidth]{./graphics/sfdtd with wave shapes.png}
+  \caption{Single source SFDTD simulation in a small room with nodes and anti-nodes present}
+\end{figure}
+
+It can be seen that increasing the threshold level of the windowing function decreases arrogate and individual execution times, and begins to become much faster with a threshold above 40dB.
 The FDTD algorithm above is adjusted to reference this matrix and operate at non-zero coordinates, calculating not only the regions with appropriate amounts of power but also the surrounding cells. The current implementation uses an if statement which is potentially very slow, and would not be easy to solve in parallel arithmetically. As well as implementing this method in 3D, it may be crucial to develop a method for masking the simulation and solving without using any if statements. Depending on the simulation, the level of the threshold value may be set as a single value or may be set to decrease over time to accommodate diffuse field calculation. However if an appropriate lossy wave equation was implemented, it may be possible to use a relatively high threshold to compute propagation loss for wave-fronts such as strong and early reflections.\\
 
 
