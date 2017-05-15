@@ -18,15 +18,15 @@ alphaZp = 0.45;
 
 %define FS
 % fs = 44100.0;
-% fs = 10000;
-fs = 1000;
+fs = 10000;
+% fs = 1000;
 
 %define density
 rho = 1.21;
 %define speed of sound
 % c = 343;
-c = 3430; %<< works for 2k
-% c = 34300;
+% c = 3430; %<< works for 2k
+c = 34300;
 %define total time
 T = 1.0;
 
@@ -231,8 +231,7 @@ srcnrm = srcnorm ./ max(abs(srcnorm));
 % srcnrm = Hd(srcnrm);
 % [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
 [spsd, sf] = pwelch(srcnrm,hann(200),[],200,fs);
-save('roundtime'
-end
+
 %% Display the results
 subplot(5,1,1);
 plot(0:dt:((length(reciever)-1)*dt),reciever)
@@ -267,4 +266,38 @@ subplot(5,1,5);
 plot(0:dt:((length(recanal)-1)*dt),recanal);
 title('MLS Analysed');
 
+
+%% Display the results
+subplot(4,1,1);
+plot(0:dt:((length(reciever)-1)*dt),reciever)
+hold on;
+plot(0:dt:((length(reciever)-1)*dt),source1(1:length(reciever)))
+hold off;
+axis('tight')
+legend('reciever','source');
+title('Raw Input And Output');
+subplot(4,1,2);
+plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
+hold on;
+plot(0:dt:((length(srcnrm)-1)*dt),srcnrm)
+hold off;
+axis('tight')
+legend('reciever','source');
+title('Normalised Input And Output');
+subplot(4,1,3);
+plot(lf, db(lpsd),'--','Linewidth',2.0);
+hold on;
+plot(sf, db(spsd));
+hold off;
+legend('reciever','source');
+grid('on');
+title('Power Spectral Density of Input and Output');
+subplot(4,1,4);
+plot(0:dt:((length(reciever)-1)*dt),roundtime)
+axis('tight')
+ttlstr = sprintf('Computation Time Per Cycle, Total Time: %i',sum(roundtime));
+title(ttlstr);
+% subplot(5,1,5);
+% plot(0:dt:((length(recanal)-1)*dt),recanal);
+% title('Impulse Response at Reciever');
 

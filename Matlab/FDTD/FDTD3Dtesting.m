@@ -18,7 +18,7 @@ rho = 1.21;
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 500 * hertz;
+fmax = 6000 * hertz;
 % dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))+(1/(gz^2))));
 % dt = 1/(2*fmax);
 
@@ -61,22 +61,26 @@ T = 1.0;
 % n=0:tnum;
 % source1=exp(-dt^2*(n-n0).^2/(2*sigma^2));
 % source1= (source1 ./ max(source1)).*((2*10^-5)*10^(100/20));
-w1 = window(@hamming,0.4/(dt)); 
-fir = dsp.FIRFilter;
-fir.Numerator = w1';
-chirp = dsp.Chirp(...
-    'SweepDirection', 'Unidirectional', ...
-    'TargetFrequency', ceil(fmax/2), ...
-    'InitialFrequency', 10,...
-    'TargetTime', 0.4, ...
-    'SweepTime', 0.4, ...
-    'SamplesPerFrame', 0.4/dt, ...
-    'SampleRate', 1/dt);
-% plot(chirp());
-source1 = w1.*chirp();
-source1 = [zeros(10,1); source1];
-source1 = [source1; zeros((T/dt) - length(source1),1)].*((2*10^-5)*10^(100/20));
+% w1 = window(@hamming,0.4/(dt)); 
+% fir = dsp.FIRFilter;
+% fir.Numerator = w1';
+% chirp = dsp.Chirp(...
+%     'SweepDirection', 'Unidirectional', ...
+%     'TargetFrequency', ceil(fmax/2), ...
+%     'InitialFrequency', 10,...
+%     'TargetTime', 0.4, ...
+%     'SweepTime', 0.4, ...
+%     'SamplesPerFrame', 0.4/dt, ...
+%     'SampleRate', 1/dt);
+% % plot(chirp());
+% source1 = w1.*chirp();
+% source1 = [zeros(10,1); source1];
+% source1 = [source1; zeros((T/dt) - length(source1),1)].*((2*10^-5)*10^(100/20));
 
+source1 = GenerateMLSSequence(3,11,0).*((2*10^-5)*10^(100/20));
+T = length(source1)*dt;
+w1 = window(@gausswin,length(source1),2.5); 
+source1 = source1 .* w1;
 % initialize the velocity and pressure matrices (matrices are set up in a
 % y by x fashion to properly display the 2D space (y = rows, x = columns))
 % p = ones(ycells - 1, xcells - 1, zcells - 1) .* 10^-12*10^(40/20);
@@ -169,14 +173,58 @@ while n*dt < T
     exectime(n) = toc();
     FDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0); 
 end
-% figure(2);
-subplot(3,1,1);
+% % figure(2);
+% subplot(3,1,1);
+% plot(0:dt:((length(reciever)-1)*dt),reciever)
+% axis('tight')
+% subplot(3,1,2);
+% plot(0:dt:((length(reciever)-1)*dt),source1)
+% % xlim([0 0.01])
+% subplot(3,1,3);
+% plot(0:dt:((length(reciever)-1)*dt),exectime)
+% axis('tight')
+
+%% Some really minor postprocessing
+% Hd = postprocessingDCfilter;
+norec = reciever ./ max(abs(reciever));
+% recanal = AnalyseMLSSequence(reciever',0,3,11,0,0);
+% norec = Hd(norec);
+% [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
+[lpsd, lf] = pwelch(norec,hann(2000),[],2000,1/dt);
+% clear('Hd');
+% Hd = postprocessingDCfilter;
+srcnrm = srcnorm ./ max(abs(srcnorm));
+% srcnrm = Hd(srcnrm);
+% [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
+[spsd, sf] = pwelch(srcnrm,hann(2000),[],2000,1/dt);
+%% Display the results
+subplot(4,1,1);
 plot(0:dt:((length(reciever)-1)*dt),reciever)
+hold on;
+plot(0:dt:((length(reciever)-1)*dt),source1(1:length(reciever)))
+hold off;
 axis('tight')
-subplot(3,1,2);
-plot(0:dt:((length(reciever)-1)*dt),source1)
-% xlim([0 0.01])
-subplot(3,1,3);
-plot(0:dt:((length(reciever)-1)*dt),exectime)
+legend('reciever','source');
+title('Raw Input And Output');
+subplot(4,1,2);
+plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
+hold on;
+plot(0:dt:((length(srcnrm)-1)*dt),srcnrm)
+hold off;
 axis('tight')
+legend('reciever','source');
+title('Normalised Input And Output');
+subplot(4,1,3);
+plot(lf, db(lpsd),'--','Linewidth',2.0);
+hold on;
+plot(sf, db(spsd));
+hold off;
+legend('reciever','source');
+grid('on');
+title('Power Spectral Density of Input and Output');
+subplot(4,1,4);
+plot(0:dt:((length(reciever)-1)*dt),roundtime)
+axis('tight')
+ttlstr = sprintf('Computation Time Per Cycle, Total Time: %i',sum(roundtime));
+title(ttlstr);
 

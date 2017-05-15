@@ -7,4 +7,7 @@
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Single source SFDTD simulation in a small room with nodes and anti-nodes present}}{27}{figure.3.4}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Execution times for FDTD simulations in domains of increasing size}}{40}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Execution times for PSTD simulations in domains of increasing size}}{41}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Execution times for SFDTD simulations in domains of increasing size}}{42}{figure.5.3}
 \addvspace {10\p@ }

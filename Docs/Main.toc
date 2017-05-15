@@ -43,6 +43,7 @@
 \contentsline {section}{\numberline {4.3}Validating The SFDTD Method}{37}{section.4.3}
 \contentsline {chapter}{\numberline {5}Execution Time and Analysis}{39}{chapter.5}
 \contentsline {section}{\numberline {5.1}Results}{39}{section.5.1}
-\contentsline {chapter}{\numberline {6}Conclusion and Further Work}{40}{chapter.6}
-\contentsline {section}{\numberline {6.1}Conclusion}{40}{section.6.1}
-\contentsline {section}{\numberline {6.2}Further Work}{40}{section.6.2}
+\contentsline {section}{\numberline {5.2}Analysis}{42}{section.5.2}
+\contentsline {chapter}{\numberline {6}Conclusion and Further Work}{44}{chapter.6}
+\contentsline {section}{\numberline {6.1}Conclusion}{44}{section.6.1}
+\contentsline {section}{\numberline {6.2}Further Work}{44}{section.6.2}
