@@ -75,15 +75,16 @@ chirp = dsp.Chirp(...
 % % source1 = fir(chirp());
 % source1 = chirp();
 % source1(1:76) = 0;
-source1 = GenerateMLSSequence(2,11,0).*((2*10^-5)*10^(100/20));
+source1 = GenerateMLSSequence(2,9,0).*((2*10^-5)*10^(100/20));
 T = length(source1)*dt;
 % source1 = source1(1:(T/dt));
 w1 = window(@gausswin,length(source1),2.5); 
-
+widths = [5 10 20 40 60];
+for cntr = 1 : 5
 %define grid width
-gridWidthX = 5.0;
-gridWidthY = 4.0;
-gridWidthZ = 3.0;
+gridWidthX = widths(cntr);
+gridWidthY = gridWidthX;
+gridWidthZ = gridWidthX;
 %calc grid size
 Nx = ceil(abs(gridWidthX/dx)+2*PMLdepth);
 Ny = ceil(abs(gridWidthY/dx)+2*PMLdepth);
@@ -221,7 +222,7 @@ end
 %% Some really minor postprocessing
 % Hd = postprocessingDCfilter;
 norec = reciever ./ max(abs(reciever));
-recanal = AnalyseMLSSequence(reciever',0,2,11,0,0);
+recanal = AnalyseMLSSequence(reciever',0,2,9,0,0);
 % norec = Hd(norec);
 % [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
 [lpsd, lf] = pwelch(norec,hann(200),[],200,fs);
@@ -231,7 +232,8 @@ srcnrm = srcnorm ./ max(abs(srcnorm));
 % srcnrm = Hd(srcnrm);
 % [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
 [spsd, sf] = pwelch(srcnrm,hann(200),[],200,fs);
-save('roundtime'
+filename = strcat('xwidth',num2str(gridWidthX),'.mat');
+save(filename,'roundtime', 'norec', 'recanal', 'lpsd', 'lf', 'srcnrm', 'spsd', 'sf');
 end
 %% Display the results
 subplot(5,1,1);

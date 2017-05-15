@@ -5,8 +5,8 @@
 %% Initz Matlab
 clear all;
 % close all;
-figure(1)
-set(1, 'windowstyle','docked','color', 'w');
+figure(3)
+set(3, 'windowstyle','docked','color', 'w');
 
 %% Initz Variables
 
@@ -41,8 +41,8 @@ dt = ((1/c)*gx)/2;
 
 %Dims
 %Dim Size (m)
-lx = 50*meters;
-ly = 40*meters;
+lx = 5*meters;
+ly = 4*meters;
 
 pidxRow = [];
 pidxCol = [];
@@ -71,7 +71,7 @@ A = 1;
 recieverleftloc = [ceil(ycells/2) ceil(xcells/4)];
 
 % %Time of sim
-T = 0.1 ;
+T = 0.2 ;
 % 
 % % generate the source(s) & determine number of time steps needed
 tnum = ceil(T/dt);
@@ -82,16 +82,16 @@ tnum = ceil(T/dt);
 % source1=exp(-dt^2*(n-n0).^2/(2*sigma^2)).*((2*10^-5)*10^(100/20));
 % source1= source1 ./ max(source1);
 
-w1 = window(@hamming,0.4/(dt)); 
+w1 = window(@hamming,0.1/(dt)); 
 fir = dsp.FIRFilter;
 fir.Numerator = w1';
 chirp = dsp.Chirp(...
     'SweepDirection', 'Unidirectional', ...
-    'TargetFrequency', ceil(fmax/2), ...
-    'InitialFrequency', 10,...
-    'TargetTime', 0.4, ...
-    'SweepTime', 0.4, ...
-    'SamplesPerFrame', 0.4/dt, ...
+    'TargetFrequency', 500, ...
+    'InitialFrequency', 100,...
+    'TargetTime', 0.1, ...
+    'SweepTime', 0.1, ...
+    'SamplesPerFrame', 0.1/dt, ...
     'SampleRate', 1/dt);
 % plot(chirp());
 source1 = w1.*chirp();
@@ -152,7 +152,7 @@ n = 1;
 for n = 1:T/dt    
 % n = n + 1;
     tic;
-    [idx] = SPARSEfun2DC(p, 20, p0);
+    [idx] = SPARSEfun2DC(p, 40, p0);
     [p, ux, uy] = SFDTD2Dfun(p, pCx, pCy, ux, uy, uCx, uCy, Rx, Ry, ZL,...
         ZR, ZT, ZB, idx);
     extime(n) = toc;
@@ -171,20 +171,24 @@ for n = 1:T/dt
 
 %PLOTTING SECTION
 %         figure(1);
-%         surf(linex, liney, abs(p));
+        surf(linex, liney, abs(p));
 %         surf(linex, liney, idx);
 % 
 %         shading interp;
-%         title(sprintf('Time = %.6f s, Executes at %.6f s',n*dt,extime(n)),...
-%             'Color',[0 0 0],'FontSize', 14);
-%         xlabel('Width (meters)', 'Color', [0 0 0]);
-%         ylabel('Length (meters)', 'Color', [0 0 0]);
-%         view(2);
-%         shading('interp');
-%         drawnow;
+        title(sprintf('Time = %.6f s, Executes at %.6f s',n*dt,extime(n)),...
+            'Color',[0 0 0],'FontSize', 14);
+        xlabel('Width (meters)', 'Color', [0 0 0]);
+        ylabel('Length (meters)', 'Color', [0 0 0]);
+        view(2);
+        shading('interp');
+        axis('tight')
+        drawnow;
         
 end
 norec = reciever ./ max(abs(reciever));
+srcnrm = srcnorm ./ max(abs(srcnorm));
+lag = getlag(norec,srcnrm);
+norec = circshift(norec, lag);
 % recanal = AnalyseMLSSequence(reciever',0,2,11,0,0);
 % norec = Hd(norec);
 % [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
@@ -193,7 +197,7 @@ norec = reciever ./ max(abs(reciever));
 
 % clear('Hd');
 % Hd = postprocessingDCfilter;
-srcnrm = srcnorm ./ max(abs(srcnorm));
+
 % srcnrm = Hd(srcnrm);
 % [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
 % [spsd, sf] = pwelch(srcnrm,hann(2000),[],200,1/dt);
@@ -229,31 +233,4 @@ plot(0:dt:((length(reciever)-1)*dt),exectime)
 axis('tight')
 ttlstr = sprintf('computation time per cycle, total time is %d',sum(exectime));
 title(ttlstr);
-% subplot(5,1,5);
-% plot(0:dt:((length(recanal)-1)*dt),recanal);
-% title('MLS Analysed');
 
-
-
-
-% figure(2);
-% subplot(3,1,1);
-% plot(0:dt:((length(reciever)-1)*dt),reciever)
-% axis('tight')
-% subplot(3,1,2);
-% plot(0:dt:((length(reciever)-1)*dt),source1)
-% % xlim([0 0.01])
-% subplot(3,1,3);
-% plot(0:dt:((length(reciever)-1)*dt),exectime)
-% axis('tight')
-
-% leftear = real(10*log10(leftear/p0));
-% rightear = real(10*log10(rightear/p0));
-% signal = real(10*log10(source1/p0));
-% 
-% ax = gca;
-% ax = plot(leftear);
-% hold on;
-% plot(rightear);
-% ax.XTickLabel = [0 : (dt)* 10 : length(leftear)* dt];
-% hold off;
