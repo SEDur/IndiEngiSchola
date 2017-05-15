@@ -105,6 +105,11 @@ J.W. Schuster, K.C. Wu, R.R. Ohs, and R.J. Luebbers.
 \newblock {\em IEEE Antennas and Propagation Society Symposium, 2004.}, pages
   1607--1610 Vol.2, 2004.
 
+\bibitem{Blanchet2006}
+Gerard Blanchet and Maurice Charbit.
+\newblock {\em {Digital Signal and Image Processing using MATLAB}}.
+\newblock 2006.
+
 \bibitem{Saarelma2016}
 Jukka Saarelma, Jonathan Botts, Brian Hamilton, and Lauri Savioja.
 \newblock {Audibility of dispersion error in room acoustic finite-difference
@@ -137,7 +142,7 @@ Lloyd~N Trefethen.
 
 \bibitem{Rumpf2012a}
 R~Rumpf.
-\newblock {The Perfectly Matched Layer ( PML ) Review of Lecture 12}, 2012.
+\newblock {The Perfectly Matched Layer ( PML ) Lecture 13 CEM}, 2012.
 
 \bibitem{Berenger1994}
 Jean~P Berenger.
@@ -161,5 +166,24 @@ Damian~T Murphy, Alex Southern, and Lauri Savioja.
 \newblock {Source excitation strategies for obtaining impulse responses in
   finite difference time domain room acoustics simulation}.
 \newblock {\em Applied Acoustics}, 82:6--14, 2014.
+
+\bibitem{Ahnert2005}
+Wolfgang Ahnert and Stefan Feistel.
+\newblock {Simulation, Auralization and their Verification of Acoustic
+  Parameters using Line Arrays}.
+\newblock {\em 119th Convention of the Audio Engineering Society}, 2005.
+
+\bibitem{Tsingos2002}
+Nicolas Tsingos, Ingrid Carlbom, Gary Elko, Robert Kubli, and Thomas
+  Funkhouser.
+\newblock {Validating acoustical simulations in the Bell Labs Box}.
+\newblock {\em IEEE Computer Graphics and Applications}, 22(4), 2002.
+
+\bibitem{Southern2013}
+Alex Southern, Samuel Siltanen, Damian~T Murphy, and Lauri Savioja.
+\newblock {Room impulse response synthesis and validation using a hybrid
+  acoustic model}.
+\newblock {\em IEEE Transactions on Audio, Speech and Language Processing},
+  21(9):1940--1952, 2013.
 
 \end{thebibliography}
