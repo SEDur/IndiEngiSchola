@@ -38,7 +38,7 @@ thr50 = load('sfdtd50thresh.mat');
 thr60 = load('sfdtd60thresh.mat');
 thr70 = load('sfdtd70thresh.mat');
 thr80 = load('sfdtd80thresh.mat');
-%% Plot execution time
+%% Plot execution time SFDTDPower
 smoothingcoeff = ones(1, length(thr10.exectime))/length(thr10.exectime);
 % filter(smoothingcoeff, 1, tempC);
 plot(0:thr10.dt:((length(thr10.reciever)-1)*thr10.dt),filter(smoothingcoeff, 1, thr10.exectime));
@@ -50,6 +50,25 @@ plot(0:thr10.dt:((length(thr10.reciever)-1)*thr10.dt),filter(smoothingcoeff, 1, 
 plot(0:thr10.dt:((length(thr10.reciever)-1)*thr10.dt),filter(smoothingcoeff, 1, thr60.exectime));
 plot(0:thr10.dt:((length(thr10.reciever)-1)*thr10.dt),filter(smoothingcoeff, 1, thr70.exectime));
 plot(0:thr10.dt:((length(thr10.reciever)-1)*thr10.dt),filter(smoothingcoeff, 1, thr80.exectime));
+hold off;
+grid('on');
+title('Execution Time for an SFDTD Simulation with Different Thresholds');
+legend('10dB','20dB','30dB','40dB','50dB','60dB','70dB','80dB','Location','southeast');
+xlabel('Time in Simulation (s)');
+ylabel('Execution Time(s)');
+set(gcf,'color','w');
+%% Plot execution time SFDTD
+smoothingcoeff = ones(1, length(thr10.exectime))/length(thr10.exectime);
+% filter(smoothingcoeff, 1, tempC);
+plot(0:thr10.dt:((length(thr10.reciever)-1)*thr10.dt),thr10.exectime);
+hold on;
+plot(0:thr10.dt:((length(thr10.reciever)-1)*thr10.dt),thr20.exectime);
+plot(0:thr10.dt:((length(thr10.reciever)-1)*thr10.dt),thr30.exectime);
+plot(0:thr10.dt:((length(thr10.reciever)-1)*thr10.dt),thr40.exectime);
+plot(0:thr10.dt:((length(thr10.reciever)-1)*thr10.dt),thr50.exectime);
+plot(0:thr10.dt:((length(thr10.reciever)-1)*thr10.dt),thr60.exectime);
+plot(0:thr10.dt:((length(thr10.reciever)-1)*thr10.dt),thr70.exectime);
+plot(0:thr10.dt:((length(thr10.reciever)-1)*thr10.dt),thr80.exectime);
 hold off;
 grid('on');
 title('Execution Time for an SFDTD Simulation with Different Thresholds');

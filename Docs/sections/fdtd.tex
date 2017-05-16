@@ -10,6 +10,12 @@
 \section{Finite Difference Time Domain Method}
 The Finite Difference Time Domain (FDTD) Method is a numerical method for solving partial differential equations. The power of this method lies in simplicity and flexibility, and it can be used to solve partial differential equations of varying complexity~\cite{Schneider2015}. This chapter will discuss the application of the finite difference time domain method to the acoustic wave equation, including partially absorbing boundary conditions and the introduction of the sparse finite difference time domain method for acoustics.
 
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.75\textwidth]{./graphics/FDTDexample.png}
+  \caption{Example Mesh Plot of an FDTD Simulation With Two Sources}
+\end{figure}
+
 \subsection{Introduction to the Finite Difference Time Domain Method}
 Methods for solving partial differential equations have been of significant and continued research since the early 1900s. Mathematicians such as Courant, Fiedrichs and Hrennikof undertook seminal work in the early 1920s that formed a base for much of the finite methods used today. The FDTD Method is a numerical method for solving time domain problems (often wave equations) with localised handling of spatial derivatives, and was first introduced for solving Maxwell's equations to simulate electromagnetic wave propagation by Yee \cite{Yee1966}.\\
 
@@ -103,9 +109,14 @@ This parameter reflects the handling of the boundary differential only being a h
 $ u^{t + \frac{\delta t}{2}}_{x} = \frac{R - Z}{R + Z} u^{t - \frac{\delta t}{2}}_{x} - \frac{2}{R + Z} p^{t}_{x+ \frac{\delta x}{2}} $\\
 \end{center}
 In this implementation of the FDTD method no internal obstacles are handled. In the study by Angus \textit{et al}~\cite{Angus2010}, obstacles were handled simply by setting local velocity  values to 0 imposing a totally hard boundary within the domain. An improvement to this may be to implement the absorbing boundary conditions discussed above to the outside velocity points of an obstacle, allowing the obstacles to partially absorb.
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.75\textwidth]{./graphics/fdtd2dReflectingObstacle.png}
+  \caption{Example Plot of an FDTD Simulation With Reflection From an Obstable}
+\end{figure}
 
-\subsection{Example Function for Solving}
-Below, is a function written in the Matlab \textregistered language, used to solve one time step of the wave equation using the FDTD method, in 3 dimensions:
+\subsection{Example Update Function}
+Below, is a function written in the Matlab language that is written to solve one time step of the wave equation using the FDTD method in 3 dimensions:
 \lstinputlisting[language=Matlab]{../Matlab/FDTD/FDTD3Dfun.m}
 
 \subsection{Stability}

@@ -52,5 +52,16 @@ vals = zeros(length(freqs),1);
 for i = 1 : length(srt)
     vals(round(srt(i))) = vals(round(srt(i))) + 1;
 end
-
-vals = vals ./ max(vals);
+fscr = zeros(length(vals),1);
+fscr(ceil(fschroder)) = 2;
+% vals(vals>1) = 1;
+stem(fscr,'r')
+hold('on');
+stem(vals);
+hold('off');
+xlim([0 ceil(fschroder)+20])
+title('Theoretical Modes for a 5m by 4m by 3m Room');
+xlabel('Frequency (Hz)');
+ylabel('Number of Modes');
+legend('Schroeder Frequency','Marker','diamond','Modes','Location','northwest');
+% vals = vals ./ max(vals);

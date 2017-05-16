@@ -8,13 +8,13 @@
 %\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
 \chapter{Acoustic Principals}
 \label{Introduction}
-Acoustics is a branch of physics\footnote{though often considered to be interdisciplinary} that aims to characterise behaviours of Newton's second law of motion applied to mechanical wave propagation and obeying the physical conservation law. This characterisation of sound propagation is intrinsically linked to many other disciplines of science and engineering, as well as psychological and perceptual study. In this section we will review the acoustic wave equation, and discuss some properties of interest in this study.
+Acoustics is a branch of physics\footnote{though often considered to be interdisciplinary} that aims to characterise behaviours of Newton's second law of motion applied to mechanical wave propagation and obeying the physical conservation law~\cite{beranek1954acoustics}. This characterisation of sound propagation is intrinsically linked to many other disciplines of science and engineering, as well as psychological and perceptual study. In this section we will review the acoustic wave equation, and discuss some acoustic equations of interest in large room electroacoustics.
 
 \section{The Acoustic Wave Equation}
 
 Acoustic waves are classified as fluctuations of pressure in a given medium, manifesting as longitudinal waves of high and low pressure and air density~\cite{Rossing2007}. These fluctuations are often cyclical in nature around an ambient pressure that is some times assumed to be 1 atmospheric pressure at sea level or $101.35kPa$. Similar to the behaviour of heat convection or fluid diffusion, these cyclical fluctuations propagate and spread through the medium of interest, decaying towards a resting steady state. It is possible to calculate an approximate solution to the propagation of pressure through a space, by solving a system of second order partial differential equations that can be collected into a 'Wave Equation'. Below, we will introduce the three building blocks of the wave equation in one dimensional space. These building blocks are Newton's Second Law of Motion, the gas law, and the laws of conservation of mass.\\
 
-In the Mcgraw-Hill Electronic and Electrical Engineering Series of books, the late Leo Beranek authored the Acoustics volume~\cite{beranek1954acoustics}. This volume contains an elegant summary of the wave equation in 1 dimension in standard notation, and 3 dimensions in vector notation. To consider the wave equation, we should use the analogy of a small volume of gas, within a significantly larger homogeneous medium. The faces of the volume are frictionless, and only the pressure at any face impacts on the gas inside the volume.\\
+In the Mcgraw-Hill Electronic and Electrical Engineering Series of books, the late Leo Beranek authored the Acoustics volume~\cite{beranek1954acoustics}. This reference text contains an elegant summary of the wave equation in 1 dimension in standard notation, and 3 dimensions in vector notation. Rienstra published an introduction to acoustics text~\cite{Rienstra1952} that takes a strong stance from a fluid dynamics perspective, and is well worth reviewing for a more in-depth derivation than is presented in this text. To consider the wave equation, we should use the analogy of a small volume of gas, within a significantly larger homogeneous medium. The faces of the volume are frictionless, and only the pressure at any face impacts on the gas inside the volume.\\
 
 \subsection{Wave Equation In One Dimension}
 \subsubsection{Equation Of Motion}
@@ -118,7 +118,7 @@ In the above section the wave equation has been derived with forms of velocity a
 Having derived a wave equation to simulation acoustic propagation, it is important to have an understanding of what acoustic phenomena can be observed through solving the wave equation. This study is interested in solving large domains efficiently, and next section will discuss three components of acoustics behaviour that may relate to large room acoustics.\\
 
 \subsection{Inverse Square Law \& Propagation time}
-As previously noted, sound propagates as longitudinal waves through a medium such as air or water. These waves are often conceptualised as simple rays~\cite{beranek1954acoustics} travelling through a space\footnote{It may be appropriate to often consider space to be 3 dimensional (3D), or a lower order approximation of a 3D space}, much like planar waves. However, the properties of a sound source such as the directivity and shape can have a significant effect on the behaviour of sound wave propagation. An example of this is the difference in energy spread over distance for theoretically ideal point and line sources. Ideal point sources that propagate sound omni-directionally obey the inverse square law and propagate sound spherically, and ideal line sources do not as they propagate sound cylindrically. The inverse square law is sound propagations is defined as:\\
+As previously noted, sound propagates as longitudinal waves through a medium such as air or water. These waves are often conceptualised as simple rays~\cite{beranek1954acoustics} travelling through a space\footnote{It may be appropriate to often consider space to be 3 dimensional (3D), or a lower order approximation of a 3D space}, much like planar waves. However, the properties of a sound source such as the directivity and shape can have a significant effect on the behaviour of sound wave propagation. An example of this is the difference in energy spread over distance for theoretically ideal point and line sources. Ideal point sources that propagate sound omni-directionally obey the inverse square law and propagate sound spherically, and ideal line sources do not as they propagate sound cylindrically. The inverse square law is sound propagations is defined as~\cite{Davis2014}\\
 \begin{center}
 $I = \frac{P}{4 \pi r^2}$\\
 \end{center}
@@ -137,7 +137,7 @@ For this study we will consider spaces or domains of finite size. These domains 
 If a sound source propagates a signal of appropriate amplitude, the sound wave will reach the boundaries and be partially absorbed or reflected in reciprocal directions. These reflections will continue to reflect and scatter, and will eventually decay beyond audibility. The reverberant sound field is the steady-state of diffusely scattered sound energy (reflections), due to perturbation by a sound source in bounded space. The amplitude of the sound source and diffusely scattered reflections balance with the rate of decay (diffusion and absorption) of the sound field~\cite{Everest2009}. In this case, the sound field can be conceptually split proportionally into direct and reverberant fields.\\
 
 \subsubsection{Acoustic Absorption}
-The decay rate of a reverberant sound field is often quantified by the time taken for a steady state sound field to reduce in level by $60{dB}$, once the sound source has finished propagating. This is defined as the $RT_{60}$ of the domain, and was first proposed by WC Sabine in 1900~\cite{Everest2009}. There have been a multitude of expansions on Sabines original formula, notably the Norris-Eyring~\cite{Beranek2006} equation which expanded the denominator of the reverberation time equation to allow for more realistically distributed absorption values above $0.1$. The Norris-Eyring reverberation time equation is as follows:\\
+The decay rate of a reverberant sound field is often quantified by the time taken for a steady state sound field to reduce in level by $60{dB}$, once the sound source has finished propagating. This is defined as the $RT_{60}$ of the domain, and was first proposed by WC Sabine in 1900~\cite{Everest2009}. There have been a multitude of expansions on Sabines original formula, notably the Norris-Eyring~\cite{Beranek2006} equation which expanded the denominator of the reverberation time equation to allow for more realistically distributed absorption values above $0.1$. The Norris-Eyring reverberation time equation is as follows~\cite{Davis2014}:\\
 \begin{center}
 $T = 0.161\frac{V}{-S \ln(1 - \alpha)} $\\
 Where $S$ is the surface area, $V$ is the volume of the domain and $\alpha$ is the average absorption coefficient and can be calculated as such:\\
@@ -195,6 +195,12 @@ These modes are defined in spatial reciprocity as axial, tangential and oblique,
 \end{center}
 
 In a room of the dimensions $5m$ by $4m$ by $3m$, modes up to the 10th order may occur at the following frequencies:\\
+
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\textwidth]{./graphics/modesuptoschr.png}
+  \caption{Room Modes up to Schroeder Frequency for a Small Rectangular Room}
+\end{figure}
 
 As modes occur at higher orders, the spatial change of the intensity of a particular frequency due to modes decreases to the point where the human ear may be insensitive these changes. Further, at higher orders of modes the frequency density of modes may tend to converge, such that many modes occur around the same frequencies and so may appear to be diffusely occurring. The frequency at which modes tend to become difficult to observe by ear due to these properties for a particular domain is known as the Schroeder frequency, and that is calculated by:\\
 

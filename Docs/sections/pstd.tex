@@ -16,7 +16,7 @@ The basic block diagram of a program for solving the the acoustic PSTD method is
 \tikzstyle{line} = [draw, -latex']
 \tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
     minimum height=2em]
-    
+\begin{center}
 \begin{tikzpicture}[node distance = 2cm, auto]
     % Place nodes
     \node [block] (init) {Start (t)};
@@ -55,7 +55,7 @@ The basic block diagram of a program for solving the the acoustic PSTD method is
     \path [line] (evaluatep) -- (source);
     \path [line] (source) -- (next);
 \end{tikzpicture}                                             
-
+\end{center}
 \subsection{The Pseudospectral Time Domain Method Applied To The Wave Equation}
 
 The acoustic wave equation has been previously defined with two resolving parts:\\

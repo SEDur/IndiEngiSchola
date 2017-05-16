@@ -180,6 +180,7 @@ while n <= (T/dt)
     % set the pressure at the source location
     % NOTE: source vectors for unused drivers will be zeros
     p(s1loc(1),s1loc(2)) = p(s1loc(1),s1loc(2)) - source1(n);
+    p(s1loc(1)+50,s1loc(2)+50) = p(s1loc(1)+50,s1loc(2)+50) - source1(n+20);
 %     p(s2loc(1),s2loc(2)) = p(s2loc(1),s2loc(2)) + -source2(n);
 %     power(n) = 20*log10(abs(max(p)));
 %     leftear(n) = abs(p(recieverleftloc(1),recieverleftloc(2)));
@@ -194,8 +195,8 @@ while n <= (T/dt)
         xlabel('Width (meters)', 'Color', [0 0 0]);
         ylabel('Length (meters)', 'Color', [0 0 0]);
         caxis([-1e-10 1e-10]);
-        zlim([-1e-10 1e-10]);
-        view(2);
+%         zlim([-1e-10 1e-10]);
+%         view(2);
 %         view([25.6 61.2]);
         drawnow;
         

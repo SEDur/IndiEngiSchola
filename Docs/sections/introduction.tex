@@ -4,6 +4,11 @@ Modelling and replicating the effects of acoustic systems has been of continued 
 
 \section{Problem Definition}
 
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \includegraphics[width=0.48\textwidth]{./graphics/raytracing.png}
+  \caption{2D Representation of Ray Tracing Concept~\cite{Elorza2005}}
+\end{wrapfigure}
+
 Current commercially available acoustic modelling tools for large (cathedrals, arenas, video game maps etc) electroacoustic simulations rely on assumptions based around plane wave propagation. These models are only accurate when assuming that detail of the domain features are significantly larger than the wavelengths of interested, and that no diffraction effects occur~\cite{Schmalle2011}. These ray based methods such as the image source method and ray or beam tracing methods approximate the performance of the system and simulation domain without solving the full wave physics of an acoustic system~\cite{Monks1996a}. These methods have been successfully used to approximate large systems at mid and high frequencies, but may not accurately simulate low frequency wave propagation and wave interaction.\\
 
 Wave based acoustic modelling methods such as the Finite Element Method (FEM) and Boundary Element Method (BEM) have been are currently implemented in commercial software packages, and are often used to model complex acoustic systems such as loudspeakers and other transducers. However, these packages are difficult to apply to simulating large domain problems, due to the computational resource limitations that are inherent with numerical solutions to wave based methods. Modelling large 3D domains even at lower frequencies can have extreme memory requirements, and may also require significant computation time to 'crunch the numbers' and solve for adequate amounts of time. One commercial FEM package known as Comsol has recently added ray tracing to the acoustics tools, potentially to accommodate this restriction~\cite{Jensen2016}.\\
