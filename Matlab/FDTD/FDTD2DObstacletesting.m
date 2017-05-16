@@ -3,11 +3,11 @@
 % 2016
 
 %% Initz Matlab
-clear all;
-% close all;
-
-figure(1)
-set(1, 'windowstyle','docked','color', 'w');
+% clear all;
+% % close all;
+% 
+% figure(1)
+% set(1, 'windowstyle','docked','color', 'w');
 
 %% Initz Variables
 

@@ -12,6 +12,35 @@ Jelle~Van Mourik and Damian~T Murphy.
 \newblock {Hybrid Acoustic Modelling of Historic Spaces Using Blender}.
 \newblock (c):7--12, 2014.
 
+\bibitem{Rindel2000}
+J~H Rindel.
+\newblock {The use of computer modeling in room acoustics}.
+\newblock {\em Journal of Vibroengineering - Paper of the International
+  Conference BALTIC-ACOUSTIC 2000}, 3(4):219--224, 2000.
+
+\bibitem{Tsingos2009}
+Nicolas Tsingos.
+\newblock {Pre-computing geometry-based reverberation effects for games
+  Nicolas}.
+\newblock {\em Aes 35Th International Conference}, 2009.
+
+\bibitem{Schmalle2011}
+Holger Schmalle, Dirk Noy, Stefan Feistel, Gabriel Hauser, Wolfgang Ahnert, and
+  John Storyk.
+\newblock {Accurate Acoustic Modeling of Small Rooms}.
+\newblock {\em Audio Engineering Society}, 2011.
+
+\bibitem{Monks1996a}
+Michael Monks, Byong {Mok Oh}, and Julie Dorsey.
+\newblock {Acoustic Simulation and Visualization using a New Unified Beam
+  Tracing and Image Source Approach}.
+\newblock 4355, 1996.
+
+\bibitem{Jensen2016}
+Mads~Herring Jensen.
+\newblock {Modeling Acoustics Applications with COMSOL Multiphysics
+  {\textregistered}}, 2016.
+
 \bibitem{Rossing2007}
 T.~D. Rossing.
 \newblock {Springer Handbook of Acoustics}.
@@ -110,6 +139,10 @@ Christopher Doerr.
 \newblock {Sparse Finite Difference Time Domain Method}.
 \newblock {\em IEEE Photonics Technology Letters}, 25(23):1--1, 2013.
 
+\bibitem{Doerr2014p}
+C~Doerr.
+\newblock {SPARSE FINITE-DIFFERENCE TIME DOMAIN SIMULATION}, 2014.
+
 \bibitem{Schuster2004}
 J.W. Schuster, K.C. Wu, R.R. Ohs, and R.J. Luebbers.
 \newblock {Application of moving window FDTD to predicting path loss over
@@ -190,6 +223,12 @@ Nicolas Tsingos, Ingrid Carlbom, Gary Elko, Robert Kubli, and Thomas
   Funkhouser.
 \newblock {Validating acoustical simulations in the Bell Labs Box}.
 \newblock {\em IEEE Computer Graphics and Applications}, 22(4), 2002.
+
+\bibitem{Foteinou2010}
+a.~Foteinou, D.~Murphy, and a.~Masinton.
+\newblock {Verification of Geometric Acoustics-Based Auralization Using Room
+  Acoustics Measurement Techniques}.
+\newblock {\em 128th Audio Engineering Society Convention}, pages 1--12, 2010.
 
 \bibitem{Southern2013}
 Alex Southern, Samuel Siltanen, Damian~T Murphy, and Lauri Savioja.

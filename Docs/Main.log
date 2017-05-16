@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.22)  16 MAY 2017 13:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.22)  16 MAY 2017 16:52
 entering extended mode
 **./Main.tex
 (Main.tex
@@ -919,6 +919,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 15--16
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 17--18
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--20
+
+ []
+
 ) [2
 
 ] (Main.toc
@@ -984,28 +994,45 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 5.
 
-Underfull \hbox (badness 10000) in paragraph at lines 7--9
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 10--11
+Underfull \hbox (badness 10000) in paragraph at lines 9--10
 
  []
 
 [6
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 14--15
+
+LaTeX Warning: Command \textregistered invalid in math mode on input line 13.
+
+
+LaTeX Warning: Command \textcircled invalid in math mode on input line 13.
+
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 13.
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omsptm.fd"
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 13.
+
+
+LaTeX Warning: Command \textcircled invalid in math mode on input line 13.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
 
  []
 
-) (sections/largeroomacoustics.tex
-Underfull \hbox (badness 10000) in paragraph at lines 17--9
+
+Underfull \hbox (badness 10000) in paragraph at lines 16--17
 
  []
 
-[7]
+) (sections/largeroomacoustics.tex [7]
 Chapter 2.
 
 Underfull \hbox (badness 10000) in paragraph at lines 15--16
@@ -1047,14 +1074,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 69--70
  []
 
 [10]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 101.
-
- ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omsptm.fd"
-File: omsptm.fd 
-)
-LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 101.
-
 Underfull \hbox (badness 10000) in paragraph at lines 115--116
 
  []
@@ -1143,7 +1162,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 205--206
 
  []
 
-[15] <./graphics/SchroederForRTandV.jpg, id=437, 1925.1925pt x 1174.3875pt>
+[15] <./graphics/SchroederForRTandV.jpg, id=447, 1925.1925pt x 1174.3875pt>
 File: ./graphics/SchroederForRTandV.jpg Graphic file (type jpg)
 
 <use ./graphics/SchroederForRTandV.jpg>
@@ -4695,7 +4714,7 @@ Package xcolor Warning: Incompatible color definition on input line 13.
 
 Package xcolor Warning: Incompatible color definition on input line 14.
 
-) <./graphics/Example Window 1.png, id=591, 535.2497pt x 414.79968pt>
+) <./graphics/Example Window 1.png, id=603, 535.2497pt x 414.79968pt>
 File: ./graphics/Example Window 1.png Graphic file (type png)
 
 <use ./graphics/Example Window 1.png>
@@ -4708,7 +4727,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 140--141
  []
 
 
-<./graphics/Example Window 3 60 threshold.png, id=616, 535.2497pt x 414.79968pt
+<./graphics/Example Window 3 60 threshold.png, id=628, 535.2497pt x 414.79968pt
 >
 File: ./graphics/Example Window 3 60 threshold.png Graphic file (type png)
  <use ./graphics/Example Window 3 60 threshold.png>
@@ -4725,7 +4744,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 149--150
 
  []
 
-<./graphics/sfdtd execution speed.png, id=622, 538.26094pt x 474.27188pt>
+<./graphics/sfdtd execution speed.png, id=634, 538.26094pt x 474.27188pt>
 File: ./graphics/sfdtd execution speed.png Graphic file (type png)
 
 <use ./graphics/sfdtd execution speed.png>
@@ -4743,7 +4762,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 157--158
 
  []
 
-<./graphics/sfdtd with wave shapes.png, id=627, 538.26094pt x 474.27188pt>
+<./graphics/sfdtd with wave shapes.png, id=639, 538.26094pt x 474.27188pt>
 File: ./graphics/sfdtd with wave shapes.png Graphic file (type png)
 
 <use ./graphics/sfdtd with wave shapes.png>
@@ -5749,20 +5768,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 31--32
 
  []
 
-<./graphics/fdtdvalidation.png, id=762, 1431.84938pt x 660.96938pt>
+<./graphics/fdtdvalidation.png, id=774, 1431.84938pt x 660.96938pt>
 File: ./graphics/fdtdvalidation.png Graphic file (type png)
 
 <use ./graphics/fdtdvalidation.png>
 Package pdftex.def Info: ./graphics/fdtdvalidation.png used on input line 35.
 (pdftex.def)             Requested size: 345.0pt x 159.2511pt.
  [39]
-<./graphics/PSTDvalidation10k.png, id=767, 612.03656pt x 474.27188pt>
+<./graphics/PSTDvalidation10k.png, id=779, 1547.0297pt x 1093.08376pt>
 File: ./graphics/PSTDvalidation10k.png Graphic file (type png)
 
 <use ./graphics/PSTDvalidation10k.png>
 Package pdftex.def Info: ./graphics/PSTDvalidation10k.png used on input line 41
 .
-(pdftex.def)             Requested size: 345.0pt x 267.34174pt.
+(pdftex.def)             Requested size: 345.0pt x 243.76495pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 45--46
 
@@ -5792,7 +5811,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 26--27
  []
 
 
-<./graphics/FDTD simulation execution time.png, id=776, 612.03656pt x 474.27188
+<./graphics/FDTD simulation execution time.png, id=788, 612.03656pt x 474.27188
 pt>
 File: ./graphics/FDTD simulation execution time.png Graphic file (type png)
  <use ./graphics/FDTD simulation execution time.png>
@@ -5807,7 +5826,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 37--42
 [42
 
 ]
-<./graphics/PSTD Simulation Execution Times.png, id=782, 612.03656pt x 474.2718
+<./graphics/PSTD Simulation Execution Times.png, id=794, 612.03656pt x 474.2718
 8pt>
 File: ./graphics/PSTD Simulation Execution Times.png Graphic file (type png)
  <use ./graphics/PSTD Simulation Execution Times.png>
@@ -5815,7 +5834,7 @@ Package pdftex.def Info: ./graphics/PSTD Simulation Execution Times.png used on
  input line 46.
 (pdftex.def)             Requested size: 345.0pt x 267.34174pt.
  [43 <./graphics/FDTD simulation execution time.png (PNG copy)>]
-<./graphics/SFDTD simulation execution time.png, id=787, 612.03656pt x 474.2718
+<./graphics/SFDTD simulation execution time.png, id=799, 612.03656pt x 474.2718
 8pt>
 File: ./graphics/SFDTD simulation execution time.png Graphic file (type png)
  <use ./graphics/SFDTD simulation execution time.png>
@@ -5833,7 +5852,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 59--60
  []
 
 [45 <./graphics/SFDTD simulation execution time.png (PNG copy)>]
-<./graphics/pstdfunctioncodeprofile.png, id=796, 283.96088pt x 537.50812pt>
+<./graphics/pstdfunctioncodeprofile.png, id=808, 283.96088pt x 537.50812pt>
 File: ./graphics/pstdfunctioncodeprofile.png Graphic file (type png)
 
 <use ./graphics/pstdfunctioncodeprofile.png>
@@ -5850,7 +5869,7 @@ Overfull \vbox (127.25832pt too high) has occurred while \output is active []
 
 
 [47 <./graphics/pstdfunctioncodeprofile.png>]
-<./graphics/fdtdfunctioncodeprofile.png, id=806, 273.72263pt x 182.18062pt>
+<./graphics/fdtdfunctioncodeprofile.png, id=818, 273.72263pt x 182.18062pt>
 File: ./graphics/fdtdfunctioncodeprofile.png Graphic file (type png)
 
 <use ./graphics/fdtdfunctioncodeprofile.png>
@@ -5862,21 +5881,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 72--77
 
  []
 
-<./graphics/sfdtdprosum.png, id=807, 194.82788pt x 156.88612pt>
+<./graphics/sfdtdprosum.png, id=819, 194.82788pt x 156.88612pt>
 File: ./graphics/sfdtdprosum.png Graphic file (type png)
 
 <use ./graphics/sfdtdprosum.png>
 Package pdftex.def Info: ./graphics/sfdtdprosum.png used on input line 84.
 (pdftex.def)             Requested size: 345.0pt x 277.83203pt.
 
-<./graphics/sfdtdfunprosum.png, id=808, 269.20575pt x 179.77162pt>
+<./graphics/sfdtdfunprosum.png, id=820, 269.20575pt x 179.77162pt>
 File: ./graphics/sfdtdfunprosum.png Graphic file (type png)
 
 <use ./graphics/sfdtdfunprosum.png>
 Package pdftex.def Info: ./graphics/sfdtdfunprosum.png used on input line 85.
 (pdftex.def)             Requested size: 345.0pt x 230.40038pt.
 
-<./graphics/sparfunprosum.png, id=809, 288.17662pt x 236.98538pt>
+<./graphics/sparfunprosum.png, id=821, 288.17662pt x 236.98538pt>
 File: ./graphics/sparfunprosum.png Graphic file (type png)
 
 <use ./graphics/sparfunprosum.png>
@@ -5899,12 +5918,12 @@ Chapter 6.
 ] [52
 
 ] [53]
-Underfull \hbox (badness 1152) in paragraph at lines 189--193
+Underfull \hbox (badness 1152) in paragraph at lines 222--226
 []\OT1/ptm/m/n/10 Nicolas Tsin-gos, In-grid Carl-bom, Gary Elko, Robert Kubli, 
 and Thomas
  []
 
-) (sections/appendix.tex [54]
+) (sections/appendix.tex [54] [55]
 Appendix A.
 
 Underfull \hbox (badness 10000) in paragraph at lines 13--14
@@ -5914,7 +5933,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 13--14
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 15.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)) [55
+)) [56
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 124.
@@ -5933,13 +5952,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 21824 strings out of 493333
- 419697 string characters out of 3139179
- 790824 words of memory out of 3000000
- 24545 multiletter control sequences out of 15000+200000
+ 21839 strings out of 493333
+ 419903 string characters out of 3139179
+ 791060 words of memory out of 3000000
+ 24552 multiletter control sequences out of 15000+200000
  48071 words of font info for 99 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,16n,67p,1228b,2396s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 55i,16n,67p,1252b,2394s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Program Files/Mi
 KTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9
 /fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
@@ -5952,9 +5971,9 @@ gram Files/MiKTeX 2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Program Files/MiKTeX
 w/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.p
 fb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Fi
 les/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Main.pdf (56 pages, 2018254 bytes).
+Output written on Main.pdf (57 pages, 2162908 bytes).
 PDF statistics:
- 960 PDF objects out of 1000 (max. 8388607)
- 318 named destinations out of 1000 (max. 500000)
+ 980 PDF objects out of 1000 (max. 8388607)
+ 326 named destinations out of 1000 (max. 500000)
  453 words of extra memory for PDF output out of 10000 (max. 10000000)
 

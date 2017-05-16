@@ -1,105 +1,118 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: Main.aux
 The style file: unsrt.bst
-Illegal, another \bibstyle command---line 142 of file Main.aux
+Illegal, another \bibstyle command---line 148 of file Main.aux
  : \bibstyle
  :          {ieeetr}
 I'm skipping whatever remains of this command
 Database file #1: library.bib
-Repeated entry---line 2763 of file library.bib
+Repeated entry---line 2779 of file library.bib
  : @article{Murphy2014
  :                    ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 3062 of file library.bib
+Repeated entry---line 3078 of file library.bib
  : @article{Spa2011
  :                 ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 5043 of file library.bib
+Repeated entry---line 5059 of file library.bib
  : @article{Mourik2014a
  :                     ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 5731 of file library.bib
+Repeated entry---line 5747 of file library.bib
  : @article{Botteldooren1995
  :                          ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 6361 of file library.bib
+Repeated entry---line 6377 of file library.bib
  : @article{Southern2013
  :                      ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 6514 of file library.bib
+Repeated entry---line 6530 of file library.bib
  : @article{Olesen1997
  :                    ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 7856 of file library.bib
+Repeated entry---line 7872 of file library.bib
  : @misc{Rumpf2012a
  :                 ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 7959 of file library.bib
+Repeated entry---line 7975 of file library.bib
  : @book{beranek1954acoustics
  :                           ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 8227 of file library.bib
+Repeated entry---line 8243 of file library.bib
  : @article{Botteldooren1993
  :                          ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 8632 of file library.bib
+Repeated entry---line 8648 of file library.bib
  : @article{Ahnert2005
  :                    ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 10619 of file library.bib
+Repeated entry---line 8941 of file library.bib
+ : @article{Tsingos2009
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10578 of file library.bib
+ : @article{Foteinou2010
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10635 of file library.bib
  : @book{Sakuma2014
  :                 ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 10707 of file library.bib
+Repeated entry---line 10723 of file library.bib
  : @article{Yee1966
  :                 ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 11157 of file library.bib
+Repeated entry---line 11173 of file library.bib
  : @article{Tsingos2002
  :                     ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 11572 of file library.bib
+Repeated entry---line 11588 of file library.bib
  : @article{Hamilton2013a
  :                       ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 12094 of file library.bib
+Repeated entry---line 12110 of file library.bib
  : @article{Saarelma2016
  :                      ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 12371 of file library.bib
+Repeated entry---line 12124 of file library.bib
+ : @article{Schmalle2011
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 12387 of file library.bib
  : @article{Doerr2013
  :                   ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 12444 of file library.bib
+Repeated entry---line 12460 of file library.bib
  : @article{Hill2012
  :                  ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 12484 of file library.bib
+Repeated entry---line 12500 of file library.bib
  : @article{Schneider2015
  :                       ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 13394 of file library.bib
+Repeated entry---line 13409 of file library.bib
  : @article{Trefethen2000
  :                       ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 13868 of file library.bib
+Repeated entry---line 13883 of file library.bib
  : @book{beranek1954acoustics
  :                           ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 14020 of file library.bib
+Repeated entry---line 14035 of file library.bib
  : @article{Schuster2004
  :                      ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 14031 of file library.bib
+Repeated entry---line 14046 of file library.bib
  : @article{Angus2010
  :                   ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 14262 of file library.bib
+Repeated entry---line 14277 of file library.bib
  : @article{Hornikx2016
  :                     ,
 I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "rossing2007springer"
 Warning--empty journal in Mourik2014a
 Warning--there's a number but no volume in Mourik2014a
+Warning--empty journal in Monks1996a
 Warning--there's a number but no volume in Rossing2007
 Warning--empty publisher in Everest2009
 Warning--can't use both author and editor fields in Davis2014
@@ -109,4 +122,4 @@ Warning--there's a number but no volume in Hill2012
 Warning--empty publisher in Sakuma2014
 Warning--empty publisher in Bilbao2009
 Warning--empty publisher in Blanchet2006
-(There were 24 error messages)
+(There were 27 error messages)
