@@ -62,5 +62,18 @@ With this data, it is clear to see that the PSTD method executes significantly f
 \item The speed of the Fourier transforms is sufficiently fast to have little increase as the number of cells increases. 
 \item Due to the nature of frequency domain differentiation, fewer cells are required per wavelength for stable simulation.
 \end{itemize}
+\section{Code Profiling}
+Use of Matlabs code profiling tool analysis the performance of the PSTD3Dfun function shows the time taken for execution for 2000 calls of the function during an example simulation of a 5m by 4m by3m domain with a maximum frequency of 5kHz:\\
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\textwidth]{./graphics/pstdfunctioncodeprofile.png}
+  \caption{Execution times for SFDTD simulations in domains of increasing size}
+\end{figure}
+This shows that most time in the execution was spent performing the IFFT of the 3D matrices, and that the maximum average differentiation time was 5.1ms for a matrix of 80724 points in the x direction. Below is a figure showing the code profiling for 1200 calls of the FDTD3Dfun function for an example simulation of a 5m by 4m by3m domain with a maximum frequency of 1kHz:\\
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\textwidth]{./graphics/fdtdfunctioncodeprofile.png}
+  \caption{Execution times for SFDTD simulations in domains of increasing size}
+\end{figure}
 
-Use of Matlabs code profiling tool shows the score:\\
+These profiling results show that the bulk of the time spent in execution of the FDTD3Dfun function is used in the differentiation of the matrices. Combined with the total execution speed results for different domains above, the conclusion can be drawn that spectral differentiation may be more appropriate for large domains than finite or local differentiation. As the SFDTD method appears above to converge after some time to a uniform excution time, PSTD may be a more appropriate choice for further development of time domain numerical simulation in large domains. This however may not be a fair conclusion to draw against the SFDTD method as it is not implemented in 3D, further study is required to confirm the efficiency difference between PSTD and SFDTD.

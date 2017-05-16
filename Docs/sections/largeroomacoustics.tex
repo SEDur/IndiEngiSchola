@@ -197,9 +197,17 @@ These modes are defined in spatial reciprocity as axial, tangential and oblique,
 In a room of the dimensions $5m$ by $4m$ by $3m$, modes up to the 10th order may occur at the following frequencies:\\
 
 As modes occur at higher orders, the spatial change of the intensity of a particular frequency due to modes decreases to the point where the human ear may be insensitive these changes. Further, at higher orders of modes the frequency density of modes may tend to converge, such that many modes occur around the same frequencies and so may appear to be diffusely occurring. The frequency at which modes tend to become difficult to observe by ear due to these properties for a particular domain is known as the Schroeder frequency, and that is calculated by:\\
+
 \begin{center}
 $ \textit{f}_{Schroeder} = 2000 \sqrt{\frac{RT_{60}}{V}} $\\
 \end{center}
+
 When considering the use of wave equation solver to compute acoustic propagation in large domains, it may be appropriate to consider calculating only up to a frequency of interest such as the Schroeder frequency using the wave method. This will reduce the required spatial resolution for the solution and thus will reduce total memory used and the time to completion per-time-step. However, calculating low frequency propagation may require to solve for longer total time to remain accurate~\cite{Bilbao2004a}. In environments such as stadia, arenas and cathedrals, $RT_{60}$ may vary from $1.2$ to beyond $10s$. The mesh plot below shows Schroeder frequency as a function of $RT_{60}$ and room volume: \\
+
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\textwidth]{./graphics/SchroederForRTandV.jpg}
+  \caption{Schroeder frequency as a function of domain size and RT60}
+\end{figure}
 
 Thus for very large domains domains with a short $RT_{60}$, modal analysis may be neither appropriate or necessary.

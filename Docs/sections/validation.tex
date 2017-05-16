@@ -30,6 +30,13 @@ The aim of the validation will be to show that there is minimal error in the nor
 \section{Results}
 Below is a plot of the spectral power of the source signal, the FDTD receiver position and the PSTD receiver position for the simulation described above. The receiver signals are normalised the maximum of the source position amplitude, as described in~\cite{Murphy2014}.\\ 
 
+
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\textwidth]{./graphics/PSTDvalidation10k.png}
+  \caption{Validation data of PSTD simulation}
+\end{figure}
+
 It can be seen that both simulations exhibit similar inclusion of the frequency domain properties of the stimulus. Both simulations include the dip from Dc to 55Hz, and both exhibit the slope from 2400Hz that is caused by the window function. However, the PSTD results include a considerable spectral tilt, which may be partially caused by the implementation of a soft source as opposed to a transparent source.\\
 
 

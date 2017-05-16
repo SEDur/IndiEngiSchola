@@ -41,6 +41,7 @@ $u^{t + \frac{\delta t}{2}}_{x} = u^{t - \frac{\delta t}{2}}_{x} - \frac{\delta 
 $p^{t + \frac{\delta t}{2}}_{x} = p^{t - \frac{\delta t}{2}}_{x} - \frac{c^2 \rho \delta t}{\delta x} \left[u^{t}_{x + \frac{\delta x}{2}} - u^{t}_{x - \frac{\delta x}{2}}\right]$\\
 \end{center}
 These update equations are developed for used with two matrices, one for for pressure values and one for velocity values. The size of these matrices is determined by the size of the domain of interest and the spatial step size. The spatial step size is determined by the highest frequency of interest and the number of grid points required per wavelength, which is often regarded as being between 6 and 10 points in much FDTD literature. The spatial step size has a significant impact on both simulation stability and execution time, and is discussed further in the report.
+\newpage
 \subsection{Block Diagram}
 A basic block diagram of a program for solving the the acoustic FDTD method is given bellow:\\
 
@@ -53,7 +54,7 @@ A basic block diagram of a program for solving the the acoustic FDTD method is g
 \tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
     minimum height=2em]
     
-\begin{tikzpicture}[node distance = 2cm, auto]
+\begin{tikzpicture}[node distance = 1.5cm, auto]
     % Place nodes
     \node [block] (init) {initialize model};
    %\node [cloud, left of=init] (expert) {expert};
@@ -65,7 +66,7 @@ A basic block diagram of a program for solving the the acoustic FDTD method is g
     \node [block, below of=source] (record) {record at reciever, $t = t + \delta t$};
     \node [block, left of=evaluateb, node distance=3cm] (display) {display model};
     \node [decision, below of=record] (decide) {$t = T?$};
-    \node [block, below of=decide, node distance=3cm] (stop) {stop and postprocess};
+    \node [block, below of=decide, node distance=2cm] (stop) {stop and postprocess};
     % Draw edges
     \path [line] (init) -- (evaluateu);
     \path [line] (evaluateu) -- (evaluateb);
@@ -74,7 +75,7 @@ A basic block diagram of a program for solving the the acoustic FDTD method is g
     \path [line] (source) -- (record);
     \path [line] (record) -- (decide);
     \path [line] (decide) -| node [near start] {no} (display);
-    \path [line] (display) |- (source);
+    \path [line] (display) |- (evaluateu);
     \path [line] (decide) -- node {yes}(stop);
     %\path [line,dashed] (expert) -- (init);
     %\path [line,dashed] (system) -- (init);
