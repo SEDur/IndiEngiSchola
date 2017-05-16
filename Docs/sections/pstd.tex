@@ -1,4 +1,4 @@
-
+\newpage
 \section{Pseudo-Spectral Time Domain Method}
 The Fourier Pseudo-spectral Time Domain (PSTD) Method is a numerical method that can be used for solving partial differential equations in a similar way to the FDTD method. The advantage of this method is that differentiation occurs in the frequency domain, using the computational speed of performing a discrete Fourier transform to give fast frequency domain differentiation and differentiation with higher order accuracy than the FDTD method~\cite{Hornikx2016}. In this chapter we will discuss the application of the PSTD method to the acoustic wave equation, including the use of empirical partially absorbing boundary conditions and the perfectly matched layer(PML).
 
@@ -88,7 +88,14 @@ $u^{t + \frac{\delta t}{2}}_{y} = u^{t - \frac{\delta t}{2}}_{y} - \frac{\delta 
 $u^{t + \frac{\delta t}{2}}_{z} = u^{t - \frac{\delta t}{2}}_{z} - \frac{\delta t}{\rho \delta z} \textbf{\textit{F}}^{-1}\left(\epsilon \textbf{\textit{F}}\left[p^{t}_{z}\right] \right)$\\
 $p^{t + \frac{\delta t}{2}}_{xyz} = p^{t - \frac{\delta t}{2}}_{xyz} - \frac{c^2 \rho \delta t}{\delta x} \textbf{\textit{F}}^{-1}\left( \epsilon \textbf{\textit{F}} \left[ u_x^{t} \right] \right) - \frac{c^2 \rho \delta t}{\delta y} \textbf{\textit{F}}^{-1}\left( \epsilon \textbf{\textit{F}} \left[ u_y^{t} \right] \right) - \frac{c^2 \rho \delta t}{\delta z} \textbf{\textit{F}}^{-1}\left( \epsilon \textbf{\textit{F}} \left[ u_z^{t} \right] \right)$ \\
 \end{center}
-A Matlab function for implementing the above equations is given below:\\
+The figure below shows a 2D matrix used for differentiation on a 2D simulation in one direction:\\
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.75\textwidth]{./graphics/pstd2ddiffmatrix.png}
+  \caption{2D Differentiation Matrix in 1 Direction for a PSTD Simulation}
+\end{figure}
+
+A Matlab function for solving 1 time step of the PSTD method is given below:\\
 \lstinputlisting[language=Matlab]{../Matlab/PTSD/PSTD3Dfun.m}
 %\lstinputlisting[language=Matlab]{../Matlab/SFDTD/SPARSEfun2DC.m}
 
@@ -115,9 +122,13 @@ d < i < N - d \quad a & = 0\\
 i > N-d \quad a & = \frac{1}{2} \left( \frac{N - i}{d} \right) ^3 \\ 
 \end{aligned}
 \end{equation}
-An example of the values of the PML coefficients for a 1D simulation can be found below:\\
 
 As the maximum number in the matrix is 1, a multidimensional implementation of the PML regions involved creating orthogonal arrays of these 1D sections and applying an average summation of the regions values. Generating 2D PML coefficients involves summing 2 orthogonal 2D $N_x N_y $ matrices using a least squares method. Generating a 3D matrix of PML coefficients involved creating 3 3D $N_x N_y N_z $ matrices, with sets of 1D coefficient arrays in each direction. These three orthogonal matrices are summed and divided by the number of matrices. An example of the values of PML coefficients in a 2D simulation can be found below:\\
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.75\textwidth]{./graphics/pstd2dpmlmatrix.png}
+  \caption{PSTD 2D PML Coefficient Matrix}
+\end{figure}
 
 
 \subsection{Partially Absorbing Boundary Conditions}
@@ -150,7 +161,12 @@ p^{t + \frac{\delta t}{2}}_{x} &= \xi \left[ p^{t - \frac{\delta t}{2}}_{x} \sig
 u^{t + \frac{\delta t}{2}}_{x} &= \frac{1}{\xi} \left[ u^{t - \frac{\delta t}{2}}_{x} \sigma_a - \frac{\delta t}{\rho \delta x} \sigma_b \textbf{\textit{F}}^{-1}\left(\epsilon \textbf{\textit{F}}\left[p^{t}\right] \right) \right] \\
 \end{aligned}
 \end{equation}
-
+The figure below shows the pressure grid for a 2D PSTD simulation after some timesteps, including some reflections from a corner of the domain:\\
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.75\textwidth]{./graphics/pstd2dwithreflectingboundaries.png}
+  \caption{Example Plot of a 2D PSTD Simulation With Reflections}
+\end{figure}
 
 %\section{Validation: A 3D Simulation with empirical partially absorbing boundary conditions}
 %\label{sec:3}
@@ -175,13 +191,4 @@ A transparent source involves applying error correction to the stimulus by convo
 $p_{xyz}^{t} = p_{xyz}^{t} + source^{t} - \Sigma_0^T h_{xyz}^{t = 0 : t}*source^{t = 0 : t}$
 \end{center}
 
-\section{Signals}
-Two signal types have been used in this study, the chirp and the maximum length sequence(MLS). 
-
-%SAVE THIS FOR PSTD
-%
-%A more conservative estimate may be provided by substituting the empirical $C_{max}$ term with the a term related to 
-%\begin{center}
-%$ CFL = c \frac{\delta t}{\sqrt{\Sigma_{1}^{N_D} \delta {N_{D}}^2}} \leq \frac{2}{\pi \sqrt{N_D}}$\\
-%\end{center}
 

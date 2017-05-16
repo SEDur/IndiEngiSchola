@@ -12,6 +12,18 @@ Jelle~Van Mourik and Damian~T Murphy.
 \newblock {Hybrid Acoustic Modelling of Historic Spaces Using Blender}.
 \newblock (c):7--12, 2014.
 
+\bibitem{Elorza2005}
+David~Oliva Elorza.
+\newblock {\em {Room acoustics modeling using the ray- tracing method :
+  implementation and evaluation}}.
+\newblock PhD thesis, University of Turku, 2005.
+
+\bibitem{Hill2012}
+Adam~J Hill.
+\newblock {Analysis , Modeling and Wide-Area Spatiotemporal Control of
+  Low-Frequency Sound Reproduction}.
+\newblock (January), 2012.
+
 \bibitem{Rindel2000}
 J~H Rindel.
 \newblock {The use of computer modeling in room acoustics}.
@@ -41,16 +53,26 @@ Mads~Herring Jensen.
 \newblock {Modeling Acoustics Applications with COMSOL Multiphysics
   {\textregistered}}, 2016.
 
+\bibitem{beranek1954acoustics}
+L~L Beranek.
+\newblock {\em {Acoustics}}.
+\newblock McGraw-Hill electrical and electronic engineering series.
+  McGraw-Hill, Berkley, 1st edition, 1954.
+
 \bibitem{Rossing2007}
 T.~D. Rossing.
 \newblock {Springer Handbook of Acoustics}.
 \newblock {\em Book}, (JANUARY 2007):1182, 2007.
 
-\bibitem{beranek1954acoustics}
-L~L Beranek.
-\newblock {\em {Acoustics}}.
-\newblock McGraw-Hill electrical and electronic engineering series.
-  McGraw-Hill, 1st edition, 1954.
+\bibitem{Rienstra1952}
+S~W Rienstra and A~Hirschberg.
+\newblock {An Introduction to Acoustics}.
+\newblock {\em Physics Today}, 5(11):24, 2004.
+
+\bibitem{Davis2014}
+Don Davis and Eugene Patronis.
+\newblock {\em {Sound System Engineering}}.
+\newblock Focal Press, New York, 4th edition, 2014.
 
 \bibitem{Everest2009}
 F.~Alton Everest and Neil~A. Shaw.
@@ -62,11 +84,6 @@ Leo~L. Beranek.
 \newblock {Analysis of Sabine and Eyring equations and their application to
   concert hall audience and chair absorption}.
 \newblock {\em J. Acoust. Soc. Am.}, 120(3):1399--1410, 2006.
-
-\bibitem{Davis2014}
-Don Davis and Eugene Patronis.
-\newblock {\em {Sound System Engineering}}.
-\newblock Focal Press, New York, 4th edition, 2014.
 
 \bibitem{Bilbao2004a}
 Stefan Bilbao.
@@ -90,12 +107,6 @@ D~Botteldooren.
 \newblock {Acoustical finite-difference time-domain simulation in a
   quasi-Cartesian grid}.
 \newblock {\em Acoustical Society of America}, 95(5):2313--2319, 1993.
-
-\bibitem{Hill2012}
-Adam~J Hill.
-\newblock {Analysis , Modeling and Wide-Area Spatiotemporal Control of
-  Low-Frequency Sound Reproduction}.
-\newblock (January), 2012.
 
 \bibitem{Olesen1997}
 Soren~Krarup Olesen.
@@ -137,7 +148,7 @@ Brian Hamilton and Stefan Bilbao.
 \bibitem{Doerr2013}
 Christopher Doerr.
 \newblock {Sparse Finite Difference Time Domain Method}.
-\newblock {\em IEEE Photonics Technology Letters}, 25(23):1--1, 2013.
+\newblock {\em IEEE Photonics Technology Letters}, 25(23):1, 2013.
 
 \bibitem{Doerr2014p}
 C~Doerr.
@@ -207,7 +218,7 @@ Carlos Spa, Jose Escolano, and Adan Garriga.
 \newblock {\em Applied Acoustics}, 72(4):226--230, 2011.
 
 \bibitem{Murphy2014}
-Damian~T. Murphy, Alex Southern, and Lauri Savioja.
+Damian~T Murphy, Alex Southern, and Lauri Savioja.
 \newblock {Source excitation strategies for obtaining impulse responses in
   finite difference time domain room acoustics simulation}.
 \newblock {\em Applied Acoustics}, 82:6--14, 2014.
@@ -231,10 +242,15 @@ a.~Foteinou, D.~Murphy, and a.~Masinton.
 \newblock {\em 128th Audio Engineering Society Convention}, pages 1--12, 2010.
 
 \bibitem{Southern2013}
-Alex Southern, Samuel Siltanen, Damian~T Murphy, and Lauri Savioja.
+Alex Southern, Samuel Siltanen, Damian~T. Murphy, and Lauri Savioja.
 \newblock {Room impulse response synthesis and validation using a hybrid
   acoustic model}.
 \newblock {\em IEEE Transactions on Audio, Speech and Language Processing},
   21(9):1940--1952, 2013.
+
+\bibitem{Mrt2008}
+Mark Thomas.
+\newblock {Maximum Sequence Length}.
+\newblock pages 1--9, 2007.
 
 \end{thebibliography}

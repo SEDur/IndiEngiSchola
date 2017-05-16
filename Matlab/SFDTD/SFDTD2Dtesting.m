@@ -33,7 +33,7 @@ cstab = 2/(pi*sqrt(2));
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 1000 * hertz;
+fmax = 5000 * hertz;
 
 gx = (c / (6*fmax));
 gy = (c / (6*fmax));
@@ -61,8 +61,8 @@ alphaB = 0.45;
 %number of sources
 snum = 2;
 %source locations
-% sourcelocations = [ceil((1/gy)) ceil(1/gx)];
-sourcelocations = [ceil((ycells/2)) ceil(xcells/2)];
+sourcelocations = [ceil((1/gy)) ceil(1/gx)];
+% sourcelocations = [ceil((ycells/2)) ceil(xcells/2)];
 
 %Source amplitude 
 A = 1;

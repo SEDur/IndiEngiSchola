@@ -20,32 +20,45 @@ The domain used for validation in this study was a fully bounded room with the f
 \end{itemize}
 
 The axial, tangential and oblique modes below the Schroeder frequency are calculated as:\\
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\textwidth]{./graphics/modesuptoschr.png}
+  \caption{Room Modes up to Schroeder Frequency for a Small Rectangular Room}
+\end{figure}
 
-
-The stimulus position in each domain was $1.0m$ in each direction from the bottom left corner, and the receiver position was the exact middle of the domain. The stimulus source type was a soft source, as described in the time domain numerical methods section above. The source content was a log chirp that was generated using the Matlab DSP Systems Toolbox, with a start frequency of 100Hz and a stop frequency of half the maximum target frequency (or a quarter of Nyquist), that was normalised to $100dBSPL$ and has a sweep time of $0.4s$. Before normalisation, a Hann window was applied to the signal to minimize the discontinuity of introducing the source. The maximum frequency of interest in this validation was $5kHz$, giving a $0.333e^{-5}$ step time for the FDTD simulation, and a $0.1e^{-4}$ step time for the PSTD simulation. A plot of the source signal amplitude with respect to time is given below:\\
+The stimulus position in each domain was $1.0m$ in each direction from the bottom left corner, and the receiver position was the exact middle of the domain. The stimulus source type was a soft source, as described in the time domain numerical methods section above. 
+The source content was an MLS sequence of 11th order with 2 repetitions. The MLS signal was generated using the MLS toolbox by MRP Thomas~\cite{Mrt2008}. The signal was normalised with a Gaussian window to the length of the signal array. The maximum frequency of interest in this validation was $5kHz$, giving a $0.333e^{-5}$ step time for the FDTD simulation, and a $0.1e^{-4}$ step time for the PSTD simulation.
 
 \subsection{Post Processing}
-The aim of the validation will be to show that there is minimal error in the normalised power spectral density between source and receiver location. This will show that waves are travelling from source to receiver with minimal error i.e. without aliasing or unexpected loss in the frequency range of interest. Some modal influence is expected, as is DC offset. To reduce the effect of the dc term, a DC blocking filter will be used when post processing the source and receiver recorded signals.
+The aim of the validation was be to show that there is minimal error in the normalised power spectral density between source and receiver location. This will show that waves are travelling from source to receiver without aliasing or unexpected loss in the frequency range of interest. Some modal influence was expected, as is DC offset. To reduce the effect of the DC term, a DC blocking filter was used when post processing the source and receiver recorded signals. This filter was generated using the Matlab filter design tool. As with ~\cite{Murphy2014} the input and output signals on the grid were recorded, and the signals are normalised to each other.\\
 
 \section{Results}
-Below is a plot of the spectral power of the source signal, the FDTD receiver position and the PSTD receiver position for the simulation described above. The receiver signals are normalised the maximum of the source position amplitude, as described in~\cite{Murphy2014}.\\ 
+Below is a plot of the spectral power of the source signal, the FDTD receiver position and the PSTD receiver position for the simulation described above. The normalised input and output subplot in these figures is shifted in time to remove the time lag between source and receiver locations.
 
 \begin{figure}[H]
 \centering
-  \includegraphics[width=\textwidth]{./graphics/fdtdvalidation.png}
+\textbf{FDTD Validation Data}
+  \includegraphics[width=\textwidth]{./graphics/FDTDvalidationFinal.png}
   \caption{Validation data of FDTD simulation}
 \end{figure}
 
 \begin{figure}[H]
 \centering
+\textbf{PSTD Validation Data}
   \includegraphics[width=\textwidth]{./graphics/PSTDvalidation10k.png}
   \caption{Validation data of PSTD simulation}
 \end{figure}
 
-It can be seen that both simulations exhibit similar inclusion of the frequency domain properties of the stimulus. Both simulations include the dip from Dc to 55Hz, and both exhibit the slope from 2400Hz that is caused by the window function. However, the PSTD results include a considerable spectral tilt, which may be partially caused by the implementation of a soft source as opposed to a transparent source.\\
+It can be seen that both simulations have reasonably good agreement between the power spectral densities (PSD) of the source and receivers in the frequency region of interest. There is a significant low frequency signal present in the PSTD response, in both the source and receiver sections.  Due to the 6 steps per wavelength of the FDTD simulation, the time step was also smaller than for the PSTD simulation. As such when using Matlabs Pwelch function to perform PSD estimation, the estimation was made beyond the frequency range of interest.\\
 
 
 \section{Validating The SFDTD Method}
-As noted previously, the SFDTD method was implemented only to 2D and thus cannot be validated against he performance of the 3D FDTD and PSTD methods as above. Below is a comparative plot of the SFDTD receiver signal and the source signal. The threshold for windowing of the SFDTD algorithm was set to 30dB.\\
+As the SFDTD method was implemented only to 2D and it could not be validated with the 3D FDTD and PSTD methods as above. The SFDTD method was tested using a 5m by 4m domain, with absorption coefficients of $ \alpha = 0.45$. The signal used was a chirp that was generated using the Chip function of the Matlab DSP Systems Toolbox, with a start frequency of 100Hz and a stop frequency of half the maximum target frequency (or a quarter of Nyquist), that was normalised to $100dBSPL$ and has a sweep time of $0.4s$. Before normalisation, a Hamming window was applied to the signal to minimize the discontinuity of introducing the source. The figure below presents the output data for the SFDTD validating simulation:\\
 
-As can be seen in the plot above, though the frequency content of the received signal is similar to the source, there is a continually increasing noise level that may be caused by the discontinuity of the fluctuating mask. Due to this noise level it is not appropriate to successfully validate this simulation method, as so the inclusion of this method in the next section is purely to explore the potential of the method.\\ 
+\begin{figure}[H]
+\centering
+\textbf{PSTD Validation Data}
+  \includegraphics[width=\textwidth]{./graphics/SFDTDvalidationFinal.png}
+  \caption{Validation data of PSTD simulation}
+\end{figure}
+As with the PSTD method there is a shared low frequency component, but the PSD between source and receiver are very close to well beyond the highest frequency of interest.

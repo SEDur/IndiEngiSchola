@@ -223,8 +223,8 @@ legend('reciever','source');
 grid('on');
 title('Power Spectral Density of Input and Output');
 subplot(4,1,4);
-plot(0:dt:((length(reciever)-1)*dt),roundtime)
+plot(0:dt:((length(reciever)-1)*dt),exectime)
 axis('tight')
-ttlstr = sprintf('Computation Time Per Cycle, Total Time: %i',sum(roundtime));
+ttlstr = sprintf('Computation Time Per Cycle, Total Time: %i',sum(exectime));
 title(ttlstr);
 
