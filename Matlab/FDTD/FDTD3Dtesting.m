@@ -18,7 +18,7 @@ rho = 1.21;
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 6000 * hertz;
+fmax = 5000 * hertz;
 % dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))+(1/(gz^2))));
 % dt = 1/(2*fmax);
 
