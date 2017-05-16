@@ -1,17 +1,20 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Schroeder frequency as a function of domain size and RT60}}{14}{figure.2.1}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Schroeder frequency as a function of domain size and RT60}}{16}{figure.2.1}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Window of an expanding wave in an SFDTD simulation}}{24}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Window of an expanding wave in an SFDTD simulation}}{25}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Smoothed rate of time step execution for the SFDTD method during simulations, for different threshold levels}}{26}{figure.3.3}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Single source SFDTD simulation in a small room with nodes and anti-nodes present}}{27}{figure.3.4}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Window of an expanding wave in an SFDTD simulation}}{26}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Window of an expanding wave in an SFDTD simulation}}{27}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Smoothed rate of time step execution for the SFDTD method during simulations, for different threshold levels}}{28}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Single source SFDTD simulation in a small room with nodes and anti-nodes present}}{29}{figure.3.4}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Validation data of PSTD simulation}}{38}{figure.4.1}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Validation data of FDTD simulation}}{40}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Validation data of PSTD simulation}}{40}{figure.4.2}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Execution times for FDTD simulations in domains of increasing size}}{40}{figure.5.1}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Execution times for PSTD simulations in domains of increasing size}}{41}{figure.5.2}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Execution times for SFDTD simulations in domains of increasing size}}{42}{figure.5.3}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Execution times for SFDTD simulations in domains of increasing size}}{44}{figure.5.4}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Execution times for SFDTD simulations in domains of increasing size}}{45}{figure.5.5}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Execution times for FDTD simulations in domains of increasing size}}{43}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Execution times for PSTD simulations in domains of increasing size}}{44}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Execution times for SFDTD simulations in domains of increasing size}}{45}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Execution times for SFDTD simulations in domains of increasing size}}{47}{figure.5.4}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Execution times for SFDTD simulations in domains of increasing size}}{48}{figure.5.5}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Execution times for SFDTD simulations in domains of increasing size}}{49}{figure.5.6}
+\addvspace {10\p@ }
 \addvspace {10\p@ }

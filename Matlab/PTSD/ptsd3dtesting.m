@@ -224,7 +224,7 @@ norec = reciever ./ max(abs(reciever));
 recanal = AnalyseMLSSequence(reciever',0,2,11,0,0);
 % norec = Hd(norec);
 % [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
-[lpsd, lf] = pwelch(norec,hann(200),[],200,fs);
+[lpsd, lf] = pwelch(norec,hann(2000),[],2000,fs);
 % clear('Hd');
 % Hd = postprocessingDCfilter;
 srcnrm = srcnorm ./ max(abs(srcnorm));

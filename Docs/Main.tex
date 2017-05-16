@@ -75,18 +75,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
+%\author{Simon Durbridge} % Your name
 
-\author{Simon Durbridge} % Your name
-
-\title{Efficient Acoustic Modelling of Large Spaces using Time Domain Methods} % The assignment title
+%\title{Efficient Acoustic Modelling of Large Spaces using Time Domain Methods} % The assignment title
 
 %\subtitle{Analysis of Time Domain Numerical Methods for Acoustic Modelling of Large Spaces}
 %\institute{Dept. Engineering, Mathematics \&\ Computing\\ University of Derby\\
 %\email{s.durbridge1@unimail.derby.ac.uk} % optional, same for URL of
-\maketitle
-
+%\maketitle
+\subfile{sections/titlepage} %Chapter
 %\frontmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\include{sections/summary}
+\subfile{sections/summary}
 %\include{sections/acknow}
 %\include{sections/acronym}
 \tableofcontents
@@ -108,13 +107,14 @@
 %\include{sections/Conclusion} %Chapter
 \subfile{sections/conclusion}
 %\include{sections/Further Work} %Chapter
-%\include{sections/appendix}
 
 
 %\backmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\chapter{References}
 \bibliographystyle{ieeetr}
 \bibliography{library}
+
+\subfile{sections/appendix}
 %\include{sections/glossary}
 %\include{sections/solutions}
 %\printindex

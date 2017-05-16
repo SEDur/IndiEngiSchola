@@ -1,5 +1,17 @@
 \begin{thebibliography}{10}
 
+\bibitem{Botteldooren1995}
+D~Botteldooren.
+\newblock {Finite-difference time-domain simulation of low-frequency room
+  acoustic problems}.
+\newblock {\em The Journal of the Acoustical Society of America}, 98(6):3302,
+  1995.
+
+\bibitem{Mourik2014a}
+Jelle~Van Mourik and Damian~T Murphy.
+\newblock {Hybrid Acoustic Modelling of Historic Spaces Using Blender}.
+\newblock (c):7--12, 2014.
+
 \bibitem{Rossing2007}
 T.~D. Rossing.
 \newblock {Springer Handbook of Acoustics}.
@@ -9,7 +21,7 @@ T.~D. Rossing.
 L~L Beranek.
 \newblock {\em {Acoustics}}.
 \newblock McGraw-Hill electrical and electronic engineering series.
-  McGraw-Hill, Berkley, 1st edition, 1954.
+  McGraw-Hill, 1st edition, 1954.
 
 \bibitem{Everest2009}
 F.~Alton Everest and Neil~A. Shaw.
@@ -142,7 +154,7 @@ Lloyd~N Trefethen.
 
 \bibitem{Rumpf2012a}
 R~Rumpf.
-\newblock {The Perfectly Matched Layer ( PML ) Lecture 13 CEM}, 2012.
+\newblock {The Perfectly Matched Layer ( PML ) Review of Lecture 12}, 2012.
 
 \bibitem{Berenger1994}
 Jean~P Berenger.
@@ -162,7 +174,7 @@ Carlos Spa, Jose Escolano, and Adan Garriga.
 \newblock {\em Applied Acoustics}, 72(4):226--230, 2011.
 
 \bibitem{Murphy2014}
-Damian~T Murphy, Alex Southern, and Lauri Savioja.
+Damian~T. Murphy, Alex Southern, and Lauri Savioja.
 \newblock {Source excitation strategies for obtaining impulse responses in
   finite difference time domain room acoustics simulation}.
 \newblock {\em Applied Acoustics}, 82:6--14, 2014.
