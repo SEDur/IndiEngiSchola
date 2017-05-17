@@ -24,31 +24,36 @@ fs = 10000;
 %define density
 rho = 1.21;
 %define speed of sound
-% c = 343;
+c = 343;
 % c = 3430; %<< works for 2k
-c = 34300;
+% c = 34300;
 %define total time
 T = 1.0;
-
+%define grid width
+gridWidthX = 5.0;
+gridWidthY = 4.0;
+gridWidthZ = 3.0;
 %Target stability number 
 St = 2/(pi*sqrt(3));
-dx = (c / fs);
+dt = (1/fs);
+dx = c * dt / St;
+% dx = (c / fs);
 %define timestep
 % dt = (1/fs);
-dt = ((1/c)*dx)/2;
+% dt = ((1/c)*dx)/2;
 %dfine grid spacing
 % dx = c * dt / St;
 %calculate pconst
-% pconst = pi * 100 * (rho * c^2 * dt/dx);
+pconst = pi * 100 * (rho * c^2 * dt/dx);
 % pconst = rho * c^2 * dt;
 % pconst = rho * c^2 * (dt/dx);
 % pconst = dt/(dx*rho);
-pconst = rho * c^2 * (dt/dx);
+% pconst = rho * c^2 * (dt/dx);
 %calculate uconst
-uconst = (1/rho)*(dt/dx);
+% uconst = (1/rho)*(dt/dx);
 % pconst = c^2*rho*dt/dx;
 %calculate uconst
-% uconst = dt/(dx*rho);
+uconst = dt/(dx*rho);
 % uconst = (1/rho)*(dt/dx);
 % uconst = dt/(dx*rho);
 % uconst = c^2*rho*dt/dx;
@@ -80,10 +85,7 @@ T = length(source1)*dt;
 % source1 = source1(1:(T/dt));
 w1 = window(@gausswin,length(source1),2.5); 
 
-%define grid width
-gridWidthX = 5.0;
-gridWidthY = 4.0;
-gridWidthZ = 3.0;
+
 %calc grid size
 Nx = ceil(abs(gridWidthX/dx)+2*PMLdepth);
 Ny = ceil(abs(gridWidthY/dx)+2*PMLdepth);
@@ -205,14 +207,20 @@ zcells = 0 : dx : (Nz-1-PMLdepth)*dx;
 
 for i = 1 : T/dt
     tic();
-    [pd, udx, udy, udz] = PTSD3Dboundary(pd, udx, udy, udz, PMLdepth,...
-        xiXn, xiXp, xiYn, xiYp, xiZn, xiZp);
+    
     [pd, udx, udy, udz] = PSTD3Dfun(pd, udx, udy, udz,...
         diffmatrixX, diffmatrixY , diffmatrixZ,...
      PMLdiff5, PMLalphau, PMLalphap, PMLconst);
+ [pd, udx, udy, udz] = PTSD3Dboundary(pd, udx, udy, udz, PMLdepth,...
+        xiXn, xiXp, xiYn, xiYp, xiZn, xiZp);
     pd = PTSD3Dsrc(pd, source1(i), srcloc);
-    reciever(i) = real(pd(ceil(Ny/2), ceil(Nx/2), ceil(Nz/2)));
+%     reciever(i) = real(pd(ceil(Ny/2), ceil(Nx/2), ceil(Nz/2)));
     srcnorm(i) = pd(srcloc(1,1),srcloc(1,2),srcloc(1,3));
+    reciever(i,1) = pd(ceil(Nx/4), ceil(Ny/4),ceil(Nz/2));
+    reciever(i,2) = pd(ceil(Nx/2)+ceil(Nx/4), ceil(Ny/4),ceil(Nz/2));    
+    reciever(i,3) = pd(ceil(Nx/2), ceil(Ny/2)+ceil(Nx/4),ceil(Nz/2));
+    reciever(i,4) = pd(ceil(Nx/2+ceil(Nx/4)), ceil(Ny/2)+ceil(Nx/4),ceil(Nz/2));
+    reciever(i,5) = pd(ceil(Nx/2), ceil(Ny/2),ceil(Nz/2));
     roundtime(i) = toc();
     T - (i*dt)
     PSTD3Dplotdomain(pd, xcells, ycells, zcells, i, dt, p0, roundtime(i), PMLdepth);
@@ -221,7 +229,7 @@ end
 %% Some really minor postprocessing
 % Hd = postprocessingDCfilter;
 norec = reciever ./ max(abs(reciever));
-recanal = AnalyseMLSSequence(reciever',0,2,11,0,0);
+% recanal = AnalyseMLSSequence(reciever',0,2,11,0,0);
 % norec = Hd(norec);
 % [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
 [lpsd, lf] = pwelch(norec,hann(2000),[],2000,fs);
@@ -269,27 +277,30 @@ title('MLS Analysed');
 
 %% Display the results
 subplot(4,1,1);
-plot(0:dt:((length(reciever)-1)*dt),reciever)
-hold on;
 plot(0:dt:((length(reciever)-1)*dt),source1(1:length(reciever)))
+hold on;
+plot(0:dt:((length(reciever)-1)*dt),reciever)
 hold off;
 axis('tight')
-legend('reciever','source');
+legend('source','rec top left','rec top right','rec bottom left',...
+    'rec bottom right','rec centre');
 title('Raw Input And Output');
 subplot(4,1,2);
 plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
 hold on;
-plot(0:dt:((length(srcnrm)-1)*dt),srcnrm)
+plot(0:dt:((length(srcnrm)-1)*dt),srcnrm,'-')
 hold off;
 axis('tight')
-legend('reciever','source');
+legend('rec top left','rec top right','rec bottom left',...
+    'rec bottom right','rec centre','source');
 title('Normalised Input And Output');
 subplot(4,1,3);
 plot(lf, db(lpsd),'--','Linewidth',2.0);
 hold on;
 plot(sf, db(spsd));
 hold off;
-legend('reciever','source');
+legend('rec top left','rec top right','rec bottom left',...
+    'rec bottom right','rec centre','source');
 grid('on');
 title('Power Spectral Density of Input and Output');
 subplot(4,1,4);

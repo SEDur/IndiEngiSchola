@@ -15,7 +15,7 @@ alphaYn = 0.45;
 alphaYp = 0.45;
 
 %define FS
-fs = 44100.0;
+fs = 10000;
 %define density
 rho = 1.21;
 %define speed of sound
@@ -52,6 +52,7 @@ Ny = ceil(abs(gridWidthY/dx)+2*PMLdepth);
 %calculate differentiation matrix
 tempdiffmatrixX = zeros(1,Nx);
 tempdiffmatrixY = zeros(1,Ny);
+
 % temp = zeros(N, N);
 %Calc source
 % sStart = 44100 * 40;
@@ -63,18 +64,23 @@ tempdiffmatrixY = zeros(1,Ny);
 % src(1:length(srctime) + 20) = src(1:length(srctime) + 20) .* win';
 % clear('win');
 
-tnum = ceil(T/dt);
-src = zeros(1,tnum);
-fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
-n0 = 10;        % Initial delay (samples)
-sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
-n=0:tnum;
-src = exp(-dt^2*(n-n0).^2/(2*sigma^2));
-scr = ((2*10^-5)*10^(100/20))*src;
+% tnum = ceil(T/dt);
+% src = zeros(1,tnum);
+% fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
+% n0 = 10;        % Initial delay (samples)
+% sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
+% n=0:tnum;
+% src = exp(-dt^2*(n-n0).^2/(2*sigma^2));
+% scr = ((2*10^-5)*10^(100/20))*src;
 
 % music = audioread('track.mp3');
 % src = (10^-12)*10^(50/20) .* music(sStart:sStart + length(src));
 srcloc = [PMLdepth+ceil(1/dx) PMLdepth+ceil(1/dx)];
+source1 = GenerateMLSSequence(2,11,0).*((2*10^-5)*10^(100/20));
+w1 = window(@gausswin,length(source1),2.5); 
+src = source1;
+T = length(src)*dt;
+% source1 = source1(1:(T/dt));
 
 % tnum = ceil(T/dt);
 % fc = 0.25;     % Cutoff frequency (normalised 0.5=nyquist)
@@ -88,7 +94,7 @@ srcloc = [PMLdepth+ceil(1/dx) PMLdepth+ceil(1/dx)];
 %     end
 % end
 
-spin = -180 :0.005 : 180;
+% spin = -180 :0.005 : 180;
         
 % alpha = 0;
 % calculate geometry matricies
@@ -99,7 +105,7 @@ spin = -180 :0.005 : 180;
 % pd = zeros(Nx,Ny);
 udx = zeros(Nx,Ny);
 udy = zeros(Nx,Ny);
-pd = ones(Nx,Ny)*(2*10^-5);
+pd = zeros(Nx,Ny);
 
 % linex = 0 : dx : dx * (Nx-1-(2*PMLdepth));
 % liney = 0 : dx : dx * (Ny-1-(2*PMLdepth));
@@ -186,26 +192,74 @@ for i = 1 : T/dt+1
     [pd, udx, udy] = PSTD2Dfun(pd, udx, udy, diffmatrixX,diffmatrixY,...
      PMLdiff, PMLalphau, PMLalphap, PMLconst);
     pd = PTSD2Dsrc(pd, src(i), srcloc);
+    srcnorm(i,1) = pd(srcloc(1), srcloc(2));
+    reciever(i,1) = pd(ceil(Nx/4), ceil(Ny/4));
+    reciever(i,2) = pd(ceil(Nx/2)+ceil(Nx/4), ceil(Ny/4));    
+    reciever(i,3) = pd(ceil(Nx/2), ceil(Ny/2)+ceil(Nx/4));
+    reciever(i,4) = pd(ceil(Nx/2+ceil(Nx/4)), ceil(Ny/2)+ceil(Nx/4));
+    reciever(i,5) = pd(ceil(Nx/2), ceil(Ny/2));
     exTime(i) = toc();
-    reciever(i) = pd(ceil(Nx/2), ceil(Ny/2));
 %     if mod(i, 100) < 1
 %     mesh(liney, linex, real(pd(PMLdepth:end-PMLdepth-1,...
 %         PMLdepth:end-PMLdepth-1)));
-mesh(liney, linex, pd);
+mesh(liney, linex, abs(pd));
     
-%     zlim([-0.04 0.04]);
-     zlim([-1 1]);
+    zlim([-0.4 0.4]);
+%      zlim([-1 1]);
 %     set(gca,'zlim',[-0.04 0.04]);
     caxis([-0.04 0.04]);
     shading interp;
     title(sprintf('Time = %.6f s,ExecTime = %.4f',dt*(i-1),exTime(i)));
 %     view([spin(i) 13]);
-%     view(2);
+    view(2)
     axis tight;
     drawnow;
 %     end
 end
-plot(0:dt:(length(reciever)-1)*dt,reciever)
+%% Some really minor postprocessing
+% Hd = postprocessingDCfilter;
+norec = reciever ./ max(abs(reciever));
+% recanal = AnalyseMLSSequence(reciever(:,1)',0,2,11,0,0);
+% norec = Hd(norec);
+% [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
+[lpsd, lf] = pwelch(norec,hann(2000),[],2000,fs);
+% clear('Hd');
+% Hd = postprocessingDCfilter;
+srcnrm = srcnorm ./ max(abs(srcnorm));
+% srcnrm = Hd(srcnrm);
+% [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
+[spsd, sf] = pwelch(srcnrm,hann(200),[],200,fs);
+
+%% Display the results
+subplot(4,1,1);
+plot(0:dt:((length(reciever)-1)*dt),source1(1:length(reciever)))
+hold on;
+plot(0:dt:((length(reciever)-1)*dt),reciever)
+hold off;
+axis('tight')
+legend('source','reciever');
+title('Raw Input And Output');
+subplot(4,1,2);
+plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
+hold on;
+plot(0:dt:((length(srcnrm)-1)*dt),srcnrm)
+hold off;
+axis('tight')
+legend('reciever','source');
+title('Normalised Input And Output');
+subplot(4,1,3);
+plot(lf, db(lpsd),'--','Linewidth',2.0);
+hold on;
+plot(sf, db(spsd));
+hold off;
+legend('reciever','source');
+grid('on');
+title('Power Spectral Density of Input and Output');
+subplot(4,1,4);
+plot(0:dt:((length(reciever)-1)*dt),exTime)
+axis('tight')
+ttlstr = sprintf('Computation Time Per Cycle, Total Time: %i',sum(exTime));
+title(ttlstr);
 % 
 %% Display the results
 
