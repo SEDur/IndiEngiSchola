@@ -1,7 +1,7 @@
 \begin{thebibliography}{10}
 
 \bibitem{Botteldooren1995}
-D~Botteldooren.
+D.~Botteldooren.
 \newblock {Finite-difference time-domain simulation of low-frequency room
   acoustic problems}.
 \newblock {\em The Journal of the Acoustical Society of America}, 98(6):3302,
@@ -57,7 +57,7 @@ Mads~Herring Jensen.
 L~L Beranek.
 \newblock {\em {Acoustics}}.
 \newblock McGraw-Hill electrical and electronic engineering series.
-  McGraw-Hill, Berkley, 1st edition, 1954.
+  McGraw-Hill, 1st edition, 1954.
 
 \bibitem{Rossing2007}
 T.~D. Rossing.
@@ -148,18 +148,18 @@ Brian Hamilton and Stefan Bilbao.
 \bibitem{Doerr2013}
 Christopher Doerr.
 \newblock {Sparse Finite Difference Time Domain Method}.
-\newblock {\em IEEE Photonics Technology Letters}, 25(23):1, 2013.
+\newblock {\em IEEE Photonics Technology Letters}, 25(23):1--1, 2013.
 
 \bibitem{Doerr2014p}
 C~Doerr.
 \newblock {SPARSE FINITE-DIFFERENCE TIME DOMAIN SIMULATION}, 2014.
 
 \bibitem{Schuster2004}
-J.W. Schuster, K.C. Wu, R.R. Ohs, and R.J. Luebbers.
+J~W Schuster, K~C Wu, R~R Ohs, and R~J Luebbers.
 \newblock {Application of moving window FDTD to predicting path loss over
   forest covered irregular terrain}.
 \newblock {\em IEEE Antennas and Propagation Society Symposium, 2004.}, pages
-  1607--1610 Vol.2, 2004.
+  1607----1610 Vol.2, 2004.
 
 \bibitem{Blanchet2006}
 Gerard Blanchet and Maurice Charbit.
@@ -218,7 +218,7 @@ Carlos Spa, Jose Escolano, and Adan Garriga.
 \newblock {\em Applied Acoustics}, 72(4):226--230, 2011.
 
 \bibitem{Murphy2014}
-Damian~T Murphy, Alex Southern, and Lauri Savioja.
+Damian~T. Murphy, Alex Southern, and Lauri Savioja.
 \newblock {Source excitation strategies for obtaining impulse responses in
   finite difference time domain room acoustics simulation}.
 \newblock {\em Applied Acoustics}, 82:6--14, 2014.

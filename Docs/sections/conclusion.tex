@@ -8,25 +8,21 @@
 %\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
 \chapter{Conclusion and Further Work}
 \section{Conclusion}
-We introduced FDTD, PSTD and SFDTD.
+The aim of this study was to evaluate three time domain numerical methods for solving the wave equation, with respect to the execution speed of each method when solving for large domains. The finite difference time domain method as presented by Hill~\cite{Hill2012} and pseudospectral time domain method presented by Angus~\cite{Angus2010} for solving the acoustic wave equation were both implemented as Matlab scripts and function. The sparse finite difference time domain method was explored, with a novel method for generating the windowing matrix that broke away from the original computational electromagnetics work by Doerr~\cite{Doerr2013}.\\
 
-We couldn't get it all going in 3D, but I tested SFDTD in 2D in as big a domain
+In this document the acoustic wave equation was introduced, and some equations of interest in large room acoustics were discussed. It was suggested for large room acoustic analysis in simple spaces, that modal interaction may not be be of interest as few modes are likely to occur below the Schroeder frequency even in particularly reverberant environments. However, the sound level, time of arrival and direct to reverberant ratio information near the boundaries of these domains may be of considerable interest in sound system engineering applications. This may be particularly true where ray tracing models have limited accuracy and computational benefits over wave methods, due to the large number of rays required in large simulations with multiple sound source and receiver locations.\\
 
-One of them is faster, but FDTD isn't bad at all!
+The finite difference time domain method, sparse finite difference time domain method and pseudospectral time domain methods are then described mathematically and programmatically. This includes consideration of partially absorbing boundary conditions and different sound source types. Due to constraints on this project only soft sources and simple geometries were implemented, however literature is available considering more complex geometries for both the finite difference and pseudospectral methods. \\
 
+The implementations of the three methods were tested for validity. It was shown that all three methods had appropriate wave propagation behaviour. Finally the execution speed for each method with a series of increasingly larger domains was then measured recorded and analysed. It was shown that as domain size doubled in all dimensions, the time step execution time of the finite difference method increased significantly. In comparison, the time step execution speed for the pseudospectral method was a factor of 10 quicker in all but the smallest domain case tested. It was highlighted that the execution speed difference between the two methods was due not only to the difference in time and spatial step, but in the speed of executing the differentiation. As the sparse finite difference method was not successfully implemented in 3D, it was not possible to compare execution speed to the two other methods. However it could be seen that for the early portions of the execution time for each domain size, time step execution speed was reduced to below a nominal rate, and that this reduction increased as domain size increased. \\
 
 \section{Further Work}
+Due to the basic nature of the implementations in this study, there is naturally a significant amount of further work to do in terms of improving these implementations. Many of these improvements are not listed below, but can be found by a brief review of much of the literature referenced in this report. The list below contains brief descriptions of a small section of the further work that could be drawn from this study.
 \begin{itemize}
-\item Single Precision Simulation on GPGPU for speed
-\item Double Precision Simulation on GPGPU for accuracy
-\item Object Oriented Implementation and Decomposition of Domains
-\item Study of Obstacle Implementation in PSTD
-\item Reducing the Gibbs Effect Cause By Partially Absorbing Boundaries in PSTD
-\item Source Directivity
-\item Convolutional PML and Frequency Dependent Boundary Conditions
-\item Lossy Wave Equation in PSTD
-\item C++ and Python Implementation
-\item 3D SFDTD
-\item Arbitrary geometry shapes and different meshing schemes
-\item Rungakutta and Adams-Bashforth predictor correcter solving
+\item More detailed validation of the current model implementations is required to show that the models truly represent an accurate approximation of room acoustics. The validation method presented in this report was significantly limited and requires major reconsideration.
+\item An deep study of 3D filtering could benefit implementation of the 3D PSTD method and the 3D SFDTD method, as both methods rely on different filtering methods across the domain during the solving process.
+\item As the execution speed of the SFDTD method appears quite promising for the improvement of execution speed, a 3D implementation of the SFDTD method presented in this work may be work working on. This is not a trivial undertaking due to the complexity of 3D adaptive windowing.
+\item Implementation of all three methods using GPGPU computing may be advantageous. However, GPGPUs are often built with single precision architecture and a double precision arbitration mechanism. So a deeper review of single and double precision implementations such as that denoted by ~\cite{Murphy2014} would need to also be undertaken.
+\item Domain decomposition such as that used in the OpenPSTD project~\cite{Hornikx2016} may be a great improvement for execution speed for all three methods, as this will reduce single matrix sizes and the way memory is accessed for differentiation.
+\item The PSTD method may only be appropriate for smooth media, and may not interact well with obstacles due to the aliasing caused by discontinuity. An implementation of PSTD for the main domain areas with FDTD handling boundaries and obstacles may provide a way to have faster time step execution and higher accuracy in the main domain body, with the simple boundary handling available in FDTD.
 \end{itemize}

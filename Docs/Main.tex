@@ -60,6 +60,7 @@
     citecolor=black,
     linktoc=all
 }
+\bibliographystyle{ieee}
 %\makeatletter
 %\patchcmd{\@makechapterhead}{\vspace*{50\p@}}{}{}{}% Removes space above \chapter head
 %\patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{}{}{}% Removes space above \chapter* head
@@ -112,8 +113,9 @@
 
 
 %\backmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\chapter{References}
-\bibliographystyle{ieeetr}
+%\chapter{References}%$\bibliographystyle{ieeetr}
+
+
 \bibliography{library}
 
 \subfile{sections/appendix}
