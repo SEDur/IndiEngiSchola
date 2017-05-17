@@ -31,8 +31,6 @@ The time step execution time was evaluated for 2000 executions, allowing for sma
 \item Asus Gryphon Motherboard with Z97 Chip Set
 \end{itemize}
 
-
-
 \section{Results}
 The average execution time for each method is given below: \\
 \begin{figure}[H]
@@ -67,13 +65,13 @@ Use of Matlabs code profiling tool analysis the performance of the PSTD3Dfun fun
 \begin{figure}[H]
 \centering
   \includegraphics[width=\textwidth]{./graphics/pstdfunctioncodeprofile.png}
-  \caption{Execution times for SFDTD simulations in domains of increasing size}
+  \caption{Code execution time profile of PSTD functions}
 \end{figure}
 This shows that most time in the execution was spent performing the IFFT of the 3D matrices, and that the maximum average differentiation time was 5.1ms for a matrix of 80724 points in the x direction. Below is a figure showing the code profiling for 1200 calls of the FDTD3Dfun function for an example simulation of a 5m by 4m by3m domain with a maximum frequency of 1kHz:\\
 \begin{figure}[H]
 \centering
   \includegraphics[width=\textwidth]{./graphics/fdtdfunctioncodeprofile.png}
-  \caption{Execution times for SFDTD simulations in domains of increasing size}
+  \caption{Code execution time profile of FDTD functions}
 \end{figure}
 
 These profiling results show that the bulk of the time spent in execution of the FDTD3Dfun function is used in the differentiation of the matrices. Combined with the total execution speed results for different domains above, the conclusion can be drawn that spectral differentiation may be more appropriate for large domains than finite or local differentiation. As the SFDTD method appears above to converge after some time to a uniform excution time, PSTD may be a more appropriate choice for further development of time domain numerical simulation in large domains. This however may not be a fair conclusion to draw against the SFDTD method as it is not implemented in 3D, further study is required to confirm the efficiency difference between PSTD and SFDTD.
@@ -81,9 +79,9 @@ These profiling results show that the bulk of the time spent in execution of the
 The figure below shows a summary of the code profiling information for an SFDTD simulation of a 5m by 4m domain with maximum frequency of 1kHz, executing for $0.2s$:\\
 \begin{figure}[H]
 \centering
-  \includegraphics[width=1\textwidth]{./graphics/sfdtdprosum.png}
+%  \includegraphics[width=1\textwidth]{./graphics/sfdtdprosum.png}
   \includegraphics[width=1\textwidth]{./graphics/sfdtdfunprosum.png}
   \includegraphics[width=1\textwidth]{./graphics/sparfunprosum.png}
-  \caption{Execution times for SFDTD simulations in domains of increasing size}
+  \caption{Code execution time profile of SFDTD functions}
 \end{figure}
 These results show that in the SFDTD method which includes extra steps on top of those in the FDTD method, most time is spent differentiating the matrices as opposed to filtering the domain. It is not possible in this case to compare this performance to the 3D FDTD and PSTD method as discussed above, but these results may suggest that SFDTD is worthy of further research.

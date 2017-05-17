@@ -1,7 +1,7 @@
 
 \chapter{Validation}
 \section{Validation Strategy}
-Model validation could be considered an important step towards creating a robust and useful simulation tool, though there is little dedicated literature referring to the process of successfully validating wave solving acoustic simulation software. A greater volume of literature is availalbe for the validation of Ray based methods such as~\cite{Ahnert2005,Tsingos2002,Foteinou2010}, and the validation of a hybrid scheme by Murphy \textit{et al} is available ~\cite{Southern2013}. Studies such as Hill~\cite{Hill2012}. This section will review an attempt to validate the FDTD and PSTD tools described above, with a small 3D domain.\\
+Model validation could be considered an important step towards creating a robust and useful simulation tool, though there is little dedicated literature studying the process of successfully validating wave solving acoustic simulation software. A greater volume of literature is availalbe for the validation of Ray based methods such as~\cite{Ahnert2005,Tsingos2002,Foteinou2010}, and the validation of a hybrid scheme by Murphy \textit{et al} is available ~\cite{Southern2013}. Studies such as Hill~\cite{Hill2012} incorporate validation as a subset of a greater work. This section will review an attempt to validate the FDTD and PSTD tools described above, with a small 3D domain.\\
 
 \subsection{The Domain}
 The domain used for validation in this study was a fully bounded room with the following properties:\\
@@ -18,13 +18,6 @@ The domain used for validation in this study was a fully bounded room with the f
 \item Mean Free Path Between Reflections $MFP = 2.55m$
 \item Eyring Reverberation Time $RT_{60} = 0.1719s $
 \end{itemize}
-
-The axial, tangential and oblique modes below the Schroeder frequency are calculated as:\\
-\begin{figure}[H]
-\centering
-  \includegraphics[width=\textwidth]{./graphics/modesuptoschr.png}
-  \caption{Room Modes up to Schroeder Frequency for a Small Rectangular Room}
-\end{figure}
 
 The stimulus position in each domain was $1.0m$ in each direction from the bottom left corner, and the receiver position was the exact middle of the domain. The stimulus source type was a soft source, as described in the time domain numerical methods section above. 
 The source content was an MLS sequence of 11th order with 2 repetitions. The MLS signal was generated using the MLS toolbox by MRP Thomas~\cite{Mrt2008}. The signal was normalised with a Gaussian window to the length of the signal array. The maximum frequency of interest in this validation was $5kHz$, giving a $0.333e^{-5}$ step time for the FDTD simulation, and a $0.1e^{-4}$ step time for the PSTD simulation.
