@@ -1,7 +1,7 @@
 \begin{thebibliography}{10}
 
 \bibitem{Botteldooren1995}
-D.~Botteldooren.
+D~Botteldooren.
 \newblock {Finite-difference time-domain simulation of low-frequency room
   acoustic problems}.
 \newblock {\em The Journal of the Acoustical Society of America}, 98(6):3302,
@@ -218,7 +218,7 @@ Carlos Spa, Jose Escolano, and Adan Garriga.
 \newblock {\em Applied Acoustics}, 72(4):226--230, 2011.
 
 \bibitem{Murphy2014}
-Damian~T. Murphy, Alex Southern, and Lauri Savioja.
+Damian~T Murphy, Alex Southern, and Lauri Savioja.
 \newblock {Source excitation strategies for obtaining impulse responses in
   finite difference time domain room acoustics simulation}.
 \newblock {\em Applied Acoustics}, 82:6--14, 2014.
@@ -252,5 +252,12 @@ Alex Southern, Samuel Siltanen, Damian~T. Murphy, and Lauri Savioja.
 Mark Thomas.
 \newblock {Maximum Sequence Length}.
 \newblock pages 1--9, 2007.
+
+\bibitem{Welch1967}
+Peter~D. Welch.
+\newblock {The Use of Fast Fourier Transform for the Estimation of Power
+  Spectra: A Method Based on Time Averaging Over Short, Modified Periodograms}.
+\newblock {\em IEEE Transactions on Audio and Electroacoustics}, 15(2):70--73,
+  1967.
 
 \end{thebibliography}

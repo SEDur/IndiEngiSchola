@@ -1,10 +1,10 @@
 
 \chapter{Validation}
 \section{Validation Strategy}
-Model validation could be considered an important step towards creating a robust and useful simulation tool, though there is little dedicated literature studying the process of successfully validating wave solving acoustic simulation software. A greater volume of literature is availalbe for the validation of Ray based methods such as~\cite{Ahnert2005,Tsingos2002,Foteinou2010}, and the validation of a hybrid scheme by Murphy \textit{et al} is available ~\cite{Southern2013}. Studies such as Hill~\cite{Hill2012} incorporate validation as a subset of a greater work. This section will review an attempt to validate the FDTD and PSTD tools described above, with a small 3D domain.\\
+Model validation could be considered an important step towards creating a robust and useful simulation tool. A greater volume of literature is availalbe for the validation of Ray based methods such as~\cite{Ahnert2005,Tsingos2002,Foteinou2010}, and the validation of a hybrid scheme by Southern \textit{et al} is available ~\cite{Southern2013}. Studies such as Hill~\cite{Hill2012} incorporate validation as a subset of a greater work. This section will review the results of simulations using the FDTD and PSTD tools described above, with a small 3D domain and different excitation signals. The validation of these simulation tools will be in proving that wave propagation is occurring.\\
 
 \subsection{The Domain}
-The domain used for validation in this study was a fully bounded room with the following properties:\\
+The domain used was a fully bounded rectangular room with the following properties:\\
 
 \begin{itemize}
 \item Length $L_x = 5m$
@@ -19,14 +19,19 @@ The domain used for validation in this study was a fully bounded room with the f
 \item Eyring Reverberation Time $RT_{60} = 0.1719s $
 \end{itemize}
 
-The stimulus position in each domain was $1.0m$ in each direction from the bottom left corner, and the receiver position was the exact middle of the domain. The stimulus source type was a soft source, as described in the time domain numerical methods section above. 
-The source content was an MLS sequence of 11th order with 2 repetitions. The MLS signal was generated using the MLS toolbox by MRP Thomas~\cite{Mrt2008}. The signal was normalised with a Gaussian window to the length of the signal array. The maximum frequency of interest in this validation was $5kHz$, giving a $0.333e^{-5}$ step time for the FDTD simulation, and a $0.1e^{-4}$ step time for the PSTD simulation.
+The theoretical room mode frequencies below the Schroeder frequency are shown below:\\
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\textwidth]{./graphics/modesuptoschr.png}
+  \caption{Room Modes up to Schroeder Frequency for a Small Rectangular Room}
+\end{figure}
 
-\subsection{Post Processing}
-The aim of the validation was be to show that there is minimal error in the normalised power spectral density between source and receiver location. This will show that waves are travelling from source to receiver without aliasing or unexpected loss in the frequency range of interest. Some modal influence was expected, as is DC offset. To reduce the effect of the DC term, a DC blocking filter was used when post processing the source and receiver recorded signals. This filter was generated using the Matlab filter design tool. As with ~\cite{Murphy2014} the input and output signals on the grid were recorded, and the signals are normalised to each other.\\
+The source position was $1.0m$ in each direction from a bottom cornerl. Five receiver positions were recorded, one quater on the x and y dimensions from each corner, all at the middle of the domain on the z axis. The source type was a soft source as described earlier in this doccument. Two source signals were implemented in seperate simulations; an MLS sequence of 11th order with 2 repetitions, and a $1kHz$ tone burst signal containing three pulses of 10 cycles with a gap of equal length to the bursts. The MLS signal was generated using the MLS toolbox by Mark Thomas~\cite{Mrt2008}, and the tone-burst was generated using tools in the Matlab DSP Systems toolbox. The signals were normalised with a Gaussian window to the length of the signals. The maximum frequency of interest in this validation was $5kHz$, giving a $0.333e^{-5}$ step time for the FDTD and SFDTD simulation, and a $0.1e^{-4}$ step time for the PSTD simulation.
 
 \section{Results}
-Below is a plot of the spectral power of the source signal, the FDTD receiver position and the PSTD receiver position for the simulation described above. The normalised input and output subplot in these figures is shifted in time to remove the time lag between source and receiver locations.
+The aim of the simulations was be to show that the models propagate pressure waves with minimal error in the average power spectral density between source and receiver location. Frequency domain averaging of the source and receiver location signals was undertaken using Matlab pwelch function. This function uses Welch's overlapping segment averaging estimator to average a series of discrete Fourier transforms, creating a smoothed average frequency response over the course of the signal without transforming the whole signal in one go~\cite{Welch1967}.
+
+\subsection{FDTD Simulation Results}
 
 \begin{figure}[H]
 \centering
@@ -35,11 +40,19 @@ Below is a plot of the spectral power of the source signal, the FDTD receiver po
   \caption{Validation data of FDTD simulation}
 \end{figure}
 
+\subsection{SFDTD Simulation Results}
+
+Results
+
+\subsection{PSTD Simulation Results}
 \begin{figure}[H]
 \centering
-\textbf{PSTD Validation Data}
+\textbf{PSTD Validation MLS Data}
   \includegraphics[width=\textwidth]{./graphics/PSTDvalidationFinal.png}
-  \caption{Validation data of PSTD simulation}
+  \caption{Validation data of PSTD simulation With MLS Source}
+  \textbf{PSTD Validation Tone Burst Data}
+  \includegraphics[width=\textwidth]{./graphics/PSTDvalidationFinalTB.png}
+  \caption{Validation data of PSTD simulation With Tone Burst Source}
 \end{figure}
 
 It can be seen that both simulations have reasonably good agreement between the power spectral densities (PSD) of the source and receivers in the frequency region of interest. There is a significant low frequency signal present in the PSTD response, in both the source and receiver sections.  Due to the 6 steps per wavelength of the FDTD simulation, the time step was also smaller than for the PSTD simulation. As such when using Matlabs Pwelch function to perform PSD estimation, the estimation was made beyond the frequency range of interest.\\

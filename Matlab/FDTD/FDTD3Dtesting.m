@@ -201,41 +201,77 @@ norec = reciever ./ max(abs(reciever));
 % recanal = AnalyseMLSSequence(reciever',0,3,11,0,0);
 % norec = Hd(norec);
 % [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
-[lpsd, lf] = pwelch(norec,hann(2000),[],2000,1/dt);
+[lpsd, lf] = pwelch(norec,hann(5000),[],5000,1/dt);
 % clear('Hd');
 % Hd = postprocessingDCfilter;
 srcnrm = srcnorm ./ max(abs(srcnorm));
 % srcnrm = Hd(srcnrm);
 % [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
-[spsd, sf] = pwelch(srcnrm,hann(2000),[],2000,1/dt);
+[spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,1/dt);
 %% Display the results
-subplot(4,1,1);
-plot(0:dt:((length(reciever)-1)*dt),reciever)
-hold on;
+% subplot(4,1,1);
+% plot(0:dt:((length(reciever)-1)*dt),reciever)
+% hold on;
+% plot(0:dt:((length(reciever)-1)*dt),source1(1:length(reciever)))
+% hold off;
+% axis('tight')
+% legend('reciever','source');
+% title('Raw Input And Output');
+% subplot(4,1,2);
+% plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
+% hold on;
+% plot(0:dt:((length(srcnrm)-1)*dt),srcnrm)
+% hold off;
+% axis('tight')
+% legend('reciever','source');
+% title('Normalised Input And Output');
+% subplot(4,1,3);
+% plot(lf, db(lpsd),'--','Linewidth',2.0);
+% hold on;
+% plot(sf, db(spsd));
+% hold off;
+% legend('reciever','source');
+% grid('on');
+% title('Power Spectral Density of Input and Output');
+% subplot(4,1,4);
+% plot(0:dt:((length(reciever)-1)*dt),exectime)
+% axis('tight')
+% ttlstr = sprintf('Computation Time Per Cycle, Total Time: %i',sum(exectime));
+% title(ttlstr);
+
+%% Display the results
+subplot(3,1,1);
 plot(0:dt:((length(reciever)-1)*dt),source1(1:length(reciever)))
+hold on;
+plot(0:dt:((length(reciever)-1)*dt),reciever)
 hold off;
 axis('tight')
-legend('reciever','source');
+legend('source','rec top left','rec top right','rec bottom left',...
+    'rec bottom right','rec centre');
 title('Raw Input And Output');
-subplot(4,1,2);
+xlim([0 0.2]);
+xlabel('Time (s)');
+ylabel('Amplitude (Pa)');
+subplot(3,1,2);
 plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
 hold on;
-plot(0:dt:((length(srcnrm)-1)*dt),srcnrm)
+plot(0:dt:((length(srcnrm)-1)*dt),srcnrm,'-')
 hold off;
 axis('tight')
-legend('reciever','source');
+legend('rec top left','rec top right','rec bottom left',...
+    'rec bottom right','rec centre','source');
 title('Normalised Input And Output');
-subplot(4,1,3);
+xlim([0 0.2]);
+xlabel('Time (s)');
+ylabel('Amplitude (Pa)');
+subplot(3,1,3);
 plot(lf, db(lpsd),'--','Linewidth',2.0);
 hold on;
 plot(sf, db(spsd));
 hold off;
-legend('reciever','source');
+legend('rec top left','rec top right','rec bottom left',...
+    'rec bottom right','rec centre','source');
 grid('on');
 title('Power Spectral Density of Input and Output');
-subplot(4,1,4);
-plot(0:dt:((length(reciever)-1)*dt),exectime)
-axis('tight')
-ttlstr = sprintf('Computation Time Per Cycle, Total Time: %i',sum(exectime));
-title(ttlstr);
-
+xlabel('Frequency (Hz)');
+ylabel('Amplitude (dB)');

@@ -231,37 +231,41 @@ end
 %% Some really minor postprocessing
 % Hd = postprocessingDCfilter;
 
-for i = 1 : size(reciever,2)
-    lag(i) = getlag(reciever(:,i)',srcnorm);
-    reciever(:,i) = circshift(reciever(:,i),lag(i));
-end
+% for i = 1 : size(reciever,2)
+%     lag(i) = getlag(reciever(:,i)',srcnorm);
+%     reciever(:,i) = circshift(reciever(:,i)',lag(i));
+% end
 
 norec = reciever ./ max(abs(reciever));
 % recanal = AnalyseMLSSequence(reciever',0,2,11,0,0);
 % norec = Hd(norec);
 % [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
-[lpsd, lf] = pwelch(norec,hann(2000),[],2000,fs);
+[lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
 % clear('Hd');
 % Hd = postprocessingDCfilter;
 srcnrm = srcnorm ./ max(abs(srcnorm));
 
-[spsd, sf] = pwelch(srcnrm,hann(2000),[],2000,fs);
+[spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
 
 
 
 %% Display the results
-subplot(4,1,1);
-plot(0:dt:((length(reciever)-1)*dt),source1(1:length(reciever)))
+subplot(3,1,1);
+plot(0:dt:((length(norec)-1)*dt),reciever,'--','linewidth',2.0)
+% stem(0:dt:((length(norec)-1)*dt),norec)
 hold on;
-plot(0:dt:((length(reciever)-1)*dt),reciever)
+plot(0:dt:((length(srcnrm)-1)*dt),source,'-')
 hold off;
 axis('tight')
 legend('source','rec top left','rec top right','rec bottom left',...
     'rec bottom right','rec centre');
 title('Raw Input And Output');
 xlim([0 0.2]);
-subplot(4,1,2);
+xlabel('Time (s)');
+ylabel('Amplitude (Pa)');
+subplot(3,1,2);
 plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
+% stem(0:dt:((length(norec)-1)*dt),norec)
 hold on;
 plot(0:dt:((length(srcnrm)-1)*dt),srcnrm,'-')
 hold off;
@@ -270,7 +274,9 @@ legend('rec top left','rec top right','rec bottom left',...
     'rec bottom right','rec centre','source');
 title('Normalised Input And Output');
 xlim([0 0.2]);
-subplot(4,1,3);
+xlabel('Time (s)');
+ylabel('Amplitude (Pa)');
+subplot(3,1,3);
 plot(lf, db(lpsd),'--','Linewidth',2.0);
 hold on;
 plot(sf, db(spsd));
@@ -279,12 +285,65 @@ legend('rec top left','rec top right','rec bottom left',...
     'rec bottom right','rec centre','source');
 grid('on');
 title('Power Spectral Density of Input and Output');
-subplot(4,1,4);
-plot(0:dt:((length(reciever)-1)*dt),roundtime)
-axis('tight')
-ttlstr = sprintf('Computation Time Per Cycle, Total Time: %i',sum(roundtime));
-title(ttlstr);
+xlabel('Frequency (Hz)');
+ylabel('Amplitude (dB)');
+% xlim([0 2000]);
+% ylim([-300 -90]);
+% subplot(4,1,4);
+% plot(0:dt:((length(reciever)-1)*dt),roundtime)
+% axis('tight')
+% ttlstr = sprintf('Computation Time Per Cycle, Total Time: %i',sum(roundtime));
+% title(ttlstr);
+% xlabel('Time (s)');
+% ylabel('');
 % subplot(5,1,5);
 % plot(0:dt:((length(recanal)-1)*dt),recanal);
 % title('Impulse Response at Reciever');
 
+%% Display the results
+% subplot(3,1,1);
+% plot(0:dt:((length(reciever)-1)*dt),source1(1:length(reciever)))
+% hold on;
+% plot(0:dt:((length(reciever)-1)*dt),reciever)
+% hold off;
+% axis('tight')
+% legend('source','rec top left','rec top right','rec bottom left',...
+%     'rec bottom right','rec centre');
+% title('Raw Input And Output');
+% xlim([0 0.2]);
+% xlabel('Time (s)');
+% ylabel('Amplitude (Pa)');
+% subplot(3,1,2);
+% plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
+% % stem(0:dt:((length(norec)-1)*dt),norec)
+% hold on;
+% plot(0:dt:((length(srcnrm)-1)*dt),srcnrm,'-')
+% hold off;
+% axis('tight')
+% legend('rec top left','rec top right','rec bottom left',...
+%     'rec bottom right','rec centre','source');
+% title('Normalised Input And Output');
+% xlim([0 0.2]);
+% xlabel('Time (s)');
+% ylabel('Amplitude (Pa)');
+% subplot(3,1,3);
+% plot(lf, db(lpsd),'--','Linewidth',2.0);
+% hold on;
+% plot(sf, db(spsd));
+% hold off;
+% legend('rec top left','rec top right','rec bottom left',...
+%     'rec bottom right','rec centre','source');
+% grid('on');
+% title('Power Spectral Density of Input and Output');
+% xlabel('Frequency (Hz)');
+% ylabel('Amplitude (dB)');
+% % subplot(4,1,4);
+% % plot(0:dt:((length(reciever)-1)*dt),roundtime)
+% % axis('tight')
+% % ttlstr = sprintf('Computation Time Per Cycle, Total Time: %i',sum(roundtime));
+% % title(ttlstr);
+% % xlabel('Time (s)');
+% % ylabel('');
+% % subplot(5,1,5);
+% % plot(0:dt:((length(recanal)-1)*dt),recanal);
+% % title('Impulse Response at Reciever');

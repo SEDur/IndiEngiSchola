@@ -5,117 +5,117 @@ Illegal, another \bibstyle command---line 20 of file Main.aux
  :          {ieee}
 I'm skipping whatever remains of this command
 Database file #1: library.bib
-Repeated entry---line 2142 of file library.bib
- : @article{Olesen1997
- :                    ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 2210 of file library.bib
- : @book{Sakuma2014
- :                 ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 2364 of file library.bib
- : @article{Saarelma2016
- :                      ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 5063 of file library.bib
- : @article{Hamilton2013a
- :                       ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 5309 of file library.bib
- : @article{Spa2011
- :                 ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 6472 of file library.bib
- : @misc{Rumpf2012a
- :                 ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 6796 of file library.bib
- : @article{Ahnert2005
- :                    ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 7056 of file library.bib
- : @article{Mourik2014a
- :                     ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 7536 of file library.bib
- : @article{Botteldooren1995
- :                          ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 7986 of file library.bib
- : @article{Schuster2004
- :                      ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 8227 of file library.bib
- : @book{beranek1954acoustics
- :                           ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 8377 of file library.bib
- : @book{beranek1954acoustics
- :                           ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 8808 of file library.bib
- : @article{Tsingos2009
- :                     ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 9231 of file library.bib
- : @article{Murphy2014
- :                    ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 9276 of file library.bib
+Repeated entry---line 3911 of file library.bib
  : @article{Hornikx2016
  :                     ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 9377 of file library.bib
- : @article{Southern2013
- :                      ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 9623 of file library.bib
- : @article{Rienstra1952
- :                      ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 10093 of file library.bib
- : @article{Yee1966
+Repeated entry---line 3974 of file library.bib
+ : @misc{Rumpf2012a
  :                 ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 10825 of file library.bib
- : @article{Tsingos2002
- :                     ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 10858 of file library.bib
- : @article{Trefethen2000
- :                       ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 10876 of file library.bib
- : @article{Hill2012
- :                  ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 11170 of file library.bib
- : @article{Botteldooren1993
+Repeated entry---line 4053 of file library.bib
+ : @article{Botteldooren1995
  :                          ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 11726 of file library.bib
- : @article{Schmalle2011
+Repeated entry---line 6228 of file library.bib
+ : @book{beranek1954acoustics
+ :                           ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 6484 of file library.bib
+ : @article{Mourik2014a
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7275 of file library.bib
+ : @article{Saarelma2016
  :                      ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 13189 of file library.bib
- : @article{Foteinou2010
- :                      ,
+Repeated entry---line 7883 of file library.bib
+ : @article{Tsingos2009
+ :                     ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 13480 of file library.bib
+Repeated entry---line 9406 of file library.bib
  : @article{Schneider2015
  :                       ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 13818 of file library.bib
- : @phdthesis{Elorza2005
- :                      ,
+Repeated entry---line 9586 of file library.bib
+ : @article{Doerr2013
+ :                   ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 14313 of file library.bib
+Repeated entry---line 10061 of file library.bib
  : @article{Angus2010
  :                   ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 14883 of file library.bib
- : @article{Doerr2013
- :                   ,
+Repeated entry---line 10101 of file library.bib
+ : @article{Trefethen2000
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10476 of file library.bib
+ : @article{Olesen1997
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10850 of file library.bib
+ : @article{Schmalle2011
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10862 of file library.bib
+ : @article{Hamilton2013a
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10995 of file library.bib
+ : @article{Spa2011
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 11780 of file library.bib
+ : @book{beranek1954acoustics
+ :                           ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 12079 of file library.bib
+ : @book{Sakuma2014
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 12120 of file library.bib
+ : @article{Schuster2004
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 12572 of file library.bib
+ : @article{Foteinou2010
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 12627 of file library.bib
+ : @article{Southern2013
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 12692 of file library.bib
+ : @article{Rienstra1952
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 13147 of file library.bib
+ : @phdthesis{Elorza2005
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 13703 of file library.bib
+ : @article{Botteldooren1993
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 14037 of file library.bib
+ : @article{Hill2012
+ :                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 14091 of file library.bib
+ : @article{Tsingos2002
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 14811 of file library.bib
+ : @article{Yee1966
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 14841 of file library.bib
+ : @article{Murphy2014
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 14921 of file library.bib
+ : @article{Ahnert2005
+ :                    ,
 I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "rossing2007springer"
 Warning--empty journal in Mourik2014a

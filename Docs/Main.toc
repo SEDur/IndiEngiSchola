@@ -24,27 +24,29 @@
 \contentsline {subsection}{\numberline {3.1.5}Block Diagram}{23}{subsection.3.1.5}
 \contentsline {subsection}{\numberline {3.1.6}Example Update Function}{24}{subsection.3.1.6}
 \contentsline {subsection}{\numberline {3.1.7}Stability}{25}{subsection.3.1.7}
-\contentsline {section}{\numberline {3.2}Sparse FDTD}{25}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Introduction to the Sparse Finite Difference Time Domain Method}{25}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Acoustic Implementation of SFDTD in Two Dimensions}{26}{subsection.3.2.2}
-\contentsline {section}{\numberline {3.3}Pseudo-Spectral Time Domain Method}{32}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}A Background to the Pseudo-Spectral Time Domain Method}{32}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Block Diagram}{32}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}The Pseudospectral Time Domain Method Applied To The Wave Equation}{34}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}Absorbing Boundary Conditions}{36}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5}Partially Absorbing Boundary Conditions}{38}{subsection.3.3.5}
-\contentsline {section}{\numberline {3.4}Sound Source Terms}{39}{section.3.4}
-\contentsline {chapter}{\numberline {4}Validation}{41}{chapter.4}
-\contentsline {section}{\numberline {4.1}Validation Strategy}{41}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}The Domain}{41}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Post Processing}{42}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Results}{42}{section.4.2}
-\contentsline {section}{\numberline {4.3}Validating The SFDTD Method}{44}{section.4.3}
-\contentsline {chapter}{\numberline {5}Execution Time and Analysis}{46}{chapter.5}
-\contentsline {section}{\numberline {5.1}Results}{46}{section.5.1}
-\contentsline {section}{\numberline {5.2}Analysis}{49}{section.5.2}
-\contentsline {section}{\numberline {5.3}Code Profiling}{50}{section.5.3}
-\contentsline {chapter}{\numberline {6}Conclusion and Further Work}{54}{chapter.6}
-\contentsline {section}{\numberline {6.1}Conclusion}{54}{section.6.1}
-\contentsline {section}{\numberline {6.2}Further Work}{55}{section.6.2}
-\contentsline {chapter}{\numberline {A}Code Listing}{61}{appendix.A}
+\contentsline {section}{\numberline {3.2}Sparse FDTD}{26}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Introduction to the Sparse Finite Difference Time Domain Method}{26}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Acoustic Implementation of SFDTD in Two Dimensions}{27}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Pseudo-Spectral Time Domain Method}{33}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}A Background to the Pseudo-Spectral Time Domain Method}{33}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Block Diagram}{33}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}The Pseudospectral Time Domain Method Applied To The Wave Equation}{35}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Absorbing Boundary Conditions}{37}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Partially Absorbing Boundary Conditions}{39}{subsection.3.3.5}
+\contentsline {section}{\numberline {3.4}Sound Source Terms}{40}{section.3.4}
+\contentsline {chapter}{\numberline {4}Validation}{42}{chapter.4}
+\contentsline {section}{\numberline {4.1}Validation Strategy}{42}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}The Domain}{42}{subsection.4.1.1}
+\contentsline {section}{\numberline {4.2}Results}{44}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}FDTD Simulation Results}{44}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}SFDTD Simulation Results}{44}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}PSTD Simulation Results}{46}{subsection.4.2.3}
+\contentsline {section}{\numberline {4.3}Validating The SFDTD Method}{47}{section.4.3}
+\contentsline {chapter}{\numberline {5}Execution Time and Analysis}{49}{chapter.5}
+\contentsline {section}{\numberline {5.1}Results}{49}{section.5.1}
+\contentsline {section}{\numberline {5.2}Analysis}{52}{section.5.2}
+\contentsline {section}{\numberline {5.3}Code Profiling}{53}{section.5.3}
+\contentsline {chapter}{\numberline {6}Conclusion and Further Work}{57}{chapter.6}
+\contentsline {section}{\numberline {6.1}Conclusion}{57}{section.6.1}
+\contentsline {section}{\numberline {6.2}Further Work}{58}{section.6.2}
+\contentsline {chapter}{\numberline {A}Code Listing}{64}{appendix.A}
