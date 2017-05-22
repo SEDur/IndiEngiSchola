@@ -67,23 +67,25 @@ timestep = abs(T/dt);
 
 %Calc source
 % w1 = window(@gausswin,0.4/(dt),2.5); 
-precursor = -(sin(2*pi*0.5*(0:0.001:2))).*0.01;
-chirp = dsp.Chirp(...
-    'SweepDirection', 'Unidirectional', ...
-    'TargetFrequency', ceil((fs/4)/2), ...
-    'InitialFrequency', 10,...
-    'TargetTime', 0.4, ...
-    'SweepTime', 0.4, ...
-    'SamplesPerFrame', 0.4/dt, ...
-    'SampleRate', 1/dt);
-% % plot(chirp());
-% % source1 = fir(chirp());
-% source1 = chirp();
-% source1(1:76) = 0;
-source1 = GenerateMLSSequence(2,11,0).*((2*10^-5)*10^(100/20));
-T = length(source1)*dt;
-% source1 = source1(1:(T/dt));
-w1 = window(@gausswin,length(source1),2.5); 
+% precursor = -(sin(2*pi*0.5*(0:0.001:2))).*0.01;
+% chirp = dsp.Chirp(...
+%     'SweepDirection', 'Unidirectional', ...
+%     'TargetFrequency', ceil((fs/4)/2), ...
+%     'InitialFrequency', 10,...
+%     'TargetTime', 0.4, ...
+%     'SweepTime', 0.4, ...
+%     'SamplesPerFrame', 0.4/dt, ...
+%     'SampleRate', 1/dt);
+tone = dsp.SineWave('Amplitude',((2*10^-5)*10^(100/20)),...
+    'Frequency', 1000,...
+    'SampleRate', 1/dt,...
+    'SamplesPerFrame',0.01/dt);
+w1 = window(@gausswin,0.01/dt,2.5); 
+toneBurst = tone() .* w1;
+source1 = zeros(T/dt,1);
+source1(10:109) = toneBurst;
+source1(510:609) = toneBurst;
+source1(1010:1109) = toneBurst;
 
 
 %calc grid size
@@ -228,6 +230,12 @@ for i = 1 : T/dt
 end
 %% Some really minor postprocessing
 % Hd = postprocessingDCfilter;
+
+for i = 1 : size(reciever,2)
+    lag(i) = getlag(reciever(:,i)',srcnorm);
+    reciever(:,i) = circshift(reciever(:,i),lag(i));
+end
+
 norec = reciever ./ max(abs(reciever));
 % recanal = AnalyseMLSSequence(reciever',0,2,11,0,0);
 % norec = Hd(norec);
@@ -236,43 +244,9 @@ norec = reciever ./ max(abs(reciever));
 % clear('Hd');
 % Hd = postprocessingDCfilter;
 srcnrm = srcnorm ./ max(abs(srcnorm));
-% srcnrm = Hd(srcnrm);
-% [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
-[spsd, sf] = pwelch(srcnrm,hann(200),[],200,fs);
 
-%% Display the results
-subplot(5,1,1);
-plot(0:dt:((length(reciever)-1)*dt),reciever)
-hold on;
-plot(0:dt:((length(reciever)-1)*dt),source1(1:length(reciever)))
-hold off;
-axis('tight')
-legend('reciever','source');
-title('raw input and output');
-subplot(5,1,2);
-plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
-hold on;
-plot(0:dt:((length(srcnrm)-1)*dt),srcnrm)
-hold off;
-axis('tight')
-legend('reciever','source');
-title('normalised input and output');
-subplot(5,1,3);
-plot(lf, db(lpsd));
-hold on;
-plot(sf, db(spsd));
-hold off;
-legend('reciever','source');
-grid('on');
-title('power spectral density of input and output');
-subplot(5,1,4);
-plot(0:dt:((length(reciever)-1)*dt),roundtime)
-axis('tight')
-ttlstr = sprintf('computation time per cycle, total time is %d',sum(roundtime));
-title(ttlstr);
-subplot(5,1,5);
-plot(0:dt:((length(recanal)-1)*dt),recanal);
-title('MLS Analysed');
+[spsd, sf] = pwelch(srcnrm,hann(2000),[],2000,fs);
+
 
 
 %% Display the results
@@ -285,6 +259,7 @@ axis('tight')
 legend('source','rec top left','rec top right','rec bottom left',...
     'rec bottom right','rec centre');
 title('Raw Input And Output');
+xlim([0 0.2]);
 subplot(4,1,2);
 plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
 hold on;
@@ -294,6 +269,7 @@ axis('tight')
 legend('rec top left','rec top right','rec bottom left',...
     'rec bottom right','rec centre','source');
 title('Normalised Input And Output');
+xlim([0 0.2]);
 subplot(4,1,3);
 plot(lf, db(lpsd),'--','Linewidth',2.0);
 hold on;

@@ -1,0 +1,100 @@
+clc;
+clear all;
+close all;
+figure(1);
+set(1, 'WindowStyle', 'Docked')
+%define FS
+fs = 2000.0;
+%define density
+rho = 1.21;
+%define speed of sound
+c = 3430.0;
+%define total time
+T = 2.0;
+%define grid width
+gridWidth = 343;
+%dx
+% dt = 1 / fs;
+% dx = c * sqrt(2) * dt;
+% dx = 1/(fs/c);
+% dt = 0.8*(dx/(c*sqrt(2)));
+%define timestep
+dt = 1/(2*fs);
+%dfine grid spacing
+dx = 2 * dt * c;
+% dx = c * sqrt(2) * dt;
+%calculate pconst
+pconst = rho * c^2 * dt;
+%calculate uconst
+uconst = (1/rho)*dt;
+%define pml depth 
+PMLdepth = 30;
+%calc time steps
+timestep = abs(T/dt);
+%calc grid size
+N = ceil(abs(gridWidth/dx)+2*PMLdepth);
+%calculate differentiation matrix
+tempdiffmatrix = zeros(1,N);
+temp = zeros(1, N);
+%Calc source
+src = zeros(1,ceil(T/(dt/2))+1);
+src(10:1010) = ((2*10^-5)*10^(100/20)) * sin(2*(pi/1010)*(1:1001));
+alpha = 0;
+%calculate geometry matricies
+phat = zeros(1,N);
+uhat = zeros(1,N);
+pdiffhat = zeros(1,N);
+udiffhat = zeros(1,N);
+pd = zeros(1,N);
+ud = zeros(1,N);
+    for i2 = 1 : N-1
+        if i2 <  ceil((N-2)/2)
+            tempdiffmatrix(i2) =  (i2-1);
+        end
+        if i2 ==  ceil((N-1)/2)
+            tempdiffmatrix(i2) = 0 * (1+0j);
+        end
+        if i2 >  ceil((N-1)/2)
+            tempdiffmatrix(i2) = (i2 - 1 - N) ;
+        end
+    end
+diffmatrix = 1i * tempdiffmatrix;
+cntr = 1;
+%calculate propagation
+for i = 0 : dt/2 : T
+    phat = fft(pd);
+    temp = phat .* diffmatrix;
+    pdiffhat = ifft(temp);
+    for i2 = 1 : length(pdiffhat)
+        if i2 < PMLdepth
+           alpha = (1/3)*(((PMLdepth-i2)/ PMLdepth)^3); 
+        elseif i2 > N - PMLdepth
+            alpha = (1/3)*(((i2 -(N-(PMLdepth-1)))/PMLdepth)^3);
+        else
+            alpha = 0;
+        end
+        ud(i2) = ud(i2) * ((1-alpha)/(1+alpha))-pconst * (1/(1+alpha))*(pdiffhat(i2)/(3.142*N));
+    end
+    uhat = fft(ud);
+
+        temp = uhat .* diffmatrix;
+
+    udiffhat = ifft(temp);
+    for i2 = 1 : length(udiffhat)
+        if i2 < PMLdepth
+           alpha = (1/3)*(((PMLdepth-i2)/ PMLdepth)^3); 
+        elseif i2 > N - PMLdepth
+            alpha = (1/3)*(((i2 -(N-(PMLdepth-1)))/PMLdepth)^3);
+        else
+            alpha = 0;
+        end
+        pd(i2) = pd(i2) * ((1-alpha)/(1+alpha))-uconst * (1/(1+alpha))*(udiffhat(i2)/(3.142*N));
+    end
+    pd(PMLdepth+1) = pd(PMLdepth+1) +  (src(cntr));
+    receiver(cntr) = pd(N-PMLdepth-1);
+    plot(real(pd(PMLdepth:end-PMLdepth)));
+    title(sprintf('Time = %.6f s',i));
+    axis('tight');
+    drawnow();
+    cntr = cntr + 1;
+end

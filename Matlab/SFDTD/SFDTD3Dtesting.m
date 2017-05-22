@@ -39,12 +39,16 @@ set(2, 'WindowStyle', 'Docked')
 %% Hard Coded Variables
 
 %Maximum calculation frequency
-fmax = 20000 * hertz;
-dt = 1/fmax;
-%grid size
-gx = c * dt / cstab;
-gy = c * dt / cstab;
-gz = c * dt / cstab;
+fmax = 1000 * hertz;
+% dt = 1/fmax;
+% %grid size
+% gx = c * dt / cstab;
+% gy = c * dt / cstab;
+% gz = c * dt / cstab;
+gx = (c / (6*fmax));
+gy = (c / (6*fmax));
+gz = (c / (6*fmax));
+dt = ((1/c)*gx)/2;
 %Dims
 %Dim Size (m)
 lx = 5*meters;
@@ -234,8 +238,8 @@ for n = 1:T/dt
 %     if mod(n,100)
 %     (100/tnum)*n
 %     end
-    [idx] = SPARSEfun3Db(p, 60);
-    [p, ux, uy, uz] = SFDTD3Dfun(p, pCx, pCy, pCz, ux, uy, uz, uCx, uCy, uCz, Rx, Ry, Rz, ZL, ZR, ZT, ZB, ZF, ZB, idx);
+    [idx] = SPARSEfun3DC(p, 10, p0);
+    [p, ux, uy, uz] = SFDTD3DfunC(p, pCx, pCy, pCz, ux, uy, uz, uCx, uCy, uCz, Rx, Ry, Rz, ZL, ZR, ZT, ZB, ZF, ZB, idx);
     
     % Input source
     p(sourcelocations(1),sourcelocations(2),sourcelocations(3)) = p(sourcelocations(1),sourcelocations(2),sourcelocations(3)) - source1(n);

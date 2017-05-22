@@ -1,10 +1,15 @@
 function SFDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0)
 
 %         figure(1);
-        xslice = ceil((xcells-1)/2); 
-        yslice = ceil((ycells-1)/2); 
-        zslice = (ceil(zcells-1)/2);
+%         xslice = ceil((xcells-1)/2); 
+%         yslice = ceil((ycells-1)/2); 
+%         zslice = (ceil(zcells-1)/2);
+        xslice = ceil((size(p,2)-1)/2); 
+        yslice = ceil((size(p,1)-1)/2); 
+        zslice = ceil((size(p,3)-1)/2);
         slice(abs(p),xslice,yslice,zslice)
+
+%         slice(xslice,yslice,zslice,abs(p))
 %         slice(xvec,yvec,zvec,abs(p),xslice,yslice,zslice)
 
 %         zslice = (ceil(zcells-1)/2);

@@ -16,6 +16,7 @@ alphaYp = 0.45;
 
 %define FS
 fs = 10000;
+% fmax = 5000;
 %define density
 rho = 1.21;
 %define speed of sound
@@ -23,23 +24,31 @@ c = 343.0;
 %define total time
 T = 0.1;
 %define grid width
-gridWidthX = 5.0;
-gridWidthY = 4.0;
+gridWidthX = 34.0;
+gridWidthY = 34.0;
 %Define Stability Condition
 St = 2/(pi * sqrt(2));
 %define timestep
-dt = (1/fs);
-% dt = 1/(2*fs);
-%dfine grid spacing
-dx = c * dt / St;
+% dx = (c / (pi*fmax));
+% dt = ((1/c)*dx)/2;
+% dt = 1 / fs;
+dt = 1/(2*fs);
 % dx = c * sqrt(2) * dt;
-% dx = 2 * dt * c;
+% dt = (1/fs);
+% dt = 1/(2*fs);
+% % %dfine grid spacing
+% dx = c * dt / St;
+% dx = c * sqrt(2) * dt;
+dx = 2 * dt * c;
 % assert(isequal((c*dt/dx),St));
 %calculate pconst
-pconst = pi * 100 * (c^2 * rho * dt/dx);
+pconst = rho * c^2 * (dt/dx);
+%calculate uconst
+uconst = (1/rho)*(dt/dx);
+% pconst = c^2 * rho * dt/dx;
 % pconst = rho * c^2 * (dt/dx) * dt * c;
 %calculate uconst
-uconst = dt / (dx*rho);
+% uconst = dt / (dx*rho);
 % uconst = (1/rho) * (dt/dx) * dt * c;
 %define pml depth 
 % PMLdepth = ceil(abs(gridWidth/dx)/(2*(fs/c)));
@@ -202,10 +211,12 @@ for i = 1 : T/dt+1
 %     if mod(i, 100) < 1
 %     mesh(liney, linex, real(pd(PMLdepth:end-PMLdepth-1,...
 %         PMLdepth:end-PMLdepth-1)));
-mesh(liney, linex, abs(pd));
+% mesh(liney, linex, abs(pd));
+mesh(liney, linex, pd);
+
     
-    zlim([-0.4 0.4]);
-%      zlim([-1 1]);
+%     zlim([-0.4 0.4]);
+     zlim([-1 1]);
 %     set(gca,'zlim',[-0.04 0.04]);
     caxis([-0.04 0.04]);
     shading interp;
@@ -213,6 +224,7 @@ mesh(liney, linex, abs(pd));
 %     view([spin(i) 13]);
     view(2)
     axis tight;
+    zlim([-1 1]);
     drawnow;
 %     end
 end
@@ -228,7 +240,11 @@ norec = reciever ./ max(abs(reciever));
 srcnrm = srcnorm ./ max(abs(srcnorm));
 % srcnrm = Hd(srcnrm);
 % [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
-[spsd, sf] = pwelch(srcnrm,hann(200),[],200,fs);
+[spsd, sf] = pwelch(srcnrm,hann(2000),[],2000,fs);
+for i = 1 : size(norec,2)
+lags(i) = getlag(norec(:,i),srcnrm);
+norec(:,i) = circshift(norec(:,i),lags(i));
+end
 
 %% Display the results
 subplot(4,1,1);
@@ -237,7 +253,7 @@ hold on;
 plot(0:dt:((length(reciever)-1)*dt),reciever)
 hold off;
 axis('tight')
-legend('source','reciever');
+legend('source','topleft','topright','bottomleft','bottomright','center');
 title('Raw Input And Output');
 subplot(4,1,2);
 plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
@@ -245,14 +261,14 @@ hold on;
 plot(0:dt:((length(srcnrm)-1)*dt),srcnrm)
 hold off;
 axis('tight')
-legend('reciever','source');
+legend('topleft','topright','bottomleft','bottomright','center','source');
 title('Normalised Input And Output');
 subplot(4,1,3);
 plot(lf, db(lpsd),'--','Linewidth',2.0);
 hold on;
 plot(sf, db(spsd));
 hold off;
-legend('reciever','source');
+legend('topleft','topright','bottomleft','bottomright','center','source');
 grid('on');
 title('Power Spectral Density of Input and Output');
 subplot(4,1,4);

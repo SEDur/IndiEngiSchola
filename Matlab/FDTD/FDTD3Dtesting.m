@@ -77,10 +77,21 @@ T = 1.0;
 % source1 = [zeros(10,1); source1];
 % source1 = [source1; zeros((T/dt) - length(source1),1)].*((2*10^-5)*10^(100/20));
 
-source1 = GenerateMLSSequence(3,11,0).*((2*10^-5)*10^(100/20));
-T = length(source1)*dt;
-w1 = window(@gausswin,length(source1),2.5); 
-source1 = source1 .* w1;
+tone = dsp.SineWave('Amplitude',((2*10^-5)*10^(100/20)),...
+    'Frequency', 1000,...
+    'SampleRate', 1/dt,...
+    'SamplesPerFrame',0.01/dt);
+w1 = window(@gausswin,0.01/dt,2.5); 
+toneBurst = tone() .* w1;
+source1 = zeros(T/dt,1);
+source1(10:609) = toneBurst;
+source1(1010:1609) = toneBurst;
+source1(2010:2609) = toneBurst;
+
+% source1 = GenerateMLSSequence(3,11,0).*((2*10^-5)*10^(100/20));
+% T = length(source1)*dt;
+% w1 = window(@gausswin,length(source1),2.5); 
+% source1 = source1 .* w1;
 % initialize the velocity and pressure matrices (matrices are set up in a
 % y by x fashion to properly display the 2D space (y = rows, x = columns))
 % p = ones(ycells - 1, xcells - 1, zcells - 1) .* 10^-12*10^(40/20);
@@ -171,7 +182,7 @@ while n*dt < T
     reciever(n) = p(recieverleftloc(1),recieverleftloc(2),recieverleftloc(3));
     srcnorm(n) = p(sourcelocations(1,1),sourcelocations(1,2),sourcelocations(1,3));
     exectime(n) = toc();
-    FDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0); 
+%     FDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0); 
 end
 % % figure(2);
 % subplot(3,1,1);
