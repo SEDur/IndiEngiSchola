@@ -18,7 +18,7 @@ rho = 1.21;
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 5000 * hertz;
+fmax = 2000 * hertz;
 % dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))+(1/(gz^2))));
 % dt = 1/(2*fmax);
 
@@ -55,7 +55,7 @@ T = 1.0;
 
 % generate the source(s) & determine number of time steps needed
 % tnum = ceil(T/dt);
-% fc = 0.1;     % Cutoff frequency (normalised 0.5=nyquist)
+% fc = 0.1;     % Cutoff frequency (normalised 0.5=ycellsquist)
 % n0 = 30;        % Initial delay (samples)
 % sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
 % n=0:tnum;
@@ -84,9 +84,9 @@ tone = dsp.SineWave('Amplitude',((2*10^-5)*10^(100/20)),...
 w1 = window(@gausswin,0.01/dt,2.5); 
 toneBurst = tone() .* w1;
 source1 = zeros(T/dt,1);
-source1(10:609) = toneBurst;
-source1(1010:1609) = toneBurst;
-source1(2010:2609) = toneBurst;
+source1(10:129) = toneBurst;
+source1(410:529) = toneBurst;
+source1(810:929) = toneBurst;
 
 % source1 = GenerateMLSSequence(3,11,0).*((2*10^-5)*10^(100/20));
 % T = length(source1)*dt;
@@ -179,7 +179,12 @@ while n*dt < T
     [p, ux, uy, uz] = FDTD3Dfun(p, pCx, pCy, pCz, ux, uy, uz, uCx,...
         uCy, uCz, Rx, Ry, Rz, ZL, ZR, ZF, ZB, ZT, ZG);
     p = FDTD3Dsources(p,sourcelocations ,source1(n) , 'soft');
-    reciever(n) = p(recieverleftloc(1),recieverleftloc(2),recieverleftloc(3));
+%     reciever(n) = p(recieverleftloc(1),recieverleftloc(2),recieverleftloc(3));
+    reciever(n,1) = p(ceil(xcells/4), ceil(ycells/4),ceil(zcells/2));
+    reciever(n,2) = p(ceil(xcells/2)+ceil(xcells/4), ceil(ycells/4),ceil(zcells/2));    
+    reciever(n,3) = p(ceil(xcells/2), ceil(ycells/2)+ceil(xcells/4),ceil(zcells/2));
+    reciever(n,4) = p(ceil(xcells/2+ceil(xcells/4)), ceil(ycells/2)+ceil(xcells/4),ceil(zcells/2));
+    reciever(n,5) = p(ceil(xcells/2), ceil(ycells/2),ceil(zcells/2));
     srcnorm(n) = p(sourcelocations(1,1),sourcelocations(1,2),sourcelocations(1,3));
     exectime(n) = toc();
 %     FDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0); 
@@ -196,8 +201,14 @@ end
 % axis('tight')
 
 %% Some really minor postprocessing
+
+for i = 1 : size(reciever,2)
+    lag(i) = getlag(reciever(:,i)',srcnorm);
+    recieverCirc(:,i) = circshift(reciever(:,i)',lag(i));
+end
+
 % Hd = postprocessingDCfilter;
-norec = reciever ./ max(abs(reciever));
+norec = recieverCirc ./ max(abs(recieverCirc));
 % recanal = AnalyseMLSSequence(reciever',0,3,11,0,0);
 % norec = Hd(norec);
 % [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);

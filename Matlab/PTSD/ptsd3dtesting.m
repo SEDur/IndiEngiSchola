@@ -231,12 +231,12 @@ end
 %% Some really minor postprocessing
 % Hd = postprocessingDCfilter;
 
-% for i = 1 : size(reciever,2)
-%     lag(i) = getlag(reciever(:,i)',srcnorm);
-%     reciever(:,i) = circshift(reciever(:,i)',lag(i));
-% end
+for i = 1 : size(reciever,2)
+    lag(i) = getlag(reciever(:,i)',srcnorm);
+    recieverCirc(:,i) = circshift(reciever(:,i)',lag(i));
+end
 
-norec = reciever ./ max(abs(reciever));
+norec = recieverCirc ./ max(abs(recieverCirc));
 % recanal = AnalyseMLSSequence(reciever',0,2,11,0,0);
 % norec = Hd(norec);
 % [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
@@ -251,7 +251,7 @@ srcnrm = srcnorm ./ max(abs(srcnorm));
 
 %% Display the results
 subplot(3,1,1);
-plot(0:dt:((length(norec)-1)*dt),reciever,'--','linewidth',2.0)
+plot(0:dt:((length(norec)-1)*dt),recieverCirc,'--','linewidth',2.0)
 % stem(0:dt:((length(norec)-1)*dt),norec)
 hold on;
 plot(0:dt:((length(srcnrm)-1)*dt),source,'-')

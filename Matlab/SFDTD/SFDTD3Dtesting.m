@@ -76,7 +76,7 @@ snum = 2;
 % s2loc = [ceil((ly/gy)/4) ceil((lx/gx)/2) ceil((lz/gz)/4)];%source frequency
 % sourcelocations = [ceil((1/gy)) ceil(1/gx) ceil(1/gz);...
 %                     ceil((1/gy)) ceil(1/gx) ceil(1/gz)];
-sourcelocations = [ceil(xcells/2) ceil(ycells/2) ceil(zcells/2);...
+sourcelocations = [ceil(1/gy) ceil(1/gx) ceil(1/gz);...
                     ceil(xcells/2) ceil(ycells/2) ceil(zcells/2)];
 s1Freq = 400;
 s2Freq = 400;
@@ -100,7 +100,7 @@ recieverrightloc = [ceil((ycells/2) + (0.1/gy)) ceil((xcells/2)+2) ceil(zcells/2
 % dt = 1/ (c*sqrt(3/(gx)^2));
 % dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))+(1/(gz^2))));
 % dt = 3.35563e-4;
-T = 0.3 ;
+T = 1.0 ;
 
 % generate the source(s) & determine number of time steps needed
 
@@ -155,18 +155,32 @@ source2 = zeros(1,tnum);
 %             temp(1 : ceil(length(y)/10)) = gain;
 %             y = y.*temp;
 %             source2(1, t0 : t0 + ceil(T/dt) - 1) = y;
-figure(4);
-fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
-n0 = 10;        % Initial delay (samples)
-sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
-n=0:tnum;
-source1=exp(-dt^2*(n-n0).^2/(2*sigma^2));
-source1 = -(((2*10^-5)*10^(100/20))*source1);
-source1(source1 > (2*10^-5)) = (2*10^-5);
-plot(0:dt:(length(source1)-1)*dt,source1);
-xlim([0 0.03]);
-drawnow;
-figure(2);
+% figure(4);
+% fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
+% n0 = 10;        % Initial delay (samples)
+% sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
+% n=0:tnum;
+% source1=exp(-dt^2*(n-n0).^2/(2*sigma^2));
+% source1 = -(((2*10^-5)*10^(100/20))*source1);
+% source1(source1 > (2*10^-5)) = (2*10^-5);
+% plot(0:dt:(length(source1)-1)*dt,source1);
+% xlim([0 0.03]);
+% drawnow;
+% figure(2);
+% tone = dsp.SineWave('Amplitude',((2*10^-5)*10^(100/20)),...
+%     'Frequency', 1000,...
+%     'SampleRate', 1/dt,...
+%     'SamplesPerFrame',0.01/dt);
+% w1 = window(@gausswin,0.01/dt,2.5); 
+% toneBurst = tone() .* w1;
+% source1 = zeros(T/dt,1);
+% source1(10:129) = toneBurst;
+% source1(410:529) = toneBurst;
+% source1(810:929) = toneBurst;
+source1 = GenerateMLSSequence(3,11,0).*((2*10^-5)*10^(100/20));
+T = length(source1)*dt;
+w1 = window(@gausswin,length(source1),2.5); 
+source1 = source1 .* w1;
 % initialize the velocity and pressure matrices (matrices are set up in a
 % y by x fashion to properly display the 2D space (y = rows, x = columns))
 p = ones(ycells - 1, xcells - 1, zcells - 1)*(2*10^-5);
@@ -238,9 +252,15 @@ for n = 1:T/dt
 %     if mod(n,100)
 %     (100/tnum)*n
 %     end
+    disp(n*dt)
     [idx] = SPARSEfun3DC(p, 10, p0);
     [p, ux, uy, uz] = SFDTD3DfunC(p, pCx, pCy, pCz, ux, uy, uz, uCx, uCy, uCz, Rx, Ry, Rz, ZL, ZR, ZT, ZB, ZF, ZB, idx);
-    
+    reciever(n,1) = p(ceil(xcells/4), ceil(ycells/4),ceil(zcells/2));
+    reciever(n,2) = p(ceil(xcells/2)+ceil(xcells/4), ceil(ycells/4),ceil(zcells/2));    
+    reciever(n,3) = p(ceil(xcells/2), ceil(ycells/2)+ceil(xcells/4),ceil(zcells/2));
+    reciever(n,4) = p(ceil(xcells/2+ceil(xcells/4)), ceil(ycells/2)+ceil(xcells/4),ceil(zcells/2));
+    reciever(n,5) = p(ceil(xcells/2), ceil(ycells/2),ceil(zcells/2));
+    srcnorm(n) = p(sourcelocations(1,1),sourcelocations(1,2),sourcelocations(1,3));
     % Input source
     p(sourcelocations(1),sourcelocations(2),sourcelocations(3)) = p(sourcelocations(1),sourcelocations(2),sourcelocations(3)) - source1(n);
 %     p(s2loc(1),s2loc(2)) = p(s2loc(1),s2loc(2)) + -source2(n);
@@ -250,10 +270,10 @@ for n = 1:T/dt
 %     %PLOTTING SECTION
 %     leftear = real(10*log10(leftear/p0));
 %     rightear = real(10*log10(rightear/p0));
-    reciever(n) = p(recieverleftloc(1),recieverleftloc(2),recieverleftloc(3));
-    signal(n) = real(10*log10(source1(n)/p0));
-    meanpstore(n) = 10*log10(mean(mean(mean(abs(real(p)))))/p0);
-    SFDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0);
+%     reciever(n) = p(recieverleftloc(1),recieverleftloc(2),recieverleftloc(3));
+%     signal(n) = real(10*log10(source1(n)/p0));
+%     meanpstore(n) = 10*log10(mean(mean(mean(abs(real(p)))))/p0);
+%     SFDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0);
 %     patch(isocaps(idx,1),...
 %    'FaceColor','interp','EdgeColor','none');
 %     p1 = patch(isosurface(idx,1),...
@@ -280,6 +300,25 @@ for n = 1:T/dt
 % 
 %         drawnow();
 end
+%% Some really minor postprocessing
+
+for i = 1 : size(reciever,2)
+    lag(i) = getlag(reciever(:,i)',srcnorm);
+    recieverCirc(:,i) = circshift(reciever(:,i)',lag(i));
+end
+
+% Hd = postprocessingDCfilter;
+norec = recieverCirc ./ max(abs(recieverCirc));
+% recanal = AnalyseMLSSequence(reciever',0,3,11,0,0);
+% norec = Hd(norec);
+% [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
+[lpsd, lf] = pwelch(norec,hann(5000),[],5000,1/dt);
+% clear('Hd');
+% Hd = postprocessingDCfilter;
+srcnrm = srcnorm ./ max(abs(srcnorm));
+% srcnrm = Hd(srcnrm);
+% [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
+[spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,1/dt);
 % figure(3);
 %         subplot(2,1,1);
 %         plot(dt:dt:n*dt, leftear(1:n));
@@ -295,4 +334,39 @@ end
 %         plot(dt:dt:n*dt, signal(1:n));
 %         title('whats sent out by the source');
 %         ylim([-100 max(signal)]);
-
+%% Display the results
+subplot(3,1,1);
+plot(0:dt:((length(reciever)-1)*dt),source1(1:length(reciever)))
+hold on;
+plot(0:dt:((length(reciever)-1)*dt),reciever)
+hold off;
+axis('tight')
+legend('source','rec top left','rec top right','rec bottom left',...
+    'rec bottom right','rec centre');
+title('Raw Input And Output');
+xlim([0 0.2]);
+xlabel('Time (s)');
+ylabel('Amplitude (Pa)');
+subplot(3,1,2);
+plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
+hold on;
+plot(0:dt:((length(srcnrm)-1)*dt),srcnrm,'-')
+hold off;
+axis('tight')
+legend('rec top left','rec top right','rec bottom left',...
+    'rec bottom right','rec centre','source');
+title('Normalised Input And Output');
+xlim([0 0.2]);
+xlabel('Time (s)');
+ylabel('Amplitude (Pa)');
+subplot(3,1,3);
+plot(lf, db(lpsd),'--','Linewidth',2.0);
+hold on;
+plot(sf, db(spsd));
+hold off;
+legend('rec top left','rec top right','rec bottom left',...
+    'rec bottom right','rec centre','source');
+grid('on');
+title('Power Spectral Density of Input and Output');
+xlabel('Frequency (Hz)');
+ylabel('Amplitude (dB)');
