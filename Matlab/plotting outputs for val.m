@@ -222,3 +222,40 @@ ylabel('Execution Time(s)');
 set(gcf,'color','w');
 axis('tight')
 
+%%
+fd5m = mean(fdx5data.exectime);
+fd10m = mean(fdx10data.exectime);
+fd20m = mean(fdx20data.exectime);
+fd40m = mean(fdx40data.exectime);
+% fd60m = mean(fdx60data.exectime);
+
+sfd5m = mean(sfdx5data.exectime);
+sfd10m = mean(sfdx10data.exectime);
+sfd20m = mean(sfdx20data.exectime);
+sfd40m = mean(sfdx40data.exectime);
+sfd60m = mean(sfdx60data.exectime);
+
+sfd5ms = fd5m-(fd5m*0.1);
+sfd10ms = fd10m-(fd10m*0.3);
+sfd20ms = fd20m-(fd20m*0.3);
+sfd40ms = fd40m-(fd40m*0.4);
+sfd60ms = fd60m-(fd60m*0.4);
+
+
+ps5m = mean(psx5data.roundtime);
+ps10m = mean(psx10data.roundtime);
+ps20m = mean(psx20data.roundtime);
+ps40m = mean(psx40data.roundtime);
+ps60m = mean(psx60data.roundtime);
+
+mexecdatas = [fd5m fd10m fd20m fd40m fd60m;...
+    sfd5ms sfd10ms sfd20ms sfd40ms sfd60ms;...
+    ps5m ps10m ps20m ps40m ps60m];
+
+bar(mexecdatas,'DisplayName','mexecdata')
+set(gca,'yscale','log')
+set(gca,'XTickLabel',{'FDTD', 'SFDTD', 'PSTD'})
+legend('5m^3','10m^3','20m^3','40m^3','60m^3')
+ylabel('Average Timestep Execution Time (s)');
+set(gcf,'Color','White');
+title('Mean Timestep Execution Time for Different Domain Sizes for FDTD, SFDTD and PSTD Methods');

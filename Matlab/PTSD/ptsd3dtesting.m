@@ -251,16 +251,18 @@ srcnrm = srcnorm ./ max(abs(srcnorm));
 
 %% Display the results
 subplot(3,1,1);
-plot(0:dt:((length(norec)-1)*dt),recieverCirc,'--','linewidth',2.0)
+% plot(0:dt:((length(norec)-1)*dt),recieverCirc,'--','linewidth',2.0)
+plot(0:dt:((length(reciever)-1)*dt),reciever,'--','linewidth',2.0)
+
 % stem(0:dt:((length(norec)-1)*dt),norec)
 hold on;
-plot(0:dt:((length(srcnrm)-1)*dt),source,'-')
+plot(0:dt:((length(source1)-1)*dt),source1','-')
 hold off;
 axis('tight')
 legend('source','rec top left','rec top right','rec bottom left',...
     'rec bottom right','rec centre');
 title('Raw Input And Output');
-xlim([0 0.2]);
+xlim([0 0.137]);
 xlabel('Time (s)');
 ylabel('Amplitude (Pa)');
 subplot(3,1,2);
@@ -273,7 +275,7 @@ axis('tight')
 legend('rec top left','rec top right','rec bottom left',...
     'rec bottom right','rec centre','source');
 title('Normalised Input And Output');
-xlim([0 0.2]);
+xlim([0 0.14]);
 xlabel('Time (s)');
 ylabel('Amplitude (Pa)');
 subplot(3,1,3);
@@ -287,6 +289,7 @@ grid('on');
 title('Power Spectral Density of Input and Output');
 xlabel('Frequency (Hz)');
 ylabel('Amplitude (dB)');
+
 % xlim([0 2000]);
 % ylim([-300 -90]);
 % subplot(4,1,4);
@@ -347,3 +350,54 @@ ylabel('Amplitude (dB)');
 % % subplot(5,1,5);
 % % plot(0:dt:((length(recanal)-1)*dt),recanal);
 % % title('Impulse Response at Reciever');
+
+%%  
+% plot(fdtdvaldata.lf, db(mean(fdtdvaldata.lpsd')),':bs');
+plot(fdtdvaldata.lf, db(mean(fdtdvaldata.lpsd')),'Linewidth',2.0);
+hold on;
+plot(fdtdvaldata.sf, db(fdtdvaldata.spsd),'--');
+% plot(sfdtdvaldata.lf, db(mean(sfdtdvaldata.lpsd')),'-.r*');
+plot(sfdtdvaldata.lf, db(mean(sfdtdvaldata.lpsd')),'Linewidth',2.0);
+
+plot(sfdtdvaldata.sf, db(sfdtdvaldata.spsd),'--');
+% plot(pstdvaldata.lf, db(mean(pstdvaldata.lpsd')),'--c');
+plot(pstdvaldata.lf, db(mean(pstdvaldata.lpsd')),'Linewidth',2.0);
+
+plot(pstdvaldata.sf, db(pstdvaldata.spsd),'--');
+
+hold off;
+% legend('FDTD Receiver1','FDTD Receiver2','FDTD Receiver3','FDTD Receiver4','FDTD Receiver5','FDTD Source',...
+%     'SFDTD Reciever1','SFDTD Reciever2','SFDTD Reciever3','SFDTD Reciever4','SFDTD Reciever5','SFDTD source',...
+%     'PSTD Reciever1','PSTD Reciever2','PSTD Reciever3','PSTD Reciever4','PSTD Reciever5','PSTD source');
+legend('FDTD Recievers', 'FDTD Source', 'SFDTD Recievers', 'SFDTD Source','PSTD Recievers', 'PSTD Source');
+grid('on');
+xlim([400 1600]);
+title('Power Spectral Density of Simulation Input and Mean Output for FDTD, SFDTD & PSTD with 1kHz Windowed Tone Burst Stimulus');
+xlabel('Frequency (Hz)');
+ylabel('Amplitude (dB)');
+
+%%
+
+% plot(fdtdvaldata.lf, db(mean(fdtdvaldata.lpsd')),':bs');
+plot(fdtdvaldata.lf, db(mean(fdtdvaldata.lpsd')...
+    -mean(sfdtdvaldata.lpsd')),'Linewidth',2.0);
+hold on;
+% plot(sfdtdvaldata.lf, db(mean(sfdtdvaldata.lpsd')),'-.r*');
+% plot(sfdtdvaldata.lf, db(mean(sfdtdvaldata.lpsd')),'Linewidth',2.0);
+plot(fdtdvaldata.lf, db(mean(fdtdvaldata.lpsd')...
+    -interp1(mean(pstdvaldata.lpsd'),(1000.*fdtdvaldata.lf)')),'Linewidth',2.0);
+% plot(pstdvaldata.lf, db(mean(pstdvaldata.lpsd')),'--c');
+% plot(pstdvaldata.lf, db(mean(pstdvaldata.lpsd')),'Linewidth',2.0);
+plot(sfdtdvaldata.lf, db(mean(sfdtdvaldata.lpsd')...
+    -interp1(mean(pstdvaldata.lpsd'),(sfdtdvaldata.lf)')),'Linewidth',2.0);
+
+hold off;
+% legend('FDTD Receiver1','FDTD Receiver2','FDTD Receiver3','FDTD Receiver4','FDTD Receiver5','FDTD Source',...
+%     'SFDTD Reciever1','SFDTD Reciever2','SFDTD Reciever3','SFDTD Reciever4','SFDTD Reciever5','SFDTD source',...
+%     'PSTD Reciever1','PSTD Reciever2','PSTD Reciever3','PSTD Reciever4','PSTD Reciever5','PSTD source');
+legend('FDTD & SFDTD Error', 'FDTD & PSTD Error', 'SFDTD & PSTD Error');
+grid('on');
+xlim([400 1600]);
+title('Error of Averaged Power Spectral Density of Simulation Input and Mean Output for FDTD, SFDTD & PSTD with 1kHz Windowed Tone Burst Stimulus');
+xlabel('Frequency (Hz)');
+ylabel('Amplitude (dB)');

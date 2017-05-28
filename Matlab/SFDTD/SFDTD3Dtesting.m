@@ -32,14 +32,14 @@ rho    = 1.21; %Density of air kg/m^3
 p0 = 2*10^-5;
 cstab = 2/(pi*sqrt(3));
 %% Initz Winodws
-figure(1);
-set(1, 'WindowStyle', 'Docked')
-figure(2);
-set(2, 'WindowStyle', 'Docked')
+% figure(1);
+% set(1, 'WindowStyle', 'Docked')
+% figure(2);
+% set(2, 'WindowStyle', 'Docked')
 %% Hard Coded Variables
 
 %Maximum calculation frequency
-fmax = 1000 * hertz;
+fmax = 500 * hertz;
 % dt = 1/fmax;
 % %grid size
 % gx = c * dt / cstab;

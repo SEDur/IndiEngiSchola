@@ -1,35 +1,41 @@
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces 2D Representation of Ray Tracing Concept\nobreakspace {}\cite {Elorza2005}}}{6}{figure.1.1}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces 2D Representation of Ray Tracing Concept\nobreakspace {}\cite {Elorza2005}}}{7}{figure.1.1}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Room Modes up to Schroeder Frequency for a Small Rectangular Room}}{16}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Schroeder frequency as a function of domain size and RT60}}{17}{figure.2.2}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Room Modes up to Schroeder Frequency for a Small Rectangular Room}}{17}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Schroeder frequency as a function of domain size and RT60}}{18}{figure.2.2}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Example Mesh Plot of an FDTD Simulation With Two Sources}}{18}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Visualization of a 2D FDTD Scheme With Offset Grids\nobreakspace {}\cite {Hill2012}}}{20}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Example Plot of an FDTD Simulation With Reflection From an Obstable}}{22}{figure.3.3}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Window Function}}{28}{figure.3.4}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Pressure Function}}{28}{figure.3.5}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Caption place holder}}{28}{figure.3.6}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Examples of an Expanding Wave in an SFDTD Simulation}}{28}{figure.3.7}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Window of an expanding wave in an SFDTD simulation}}{29}{figure.3.8}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Window of an expanding wave in an SFDTD simulation}}{30}{figure.3.9}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Smoothed rate of time step execution for the SFDTD method during simulations, for different threshold levels}}{31}{figure.3.10}
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Single source SFDTD simulation in a small room with nodes and anti-nodes present}}{32}{figure.3.11}
-\contentsline {figure}{\numberline {3.12}{\ignorespaces 2D Differentiation Matrix in 1 Direction for a PSTD Simulation}}{36}{figure.3.12}
-\contentsline {figure}{\numberline {3.13}{\ignorespaces PSTD 2D PML Coefficient Matrix}}{39}{figure.3.13}
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Example Plot of a 2D PSTD Simulation With Reflections}}{40}{figure.3.14}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Example Mesh Plot of an FDTD Simulation With Two Sources}}{19}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Visualization of a 2D FDTD Scheme With Offset Grids\nobreakspace {}\cite {Hill2012}}}{21}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Example Plot of an FDTD Simulation With Reflection From an Obstable}}{23}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Window Function}}{29}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Pressure Function}}{29}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Caption place holder}}{29}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Examples of an Expanding Wave in an SFDTD Simulation}}{29}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Window of an expanding wave in an SFDTD simulation}}{30}{figure.3.8}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Window of an expanding wave in an SFDTD simulation}}{31}{figure.3.9}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Smoothed rate of time step execution for the SFDTD method during simulations, for different threshold levels}}{32}{figure.3.10}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Single source SFDTD simulation in a small room with nodes and anti-nodes present}}{33}{figure.3.11}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces 2D Differentiation Matrix in 1 Direction for a PSTD Simulation}}{37}{figure.3.12}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces PSTD 2D PML Coefficient Matrix}}{40}{figure.3.13}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Example Plot of a 2D PSTD Simulation With Reflections}}{41}{figure.3.14}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Room Modes up to Schroeder Frequency for a Small Rectangular Room}}{43}{figure.4.1}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Validation data of FDTD simulation}}{44}{figure.4.2}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Validation data of PSTD simulation With MLS Source}}{46}{figure.4.3}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Validation data of PSTD simulation With Tone Burst Source}}{46}{figure.4.4}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Validation data of PSTD simulation}}{48}{figure.4.5}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Room Modes up to Schroeder Frequency for a Small Rectangular Room}}{44}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces FDTD Simulation Data With Windowed MLS Source With 10kHz Maximum Frequency}}{45}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces FDTD Simulation Data With Windowed Tone Burst Source With 2kHz Maximum Frequency}}{46}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces SFDTD Simulation Data With Windowed MLS Source With 2kHz Maximum Frequency}}{47}{figure.4.4}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces SFDTD Simulation Data With Windowed Tone Burst Source With 2kHz Maximum Frequency}}{48}{figure.4.5}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Validation data of PSTD simulation With MLS Source}}{49}{figure.4.6}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Validation data of PSTD simulation With Tone Burst Source}}{50}{figure.4.7}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Averaged spectral content around tone burst frequency for all three methods}}{51}{figure.4.8}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Execution times for FDTD simulations in domains of increasing size}}{50}{figure.5.1}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Execution times for PSTD simulations in domains of increasing size}}{51}{figure.5.2}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Execution times for SFDTD simulations in domains of increasing size}}{52}{figure.5.3}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Code execution time profile of PSTD functions}}{53}{figure.5.4}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Code execution time profile of FDTD functions}}{54}{figure.5.5}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Code execution time profile of SFDTD functions}}{55}{figure.5.6}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Execution times for FDTD simulations in domains of increasing size}}{53}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Execution times for FDTD simulations in domains of increasing size}}{53}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Code execution time profile of PSTD functions}}{54}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Code execution time profile of FDTD functions}}{55}{figure.5.4}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Code execution time profile of SFDTD functions}}{56}{figure.5.5}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Execution times for FDTD simulations in domains of increasing size}}{67}{figure.B.1}
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Execution times for PSTD simulations in domains of increasing size}}{68}{figure.B.2}
+\contentsline {figure}{\numberline {B.3}{\ignorespaces Execution times for SFDTD simulations in domains of increasing size}}{69}{figure.B.3}

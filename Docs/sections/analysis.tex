@@ -8,11 +8,11 @@
 %\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
 \chapter{Execution Time and Analysis}
 \label{Introduction}
-The interest of this study was to analyse the execution times of the three algorithms described above, to determine which method executes in the fastest time and thus might be most appropriate for using to solve large problems. The execution times were measured for each method for domains of the following sizes with a maximum frequency of 500Hz for FDTD and PSTD in 3D, and 1kHz for SFDTD in 2D:\\
+The interest of this study was to analyse the execution times of the three algorithms described above, to determine which method executes in the fastest time and might be most appropriate for using to solve large problems. The execution times were measured for each method for domains of the following sizes with a maximum frequency of 500Hz for FDTD, SFDTD and PSTD in 3D:\\
 \begin{center}
 \begin{tabular}{|c|c|c|c|} 
   \hline
- Dimension ($m^2$) & FDTD Cells & SFDTDCells & PSTD Cells \\
+ Dimension ($m^3$) & FDTD Cells & SFDTDCells & PSTD Cells \\
  \hline
  5 & 121104	& 121104 & 24025\\ 
  10 & 483025 & 483025 & 62500\\  
@@ -23,7 +23,7 @@ The interest of this study was to analyse the execution times of the three algor
 \end{tabular}\\
 \end{center}
 
-The time step execution time was evaluated for 2000 executions, allowing for smaller or larger required time steps to be part of the analysis. The execution of each time step includes only the steps outlined above, with no plotting. Execution time was measured using Matlabs Tic and Toc functions. During execution, Matlab was the only task running in the foreground of the system, but background tasks were allowed to continue without restriction. The computer system used for these tests had the following properties:\\
+The time step execution time was evaluated for 2000 executions, allowing for smaller or larger required time steps to be part of the analysis. The execution of each time step includes only the steps outlined above, with no plotting. Execution time was measured using Matlab internal timers. During execution, Matlab was the only task running in the foreground of the system, but background tasks were allowed to continue without restriction. The computer system used for these tests had the following properties:\\
 
 \begin{itemize}
 \item Intel Core i5 4690k CPU @ 4.5GHz @ 1.227V
@@ -32,34 +32,29 @@ The time step execution time was evaluated for 2000 executions, allowing for sma
 \end{itemize}
 
 \section{Results}
-The average execution time for each method is given below: \\
+The mean time step execution time for each method is given below in two bar charts, one with a linear and one with a logarithmic y axis: \\
 \begin{figure}[H]
 \centering
-  \includegraphics[width=\textwidth]{./graphics/FDTD simulation execution time.png}
+	\textbf{Mean Timestep Execution Speed with Log Axis}
+  \includegraphics[width=\textwidth]{./graphics/speedTestBar.png}
+  \caption{Execution times for FDTD simulations in domains of increasing size}
+\end{figure}
+\begin{figure}[H]
+\centering
+\textbf{Mean Timestep Execution Speed with Linear Axis}
+  \includegraphics[width=\textwidth]{./graphics/speedTestBarlin.png}
   \caption{Execution times for FDTD simulations in domains of increasing size}
 \end{figure}
 
-\begin{figure}[H]
-\centering
-  \includegraphics[width=\textwidth]{./graphics/PSTD Simulation Execution Times.png}
-  \caption{Execution times for PSTD simulations in domains of increasing size}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-  \includegraphics[width=\textwidth]{./graphics/SFDTD simulation execution time.png}
-  \caption{Execution times for SFDTD simulations in domains of increasing size}
-\end{figure}
-
 \section{Analysis}
-These results how some interesting properties of simulation execution over time for the different methods. The FDTD method is significantly slower at executing than the PSTD and SFDTD methods, particularly with the larger domains. The arrogate execution time for $0.25s $of simulation for a $40m^3$ domain was 1 hour 5 minutes. Where as execution for the same domain in PSTD was 1.5 minutes. Execution time data for the PSTD method appears to fluctuate wildly compared to the FDTD data, and this is probably due to the influence of system loading by background tasts. These fluctuations are better masked by the log scaling in time for the plot of FDTD execution time data. This y axis scaling was chosen to give clearer reference to the range of execution times due to the size of each domain.\\
 
-With this data, it is clear to see that the PSTD method executes significantly faster for larger domains than the FDTD method. This is likely due to three main reasons: \\
+These results show the scale of the increase in execution speed with domain size. Both the FDTD and SFDTD methods average timestep execution speed increase exponentially with domain size, where the PSTD method shows a minimal increase in execution time. Though not shown by this data, the aggregate execution time of the FDTD simulation for a $40m^3$ domain was 1 hour 5 minutes. Where as execution for the same domain in PSTD was 1.5 minutes. This data suggests that the PSTD method executes significantly faster for larger domains than the FDTD method. This is likely due to three main reasons: \\
 \begin{itemize}
 \item Differentiation in the frequency domain allows large domains to be evaluated fast, as many cells are differentiated at once.
 \item The speed of the Fourier transforms is sufficiently fast to have little increase as the number of cells increases. 
 \item Due to the nature of frequency domain differentiation, fewer cells are required per wavelength for stable simulation.
 \end{itemize}
+However as shown in the validation section the quality of the results of the PSTD method may be questionable, and it may be that a greater number of spatial steps and a reduced time step is required for improved results quality from the PSTD method. Further study of a Chebyshev PSTD method may help with this. The SFDTD method improves average execution speed, and gives results similar in quality to the FDTD method, and so may be worth further investigation and optimisation.
 \section{Code Profiling}
 Use of Matlabs code profiling tool analysis the performance of the PSTD3Dfun function shows the time taken for execution for 2000 calls of the function during an example simulation of a 5m by 4m by3m domain with a maximum frequency of 5kHz:\\
 \begin{figure}[H]
@@ -84,4 +79,4 @@ The figure below shows a summary of the code profiling information for an SFDTD 
   \includegraphics[width=1\textwidth]{./graphics/sparfunprosum.png}
   \caption{Code execution time profile of SFDTD functions}
 \end{figure}
-These results show that in the SFDTD method which includes extra steps on top of those in the FDTD method, most time is spent differentiating the matrices as opposed to filtering the domain. It is not possible in this case to compare this performance to the 3D FDTD and PSTD method as discussed above, but these results may suggest that SFDTD is worthy of further research.
+These results show that in the SFDTD method most time is spent differentiating the matrices as opposed to filtering the domain, although an extra process has been added that process does not take longer than the longest process in the original method. However, further study could provide a more optimal 3D filtering method for index matrix generation, as the function used for the smoothing is one designed by Mathworks for smoothing MRI data.

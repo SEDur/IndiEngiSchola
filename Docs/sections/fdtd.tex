@@ -149,7 +149,7 @@ The approach suggested by Doerr is similar to the moving window FDTD method impl
 Maintaining multiple large lists in memory may be detrimental to the speed of execution in of a large system where non-contiguous memory accesses are expensive in time. This may be of further concern when considering the difference in behaviour between electromagnetic and acoustics waves. Electromagnetic waves are transverse and can travel through a vacuum, acoustic waves are longitudinal and mechanical i.e. are fluctuations in a medium. Mechanical waves diffuse but photons in a PIC simulation may not, and the addressing of multiple lists with diffusing mechanical waves may be less practical than in PIC simulations. As such another method of windowing is explored below. \\
 
 \subsection{Acoustic Implementation of SFDTD in Two Dimensions}
-The implementation of the SFDTD for 2D simulation in this study attempts to leverage some signal processing techniques instead of search algorithms or individual checks like Doerrs method. The aim of is to generate a single indexing matrix as opposed to having an indexing matrix and lists. The points of the matrix will be used as a mask, where points with an absolute pressure above a threshold and surrounding points will be computed. The figure below shows the window shape and function shape for an SFDTD simulation at the same point in time.\\
+The implementation of the SFDTD in this study attempts to leverage some signal processing techniques instead of search algorithms or individual checks like Doerrs method. The aim of is to generate a single indexing matrix as opposed to having an indexing matrix and lists. The points of the matrix will be used as a mask, where points with an absolute pressure above a threshold and surrounding points will be computed. The figure below shows the window shape and function shape for an SFDTD simulation at the same point in time.\\
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]
@@ -171,7 +171,7 @@ The domains of interest in this study are large and contain many points. To gene
 
 \lstinputlisting[language=Matlab]{../Matlab/SFDTD/SPARSEfun2DC.m}
 
-Below is an example surf plot of the window matrix for a 50m by 40m simulation with a maximum sampling frequency of $1kHz$ and a windows threshold of 40dB. 
+Below is an example surf plot of the window matrix for a 50m by 40m 2D simulation with a maximum sampling frequency of $1kHz$ and a windows threshold of 40dB. 
 \begin{figure}[H]
 \centering
   \includegraphics[width=0.75\textwidth]{./graphics/Example Window 1.png} %./graphics/Example Window 1.png
@@ -203,8 +203,7 @@ The figure below shows that simulations in small domains using the SFDTD method 
   \caption{Single source SFDTD simulation in a small room with nodes and anti-nodes present}
 \end{figure}
 
-It can be seen that increasing the threshold level of the windowing function decreases aggregate and individual execution times, and begins to become much faster with a threshold above 40dB.
-The FDTD algorithm above is adjusted to reference this matrix and operate at non-zero coordinates, calculating not only the regions with appropriate amounts of power but also the surrounding cells. The current implementation uses an if statement which is potentially very slow, and would not be easy to solve in parallel arithmetically. As well as implementing this method in 3D, it may be crucial to develop a method for masking the simulation and solving without using any if statements. Depending on the simulation, the level of the threshold value may be set as a single value or may be set to decrease over time to accommodate diffuse field calculation. However if an appropriate lossy wave equation was implemented, it may be possible to use a relatively high threshold to compute propagation loss for wave-fronts such as strong and early reflections.\\
+It can be seen that increasing the threshold level of the windowing function decreases aggregate and individual execution times, and begins to become much faster with a threshold above 40dB. The FDTD algorithm above is adjusted to reference this matrix and operate at non-zero coordinates, calculating not only the regions with appropriate amounts of power but also the surrounding cells. The current implementation uses an if statement which is potentially very slow, and would not be easy to solve in parallel arithmetically. Depending on the simulation, the level of the threshold value may be set as a single value or may be set to decrease over time to accommodate diffuse field calculation. However if an appropriate lossy wave equation was implemented, it may be possible to use a relatively high threshold to compute propagation loss for wave-fronts such as strong and early reflections.\\
 
 
 

@@ -1,52 +1,53 @@
-\contentsline {chapter}{\numberline {1}Introduction}{6}{chapter.1}
-\contentsline {section}{\numberline {1.1}Problem Definition}{6}{section.1.1}
-\contentsline {section}{\numberline {1.2}Aim of the Study}{7}{section.1.2}
-\contentsline {section}{\numberline {1.3}Format of the Report}{7}{section.1.3}
-\contentsline {chapter}{\numberline {2}Acoustic Principals}{8}{chapter.2}
-\contentsline {section}{\numberline {2.1}The Acoustic Wave Equation}{8}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Wave Equation In One Dimension}{9}{subsection.2.1.1}
-\contentsline {subsubsection}{Equation Of Motion}{9}{section*.5}
-\contentsline {subsubsection}{Gas Law}{9}{section*.6}
-\contentsline {subsubsection}{Conservation Of Mass}{10}{section*.7}
-\contentsline {subsubsection}{Wave Equation}{11}{section*.8}
-\contentsline {section}{\numberline {2.2}Acoustic Properties of Interest in This Study}{12}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Inverse Square Law \& Propagation time}{12}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Reverberation}{13}{subsection.2.2.2}
-\contentsline {subsubsection}{Acoustic Absorption}{13}{section*.9}
-\contentsline {subsubsection}{Modified Hopkins-Stryker Equation}{14}{section*.10}
-\contentsline {subsection}{\numberline {2.2.3}Room Modes}{15}{subsection.2.2.3}
-\contentsline {chapter}{\numberline {3}Time Domain Numerical Methods}{18}{chapter.3}
-\contentsline {section}{\numberline {3.1}Finite Difference Time Domain Method}{18}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Introduction to the Finite Difference Time Domain Method}{19}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}The Finite Difference Time Domain Method Applied To The Acoustic Wave Equation}{19}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}Field Calculation}{20}{subsection.3.1.3}
-\contentsline {subsection}{\numberline {3.1.4}Boundary Handling}{21}{subsection.3.1.4}
-\contentsline {subsection}{\numberline {3.1.5}Block Diagram}{23}{subsection.3.1.5}
-\contentsline {subsection}{\numberline {3.1.6}Example Update Function}{24}{subsection.3.1.6}
-\contentsline {subsection}{\numberline {3.1.7}Stability}{25}{subsection.3.1.7}
-\contentsline {section}{\numberline {3.2}Sparse FDTD}{26}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Introduction to the Sparse Finite Difference Time Domain Method}{26}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Acoustic Implementation of SFDTD in Two Dimensions}{27}{subsection.3.2.2}
-\contentsline {section}{\numberline {3.3}Pseudo-Spectral Time Domain Method}{33}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}A Background to the Pseudo-Spectral Time Domain Method}{33}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Block Diagram}{33}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}The Pseudospectral Time Domain Method Applied To The Wave Equation}{35}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}Absorbing Boundary Conditions}{37}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5}Partially Absorbing Boundary Conditions}{39}{subsection.3.3.5}
-\contentsline {section}{\numberline {3.4}Sound Source Terms}{40}{section.3.4}
-\contentsline {chapter}{\numberline {4}Validation}{42}{chapter.4}
-\contentsline {section}{\numberline {4.1}Validation Strategy}{42}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}The Domain}{42}{subsection.4.1.1}
+\contentsline {chapter}{\numberline {1}Introduction}{7}{chapter.1}
+\contentsline {section}{\numberline {1.1}Problem Definition}{7}{section.1.1}
+\contentsline {section}{\numberline {1.2}Aim of the Study}{8}{section.1.2}
+\contentsline {section}{\numberline {1.3}Format of the Report}{8}{section.1.3}
+\contentsline {chapter}{\numberline {2}Acoustic Principals}{9}{chapter.2}
+\contentsline {section}{\numberline {2.1}The Acoustic Wave Equation}{9}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Wave Equation In One Dimension}{10}{subsection.2.1.1}
+\contentsline {subsubsection}{Equation Of Motion}{10}{section*.5}
+\contentsline {subsubsection}{Gas Law}{10}{section*.6}
+\contentsline {subsubsection}{Conservation Of Mass}{11}{section*.7}
+\contentsline {subsubsection}{Wave Equation}{12}{section*.8}
+\contentsline {section}{\numberline {2.2}Acoustic Properties of Interest in This Study}{13}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Inverse Square Law \& Propagation time}{13}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Reverberation}{14}{subsection.2.2.2}
+\contentsline {subsubsection}{Acoustic Absorption}{14}{section*.9}
+\contentsline {subsubsection}{Modified Hopkins-Stryker Equation}{15}{section*.10}
+\contentsline {subsection}{\numberline {2.2.3}Room Modes}{16}{subsection.2.2.3}
+\contentsline {chapter}{\numberline {3}Time Domain Numerical Methods}{19}{chapter.3}
+\contentsline {section}{\numberline {3.1}Finite Difference Time Domain Method}{19}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Introduction to the Finite Difference Time Domain Method}{20}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}The Finite Difference Time Domain Method Applied To The Acoustic Wave Equation}{20}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Field Calculation}{21}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Boundary Handling}{22}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.5}Block Diagram}{24}{subsection.3.1.5}
+\contentsline {subsection}{\numberline {3.1.6}Example Update Function}{25}{subsection.3.1.6}
+\contentsline {subsection}{\numberline {3.1.7}Stability}{26}{subsection.3.1.7}
+\contentsline {section}{\numberline {3.2}Sparse FDTD}{27}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Introduction to the Sparse Finite Difference Time Domain Method}{27}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Acoustic Implementation of SFDTD in Two Dimensions}{28}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Pseudo-Spectral Time Domain Method}{34}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}A Background to the Pseudo-Spectral Time Domain Method}{34}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Block Diagram}{34}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}The Pseudospectral Time Domain Method Applied To The Wave Equation}{36}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Absorbing Boundary Conditions}{38}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Partially Absorbing Boundary Conditions}{40}{subsection.3.3.5}
+\contentsline {section}{\numberline {3.4}Sound Source Terms}{41}{section.3.4}
+\contentsline {chapter}{\numberline {4}Validation}{43}{chapter.4}
+\contentsline {section}{\numberline {4.1}Validation Strategy}{43}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}The Domain}{43}{subsection.4.1.1}
 \contentsline {section}{\numberline {4.2}Results}{44}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}FDTD Simulation Results}{44}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}SFDTD Simulation Results}{44}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}PSTD Simulation Results}{46}{subsection.4.2.3}
-\contentsline {section}{\numberline {4.3}Validating The SFDTD Method}{47}{section.4.3}
-\contentsline {chapter}{\numberline {5}Execution Time and Analysis}{49}{chapter.5}
-\contentsline {section}{\numberline {5.1}Results}{49}{section.5.1}
-\contentsline {section}{\numberline {5.2}Analysis}{52}{section.5.2}
-\contentsline {section}{\numberline {5.3}Code Profiling}{53}{section.5.3}
-\contentsline {chapter}{\numberline {6}Conclusion and Further Work}{57}{chapter.6}
-\contentsline {section}{\numberline {6.1}Conclusion}{57}{section.6.1}
-\contentsline {section}{\numberline {6.2}Further Work}{58}{section.6.2}
-\contentsline {chapter}{\numberline {A}Code Listing}{64}{appendix.A}
+\contentsline {subsection}{\numberline {4.2.1}FDTD Simulation Results}{45}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}SFDTD Simulation Results}{47}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}PSTD Simulation Results}{49}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Compared Spectral Analysis for Simulation Results With Tone Burst Stimulus}{51}{subsection.4.2.4}
+\contentsline {chapter}{\numberline {5}Execution Time and Analysis}{52}{chapter.5}
+\contentsline {section}{\numberline {5.1}Results}{52}{section.5.1}
+\contentsline {section}{\numberline {5.2}Analysis}{53}{section.5.2}
+\contentsline {section}{\numberline {5.3}Code Profiling}{54}{section.5.3}
+\contentsline {chapter}{\numberline {6}Conclusion and Further Work}{58}{chapter.6}
+\contentsline {section}{\numberline {6.1}Conclusion}{58}{section.6.1}
+\contentsline {section}{\numberline {6.2}Further Work}{59}{section.6.2}
+\contentsline {chapter}{\numberline {A}Code Listing}{65}{appendix.A}
+\contentsline {chapter}{\numberline {B}Plots of Time Step Execution Speed for Duration of Simulations}{66}{appendix.B}

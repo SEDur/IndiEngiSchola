@@ -35,7 +35,7 @@
 \BOOKMARK [2][-]{subsection.4.2.1}{FDTD Simulation Results}{section.4.2}% 35
 \BOOKMARK [2][-]{subsection.4.2.2}{SFDTD Simulation Results}{section.4.2}% 36
 \BOOKMARK [2][-]{subsection.4.2.3}{PSTD Simulation Results}{section.4.2}% 37
-\BOOKMARK [1][-]{section.4.3}{Validating The SFDTD Method}{chapter.4}% 38
+\BOOKMARK [2][-]{subsection.4.2.4}{Compared Spectral Analysis for Simulation Results With Tone Burst Stimulus}{section.4.2}% 38
 \BOOKMARK [0][-]{chapter.5}{Execution Time and Analysis}{}% 39
 \BOOKMARK [1][-]{section.5.1}{Results}{chapter.5}% 40
 \BOOKMARK [1][-]{section.5.2}{Analysis}{chapter.5}% 41
@@ -44,3 +44,4 @@
 \BOOKMARK [1][-]{section.6.1}{Conclusion}{chapter.6}% 44
 \BOOKMARK [1][-]{section.6.2}{Further Work}{chapter.6}% 45
 \BOOKMARK [0][-]{appendix.A}{Code Listing}{}% 46
+\BOOKMARK [0][-]{appendix.B}{Plots of Time Step Execution Speed for Duration of Simulations}{}% 47
