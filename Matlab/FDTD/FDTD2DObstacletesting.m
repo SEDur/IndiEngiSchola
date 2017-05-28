@@ -1,11 +1,12 @@
-% twoD.m
+% 2D FDTD Simulation including a forced obstacle in the lower-left hadn
+% side of the domain
 % S Durbridge 
 % 2016
 
 %% Initz Matlab
 % clear all;
-% % close all;
-% 
+% %close all;
+
 % figure(1)
 % set(1, 'windowstyle','docked','color', 'w');
 
