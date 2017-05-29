@@ -1,10 +1,15 @@
-% twoD.m
-% S Durbridge 
-% 2016
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SFDTD2Dtesting.m
+% Created by S Durbridge as part of work on a masters dissertation
+% Copywrite S Durbridge 2017
+%
+% A script that was written to test the SFDTD method in 2D.
+%
+% Any copies of this function distributed by the autor are done so
+% without any form of warranty, and should not be reproduced without
+% permission
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Initz Matlab
-clear all;
-% close all;
 figure(3)
 set(3, 'windowstyle','docked','color', 'w');
 
@@ -162,12 +167,6 @@ for n = 1:T/dt
     reciever(n) = p(recieverleftloc(1),recieverleftloc(2));
     srcnorm(n) = p(sourcelocations(1,1),sourcelocations(1,2));
     exectime(n) = toc();
-
-    %     p(s2loc(1),s2loc(2)) = p(s2loc(1),s2loc(2)) + -source2(n);
-%     power(n) = 20*log10(abs(max(p)));
-%     leftear(n) = abs(p(recieverleftloc(1),recieverleftloc(2)));
-%     rightear(n) = abs(p(recieverrightloc(1),recieverrightloc(2)));
-%       reciever(n) = p(recieverleftloc(1),recieverleftloc(2));
 
 %PLOTTING SECTION
 %         figure(1);

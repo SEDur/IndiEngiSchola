@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% SFDTD3Dtesting.m
+%% SFDTD3Dtestingeec.m
 % Created by S Durbridge as part of work on a masters dissertation
 % Copywrite S Durbridge 2017
 %
@@ -50,16 +50,6 @@ gy = (c / (6*fmax));
 gz = (c / (6*fmax));
 dt = ((1/c)*gx)/2;
 
-%Dims
-%Dim Size (m)
-lx = 5*meters;
-ly = 4*meters;
-lz = 3*meters;
-
-xcells = ceil(lx/gx);
-ycells = ceil(ly/gy);
-zcells = ceil(lz/gz);
-
 %Boundary Absorption Coefs (0 to 1)
 alphaL = 0.45;
 alphaR = 0.45;
@@ -70,15 +60,13 @@ alphaG = 0.45;
 
 %number of sources
 snum = 1;
-%source locations
-sourcelocations = [ceil(1/gy) ceil(1/gx) ceil(1/gz);...
-                    ceil(xcells/2) ceil(ycells/2) ceil(zcells/2)];
+
 %Time of sim
 T = 1.0 ;
 % generate the source(s) & determine number of time steps needed
 
 %% Gauss Source
-tnum = ceil(T/dt);
+% tnum = ceil(T/dt);
 % fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
 % n0 = 30;        % Initial delay (samples)
 % sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
@@ -90,23 +78,38 @@ tnum = ceil(T/dt);
 %     end
 % end
 %% Toneburst Source
-tone = dsp.SineWave('Amplitude',((2*10^-5)*10^(100/20)),...
-    'Frequency', 1000,...
-    'SampleRate', 1/dt,...
-    'SamplesPerFrame',0.01/dt);
-w1 = window(@gausswin,0.01/dt,2.5); 
-toneBurst = tone() .* w1;
-source1 = zeros(T/dt,1);
-source1(10:129) = toneBurst;
-source1(410:529) = toneBurst;
-source1(810:929) = toneBurst;
+% tone = dsp.SineWave('Amplitude',((2*10^-5)*10^(100/20)),...
+%     'Frequency', 1000,...
+%     'SampleRate', 1/dt,...
+%     'SamplesPerFrame',0.01/dt);
+% w1 = window(@gausswin,0.01/dt,2.5); 
+% toneBurst = tone() .* w1;
+% source1 = zeros(T/dt,1);
+% source1(10:69) = toneBurst;
+% source1(110:169) = toneBurst;
+% source1(410:469) = toneBurst;
 
 %% MLS Source
-% source1 = GenerateMLSSequence(3,11,0).*((2*10^-5)*10^(100/20));
-% T = length(source1)*dt;
-% w1 = window(@gausswin,length(source1),2.5); 
-% source1 = source1 .* w1;
+source1 = GenerateMLSSequence(5,9,0).*((2*10^-5)*10^(100/20));
+T = length(source1)*dt;
+w1 = window(@gausswin,length(source1),2.5); 
+source1 = source1 .* w1;
 
+widths = [5 10 20 40 60];
+for cntr = 1 : 5
+%define grid width
+lx = widths(cntr);
+ly = lx;
+lz = lx;
+
+%number of cells
+xcells = ceil(lx/gx);
+ycells = ceil(ly/gy);
+zcells = ceil(lz/gz);
+
+%source locations
+sourcelocations = [ceil(1/gy) ceil(1/gx) ceil(1/gz);...
+                    ceil(xcells/2) ceil(ycells/2) ceil(zcells/2)];
 %% Pre cast pressure and velocity matrices
 % initialize the velocity and pressure matrices (matrices are set up in a
 % y by x fashion to properly display the 2D space (y = rows, x = columns))
@@ -141,18 +144,14 @@ linex = linspace(0, lx - gx, xcells-1);
 liney = linspace(0, ly - gy, ycells-1);
 linez = linspace(0, lz - gz, zcells-1);
 
-%Initialize recording vectors
-leftear = zeros(1,tnum);
-rightear = zeros(1,tnum);
-meanpstore = zeros(1,tnum);
-
 %Set zsliceloc
 [xvec, yvec, zvec] = meshgrid(0 : gx : gx * (xcells-2),...
     0 : gy : gy * (ycells-2), 0 : gz : gz * (zcells-2));
 
 %% Run for time
 for n = 1:T/dt    
-    disp(n*dt)
+    disp(T-(n*dt))
+    tic();
     [idx] = SPARSEfun3DC(p, 10, p0);
     [p, ux, uy, uz] = SFDTD3DfunC(p, pCx, pCy, pCz, ux, uy, uz, uCx, uCy, uCz, Rx, Ry, Rz, ZL, ZR, ZT, ZB, ZF, ZB, idx);
     reciever(n,1) = p(ceil(xcells/4), ceil(ycells/4),ceil(zcells/2));
@@ -163,6 +162,17 @@ for n = 1:T/dt
     srcnorm(n) = p(sourcelocations(1,1),sourcelocations(1,2),sourcelocations(1,3));
     % Input source
     p(sourcelocations(1),sourcelocations(2),sourcelocations(3)) = p(sourcelocations(1),sourcelocations(2),sourcelocations(3)) - source1(n);
+    exectime(n) = toc();
+end
+
+%% Some really postprocessing
+norec = reciever ./ max(abs(reciever));
+% recanal = AnalyseMLSSequence(reciever',0,5,9,0,0);
+[lpsd, lf] = pwelch(norec,hann(1000),[],1000,1/dt);
+srcnrm = srcnorm ./ max(abs(srcnorm));
+[spsd, sf] = pwelch(srcnrm,hann(1000),[],1000,1/dt);
+filename = strcat('xwidth',num2str(lx),'.mat');
+save(filename,'exectime', 'norec', 'lpsd', 'lf', 'srcnrm', 'spsd', 'sf');
 end
 %% Postprocessing
 
