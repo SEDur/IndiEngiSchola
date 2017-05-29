@@ -18,7 +18,7 @@ alphaZp = 0.45;
 
 %define FS
 % fs = 44100.0;
-fs = 10000;
+fs = 4000;
 % fs = 1000;
 
 %define density
@@ -83,9 +83,9 @@ tone = dsp.SineWave('Amplitude',((2*10^-5)*10^(100/20)),...
 w1 = window(@gausswin,0.01/dt,2.5); 
 toneBurst = tone() .* w1;
 source1 = zeros(T/dt,1);
-source1(10:109) = toneBurst;
-source1(510:609) = toneBurst;
-source1(1010:1109) = toneBurst;
+source1(10:49) = toneBurst;
+source1(110:149) = toneBurst;
+source1(310:349) = toneBurst;
 
 
 %calc grid size
@@ -225,7 +225,7 @@ for i = 1 : T/dt
     reciever(i,5) = pd(ceil(Nx/2), ceil(Ny/2),ceil(Nz/2));
     roundtime(i) = toc();
     T - (i*dt)
-    PSTD3Dplotdomain(pd, xcells, ycells, zcells, i, dt, p0, roundtime(i), PMLdepth);
+    PSTD3Dplotdomain(pd, i, dt, p0, roundtime(i), PMLdepth);
 
 end
 %% Some really minor postprocessing
@@ -303,53 +303,6 @@ ylabel('Amplitude (dB)');
 % plot(0:dt:((length(recanal)-1)*dt),recanal);
 % title('Impulse Response at Reciever');
 
-%% Display the results
-% subplot(3,1,1);
-% plot(0:dt:((length(reciever)-1)*dt),source1(1:length(reciever)))
-% hold on;
-% plot(0:dt:((length(reciever)-1)*dt),reciever)
-% hold off;
-% axis('tight')
-% legend('source','rec top left','rec top right','rec bottom left',...
-%     'rec bottom right','rec centre');
-% title('Raw Input And Output');
-% xlim([0 0.2]);
-% xlabel('Time (s)');
-% ylabel('Amplitude (Pa)');
-% subplot(3,1,2);
-% plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
-% % stem(0:dt:((length(norec)-1)*dt),norec)
-% hold on;
-% plot(0:dt:((length(srcnrm)-1)*dt),srcnrm,'-')
-% hold off;
-% axis('tight')
-% legend('rec top left','rec top right','rec bottom left',...
-%     'rec bottom right','rec centre','source');
-% title('Normalised Input And Output');
-% xlim([0 0.2]);
-% xlabel('Time (s)');
-% ylabel('Amplitude (Pa)');
-% subplot(3,1,3);
-% plot(lf, db(lpsd),'--','Linewidth',2.0);
-% hold on;
-% plot(sf, db(spsd));
-% hold off;
-% legend('rec top left','rec top right','rec bottom left',...
-%     'rec bottom right','rec centre','source');
-% grid('on');
-% title('Power Spectral Density of Input and Output');
-% xlabel('Frequency (Hz)');
-% ylabel('Amplitude (dB)');
-% % subplot(4,1,4);
-% % plot(0:dt:((length(reciever)-1)*dt),roundtime)
-% % axis('tight')
-% % ttlstr = sprintf('Computation Time Per Cycle, Total Time: %i',sum(roundtime));
-% % title(ttlstr);
-% % xlabel('Time (s)');
-% % ylabel('');
-% % subplot(5,1,5);
-% % plot(0:dt:((length(recanal)-1)*dt),recanal);
-% % title('Impulse Response at Reciever');
 
 %%  
 % plot(fdtdvaldata.lf, db(mean(fdtdvaldata.lpsd')),':bs');
