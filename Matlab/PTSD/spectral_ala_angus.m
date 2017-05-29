@@ -1,3 +1,17 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% spectral_ala_angus.m
+% Created by S Durbridge as part of work on a masters dissertation
+% Copywrite S Durbridge 2017
+%
+% A script for 1D PSTD that was adapted to matlab from the C++ code in the
+% appendecies of the work by Angus and Caunce on PSTD applied to the GPU.
+%
+% Any copies of this function distributed by the autor are done so
+% without any form of warranty, and should not be reproduced without
+% permission
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 clc;
 clear all;
 close all;
@@ -5,41 +19,45 @@ figure(1);
 set(1, 'WindowStyle', 'Docked')
 %define FS
 fs = 2000.0;
+
 %define density
 rho = 1.21;
+
 %define speed of sound
 c = 343.0;
+
 %define total time
 T = 2.0;
+
 %define grid width
 gridWidth = 343;
-%dx
 dt = 1 / fs;
 dx = c * sqrt(2) * dt;
-% dx = 1/(fs/c);
-% dt = 0.8*(dx/(c*sqrt(2)));
-%define timestep
-% dt = 1/(2*fs);
-%dfine grid spacing
-% dx = 2 * dt * c;
-% dx = c * sqrt(2) * dt;
+
 %calculate pconst
 pconst = rho * c^2 * (dt/dx);
+
 %calculate uconst
 uconst = (1/rho)*(dt/dx);
+
 %define pml depth 
 PMLdepth = 30;
+
 %calc time steps
 timestep = abs(T/dt);
+
 %calc grid size
 N = ceil(abs(gridWidth/dx)+2*PMLdepth);
+
 %calculate differentiation matrix
 tempdiffmatrix = zeros(1,N);
 temp = zeros(1, N);
+
 %Calc source
 src = zeros(1,ceil(T/(dt/2))+1);
 src(10:1010) = (10^-12*10^(50/20)) * sin(2*(pi/1010)*(1:1001));
 alpha = 0;
+
 %calculate geometry matricies
 phat = zeros(1,N);
 uhat = zeros(1,N);

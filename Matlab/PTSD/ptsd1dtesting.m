@@ -1,4 +1,14 @@
-%% PTSD1D testing script
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PTSD1Dtesting.m
+% Created by S Durbridge as part of work on a masters dissertation
+% Copywrite S Durbridge 2017
+%
+% A script that will execute an acoustic PSTD simulation in 1D
+%
+% Any copies of this function distributed by the autor are done so
+% without any form of warranty, and should not be reproduced without
+% permission
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Initz
 clf;

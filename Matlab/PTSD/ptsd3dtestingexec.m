@@ -1,4 +1,15 @@
-%% PTSD3D testing script
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PTSD3Dtestingexec.m
+% Created by S Durbridge as part of work on a masters dissertation
+% Copywrite S Durbridge 2017
+%
+% A script that was written to test the execution speed of the PSTD method
+% for 3 different domain sizes.
+%
+% Any copies of this function distributed by the autor are done so
+% without any form of warranty, and should not be reproduced without
+% permission
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Initz
 clc;
@@ -17,89 +28,61 @@ alphaZn = 0.45;
 alphaZp = 0.45;
 
 %define FS
-% fs = 44100.0;
-% fs = 10000;
 fs = 1000;
 
 %define density
 rho = 1.21;
 %define speed of sound
-% c = 343;
 c = 3430; %<< works for 2k
-% c = 34300;
 %define total time
 T = 1.0;
 
 %Target stability number 
 St = 2/(pi*sqrt(3));
 dx = (c / fs);
+
 %define timestep
-% dt = (1/fs);
 dt = ((1/c)*dx)/2;
-%dfine grid spacing
-% dx = c * dt / St;
+
 %calculate pconst
-% pconst = pi * 100 * (rho * c^2 * dt/dx);
-% pconst = rho * c^2 * dt;
-% pconst = rho * c^2 * (dt/dx);
-% pconst = dt/(dx*rho);
 pconst = rho * c^2 * (dt/dx);
+
 %calculate uconst
 uconst = (1/rho)*(dt/dx);
-% pconst = c^2*rho*dt/dx;
-%calculate uconst
-% uconst = dt/(dx*rho);
-% uconst = (1/rho)*(dt/dx);
-% uconst = dt/(dx*rho);
-% uconst = c^2*rho*dt/dx;
-%define pml depth 
-% PMLdepth = ceil(abs(gridWidth/dx)/(2*(fs/c)));
-% PMLdepth = 30;
+
+%set PML depth
 PMLdepth = 30;
 
 %calc time steps
 timestep = abs(T/dt);
 
 %Calc source
-% w1 = window(@gausswin,0.4/(dt),2.5); 
-precursor = -(sin(2*pi*0.5*(0:0.001:2))).*0.01;
-chirp = dsp.Chirp(...
-    'SweepDirection', 'Unidirectional', ...
-    'TargetFrequency', ceil((fs/4)/2), ...
-    'InitialFrequency', 10,...
-    'TargetTime', 0.4, ...
-    'SweepTime', 0.4, ...
-    'SamplesPerFrame', 0.4/dt, ...
-    'SampleRate', 1/dt);
-% % plot(chirp());
-% % source1 = fir(chirp());
-% source1 = chirp();
-% source1(1:76) = 0;
 source1 = GenerateMLSSequence(2,9,0).*((2*10^-5)*10^(100/20));
 T = length(source1)*dt;
-% source1 = source1(1:(T/dt));
-w1 = window(@gausswin,length(source1),2.5); 
+
+%set widths
 widths = [5 10 20 40 60];
+
 for cntr = 1 : 5
 %define grid width
 gridWidthX = widths(cntr);
 gridWidthY = gridWidthX;
 gridWidthZ = gridWidthX;
+
 %calc grid size
 Nx = ceil(abs(gridWidthX/dx)+2*PMLdepth);
 Ny = ceil(abs(gridWidthY/dx)+2*PMLdepth);
 Nz = ceil(abs(gridWidthZ/dx)+2*PMLdepth);
-% temp = zeros(N, N);
 
-% source1 = source1 .* w1;
-% source1 = [precursor'; source1];
-% source1 = [source1; zeros((T/dt) - length(source1),1)].*((2*10^-5)*10^(100/20));
-
+%set source location
 srcloc = [PMLdepth+ceil(1/dx) PMLdepth+ceil(1/dx) PMLdepth+ceil(1/dx)];
+
+%preallocate differentiation matrices
 tempdiffmatrixX = zeros(1,Nx);
 tempdiffmatrixY = zeros(1,Ny);
 tempdiffmatrixZ = zeros(1,Nz);
-% spin = -180 :0.005 : 180;     
+
+%preallocate domain matrices
 pd =  zeros(Nx,Ny,Nz);
 udx = zeros(Nx,Ny,Nz);
 udy = zeros(Nx,Ny,Nz);
@@ -140,7 +123,6 @@ udz = zeros(Nx,Ny,Nz);
         end
     end
 
-% [mgx mgy mgz] = meshgrid(tempdiffmatrixY,tempdiffmatrixX,tempdiffmatrixZ);
 mgx = reshape(tempdiffmatrixX,[Nx,1,1]);
 mgy = reshape(tempdiffmatrixY,[1,Ny,1]);
 mgz = reshape(tempdiffmatrixZ,[1,1,Nz]);
@@ -149,9 +131,7 @@ diffmatrixY =  1i.*mgy ;
 diffmatrixZ =  1i.*mgz ;
 
 PMLconst = ones(Nx,Ny,Nz);
-% PMLconst = PMLconst .* (pi*max([Ny Nx Nz]));
 PMLconst = PMLconst * (pi*sqrt(Nx^2 + Ny^2 + Nz^2));
-
 PMLdiff = zeros(Nx,Ny,Nz);
 PMLdiff2 = zeros(Nx,Ny,Nz);
 PMLdiff4 = zeros(Nx,Ny,Nz);
@@ -166,9 +146,6 @@ PMLdiff(Nx-PMLdepth+1:end,:,:) = fliplr(PMLdiff(PMLdepth:-1:1,:,:));
         PMLdiff2(:,i,:) = (1.0/3.0).*(((PMLdepth-PMLdiff2(:,i,:))./PMLdepth).^3);
     end
 PMLdiff2(:,end:-1:Ny-PMLdepth+1,:) = fliplr(PMLdiff2(:,PMLdepth:-1:1,:));
-% PMLdiff2 = permute(PMLdiff, [2 1 3]);
-% PMLdiff3 = sqrt(PMLdiff.^2 + PMLdiff2.^2);
-% PMLdiff4 = permute(PMLdiff, [3 2 1]);
     for i = 1 : PMLdepth
         PMLdiff4(:,:,i) = i;
         PMLdiff4(:,:,i) = (1.0/3.0).*(((PMLdepth-PMLdiff4(:,:,i))./PMLdepth).^3);
@@ -185,6 +162,7 @@ PMLalphau = uconst*(1./(1+PMLdiff5));
 PMLalphap = pconst*(1./(1+PMLdiff5));
 PMLdiff5 = ((1-PMLdiff5)./(1+PMLdiff5));
 
+%set up values for partially absorbing boundaries
 S = c*(dt/dx);
 Rxn = 1 - alphaXn;
 Rxp = 1 - alphaXp;

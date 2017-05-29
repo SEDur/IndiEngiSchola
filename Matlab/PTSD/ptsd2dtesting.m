@@ -1,4 +1,14 @@
-%% PTSD2D testing script
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PTSD2Dtesting.m
+% Created by S Durbridge as part of work on a masters dissertation
+% Copywrite S Durbridge 2017
+%
+% A script that will execute the PSTD method for a 2D simulation up to 10kHz
+%
+% Any copies of this function distributed by the autor are done so
+% without any form of warranty, and should not be reproduced without
+% permission
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Initz
 clc;

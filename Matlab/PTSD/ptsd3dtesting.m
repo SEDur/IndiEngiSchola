@@ -1,4 +1,15 @@
-%% PTSD3D testing script
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PTSD3Dtesting.m
+% Created by S Durbridge as part of work on a masters dissertation
+% Copywrite S Durbridge 2017
+%
+% A script that will execute the PSTD method in 3D up to 10kHz for PSTD
+% validation.
+%
+% Any copies of this function distributed by the autor are done so
+% without any form of warranty, and should not be reproduced without
+% permission
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Initz
 clc;
@@ -17,65 +28,38 @@ alphaZn = 0.45;
 alphaZp = 0.45;
 
 %define FS
-% fs = 44100.0;
-fs = 4000;
-% fs = 1000;
+fs = 10000;
 
 %define density
 rho = 1.21;
+
 %define speed of sound
 c = 343;
-% c = 3430; %<< works for 2k
-% c = 34300;
+
 %define total time
 T = 1.0;
+
 %define grid width
 gridWidthX = 5.0;
 gridWidthY = 4.0;
 gridWidthZ = 3.0;
+
 %Target stability number 
 St = 2/(pi*sqrt(3));
 dt = (1/fs);
 dx = c * dt / St;
-% dx = (c / fs);
-%define timestep
-% dt = (1/fs);
-% dt = ((1/c)*dx)/2;
-%dfine grid spacing
-% dx = c * dt / St;
+
 %calculate pconst
 pconst = pi * 100 * (rho * c^2 * dt/dx);
-% pconst = rho * c^2 * dt;
-% pconst = rho * c^2 * (dt/dx);
-% pconst = dt/(dx*rho);
-% pconst = rho * c^2 * (dt/dx);
-%calculate uconst
-% uconst = (1/rho)*(dt/dx);
-% pconst = c^2*rho*dt/dx;
+
 %calculate uconst
 uconst = dt/(dx*rho);
-% uconst = (1/rho)*(dt/dx);
-% uconst = dt/(dx*rho);
-% uconst = c^2*rho*dt/dx;
-%define pml depth 
-% PMLdepth = ceil(abs(gridWidth/dx)/(2*(fs/c)));
-% PMLdepth = 30;
 PMLdepth = 30;
 
 %calc time steps
 timestep = abs(T/dt);
 
 %Calc source
-% w1 = window(@gausswin,0.4/(dt),2.5); 
-% precursor = -(sin(2*pi*0.5*(0:0.001:2))).*0.01;
-% chirp = dsp.Chirp(...
-%     'SweepDirection', 'Unidirectional', ...
-%     'TargetFrequency', ceil((fs/4)/2), ...
-%     'InitialFrequency', 10,...
-%     'TargetTime', 0.4, ...
-%     'SweepTime', 0.4, ...
-%     'SamplesPerFrame', 0.4/dt, ...
-%     'SampleRate', 1/dt);
 tone = dsp.SineWave('Amplitude',((2*10^-5)*10^(100/20)),...
     'Frequency', 1000,...
     'SampleRate', 1/dt,...
@@ -83,31 +67,28 @@ tone = dsp.SineWave('Amplitude',((2*10^-5)*10^(100/20)),...
 w1 = window(@gausswin,0.01/dt,2.5); 
 toneBurst = tone() .* w1;
 source1 = zeros(T/dt,1);
-source1(10:49) = toneBurst;
-source1(110:149) = toneBurst;
-source1(310:349) = toneBurst;
-
+source1(10:109) = toneBurst;
+source1(410:509) = toneBurst;
+source1(1010:1109) = toneBurst;
 
 %calc grid size
 Nx = ceil(abs(gridWidthX/dx)+2*PMLdepth);
 Ny = ceil(abs(gridWidthY/dx)+2*PMLdepth);
 Nz = ceil(abs(gridWidthZ/dx)+2*PMLdepth);
-% temp = zeros(N, N);
 
-% source1 = source1 .* w1;
-% source1 = [precursor'; source1];
-% source1 = [source1; zeros((T/dt) - length(source1),1)].*((2*10^-5)*10^(100/20));
-
+% set source location
 srcloc = [PMLdepth+ceil(1/dx) PMLdepth+ceil(1/dx) PMLdepth+ceil(1/dx)];
+
+%predeclair differentiation and domain matrices
 tempdiffmatrixX = zeros(1,Nx);
 tempdiffmatrixY = zeros(1,Ny);
-tempdiffmatrixZ = zeros(1,Nz);
-% spin = -180 :0.005 : 180;     
+tempdiffmatrixZ = zeros(1,Nz);   
 pd =  zeros(Nx,Ny,Nz);
 udx = zeros(Nx,Ny,Nz);
 udy = zeros(Nx,Ny,Nz);
 udz = zeros(Nx,Ny,Nz);
 
+% Calculate differentiation matrices
     for i2 = 1 : Nx-1
         if i2 <  ceil(Nx/2)
             tempdiffmatrixX(i2) =  (i2-1);
@@ -143,7 +124,7 @@ udz = zeros(Nx,Ny,Nz);
         end
     end
 
-% [mgx mgy mgz] = meshgrid(tempdiffmatrixY,tempdiffmatrixX,tempdiffmatrixZ);
+% Shift around matrices
 mgx = reshape(tempdiffmatrixX,[Nx,1,1]);
 mgy = reshape(tempdiffmatrixY,[1,Ny,1]);
 mgz = reshape(tempdiffmatrixZ,[1,1,Nz]);
@@ -151,10 +132,9 @@ diffmatrixX =  1i.*mgx ;
 diffmatrixY =  1i.*mgy ;
 diffmatrixZ =  1i.*mgz ;
 
+% generate PML
 PMLconst = ones(Nx,Ny,Nz);
-% PMLconst = PMLconst .* (pi*max([Ny Nx Nz]));
 PMLconst = PMLconst * (pi*sqrt(Nx^2 + Ny^2 + Nz^2));
-
 PMLdiff = zeros(Nx,Ny,Nz);
 PMLdiff2 = zeros(Nx,Ny,Nz);
 PMLdiff4 = zeros(Nx,Ny,Nz);
@@ -169,16 +149,14 @@ PMLdiff(Nx-PMLdepth+1:end,:,:) = fliplr(PMLdiff(PMLdepth:-1:1,:,:));
         PMLdiff2(:,i,:) = (1.0/3.0).*(((PMLdepth-PMLdiff2(:,i,:))./PMLdepth).^3);
     end
 PMLdiff2(:,end:-1:Ny-PMLdepth+1,:) = fliplr(PMLdiff2(:,PMLdepth:-1:1,:));
-% PMLdiff2 = permute(PMLdiff, [2 1 3]);
-% PMLdiff3 = sqrt(PMLdiff.^2 + PMLdiff2.^2);
-% PMLdiff4 = permute(PMLdiff, [3 2 1]);
     for i = 1 : PMLdepth
         PMLdiff4(:,:,i) = i;
         PMLdiff4(:,:,i) = (1.0/3.0).*(((PMLdepth-PMLdiff4(:,:,i))./PMLdepth).^3);
     end
 PMLdiff4(:,:,Nz-PMLdepth+1:end) = fliplr(PMLdiff4(:,:,PMLdepth:-1:1));
-
+% Sum PML in each direction
 PMLdiff5 = ((PMLdiff) + (PMLdiff2) + (PMLdiff4))./3;
+% Clear unnecesarry PML matrices as these will take up lots of memory
 clear('PMLdiff');
 clear('PMLdiff2');
 clear('PMLdiff3');
@@ -188,6 +166,7 @@ PMLalphau = uconst*(1./(1+PMLdiff5));
 PMLalphap = pconst*(1./(1+PMLdiff5));
 PMLdiff5 = ((1-PMLdiff5)./(1+PMLdiff5));
 
+% Set partialy abosrbing boundaries
 S = c*(dt/dx);
 Rxn = 1 - alphaXn;
 Rxp = 1 - alphaXp;
@@ -205,8 +184,7 @@ xcells = 0 : dx : (Nx-1-PMLdepth)*dx;
 ycells = 0 : dx : (Ny-1-PMLdepth)*dx;
 zcells = 0 : dx : (Nz-1-PMLdepth)*dx;
 
-%% solve for some time
-
+%% solve for time
 for i = 1 : T/dt
     tic();
     
@@ -216,7 +194,6 @@ for i = 1 : T/dt
  [pd, udx, udy, udz] = PTSD3Dboundary(pd, udx, udy, udz, PMLdepth,...
         xiXn, xiXp, xiYn, xiYp, xiZn, xiZp);
     pd = PTSD3Dsrc(pd, source1(i), srcloc);
-%     reciever(i) = real(pd(ceil(Ny/2), ceil(Nx/2), ceil(Nz/2)));
     srcnorm(i) = pd(srcloc(1,1),srcloc(1,2),srcloc(1,3));
     reciever(i,1) = pd(ceil(Nx/4), ceil(Ny/4),ceil(Nz/2));
     reciever(i,2) = pd(ceil(Nx/2)+ceil(Nx/4), ceil(Ny/4),ceil(Nz/2));    
@@ -229,32 +206,20 @@ for i = 1 : T/dt
 
 end
 %% Some really minor postprocessing
-% Hd = postprocessingDCfilter;
-
 for i = 1 : size(reciever,2)
     lag(i) = getlag(reciever(:,i)',srcnorm);
     recieverCirc(:,i) = circshift(reciever(:,i)',lag(i));
 end
-
 norec = recieverCirc ./ max(abs(recieverCirc));
 % recanal = AnalyseMLSSequence(reciever',0,2,11,0,0);
-% norec = Hd(norec);
-% [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
 [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
-% clear('Hd');
-% Hd = postprocessingDCfilter;
 srcnrm = srcnorm ./ max(abs(srcnorm));
-
 [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
-
-
 
 %% Display the results
 subplot(3,1,1);
 % plot(0:dt:((length(norec)-1)*dt),recieverCirc,'--','linewidth',2.0)
 plot(0:dt:((length(reciever)-1)*dt),reciever,'--','linewidth',2.0)
-
-% stem(0:dt:((length(norec)-1)*dt),norec)
 hold on;
 plot(0:dt:((length(source1)-1)*dt),source1','-')
 hold off;
@@ -267,7 +232,6 @@ xlabel('Time (s)');
 ylabel('Amplitude (Pa)');
 subplot(3,1,2);
 plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
-% stem(0:dt:((length(norec)-1)*dt),norec)
 hold on;
 plot(0:dt:((length(srcnrm)-1)*dt),srcnrm,'-')
 hold off;
@@ -287,70 +251,5 @@ legend('rec top left','rec top right','rec bottom left',...
     'rec bottom right','rec centre','source');
 grid('on');
 title('Power Spectral Density of Input and Output');
-xlabel('Frequency (Hz)');
-ylabel('Amplitude (dB)');
-
-% xlim([0 2000]);
-% ylim([-300 -90]);
-% subplot(4,1,4);
-% plot(0:dt:((length(reciever)-1)*dt),roundtime)
-% axis('tight')
-% ttlstr = sprintf('Computation Time Per Cycle, Total Time: %i',sum(roundtime));
-% title(ttlstr);
-% xlabel('Time (s)');
-% ylabel('');
-% subplot(5,1,5);
-% plot(0:dt:((length(recanal)-1)*dt),recanal);
-% title('Impulse Response at Reciever');
-
-
-%%  
-% plot(fdtdvaldata.lf, db(mean(fdtdvaldata.lpsd')),':bs');
-plot(fdtdvaldata.lf, db(mean(fdtdvaldata.lpsd')),'Linewidth',2.0);
-hold on;
-plot(fdtdvaldata.sf, db(fdtdvaldata.spsd),'--');
-% plot(sfdtdvaldata.lf, db(mean(sfdtdvaldata.lpsd')),'-.r*');
-plot(sfdtdvaldata.lf, db(mean(sfdtdvaldata.lpsd')),'Linewidth',2.0);
-
-plot(sfdtdvaldata.sf, db(sfdtdvaldata.spsd),'--');
-% plot(pstdvaldata.lf, db(mean(pstdvaldata.lpsd')),'--c');
-plot(pstdvaldata.lf, db(mean(pstdvaldata.lpsd')),'Linewidth',2.0);
-
-plot(pstdvaldata.sf, db(pstdvaldata.spsd),'--');
-
-hold off;
-% legend('FDTD Receiver1','FDTD Receiver2','FDTD Receiver3','FDTD Receiver4','FDTD Receiver5','FDTD Source',...
-%     'SFDTD Reciever1','SFDTD Reciever2','SFDTD Reciever3','SFDTD Reciever4','SFDTD Reciever5','SFDTD source',...
-%     'PSTD Reciever1','PSTD Reciever2','PSTD Reciever3','PSTD Reciever4','PSTD Reciever5','PSTD source');
-legend('FDTD Recievers', 'FDTD Source', 'SFDTD Recievers', 'SFDTD Source','PSTD Recievers', 'PSTD Source');
-grid('on');
-xlim([400 1600]);
-title('Power Spectral Density of Simulation Input and Mean Output for FDTD, SFDTD & PSTD with 1kHz Windowed Tone Burst Stimulus');
-xlabel('Frequency (Hz)');
-ylabel('Amplitude (dB)');
-
-%%
-
-% plot(fdtdvaldata.lf, db(mean(fdtdvaldata.lpsd')),':bs');
-plot(fdtdvaldata.lf, db(mean(fdtdvaldata.lpsd')...
-    -mean(sfdtdvaldata.lpsd')),'Linewidth',2.0);
-hold on;
-% plot(sfdtdvaldata.lf, db(mean(sfdtdvaldata.lpsd')),'-.r*');
-% plot(sfdtdvaldata.lf, db(mean(sfdtdvaldata.lpsd')),'Linewidth',2.0);
-plot(fdtdvaldata.lf, db(mean(fdtdvaldata.lpsd')...
-    -interp1(mean(pstdvaldata.lpsd'),(1000.*fdtdvaldata.lf)')),'Linewidth',2.0);
-% plot(pstdvaldata.lf, db(mean(pstdvaldata.lpsd')),'--c');
-% plot(pstdvaldata.lf, db(mean(pstdvaldata.lpsd')),'Linewidth',2.0);
-plot(sfdtdvaldata.lf, db(mean(sfdtdvaldata.lpsd')...
-    -interp1(mean(pstdvaldata.lpsd'),(sfdtdvaldata.lf)')),'Linewidth',2.0);
-
-hold off;
-% legend('FDTD Receiver1','FDTD Receiver2','FDTD Receiver3','FDTD Receiver4','FDTD Receiver5','FDTD Source',...
-%     'SFDTD Reciever1','SFDTD Reciever2','SFDTD Reciever3','SFDTD Reciever4','SFDTD Reciever5','SFDTD source',...
-%     'PSTD Reciever1','PSTD Reciever2','PSTD Reciever3','PSTD Reciever4','PSTD Reciever5','PSTD source');
-legend('FDTD & SFDTD Error', 'FDTD & PSTD Error', 'SFDTD & PSTD Error');
-grid('on');
-xlim([400 1600]);
-title('Error of Averaged Power Spectral Density of Simulation Input and Mean Output for FDTD, SFDTD & PSTD with 1kHz Windowed Tone Burst Stimulus');
 xlabel('Frequency (Hz)');
 ylabel('Amplitude (dB)');
