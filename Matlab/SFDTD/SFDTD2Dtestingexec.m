@@ -1,10 +1,18 @@
-% twoD.m
-% S Durbridge 
-% 2016
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SFDTD2Dtestingexec.m
+% Created by S Durbridge as part of work on a masters dissertation
+% Copywrite S Durbridge 2017
+%
+% A script that was written to test the execution time of the SFDTD method
+% for domains of five different sizes.
+%
+% Any copies of this function distributed by the autor are done so
+% without any form of warranty, and should not be reproduced without
+% permission
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Initz Matlab
-clear all;
-% close all;
+clf;
 figure(3)
 set(3, 'windowstyle','docked','color', 'w');
 
@@ -30,14 +38,15 @@ c     = 343 * meters / seconds; %Speed of sound m/s
 rho    = 1.21; %Density of air kg/m^3
 p0 = 2*10^-5;
 cstab = 2/(pi*sqrt(2));
-%%
 %%Hard Code Variables
+
 %Maximum calculation frequency
 fmax = 1000 * hertz;
 
-gx = (c / (6*fmax));
-gy = (c / (6*fmax));
-dt = ((1/c)*gx)/2;
+%calculate space and time step
+dx = (c / (6*fmax));
+dy = (c / (6*fmax));
+dt = ((1/c)*dx)/2;
 
 %Boundary Absorption Coefs (0 to 1)
 alphaL = 0.45;
@@ -45,15 +54,11 @@ alphaR = 0.45;
 alphaF = 0.45;
 alphaB = 0.45;
 
-
-
-%Source amplitude 
-A = 1;
-
-uCx = dt/(gx*rho);
-uCy = dt/(gy*rho);
-pCx = c^2*rho*dt/gx;
-pCy = c^2*rho*dt/gy;
+%Calculate coefficients for pressure and velocity
+uCx = dt/(dx*rho);
+uCy = dt/(dy*rho);
+pCx = c^2*rho*dt/dx;
+pCy = c^2*rho*dt/dy;
 
 pidxRow = [];
 pidxCol = [];
@@ -82,8 +87,8 @@ ZT = rho*c*(1 + sqrt(1 - alphaF))/(1 - sqrt(1 - alphaF));
 ZB = rho*c*(1 + sqrt(1 - alphaB))/(1 - sqrt(1 - alphaB));
 
 % calulcate the coefficients used for the boundary conditions
-Rx = rho*gx/dt;
-Ry = rho*gy/dt;
+Rx = rho*dx/dt;
+Ry = rho*dy/dt;
 
 source1 = GenerateMLSSequence(5,9,0).*((2*10^-5)*10^(100/20));
 w1 = window(@hamming,length(source1)); 
@@ -95,48 +100,19 @@ for cntr = 1 : 5
 %define grid width
 lx = widths(cntr);
 ly = lx;
+
 %Dims
-
-
-xcells = ceil(lx/gx);
-ycells = ceil(lx/gy);
+xcells = ceil(lx/dx);
+ycells = ceil(lx/dy);
 
 %number of sources
 snum = 1;
+
 %source locations
-% sourcelocations = [ceil((1/gy)) ceil(1/gx)];
 sourcelocations = [ceil((ycells/2)) ceil(xcells/2)];
 
 %recieves position
 recieverleftloc = [ceil(ycells/2) ceil(xcells/4)];
-
-% % %Time of sim
-% T = 0.2 ;
-% % 
-% % % generate the source(s) & determine number of time steps needed
-% tnum = ceil(T/dt);
-% fc = 0.05;     % Cutoff frequency (normalised 0.5=nyquist)
-% n0 = 30;        % Initial delay (samples)
-% sigma=sqrt(2*log(2))/(2*pi*(fc/dt));
-% n=0:tnum;
-% source1=exp(-dt^2*(n-n0).^2/(2*sigma^2)).*((2*10^-5)*10^(100/20));
-% source1= source1 ./ max(source1);
-
-% w1 = window(@hamming,0.1/(dt)); 
-% fir = dsp.FIRFilter;
-% fir.Numerator = w1';
-% chirp = dsp.Chirp(...
-%     'SweepDirection', 'Unidirectional', ...
-%     'TargetFrequency', 500, ...
-%     'InitialFrequency', 100,...
-%     'TargetTime', 0.1, ...
-%     'SweepTime', 0.1, ...
-%     'SamplesPerFrame', 0.1/dt, ...
-%     'SampleRate', 1/dt);
-% % plot(chirp());
-% source1 = w1.*chirp();
-% source1 = [zeros(10,1); source1];
-% source1 = [source1; zeros((T/dt) - length(source1),1)].*((2*10^-5)*10^(120/20));
 
 % initialize the velocity and pressure matrices (matrices are set up in a
 % y by x fashion to properly display the 2D space (y = rows, x = columns))
@@ -147,15 +123,14 @@ idx3 = uy;
 % set up the multiplication constants for the update equations
 
 % plot vectors
-linex = linspace(0, lx - gx, xcells-1);
-liney = linspace(0, ly - gy, ycells-1);
+linex = linspace(0, lx - dx, xcells-1);
+liney = linspace(0, ly - dy, ycells-1);
 
-[xvec, yvec] = meshgrid(0 : gx : gx * (xcells-2),...
-    0 : gy : gy * (ycells-2));
+[xvec, yvec] = meshgrid(0 : dx : dx * (xcells-2),...
+    0 : dy : dy * (ycells-2));
 
 % loop to update the velocities and pressures over the time steps, n
 n = 1;
-% while or((max(max(abs(p(:,:)))) > (p0 * 10^(40/10))),(n < 48000))
 for n = 1:T/dt    
 % n = n + 1;
     tic;
@@ -169,58 +144,13 @@ for n = 1:T/dt
     reciever(n) = p(recieverleftloc(1),recieverleftloc(2));
     srcnorm(n) = p(sourcelocations(1,1),sourcelocations(1,2));
     exectime(n) = toc();
-
-    %     p(s2loc(1),s2loc(2)) = p(s2loc(1),s2loc(2)) + -source2(n);
-%     power(n) = 20*log10(abs(max(p)));
-%     leftear(n) = abs(p(recieverleftloc(1),recieverleftloc(2)));
-%     rightear(n) = abs(p(recieverrightloc(1),recieverrightloc(2)));
-%       reciever(n) = p(recieverleftloc(1),recieverleftloc(2));
-
-%PLOTTING SECTION
-%         figure(1);
-%         surf(linex, liney, abs(p));
-% %         surf(linex, liney, idx);
-% % 
-% %         shading interp;
-%         title(sprintf('Time = %.6f s, Executes at %.6f s',n*dt,extime(n)),...
-%             'Color',[0 0 0],'FontSize', 14);
-%         xlabel('Width (meters)', 'Color', [0 0 0]);
-%         ylabel('Length (meters)', 'Color', [0 0 0]);
-%         view(2);
-%         shading('interp');
-%         axis('tight')
-%         drawnow;
-%         
 end
-% norec = reciever ./ max(abs(reciever));
-% srcnrm = srcnorm ./ max(abs(srcnorm));
-% lag = getlag(norec,srcnrm);
-% norec = circshift(norec, lag);
-% % recanal = AnalyseMLSSequence(reciever',0,2,11,0,0);
-% % norec = Hd(norec);
-% % [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
-% % [lpsd, lf] = pwelch(norec,hann(2000),[],200,1/dt);
-% [lpsd, lf] = pwelch(norec,hann(200),[],200,1/dt);
-% 
-% % clear('Hd');
-% % Hd = postprocessingDCfilter;
-% 
-% % srcnrm = Hd(srcnrm);
-% % [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
-% % [spsd, sf] = pwelch(srcnrm,hann(2000),[],200,1/dt);
-% [spsd, sf] = pwelch(srcnrm,hann(200),[],200,1/dt);
-%% Some really minor postprocessing
-% Hd = postprocessingDCfilter;
+
+%% Some really postprocessing
 norec = reciever ./ max(abs(reciever));
 recanal = AnalyseMLSSequence(reciever',0,5,9,0,0);
-% norec = Hd(norec);
-% [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
 [lpsd, lf] = pwelch(norec,hann(1000),[],1000,1/dt);
-% clear('Hd');
-% Hd = postprocessingDCfilter;
 srcnrm = srcnorm ./ max(abs(srcnorm));
-% srcnrm = Hd(srcnrm);
-% [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
 [spsd, sf] = pwelch(srcnrm,hann(1000),[],1000,1/dt);
 filename = strcat('xwidth',num2str(lx),'.mat');
 save(filename,'exectime', 'norec', 'recanal', 'lpsd', 'lf', 'srcnrm', 'spsd', 'sf');
