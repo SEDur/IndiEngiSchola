@@ -18,7 +18,7 @@ alphaZp = 0.45;
 
 %define FS
 % fs = 44100.0;
-fs = 10000;
+fs = 4000;
 % fs = 1000;
 
 %define density
@@ -35,8 +35,10 @@ gridWidthY = 4.0;
 gridWidthZ = 3.0;
 %Target stability number 
 St = 2/(pi*sqrt(3));
-dt = (1/fs);
-dx = c * dt / St;
+% dt = (1/fs);
+% dx = c * dt / St;
+dx = (c / (3*(fs/2)));
+dt = ((1/c)*dx)/2;
 % dx = (c / fs);
 %define timestep
 % dt = (1/fs);
@@ -83,9 +85,9 @@ tone = dsp.SineWave('Amplitude',((2*10^-5)*10^(100/20)),...
 w1 = window(@gausswin,0.01/dt,2.5); 
 toneBurst = tone() .* w1;
 source1 = zeros(T/dt,1);
-source1(10:109) = toneBurst;
-source1(510:609) = toneBurst;
-source1(1010:1109) = toneBurst;
+source1(10:129) = toneBurst;
+source1(310:429) = toneBurst;
+source1(610:729) = toneBurst;
 
 
 %calc grid size
