@@ -10,6 +10,7 @@
 % permission
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Initz Matlab
+addpath(genpath('../mls/mls/'));
 figure(3)
 set(3, 'windowstyle','docked','color', 'w');
 
@@ -161,19 +162,13 @@ for n = 1:T/dt
     [p, ux, uy] = SFDTD2Dfun(p, pCx, pCy, ux, uy, uCx, uCy, Rx, Ry, ZL,...
         ZR, ZT, ZB, idx);
     extime(n) = toc;
-    % set the pressure at the source location
-    % NOTE: source vectors for unused drivers will be zeros
     p(sourcelocations(1),sourcelocations(2)) = p(sourcelocations(1),sourcelocations(2)) - source1(n);
     reciever(n) = p(recieverleftloc(1),recieverleftloc(2));
     srcnorm(n) = p(sourcelocations(1,1),sourcelocations(1,2));
     exectime(n) = toc();
 
 %PLOTTING SECTION
-%         figure(1);
         surf(linex, liney, abs(p));
-%         surf(linex, liney, idx);
-% 
-%         shading interp;
         title(sprintf('Time = %.6f s, Executes at %.6f s',n*dt,extime(n)),...
             'Color',[0 0 0],'FontSize', 14);
         xlabel('Width (meters)', 'Color', [0 0 0]);

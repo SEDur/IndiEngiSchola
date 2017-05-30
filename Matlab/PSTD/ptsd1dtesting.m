@@ -123,6 +123,7 @@ for i = 1 : T/dt
      PMLdiff, PMLalphau, PMLalphap, PMLconst);
     [pd, ud] = PTSD1Dboundary(pd, ud, PMLdepth, xiL, xiR);
     pd = PTSD1Dsrc(pd, src(i), srcloc);
+    %PLOTTING SECTION
     plot(linex, real(pd));
     ylim([-10e-9 10e-9]);
     title(sprintf('Time = %.6f s',dt*i));

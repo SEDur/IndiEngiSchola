@@ -1,4 +1,4 @@
-function SFDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0)
+function SFDTD3Dplotdomain(p, n, dt, p0)
 
 %         figure(1);
 %         xslice = ceil((xcells-1)/2); 

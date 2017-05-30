@@ -17,7 +17,7 @@
 clc;
 clear all;
 % close all;
-
+addpath(genpath('../mls/mls/'));
 %% Make Variables
 g = gpuDevice(1);
 
@@ -129,16 +129,12 @@ for i = 1 : T/dt
      PMLdiff, PMLalphau, PMLalphap, PMLconst, N);
     pd = PTSD2Dsrc(pd, src(i), srcloc);
     reciever(i) = abs(gather(pd(ceil(N/2), ceil(N/2))));
+    %PLOTTING SECTION
     if mod(i, 100) < 1
     localpd = gather(pd);
     mesh(abs(localpd)); 
-%     zlim([-10^-10 10^-10]);
-%     set(gca,'zlim',[-10^-12 10^-12]);
-%     caxis([-10^-12 10^-12])
     shading interp;
     title(sprintf('Time = %.6f s',dt*i));
-%     view([spin(i) 13]);
-% view(2);
     drawnow;
     end
 end

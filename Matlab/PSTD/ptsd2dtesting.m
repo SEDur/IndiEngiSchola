@@ -14,7 +14,7 @@
 clc;
 clear all;
 % close all;
-
+addpath(genpath('../mls/mls/'));
 %% Make Variables
 
 
@@ -218,25 +218,16 @@ for i = 1 : T/dt+1
     reciever(i,4) = pd(ceil(Nx/2+ceil(Nx/4)), ceil(Ny/2)+ceil(Nx/4));
     reciever(i,5) = pd(ceil(Nx/2), ceil(Ny/2));
     exTime(i) = toc();
-%     if mod(i, 100) < 1
-%     mesh(liney, linex, real(pd(PMLdepth:end-PMLdepth-1,...
-%         PMLdepth:end-PMLdepth-1)));
-% mesh(liney, linex, abs(pd));
+%PLOTTING SECTION
 mesh(liney, linex, pd);
-
-    
-%     zlim([-0.4 0.4]);
      zlim([-1 1]);
-%     set(gca,'zlim',[-0.04 0.04]);
     caxis([-0.04 0.04]);
     shading interp;
     title(sprintf('Time = %.6f s,ExecTime = %.4f',dt*(i-1),exTime(i)));
-%     view([spin(i) 13]);
     view(2)
     axis tight;
     zlim([-1 1]);
     drawnow;
-%     end
 end
 %% Some really minor postprocessing
 % Hd = postprocessingDCfilter;

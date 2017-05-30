@@ -13,6 +13,7 @@
 %% Initz Matlab
 % clear all;
 % close all;
+addpath(genpath('../mls/mls/'));
 %Units
 figure(1);
 set(1, 'WindowStyle', 'Docked');
@@ -172,7 +173,7 @@ while n*dt < T
         sourcelocations(1,3)); % Record source position for normalisation
     
     exectime(n) = toc(); %End timer and record execution time
-%     FDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0); 
+    FDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0); 
 end
 
 %% Postprocessing

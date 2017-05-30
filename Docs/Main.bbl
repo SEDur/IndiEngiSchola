@@ -12,18 +12,6 @@ Jelle~Van Mourik and Damian~T Murphy.
 \newblock {Hybrid Acoustic Modelling of Historic Spaces Using Blender}.
 \newblock (c):7--12, 2014.
 
-\bibitem{Elorza2005}
-David~Oliva Elorza.
-\newblock {\em {Room acoustics modeling using the ray- tracing method :
-  implementation and evaluation}}.
-\newblock PhD thesis, University of Turku, 2005.
-
-\bibitem{Hill2012}
-Adam~J Hill.
-\newblock {Analysis , Modeling and Wide-Area Spatiotemporal Control of
-  Low-Frequency Sound Reproduction}.
-\newblock (January), 2012.
-
 \bibitem{Rindel2000}
 J~H Rindel.
 \newblock {The use of computer modeling in room acoustics}.
@@ -35,6 +23,12 @@ Nicolas Tsingos.
 \newblock {Pre-computing geometry-based reverberation effects for games
   Nicolas}.
 \newblock {\em Aes 35Th International Conference}, 2009.
+
+\bibitem{Elorza2005}
+David~Oliva Elorza.
+\newblock {\em {Room acoustics modeling using the ray- tracing method :
+  implementation and evaluation}}.
+\newblock PhD thesis, University of Turku, 2005.
 
 \bibitem{Schmalle2011}
 Holger Schmalle, Dirk Noy, Stefan Feistel, Gabriel Hauser, Wolfgang Ahnert, and
@@ -67,7 +61,7 @@ T.~D. Rossing.
 \bibitem{Rienstra1952}
 S~W Rienstra and A~Hirschberg.
 \newblock {An Introduction to Acoustics}.
-\newblock {\em Physics Today}, 5(11):24, 2004.
+\newblock {\em Physics Today}, 5(11):24, 1952.
 
 \bibitem{Davis2014}
 Don Davis and Eugene Patronis.
@@ -107,6 +101,12 @@ D~Botteldooren.
 \newblock {Acoustical finite-difference time-domain simulation in a
   quasi-Cartesian grid}.
 \newblock {\em Acoustical Society of America}, 95(5):2313--2319, 1993.
+
+\bibitem{Hill2012}
+Adam~J Hill.
+\newblock {Analysis , Modeling and Wide-Area Spatiotemporal Control of
+  Low-Frequency Sound Reproduction}.
+\newblock (January), 2012.
 
 \bibitem{Olesen1997}
 Soren~Krarup Olesen.
@@ -218,7 +218,7 @@ Carlos Spa, Jose Escolano, and Adan Garriga.
 \newblock {\em Applied Acoustics}, 72(4):226--230, 2011.
 
 \bibitem{Murphy2014}
-Damian~T Murphy, Alex Southern, and Lauri Savioja.
+Damian~T. Murphy, Alex Southern, and Lauri Savioja.
 \newblock {Source excitation strategies for obtaining impulse responses in
   finite difference time domain room acoustics simulation}.
 \newblock {\em Applied Acoustics}, 82:6--14, 2014.
@@ -236,7 +236,7 @@ Nicolas Tsingos, Ingrid Carlbom, Gary Elko, Robert Kubli, and Thomas
 \newblock {\em IEEE Computer Graphics and Applications}, 22(4), 2002.
 
 \bibitem{Foteinou2010}
-a.~Foteinou, D.~Murphy, and a.~Masinton.
+a.~Foteinou, D~Murphy, and a.~Masinton.
 \newblock {Verification of Geometric Acoustics-Based Auralization Using Room
   Acoustics Measurement Techniques}.
 \newblock {\em 128th Audio Engineering Society Convention}, pages 1--12, 2010.

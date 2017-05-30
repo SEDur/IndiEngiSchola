@@ -15,6 +15,7 @@
 %%Initz Matlab
 % clear all;
 % close all;
+addpath(genpath('../mls/mls/'));
 %Units
 figure(1);
 set(1, 'WindowStyle', 'Docked');
@@ -138,7 +139,7 @@ while n*dt < T
     reciever(n) = p(recieverleftloc(1),recieverleftloc(2),recieverleftloc(3));
     srcnorm(n) = p(sourcelocations(1,1),sourcelocations(1,2),sourcelocations(1,3));
     exectime(n) = toc();
-    FDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0); 
+%     FDTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0); 
 end
 %% Postprocessing
 % Hd = postprocessingDCfilter;

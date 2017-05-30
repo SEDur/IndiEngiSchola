@@ -13,6 +13,7 @@
 
 %%Initz Matlab
 %%Initz Variables
+addpath(genpath('../mls/mls/'));
 %Units
 
 %Distance
@@ -163,6 +164,7 @@ for n = 1:T/dt
     % Input source
     p(sourcelocations(1),sourcelocations(2),sourcelocations(3)) = p(sourcelocations(1),sourcelocations(2),sourcelocations(3)) - source1(n);
     exectime(n) = toc();
+%     SFDTD3Dplotdomain(p, n, dt, p0);
 end
 
 %% Some really postprocessing
@@ -181,7 +183,6 @@ for i = 1 : size(reciever,2)
     recieverCirc(:,i) = circshift(reciever(:,i)',lag(i));
 end
 
-% Hd = postprocessingDCfilter;
 norec = recieverCirc ./ max(abs(recieverCirc));
 % recanal = AnalyseMLSSequence(reciever',0,3,11,0,0);
 % norec = Hd(norec);

@@ -13,7 +13,7 @@
 %% Initz Matlab
 clear all;
 % close all;
-
+addpath(genpath('../mls/mls/'));
 figure(1)
 set(1, 'windowstyle','docked','color', 'w');
 

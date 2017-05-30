@@ -14,7 +14,7 @@
 %%Initz Matlab
 %%Initz Variables
 %Units
-
+addpath(genpath('../mls/mls/'));
 %Distance
 meters      = 1;
 centimeters = 1e-2 * meters;
@@ -163,6 +163,7 @@ for n = 1:T/dt
     srcnorm(n) = p(sourcelocations(1,1),sourcelocations(1,2),sourcelocations(1,3));
     % Input source
     p(sourcelocations(1),sourcelocations(2),sourcelocations(3)) = p(sourcelocations(1),sourcelocations(2),sourcelocations(3)) - source1(n);
+%     SFDTD3Dplotdomain(p, n, dt, p0);
 end
 %% Postprocessing
 

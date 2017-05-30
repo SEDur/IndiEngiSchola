@@ -15,7 +15,7 @@
 clc;
 clear all;
 % close all;
-
+addpath(genpath('../mls/mls/'));
 %% Make Variables
 p0 = 2*10^-5;
 
@@ -202,7 +202,7 @@ for i = 1 : T/dt
     reciever(i,5) = pd(ceil(Nx/2), ceil(Ny/2),ceil(Nz/2));
     roundtime(i) = toc();
     T - (i*dt)
-    PSTD3Dplotdomain(pd, i, dt, p0, roundtime(i), PMLdepth);
+%     PSTD3Dplotdomain(pd, i, dt, p0, roundtime(i), PMLdepth);
 
 end
 %% Some really minor postprocessing
