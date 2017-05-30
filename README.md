@@ -7,7 +7,7 @@ Efficient Acoustic Modelling of Large Spaces Using Time Domain Methods
 
 README
 
-This CD contains three folders: Docs, Matlab and LowFat.
+This CD contains two folders: Docs and Matlab.
 
 The Docs folder contains the source code for the disserataion (written in LaTeX), a library of supporting literature, a bibtex library, graphics and so on.
 
@@ -29,4 +29,4 @@ The MLS package conatined in the mls folder is references in the main literature
 
 The IMS folder contains an Image Source Method program written in Matlab, under the supervision of Dr Adam Hill, during the undertaking of the MSc in Audio Engineering. This folder also contains impulse response data for the domain used for validating the three numerical methods in this study.
 
-The code inside the matlab folder was used for organising and plotting some of the data presented in the report.
+The matlab scripts inside the matlab folder was used for organising and plotting some of the data presented in the report.
