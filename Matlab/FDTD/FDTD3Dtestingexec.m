@@ -38,7 +38,7 @@ gz = (c / (6*fmax));
 dt = ((1/c)*gx)/2;
 
 %create source term
-source1 = GenerateMLSSequence(2,9,0).*((2*10^-5)*10^(100/20));
+source1 = GenerateMLSSequence(2,7,0).*((2*10^-5)*10^(100/20));
 w1 = window(@hamming,length(source1)); 
 source1 = source1 .* w1;
 T = length(source1)*dt;
@@ -144,16 +144,16 @@ end
 %% Postprocessing
 % Hd = postprocessingDCfilter;
 norec = reciever ./ max(abs(reciever));
-recanal = AnalyseMLSSequence(reciever',0,2,9,0,0);
+recanal = AnalyseMLSSequence(reciever',0,2,5,0,0);
 % norec = Hd(norec);
 % [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
-[lpsd, lf] = pwelch(norec,hann(1000),[],1000,1/dt);
+[lpsd, lf] = pwelch(norec,hann(ceil(length(norec)/2)),[],ceil(length(norec)/2),1/dt);
 % clear('Hd');
 % Hd = postprocessingDCfilter;
 srcnrm = srcnorm ./ max(abs(srcnorm));
 % srcnrm = Hd(srcnrm);
 % [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
-[spsd, sf] = pwelch(srcnrm,hann(1000),[],1000,1/dt);
+[spsd, sf] = pwelch(srcnrm,hann(ceil(length(norec)/2)),[],ceil(length(norec)/2),1/dt);
 filename = strcat('xwidth',num2str(lx),'.mat');
 save(filename,'exectime', 'norec', 'recanal', 'lpsd', 'lf', 'srcnrm', 'spsd', 'sf');
 end

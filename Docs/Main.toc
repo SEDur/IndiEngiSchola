@@ -8,7 +8,7 @@
 \contentsline {subsubsection}{Equation Of Motion}{10}{section*.5}
 \contentsline {subsubsection}{Gas Law}{10}{section*.6}
 \contentsline {subsubsection}{Conservation Of Mass}{11}{section*.7}
-\contentsline {subsubsection}{Wave Equation}{12}{section*.8}
+\contentsline {subsubsection}{Wave Equation}{11}{section*.8}
 \contentsline {section}{\numberline {2.2}Acoustic Properties of Interest in This Study}{13}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}Inverse Square Law \& Propagation time}{13}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Reverberation}{14}{subsection.2.2.2}
@@ -46,8 +46,8 @@
 \contentsline {section}{\numberline {5.1}Results}{52}{section.5.1}
 \contentsline {section}{\numberline {5.2}Analysis}{53}{section.5.2}
 \contentsline {section}{\numberline {5.3}Code Profiling}{54}{section.5.3}
-\contentsline {chapter}{\numberline {6}Conclusion and Further Work}{58}{chapter.6}
-\contentsline {section}{\numberline {6.1}Conclusion}{58}{section.6.1}
-\contentsline {section}{\numberline {6.2}Further Work}{59}{section.6.2}
-\contentsline {chapter}{\numberline {A}Code Listing}{65}{appendix.A}
-\contentsline {chapter}{\numberline {B}Plots of Time Step Execution Speed for Duration of Simulations}{66}{appendix.B}
+\contentsline {chapter}{\numberline {6}Conclusion and Further Work}{59}{chapter.6}
+\contentsline {section}{\numberline {6.1}Conclusion}{59}{section.6.1}
+\contentsline {section}{\numberline {6.2}Further Work}{60}{section.6.2}
+\contentsline {chapter}{\numberline {A}Code Listing}{66}{appendix.A}
+\contentsline {chapter}{\numberline {B}Plots of Time Step Execution Speed for Duration of Simulations}{67}{appendix.B}

@@ -54,7 +54,10 @@ These results show the scale of the increase in execution speed with domain size
 \item The speed of the Fourier transforms is sufficiently fast to have little increase as the number of cells increases. 
 \item Due to the nature of frequency domain differentiation, fewer cells are required per wavelength for stable simulation.
 \end{itemize}
-However as shown in the validation section the quality of the results of the PSTD method may be questionable, and it may be that a greater number of spatial steps and a reduced time step is required for improved results quality from the PSTD method. Further study of a Chebyshev PSTD method may help with this. The SFDTD method improves average execution speed, and gives results similar in quality to the FDTD method, and so may be worth further investigation and optimisation.
+However as shown in the validation section the quality of the results of the PSTD method may be questionable, and it may be that a greater number of spatial steps and a reduced time step is required for improved results quality from the PSTD method. Further study of a Chebyshev PSTD method may help with this. \\
+
+The SFDTD method improves average execution speed of the largest domain size and gives results similar in quality to the FDTD method, and so may be worth further investigation and optimisation. This improvement in execution speed for the very large domain size comes at the cost of execution speed for smaller domain sizes where the whole of the domain is likely to be excited. As can be seen in the plots of the appendices B.3, execution speed changes over time for the SFDTD method, starting faster and converging on a steady state speed. As the area of execution increases, the speed benefit of the SFDTD method drops. A tactic to leverage this property of the SFDTD method may be to model multiple sound sources for first arrival and early reflections analysis; this uses the method during the time period in which the method may be fastest, and may provide some benefits over the standard FDTD method with regards to time.
+
 \section{Code Profiling}
 Use of Matlabs code profiling tool analysis the performance of the PSTD3Dfun function shows the time taken for execution for 2000 calls of the function during an example simulation of a 5m by 4m by3m domain with a maximum frequency of 5kHz:\\
 \begin{figure}[H]

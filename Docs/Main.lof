@@ -30,12 +30,12 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Execution times for FDTD simulations in domains of increasing size}}{53}{figure.5.1}
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Execution times for FDTD simulations in domains of increasing size}}{53}{figure.5.2}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Code execution time profile of PSTD functions}}{54}{figure.5.3}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Code execution time profile of FDTD functions}}{55}{figure.5.4}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Code execution time profile of SFDTD functions}}{56}{figure.5.5}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Code execution time profile of PSTD functions}}{55}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Code execution time profile of FDTD functions}}{56}{figure.5.4}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Code execution time profile of SFDTD functions}}{57}{figure.5.5}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {B.1}{\ignorespaces Execution times for FDTD simulations in domains of increasing size}}{67}{figure.B.1}
-\contentsline {figure}{\numberline {B.2}{\ignorespaces Execution times for PSTD simulations in domains of increasing size}}{68}{figure.B.2}
-\contentsline {figure}{\numberline {B.3}{\ignorespaces Execution times for SFDTD simulations in domains of increasing size}}{69}{figure.B.3}
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Execution times for FDTD simulations in domains of increasing size}}{68}{figure.B.1}
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Execution times for PSTD simulations in domains of increasing size}}{69}{figure.B.2}
+\contentsline {figure}{\numberline {B.3}{\ignorespaces Execution times for SFDTD simulations in domains of increasing size}}{70}{figure.B.3}

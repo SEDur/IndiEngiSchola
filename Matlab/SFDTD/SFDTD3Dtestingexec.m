@@ -91,7 +91,7 @@ T = 1.0 ;
 % source1(410:469) = toneBurst;
 
 %% MLS Source
-source1 = GenerateMLSSequence(5,9,0).*((2*10^-5)*10^(100/20));
+source1 = GenerateMLSSequence(5,6,0).*((2*10^-5)*10^(100/20));
 T = length(source1)*dt;
 w1 = window(@gausswin,length(source1),2.5); 
 source1 = source1 .* w1;
@@ -170,9 +170,9 @@ end
 %% Some really postprocessing
 norec = reciever ./ max(abs(reciever));
 % recanal = AnalyseMLSSequence(reciever',0,5,9,0,0);
-[lpsd, lf] = pwelch(norec,hann(1000),[],1000,1/dt);
+[lpsd, lf] = pwelch(norec,hann(ceil(length(norec)/2)),[],ceil(length(norec)/2),1/dt);
 srcnrm = srcnorm ./ max(abs(srcnorm));
-[spsd, sf] = pwelch(srcnrm,hann(1000),[],1000,1/dt);
+[spsd, sf] = pwelch(srcnrm,hann(ceil(length(norec)/2)),[],ceil(length(norec)/2),1/dt);
 filename = strcat('xwidth',num2str(lx),'.mat');
 save(filename,'exectime', 'norec', 'lpsd', 'lf', 'srcnrm', 'spsd', 'sf');
 end

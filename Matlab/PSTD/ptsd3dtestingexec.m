@@ -28,7 +28,7 @@ alphaZn = 0.45;
 alphaZp = 0.45;
 
 %define FS
-fs = 1000;
+fs = 3000;
 
 %define density
 rho = 1.21;
@@ -57,7 +57,7 @@ PMLdepth = 30;
 timestep = abs(T/dt);
 
 %Calc source
-source1 = GenerateMLSSequence(2,9,0).*((2*10^-5)*10^(100/20));
+source1 = GenerateMLSSequence(2,5,0).*((2*10^-5)*10^(100/20));
 T = length(source1)*dt;
 
 %set widths
@@ -190,28 +190,32 @@ for i = 1 : T/dt
         diffmatrixX, diffmatrixY , diffmatrixZ,...
      PMLdiff5, PMLalphau, PMLalphap, PMLconst);
     pd = PTSD3Dsrc(pd, source1(i), srcloc);
-    reciever(i) = real(pd(ceil(Ny/2), ceil(Nx/2), ceil(Nz/2)));
+    reciever(i,1) = pd(ceil(Nx/4), ceil(Ny/4),ceil(Nz/2));
+    reciever(i,2) = pd(ceil(Nx/2)+ceil(Nx/4), ceil(Ny/4),ceil(Nz/2));    
+    reciever(i,3) = pd(ceil(Nx/2), ceil(Ny/2)+ceil(Nx/4),ceil(Nz/2));
+    reciever(i,4) = pd(ceil(Nx/2+ceil(Nx/4)), ceil(Ny/2)+ceil(Nx/4),ceil(Nz/2));
+    reciever(i,5) = pd(ceil(Nx/2), ceil(Ny/2),ceil(Nz/2));
     srcnorm(i) = pd(srcloc(1,1),srcloc(1,2),srcloc(1,3));
-    roundtime(i) = toc();
+    exectime(i) = toc();
     T - (i*dt)
-%     PSTD3Dplotdomain(pd, xcells, ycells, zcells, i, dt, p0, roundtime(i), PMLdepth);
+    PSTD3Dplotdomain(pd, i, dt, p0, exectime(i), PMLdepth)
 
 end
 %% Some really minor postprocessing
 % Hd = postprocessingDCfilter;
 norec = reciever ./ max(abs(reciever));
-recanal = AnalyseMLSSequence(reciever',0,2,9,0,0);
+recanal = AnalyseMLSSequence(reciever(:,1),0,2,5,0,0);
 % norec = Hd(norec);
 % [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
-[lpsd, lf] = pwelch(norec,hann(200),[],200,fs);
+[lpsd, lf] = pwelch(norec,hann(ceil(length(norec)/2)),[],ceil(length(norec)/2),fs);
 % clear('Hd');
 % Hd = postprocessingDCfilter;
 srcnrm = srcnorm ./ max(abs(srcnorm));
 % srcnrm = Hd(srcnrm);
 % [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
-[spsd, sf] = pwelch(srcnrm,hann(200),[],200,fs);
+[spsd, sf] = pwelch(srcnrm,hann(ceil(length(srcnrm)/2)),[],ceil(length(srcnrm)/2),fs);
 filename = strcat('xwidth',num2str(gridWidthX),'.mat');
-save(filename,'roundtime', 'norec', 'recanal', 'lpsd', 'lf', 'srcnrm', 'spsd', 'sf');
+save(filename,'exectime', 'norec', 'recanal', 'lpsd', 'lf', 'srcnrm', 'spsd', 'sf');
 end
 %% Display the results
 subplot(5,1,1);
