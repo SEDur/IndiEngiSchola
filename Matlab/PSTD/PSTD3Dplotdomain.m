@@ -1,22 +1,6 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PTSD3Dplotdomain.m
-% Created by S Durbridge as part of work on a masters dissertation
-% Copywrite S Durbridge 2017
-%
-% This function is used to consolidate plotting of a 3D PSTD simulations
-% pressure matrix, down into an easy to manage function with a restricted
-% namespace.
-%
-% Any copies of this function distributed by the autor are done so
-% without any form of warranty, and should not be reproduced without
-% permission
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+function PSTD3Dplotdomain(p, xcells, ycells, zcells, n, dt, p0, roundtime, PMLdepth)
 
-
-function PSTD3Dplotdomain(p, n, dt, p0, roundtime, PMLdepth)
-% This function is written to consolidate the plotting of slices of a 3D
-% pressure domain into a simple function.
-
+%         figure(1);
         xslice = ceil((size(p,2)-(2*PMLdepth))/2); 
         yslice = ceil((size(p,1)-(2*PMLdepth))/2);  
         zslice = ceil((size(p,3)-(2*PMLdepth))/3);

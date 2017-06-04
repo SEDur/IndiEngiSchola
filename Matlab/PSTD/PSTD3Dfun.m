@@ -11,11 +11,11 @@
 function[pd, udx, udy, udz] = PSTD3Dfun(pd, udx, udy, udz,...
     diffmatrixX, diffmatrixY, diffmatrixZ,...
      PMLdiff, PMLalphau, PMLalphap, PMLconst)
-    %% Function solves using the PSTD method, takes pressure and velocity
-    % matrices in 3D, and PML matrices and returns new velocity and
-    % pressure matrices. 
+    %% Function solves using the PSTD method for a pressure vector,...
+    %  velocity vector and differentiation impulse response in 1 dimension
+    %  and returns the solved pressure and velocity vectors
     
-%% Pressure differentials in X, Y and Z directions due to linear wave equations
+%% Velocity in 3d
     phat = fftn(pd);
     temp1 = phat .* diffmatrixX;
     temp2 = phat .* diffmatrixY;
@@ -25,22 +25,22 @@ function[pd, udx, udy, udz] = PSTD3Dfun(pd, udx, udy, udz,...
     pdiffhaty = ifftn(temp2,'symmetric');
     pdiffhatz = ifftn(temp3,'symmetric');
     
-%% Total New Velocity
+%% Total Velocity
     udx = udx .* PMLdiff - PMLalphau .* (pdiffhatx./PMLconst);
     udy = udy .* PMLdiff - PMLalphau .* (pdiffhaty./PMLconst);
     udz = udz .* PMLdiff - PMLalphau .* (pdiffhatz./PMLconst);
     
-%% Velocity differential in x dimension
+%% Pressure in 3d
     uhat = fftn(udx);
     temp = uhat .* diffmatrixX;
     udiffhatx = ifftn(temp,'symmetric');
     
-%% Velocity differential in y dimension
+%% Pressure in 3d
     uhat = fftn(udy);
     temp = uhat .* diffmatrixY;
     udiffhaty = ifftn(temp,'symmetric');
     
-%% Velocity differential in z dimension
+%% Pressure in 3d
     uhat = fftn(udz);
     temp = uhat .* diffmatrixZ;
     udiffhatz = ifftn(temp,'symmetric');

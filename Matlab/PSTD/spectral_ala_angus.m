@@ -12,9 +12,9 @@
 % permission
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-clc;
-clear all;
-close all;
+% clc;
+% clear all;
+% close all;
 figure(1);
 set(1, 'WindowStyle', 'Docked')
 %define FS
@@ -30,7 +30,7 @@ c = 343.0;
 T = 2.0;
 
 %define grid width
-gridWidth = 343;
+gridWidth = 34.3;
 dt = 1 / fs;
 dx = c * sqrt(2) * dt;
 

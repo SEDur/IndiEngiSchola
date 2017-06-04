@@ -25,7 +25,7 @@ rho = 1.21;
 %% Variable Initialization
 %Hard Code Variables
 %Maximum calculation frequency
-fmax = 2000 * hertz; %% << fs for nyquist would be twice this
+fmax = 500; %% << fs for nyquist would be twice this
 
 %grid discretization step (m)
 dx = (c / (6*fmax));
@@ -37,9 +37,9 @@ dt = ((1/c)*dx)/2;
 
 %Dims
 %Dim Size (m)
-lx = 5*meters;
-ly = 4*meters;
-lz = 3*meters;
+lx = 100;
+ly = 100;
+lz = 100;
 
 %Total number of spatial steps in each direction
 xcells = ceil(lx/dx);
@@ -69,9 +69,9 @@ tone = dsp.SineWave('Amplitude',((2*10^-5)*10^(100/20)),...
 w1 = window(@gausswin,0.01/dt,2.5); 
 toneBurst = tone() .* w1;
 source1 = zeros(T/dt,1);
-source1(10:129) = toneBurst;
-source1(410:529) = toneBurst;
-source1(810:929) = toneBurst;
+source1(10:69) = toneBurst;
+source1(110:169) = toneBurst;
+source1(410:469) = toneBurst;
 
 %MLS
 % source1 = GenerateMLSSequence(3,11,0).*((2*10^-5)*10^(100/20));
@@ -141,8 +141,8 @@ liney = linspace(0, ly - dy, ycells-1);
 linez = linspace(0, lz - dz, zcells-1);
 
 %plotgrid
-[xvec, yvec, zvec] = meshgrid(0 : dx : dx * (xcells-2),...
-    0 : dy : dy * (ycells-2), 0 : dz : dz * (zcells-2));
+% [xvec, yvec, zvec] = meshgrid(0 : dx : dx * (xcells-2),...
+%     0 : dy : dy * (ycells-2), 0 : dz : dz * (zcells-2));
 %%
 % loop to update the velocities and pressures over the time steps, n
 n = 1;

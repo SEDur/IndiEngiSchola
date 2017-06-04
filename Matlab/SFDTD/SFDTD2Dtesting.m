@@ -11,9 +11,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Initz Matlab
 addpath(genpath('../mls/mls/'));
-figure(3)
-set(3, 'windowstyle','docked','color', 'w');
-
+figure(2)
+set(2, 'windowstyle','docked','color', 'w');
+clf;
 %% Initz Variables
 
 %Units
@@ -39,7 +39,7 @@ cstab = 2/(pi*sqrt(2));
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 5000 * hertz;
+fmax = 1000 * hertz;
 
 gx = (c / (6*fmax));
 gy = (c / (6*fmax));
@@ -93,16 +93,17 @@ fir = dsp.FIRFilter;
 fir.Numerator = w1';
 chirp = dsp.Chirp(...
     'SweepDirection', 'Unidirectional', ...
-    'TargetFrequency', 500, ...
+    'TargetFrequency', fmax, ...
     'InitialFrequency', 100,...
     'TargetTime', 0.1, ...
     'SweepTime', 0.1, ...
     'SamplesPerFrame', 0.1/dt, ...
     'SampleRate', 1/dt);
 % plot(chirp());
-source1 = w1.*chirp();
+% source1 = w1.*chirp();
+source1 = chirp();
 source1 = [zeros(10,1); source1];
-source1 = [source1; zeros((T/dt) - length(source1),1)].*((2*10^-5)*10^(120/20));
+source1 = [source1; zeros((T/dt) - length(source1),1)].*((2*10^-5)*10^(90/20));
 
 % initialize the velocity and pressure matrices (matrices are set up in a
 % y by x fashion to properly display the 2D space (y = rows, x = columns))
@@ -187,7 +188,7 @@ norec = circshift(norec, lag);
 % norec = Hd(norec);
 % [lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
 % [lpsd, lf] = pwelch(norec,hann(2000),[],200,1/dt);
-[lpsd, lf] = pwelch(norec,hann(200),[],200,1/dt);
+[lpsd, lf] = pwelch(norec,hann(ceil(length(norec)/2)),[],ceil(length(norec)/2),1/dt);
 
 % clear('Hd');
 % Hd = postprocessingDCfilter;
@@ -195,10 +196,10 @@ norec = circshift(norec, lag);
 % srcnrm = Hd(srcnrm);
 % [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
 % [spsd, sf] = pwelch(srcnrm,hann(2000),[],200,1/dt);
-[spsd, sf] = pwelch(srcnrm,hann(200),[],200,1/dt);
+[spsd, sf] = pwelch(srcnrm,hann(ceil(length(norec)/2)),[],ceil(length(norec)/2),1/dt);
 
 %% Display the results
-subplot(4,1,1);
+subplot(3,1,1);
 plot(0:dt:((length(reciever)-1)*dt),reciever)
 hold on;
 plot(0:dt:((length(reciever)-1)*dt),source1(1:length(reciever)))
@@ -206,15 +207,16 @@ hold off;
 axis('tight')
 legend('reciever','source');
 title('raw input and output');
-subplot(4,1,2);
+subplot(3,1,2);
 plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
 hold on;
 plot(0:dt:((length(srcnrm)-1)*dt),srcnrm)
 hold off;
 axis('tight')
 legend('reciever','source');
-title('normalised input and output');
-subplot(4,1,3);
+title('normalised input and output')
+
+subplot(3,1,3);
 plot(lf, db(lpsd),'--','Linewidth',2.0);
 hold on;
 plot(sf, db(spsd));
@@ -222,9 +224,10 @@ hold off;
 legend('reciever','source');
 grid('on');
 title('power spectral density of input and output');
-subplot(4,1,4);
-plot(0:dt:((length(reciever)-1)*dt),exectime)
-axis('tight')
-ttlstr = sprintf('computation time per cycle, total time is %d',sum(exectime));
-title(ttlstr);
+xlim([0 1000])
+% subplot(4,1,4);
+% plot(0:dt:((length(reciever)-1)*dt),exectime)
+% axis('tight')
+% ttlstr = sprintf('computation time per cycle, total time is %d',sum(exectime));
+% title(ttlstr);
 

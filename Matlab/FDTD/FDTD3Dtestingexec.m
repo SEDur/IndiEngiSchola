@@ -92,7 +92,7 @@ Ry = rho*gy/dt;
 Rz = rho*gz/dt;
 
 widths = [5 10 20 40 60];
-for cntr = 1 : 5
+for cntr = 5 : 5
 %define grid width
 lx = widths(cntr);
 ly = lx;

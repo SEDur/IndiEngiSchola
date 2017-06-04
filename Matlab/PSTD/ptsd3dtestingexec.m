@@ -57,7 +57,7 @@ PMLdepth = 30;
 timestep = abs(T/dt);
 
 %Calc source
-source1 = GenerateMLSSequence(2,5,0).*((2*10^-5)*10^(100/20));
+source1 = GenerateMLSSequence(2,11,0).*((2*10^-5)*10^(100/20));
 T = length(source1)*dt;
 
 %set widths
