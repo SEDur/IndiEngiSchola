@@ -1,4 +1,8 @@
 %% Make Variables
+%Create Figure
+figure(1);
+set(1,'Windowstyle','docked');
+%Define pressure mimimum
 p0 = 2*10^-5;
 %define density
 rho = 1.21;
@@ -23,7 +27,7 @@ sfdtdgx = c * sfdtddt / sfdtdcstab;
 sfdtdgy = c * sfdtddt / sfdtdcstab;
 sfdtdgz = c * sfdtddt / sfdtdcstab;
 %define grid width
-dims = [2 4 8 16 32 64 128 256 512 1024 2048 4096 8192];
+dims = [32 64 128 256 512 1024 2048 4096 8192];
 gridWidthX = dims;
 gridWidthY = dims;
 gridWidthZ = dims;
@@ -57,4 +61,8 @@ semilogy(dims,[fdtd2dncells; pstd2dncells; sfdtd2dncells])
 legend('fdtd','pstd','sfdtd');
 axis('tight');
 set(gca,'xscale','log');
+set(gcf,'Color','White');
+xlabel('N Dimension size');
+ylabel('Number of Cells in Domain');
+title('Number of cells Compared to Domain Size for FDTD, SFDTD and PSTD simulations');
 grid('on');

@@ -25,7 +25,8 @@ alphaYn = 0.45;
 alphaYp = 0.45;
 
 %define FS
-fs = 10000;
+% fs = 10000;
+fs = 5000;
 % fmax = 5000;
 %define density
 rho = 1.21;
@@ -34,8 +35,8 @@ c = 343.0;
 %define total time
 T = 0.1;
 %define grid width
-gridWidthX = 34.0;
-gridWidthY = 34.0;
+gridWidthX = 5.0;
+gridWidthY = 4.0;
 %Define Stability Condition
 St = 2/(pi * sqrt(2));
 %define timestep
@@ -52,7 +53,7 @@ dt = 1/(2*fs);
 dx = 2 * dt * c;
 % assert(isequal((c*dt/dx),St));
 %calculate pconst
-pconst = rho * c^2 * (dt/dx);
+pconst = 100 * pi * rho * c^2 * (dt/dx);
 %calculate uconst
 uconst = (1/rho)*(dt/dx);
 % pconst = c^2 * rho * dt/dx;
@@ -219,7 +220,7 @@ for i = 1 : T/dt+1
     reciever(i,5) = pd(ceil(Nx/2), ceil(Ny/2));
     exTime(i) = toc();
 %PLOTTING SECTION
-mesh(liney, linex, pd);
+surf(liney, linex, pd);
      zlim([-1 1]);
     caxis([-0.04 0.04]);
     shading interp;
@@ -248,7 +249,7 @@ norec(:,i) = circshift(norec(:,i),lags(i));
 end
 
 %% Display the results
-subplot(4,1,1);
+subplot(3,1,1);
 plot(0:dt:((length(reciever)-1)*dt),source1(1:length(reciever)))
 hold on;
 plot(0:dt:((length(reciever)-1)*dt),reciever)
@@ -256,7 +257,7 @@ hold off;
 axis('tight')
 legend('source','topleft','topright','bottomleft','bottomright','center');
 title('Raw Input And Output');
-subplot(4,1,2);
+subplot(3,1,2);
 plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
 hold on;
 plot(0:dt:((length(srcnrm)-1)*dt),srcnrm)
@@ -264,7 +265,7 @@ hold off;
 axis('tight')
 legend('topleft','topright','bottomleft','bottomright','center','source');
 title('Normalised Input And Output');
-subplot(4,1,3);
+subplot(3,1,3);
 plot(lf, db(lpsd),'--','Linewidth',2.0);
 hold on;
 plot(sf, db(spsd));
@@ -272,11 +273,11 @@ hold off;
 legend('topleft','topright','bottomleft','bottomright','center','source');
 grid('on');
 title('Power Spectral Density of Input and Output');
-subplot(4,1,4);
-plot(0:dt:((length(reciever)-1)*dt),exTime)
-axis('tight')
-ttlstr = sprintf('Computation Time Per Cycle, Total Time: %i',sum(exTime));
-title(ttlstr);
-% 
+% subplot(4,1,4);
+% plot(0:dt:((length(reciever)-1)*dt),exTime)
+% axis('tight')
+% ttlstr = sprintf('Computation Time Per Cycle, Total Time: %i',sum(exTime));
+% title(ttlstr);
+% % 
 %% Display the results
 

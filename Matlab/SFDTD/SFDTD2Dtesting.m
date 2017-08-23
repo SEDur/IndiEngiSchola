@@ -39,7 +39,7 @@ cstab = 2/(pi*sqrt(2));
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 1000 * hertz;
+fmax = 5000 * hertz;
 
 gx = (c / (6*fmax));
 gy = (c / (6*fmax));
