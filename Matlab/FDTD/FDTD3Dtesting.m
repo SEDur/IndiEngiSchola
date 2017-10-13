@@ -178,12 +178,14 @@ end
 
 %% Postprocessing
 
-for i = 1 : size(reciever,2)
-    lag(i) = getlag(reciever(:,i)',srcnorm);%
-    recieverCirc(:,i) = circshift(reciever(:,i)',lag(i));
-end
+% for i = 1 : size(reciever,2)
+%     lag(i) = getlag(reciever(:,i)',srcnorm);%
+%     recieverCirc(:,i) = circshift(reciever(:,i)',lag(i));
+% end
 
-norec = recieverCirc ./ max(abs(recieverCirc));
+recieverCirc = receiver;
+norec = recieverCirc;
+normrec = recieverCirc ./ max(abs(recieverCirc));
 % recanal = AnalyseMLSSequence(reciever',0,3,11,0,0);
 [lpsd, lf] = pwelch(norec,hann(5000),[],5000,1/dt);
 srcnrm = srcnorm ./ max(abs(srcnorm));

@@ -206,15 +206,21 @@ for i = 1 : T/dt
 
 end
 %% Some really minor postprocessing
-for i = 1 : size(reciever,2)
-    lag(i) = getlag(reciever(:,i)',srcnorm);
-    recieverCirc(:,i) = circshift(reciever(:,i)',lag(i));
-end
-norec = recieverCirc ./ max(abs(recieverCirc));
+% for i = 1 : size(reciever,2)
+%     lag(i) = getlag(reciever(:,i)',srcnorm);
+%     recieverCirc(:,i) = circshift(reciever(:,i)',lag(i));
+% end
+recieverCirc = reciever;
+norec = recieverCirc;
+normrec = recieverCirc ./ max(abs(recieverCirc));
 % recanal = AnalyseMLSSequence(reciever',0,2,11,0,0);
-[lpsd, lf] = pwelch(norec,hann(5000),[],5000,fs);
+% [lpsd, lf] = pwelch(normrec,hann(5000),[],5000,fs);
+% [lpsd, lf] = pwelch(normrec,[],[],[],fs);
+[lpsd, lf] = pwelch(normrec,[],[],[],1/dt);
 srcnrm = srcnorm ./ max(abs(srcnorm));
-[spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
+% [spsd, sf] = pwelch(srcnrm,hann(5000),[],5000,fs);
+% [spsd, sf] = pwelch(srcnrm,[],[],[],fs);
+[spsd, sf] = pwelch(srcnrm,[],[],[],1/dt);
 
 %% Display the results
 subplot(3,1,1);
@@ -229,12 +235,12 @@ legend('source','rec top left','rec top right','rec bottom left',...
 title('Raw Input And Output');
 xlim([0 0.137]);
 xlabel('Time (s)');
-ylabel('Amplitude (Pa)');
+ylabel('Amplitude (N)');
 subplot(3,1,2);
 plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
-hold on;
-plot(0:dt:((length(srcnrm)-1)*dt),srcnrm,'-')
-hold off;
+% hold on;
+% plot(0:dt:((length(srcnrm)-1)*dt),srcnrm,'-')
+% hold off;
 axis('tight')
 legend('rec top left','rec top right','rec bottom left',...
     'rec bottom right','rec centre','source');
@@ -253,3 +259,43 @@ grid('on');
 title('Power Spectral Density of Input and Output');
 xlabel('Frequency (Hz)');
 ylabel('Amplitude (dB)');
+
+%% Display the results
+
+subplot(3,1,1);
+plot(0:dt:((length(reciever)-1)*dt),source1(1:length(reciever)).*max(max(abs(reciever))))
+hold on;
+plot(0:dt:((length(reciever)-1)*dt),reciever, '--')
+hold off;
+axis('tight')
+legend('source','rec top left','rec top right','rec bottom left',...
+    'rec bottom right','rec centre');
+title('Time Domain Input & Ouput Normalised to Maximum Measured Amplitude');
+xlim([0 0.2]);
+xlabel('Time (s)');
+ylabel('Amplitude (Pa)');
+subplot(3,1,2);
+plot(0:dt:((length(norec)-1)*dt),norec,'--','linewidth',2.0)
+% hold on;
+% plot(0:dt:((length(srcnrm)-1)*dt),srcnrm,'-')
+% hold off;
+axis('tight')
+legend('rec top left','rec top right','rec bottom left',...
+    'rec bottom right','rec centre','source');
+title('Measured Data From Across Domain');
+xlim([0 0.2]);
+xlabel('Time (s)');
+ylabel('Amplitude (Pa)');
+subplot(3,1,3);
+plot(lf, db(lpsd),'--','Linewidth',2.0);
+hold on;
+plot(sf, db(spsd));
+hold off;
+xlim([0 3000]);
+ylim([-240 -50])
+grid('on');
+title('Power Spectral Density of Normalised Input and Output');
+xlabel('Frequency (Hz)');
+ylabel('Amplitude (dB)');
+legend('rec top left','rec top right','rec bottom left',...
+    'rec bottom right','rec centre','source', 'Location','best');
