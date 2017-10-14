@@ -156,14 +156,14 @@ psx10data = load('xwidth10.mat');
 psx20data = load('xwidth20.mat');
 psx40data = load('xwidth40.mat');
 psx60data = load('xwidth60.mat');
-smoothingcoeff3 = ones(1, length(psx40data.roundtime))/length(psx40data.roundtime);
+smoothingcoeff3 = ones(1, length(psx40data.exectime))/length(psx40data.exectime);
 
-plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),filter(smoothingcoeff3, 1, psx5data.roundtime));
+plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),filter(smoothingcoeff3, 1, psx5data.exectime));
 hold on;
-plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),filter(smoothingcoeff3, 1, psx10data.roundtime));
-plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),filter(smoothingcoeff3, 1, psx20data.roundtime));
-plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),filter(smoothingcoeff3, 1, psx40data.roundtime));
-plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),filter(smoothingcoeff3, 1, psx60data.roundtime));
+plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),filter(smoothingcoeff3, 1, psx10data.exectime));
+plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),filter(smoothingcoeff3, 1, psx20data.exectime));
+plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),filter(smoothingcoeff3, 1, psx40data.exectime));
+plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),filter(smoothingcoeff3, 1, psx60data.exectime));
 
 hold off;
 grid('on');
@@ -180,14 +180,14 @@ psx10data = load('xwidth10.mat');
 psx20data = load('xwidth20.mat');
 psx40data = load('xwidth40.mat');
 psx60data = load('xwidth60.mat');
-smoothingcoeff3 = ones(1, length(psx40data.roundtime))/length(psx40data.roundtime);
+smoothingcoeff3 = ones(1, length(psx40data.exectime))/length(psx40data.exectime);
 
-plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),psx5data.roundtime);
+plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),psx5data.exectime);
 hold on;
-plot(0:pstddt:((length(psx5data.norec)-1)*pstddt), psx10data.roundtime);
-plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),psx20data.roundtime);
-plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),psx40data.roundtime);
-plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),psx60data.roundtime);
+plot(0:pstddt:((length(psx5data.norec)-1)*pstddt), psx10data.exectime);
+plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),psx20data.exectime);
+plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),psx40data.exectime);
+plot(0:pstddt:((length(psx5data.norec)-1)*pstddt),psx60data.exectime);
 
 hold off;
 grid('on');
@@ -252,3 +252,16 @@ legend('5m^3','10m^3','20m^3','40m^3','60m^3')
 ylabel('Average Timestep Execution Time (s)');
 set(gcf,'Color','White');
 title('Mean Timestep Execution Time for Different Domain Sizes for FDTD, SFDTD and PSTD Methods');
+
+
+%% dsfg
+
+plot([sfdx5data.exectime;...
+    sfdx10data.exectime;...
+    sfdx20data.exectime;...
+    sfdx40data.exectime;...
+    sfdx60data.exectime])
+
+plot(fdx60data.exectime)
+
+

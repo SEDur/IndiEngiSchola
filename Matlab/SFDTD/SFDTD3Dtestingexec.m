@@ -173,7 +173,7 @@ norec = reciever ./ max(abs(reciever));
 [lpsd, lf] = pwelch(norec,hann(ceil(length(norec)/2)),[],ceil(length(norec)/2),1/dt);
 srcnrm = srcnorm ./ max(abs(srcnorm));
 [spsd, sf] = pwelch(srcnrm,hann(ceil(length(norec)/2)),[],ceil(length(norec)/2),1/dt);
-filename = strcat('xwidth',num2str(lx),'.mat');
+filename = strcat('xwidth',num2str(lx),'v2.mat');
 save(filename,'exectime', 'norec', 'lpsd', 'lf', 'srcnrm', 'spsd', 'sf');
 end
 %% Postprocessing
