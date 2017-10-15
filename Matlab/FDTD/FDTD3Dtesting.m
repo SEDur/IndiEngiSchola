@@ -37,9 +37,9 @@ dt = ((1/c)*dx)/2;
 
 %Dims
 %Dim Size (m)
-lx = 100;
-ly = 100;
-lz = 100;
+lx = 5;
+ly = 4;
+lz = 3;
 
 %Total number of spatial steps in each direction
 xcells = ceil(lx/dx);

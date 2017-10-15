@@ -35,8 +35,8 @@ c = 343.0;
 %define total time
 T = 0.1;
 %define grid width
-gridWidthX = 5.0;
-gridWidthY = 4.0;
+gridWidthX = 20.0;
+gridWidthY = 30.0;
 %Define Stability Condition
 St = 2/(pi * sqrt(2));
 %define timestep
