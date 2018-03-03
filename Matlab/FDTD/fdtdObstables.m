@@ -1,40 +1,26 @@
-[p, ux, uy, meta] = setup();
+[p, ux, uy, meta] = setupSim();
+meta = setupObstacles(meta, p);
 
 yRec = ceil(25/meta.gx);
 xRec = ceil(5/meta.gy);
 ct = 1;
 t = 0;
+
 while t < meta.T
-%     [p, ux, uy] = fun2do(p, ux, uy, meta, ct);
-    [p, ux, uy] = fun2d(p, ux, uy, meta, ct);
-    t = t + meta.dt;
-    ct = ct + 1;
-    myMonopoleData(ct) = p(yRec, xRec);
-        stepPlot(p, meta, t);
-end
-
-[p, ux, uy, meta] = setup();
-
-ct = 1;
-t = 0;
-while t <= meta.T
     [p, ux, uy] = fun2do(p, ux, uy, meta, ct);
 %     [p, ux, uy] = fun2d(p, ux, uy, meta, ct);
     t = t + meta.dt;
     ct = ct + 1;
-    myDipoleData(ct) = p(yRec, xRec);
-%         stepPlot(p, meta, t);
+    myRecieverData(ct) = p(yRec, xRec);
+        stepPlot(p, meta, t);
 end
 
-myTimeVector = 0 : meta.dt : (length(myMonopoleData) - 1) * meta.dt;
-
-plot(myTimeVector, [myMonopoleData; myDipoleData]);
+myTimeVector = 0 : meta.dt : (length(myRecieverData) - 1) * meta.dt;
+plot(myTimeVector, myRecieverData);
 axis tight
 grid
-legend('monopole', 'dipole');
 
-
-function [p, ux, uy, meta] = setup()
+function [p, ux, uy, meta] = setupSim()
 
 %Units
 
@@ -84,6 +70,11 @@ alphaR = 1.0;
 alphaF = 1.0;
 alphaB = 1.0;
 
+alphaPositiveX = 0.2;
+alphaNegativeX = 0.2;
+alphaNegativeY = 0.2;
+alphaPositiveY = 0.2;
+
 %number of sources
 snum = 2;
 %source locations
@@ -107,10 +98,11 @@ tnum = ceil(T/dt);
 source1 = zeros(1,tnum);
 source2 = zeros(1,tnum);
 
-stimulus = create_stimulus('tone', 1e-4, 60, 1, 0, [], 1/dt);
+stimulus = create_stimulus('tone', 1e-4, 100, 1, 0, [], 1/dt);
 gradDelay = ceil(4.17e-3 / dt);
 meta.source1 = stimulus;
-meta.source2 = [zeros(gradDelay,1); -stimulus];
+meta.source2 = zeros(length(stimulus),1);
+% meta.source2 = [zeros(gradDelay,1); -stimulus];
 
 % initialize the velocity and pressure matrices (matrices are set up in a
 % y by x fashion to properly display the 2D space (y = rows, x = columns))
@@ -134,6 +126,12 @@ ZL = rho*c*(1 + sqrt(1 - alphaL))/(1 - sqrt(1 - alphaL));
 ZT = rho*c*(1 + sqrt(1 - alphaF))/(1 - sqrt(1 - alphaF));
 ZB = rho*c*(1 + sqrt(1 - alphaB))/(1 - sqrt(1 - alphaB));
 
+ZPositiveX = rho*c*(1 + sqrt(1 - alphaPositiveX))/(1 - sqrt(1 - alphaPositiveX));
+ZNegativeX = rho*c*(1 + sqrt(1 - alphaNegativeX))/(1 - sqrt(1 - alphaNegativeX));
+ZNegativeY = rho*c*(1 + sqrt(1 - alphaNegativeY))/(1 - sqrt(1 - alphaNegativeY));
+ZPositiveY = rho*c*(1 + sqrt(1 - alphaPositiveY))/(1 - sqrt(1 - alphaPositiveY));
+
+
 % calulcate the coefficients used for the boundary conditions
 Rx = rho*gx/dt;
 Ry = rho*gy/dt;
@@ -151,26 +149,67 @@ meta.yOnepImpedance = (2/(Ry + ZB));
 meta.yEnduImpedance = ((Ry - ZT)/(Ry + ZT));
 meta.yEndpImpedance = (2/(Ry + ZT));
 
+meta.xPositiveuImpedance = ((Rx - ZPositiveX)/(Rx + ZPositiveX));
+meta.xPositivepImpedance = (2/(Rx + ZPositiveX));
+meta.xNegativeuImpedance = ((Rx - ZNegativeX)/(Rx + ZNegativeX));
+meta.xNegativepImpedance = (2/(Rx + ZNegativeX));
+meta.yPositiveuImpedance = ((Ry - ZPositiveY)/(Ry + ZPositiveY));
+meta.yPositivepImpedance = (2/(Ry + ZPositiveY));
+meta.yNegativeuImpedance = ((Ry - ZNegativeY)/(Ry + ZNegativeY));
+meta.yNegativepImpedance = (2/(Ry + ZNegativeY));
+
 dimsx = size(ux)-1;
-    dimsy = size(uy)-1;
+dimsy = size(uy)-1;
     
-    boxBottomLeftCorner1 = [ceil(5/gx) ceil(5/gx)];
-    boxWidth1 = ceil(20/gx);
-    boxDepth1 = ceil(2/gx);
+end
+
+function meta = setupObstacles(meta, p)
+
+    referencePointX = ceil(20/meta.gx);
+    referencePointY = ceil(5/meta.gy);
     
-    boxBottomLeftCorner2 = [ceil(5/gx) ceil(25/gx)];
-    boxWidth2 = ceil(2/gx);
-    boxDepth2 = ceil(20/gx);
+    % Row % Col
+    wallOne = [referencePointY : referencePointY + ceil(5/meta.gy);...
+        ones(1, length(referencePointY : referencePointY + ceil(5/meta.gy))) * referencePointX];
     
-    meta.uxIndexes1 = [boxBottomLeftCorner1(1), boxBottomLeftCorner1(1) + boxDepth1;...
-        boxBottomLeftCorner1(2), (boxBottomLeftCorner1(2) + boxWidth1)-1];
-    meta.uyIndexes1 = [boxBottomLeftCorner1(1), (boxBottomLeftCorner1(1) + boxDepth1)-1;...
-        boxBottomLeftCorner1(2), boxBottomLeftCorner1(2) + boxWidth1];
+    wallTwo = [ones(1, length(referencePointX : referencePointX + ceil(5/meta.gx))) * referencePointY;...
+        referencePointX : referencePointX + ceil(5/meta.gx)];
     
-     meta.uxIndexes2 = [boxBottomLeftCorner2(1), boxBottomLeftCorner2(1) + boxDepth2;...
-        boxBottomLeftCorner2(2), (boxBottomLeftCorner2(2) + boxWidth2)-1];
-    meta.uyIndexes2 = [boxBottomLeftCorner2(1), (boxBottomLeftCorner2(1) + boxDepth2)-1;...
-        boxBottomLeftCorner2(2), boxBottomLeftCorner2(2) + boxWidth2];
+    wallThree = [referencePointY : referencePointY + ceil(5/meta.gy);...
+        ones(1, length(referencePointY : referencePointY + ceil(5/meta.gy))) * (referencePointX + ceil(5/meta.gx))];
+    
+    wallFour = [ones(1, length(referencePointX : referencePointX + ceil(5/meta.gx))) * (referencePointY+ ceil(5/meta.gy));...
+        referencePointX : referencePointX + ceil(5/meta.gx)];
+
+    meta.negativeXWalls = sub2ind(size(p), wallOne(1,:), wallOne(2,:));
+    meta.negativeYWalls = sub2ind(size(p), wallTwo(1,:), wallTwo(2,:));
+    meta.positiveXWalls = sub2ind(size(p), wallThree(1,:), wallThree(2,:));
+    meta.positiveYWalls = sub2ind(size(p), wallFour(1,:), wallFour(2,:));
+    
+%     meta.deadSpace = poly2mask([meta.negativeXWalls meta.positiveXWalls], [meta.negativeYWalls meta.positiveYWalls], size(p,1), size(p,2));
+    
+    meta.walls = [meta.negativeXWalls meta.negativeYWalls meta.positiveXWalls meta.positiveYWalls];
+    
+    meta.deadSpace = findDeadSpace(meta.walls, p);
+    
+%     boxBottomLeftCorner1 = [ceil(5/gx) ceil(5/gx)];
+%     boxWidth1 = ceil(20/gx);
+%     boxDepth1 = ceil(2/gx);
+%     
+%     boxBottomLeftCorner2 = [ceil(5/gx) ceil(25/gx)];
+%     boxWidth2 = ceil(2/gx);
+%     boxDepth2 = ceil(20/gx);
+%     
+%     meta.uxIndexes1 = [boxBottomLeftCorner1(1), boxBottomLeftCorner1(1) + boxDepth1;...
+%         boxBottomLeftCorner1(2), (boxBottomLeftCorner1(2) + boxWidth1)-1];
+%     meta.uyIndexes1 = [boxBottomLeftCorner1(1), (boxBottomLeftCorner1(1) + boxDepth1)-1;...
+%         boxBottomLeftCorner1(2), boxBottomLeftCorner1(2) + boxWidth1];
+%     
+%      meta.uxIndexes2 = [boxBottomLeftCorner2(1), boxBottomLeftCorner2(1) + boxDepth2;...
+%         boxBottomLeftCorner2(2), (boxBottomLeftCorner2(2) + boxWidth2)-1];
+%     meta.uyIndexes2 = [boxBottomLeftCorner2(1), (boxBottomLeftCorner2(1) + boxDepth2)-1;...
+%         boxBottomLeftCorner2(2), boxBottomLeftCorner2(2) + boxWidth2];
+
 end
 
 function [p, ux, uy] = fun2do(p, ux, uy, meta, ct)
@@ -178,41 +217,68 @@ function [p, ux, uy] = fun2do(p, ux, uy, meta, ct)
     ux(:, 2:end-1) = ux(:, 2:end-1) - meta.uCx*(p(:, 2:end) - p(:, 1:end-1));
     uy(2:end-1, :) = uy(2:end-1, :) - meta.uCy*(p(2:end, :) - p(1:end-1, :));
     
-    ux(meta.uxIndexes1(1,1):meta.uxIndexes1(1,2),...
-        meta.uxIndexes1(2,1):meta.uxIndexes1(2,2)) =...
-        ux(meta.uxIndexes1(1,1):meta.uxIndexes1(1,2),...
-        meta.uxIndexes1(2,1):meta.uxIndexes1(2,2)) .* 0.0002;
-    
-    uy(meta.uyIndexes1(1,1):meta.uyIndexes1(1,2),...
-        meta.uyIndexes1(2,1):meta.uyIndexes1(2,2)) =...
-        uy(meta.uyIndexes1(1,1):meta.uyIndexes1(1,2),...
-        meta.uyIndexes1(2,1):meta.uyIndexes1(2,2)) .* 0.0002;
-    
-    ux(meta.uxIndexes2(1,1):meta.uxIndexes2(1,2),...
-        meta.uxIndexes2(2,1):meta.uxIndexes2(2,2)) =...
-        ux(meta.uxIndexes2(1,1):meta.uxIndexes2(1,2),...
-        meta.uxIndexes2(2,1):meta.uxIndexes2(2,2)) .* 0.0002;
-    
-    uy(meta.uyIndexes2(1,1):meta.uyIndexes2(1,2),...
-        meta.uyIndexes2(2,1):meta.uyIndexes2(2,2)) =...
-        uy(meta.uxIndexes2(1,1):meta.uyIndexes2(1,2),...
-        meta.uyIndexes2(2,1):meta.uyIndexes2(2,2)) .* 0.0002;
+%     ux(meta.uxIndexes1(1,1):meta.uxIndexes1(1,2),...
+%         meta.uxIndexes1(2,1):meta.uxIndexes1(2,2)) =...
+%         ux(meta.uxIndexes1(1,1):meta.uxIndexes1(1,2),...
+%         meta.uxIndexes1(2,1):meta.uxIndexes1(2,2)) .* 0.0002;
+%     
+%     uy(meta.uyIndexes1(1,1):meta.uyIndexes1(1,2),...
+%         meta.uyIndexes1(2,1):meta.uyIndexes1(2,2)) =...
+%         uy(meta.uyIndexes1(1,1):meta.uyIndexes1(1,2),...
+%         meta.uyIndexes1(2,1):meta.uyIndexes1(2,2)) .* 0.0002;
+%     
+%     ux(meta.uxIndexes2(1,1):meta.uxIndexes2(1,2),...
+%         meta.uxIndexes2(2,1):meta.uxIndexes2(2,2)) =...
+%         ux(meta.uxIndexes2(1,1):meta.uxIndexes2(1,2),...
+%         meta.uxIndexes2(2,1):meta.uxIndexes2(2,2)) .* 0.0002;
+%     
+%     uy(meta.uyIndexes2(1,1):meta.uyIndexes2(1,2),...
+%         meta.uyIndexes2(2,1):meta.uyIndexes2(2,2)) =...
+%         uy(meta.uxIndexes2(1,1):meta.uyIndexes2(1,2),...
+%         meta.uyIndexes2(2,1):meta.uyIndexes2(2,2)) .* 0.0002;
     
     % update the velocity at the right wall
     ux(:, end) = meta.xEnduImpedance * ux(:, end) ...
         + meta.xEndpImpedance * p(:, end);
+    
+    ux(meta.negativeXWalls) = meta.xNegativeuImpedance * ux(meta.negativeXWalls) ...
+        + meta.xNegativepImpedance * p(meta.negativeXWalls);
+%     ux(meta.walls) = meta.xNegativeuImpedance * ux(meta.walls) ...
+%         + meta.xNegativepImpedance * p(meta.walls);
 
     %update the velocity at the left wall
     ux(:, 1) = meta.xOneuImpedance * ux(:, 1) ...
         - meta.xOnepImpedance * p(:, 1);
+    
+    ux(meta.positiveXWalls) = meta.xPositiveuImpedance * ux(meta.positiveXWalls) ...
+        + meta.xPositivepImpedance * p(meta.positiveXWalls);
+%     x(meta.walls) = meta.xPositiveuImpedance * ux(meta.walls) ...
+%         + meta.xPositivepImpedance * p(meta.walls);
 
     %update the velocity at the top wall
     uy(end, :) = meta.yEnduImpedance * uy(end, :) ...
         + meta.yEndpImpedance * p(end, :);
+    
+    uy(meta.negativeYWalls) = meta.yNegativeuImpedance * ux(meta.negativeYWalls) ...
+        + meta.yNegativepImpedance * p(meta.negativeYWalls);
+%     uy(meta.walls) = meta.yNegativeuImpedance * ux(meta.walls) ...
+%         + meta.yNegativepImpedance * p(meta.walls);
 
     %update the velocity at the bottom wall
     uy(1, :) = meta.yOneuImpedance * uy(1, :) ...
         - meta.yOnepImpedance * p(1, :);
+    
+    uy(meta.positiveYWalls) = meta.yPositiveuImpedance * uy(meta.positiveYWalls) ...
+        - meta.yPositivepImpedance * p(meta.positiveYWalls);  
+%     uy(meta.walls) = meta.yPositiveuImpedance * uy(meta.walls) ...
+%         - meta.yPositivepImpedance * p(meta.walls);
+
+
+ux(meta.walls) =...
+        ux(meta.walls) .* 0;
+    
+    uy(meta.walls) =...
+        uy(meta.walls) .* 0;
 
     % update the pressure at all nodes
     p = p - meta.pCx*(ux(:, 2:end) - ux(:, 1:end-1))...
@@ -265,4 +331,20 @@ function stepPlot(p, meta, t)
     axis equal;
     view(2);
     drawnow();
+end
+
+function [deadspace] = findDeadSpace(walls, domain)
+    % essentially performs a floodfill to find dead space  and set its
+    % value to zero
+    mask = zeros(size(domain));
+    mask(walls) = 0;
+    
+    for  arrayYIndex = 1 : size(domain, 1)
+        for arrayXIndex = 1 : size(domain, 2)
+            % get the next index
+            newIndex = mask(arrayYIndex, arrayXIndex);
+            
+        end
+    end
+    
 end
