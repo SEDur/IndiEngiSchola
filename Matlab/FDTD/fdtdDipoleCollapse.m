@@ -1,6 +1,6 @@
 [p, ux, uy, meta] = setupDipole();
- ax = figure;
- stepPlot(p, meta, t, ax)
+ ax = gcf;
+ stepPlot(p, meta, 0, ax)
  ax.NextPlot = 'replaceChildren';
 
 yRec = ceil(25/meta.gx);
@@ -67,7 +67,7 @@ cstab = 2/(pi*sqrt(2));
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 2000 * hertz;
+fmax = 6000 * hertz;
 
 %grid size
 gx = c * (1/fmax) / cstab;
@@ -104,7 +104,7 @@ recieverleftloc = [ceil(ycells/2) ceil(xcells/2)];
 %Time of sim
 dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))));
 meta.dt = dt;
-T =dt * 100;
+T = 0.1;
 meta.T = T;
 
 % generate the source(s) & determine number of time steps needed
@@ -206,7 +206,7 @@ cstab = 2/(pi*sqrt(2));
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 2000 * hertz;
+fmax = 6000 * hertz;
 
 %grid size
 gx = c * (1/fmax) / cstab;
@@ -243,7 +243,7 @@ recieverleftloc = [ceil(ycells/2) ceil(xcells/2)];
 %Time of sim
 dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))));
 meta.dt = dt;
-T =dt * 200;
+T = 0.1;
 meta.T = T;
 
 % generate the source(s) & determine number of time steps needed

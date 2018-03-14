@@ -1,6 +1,6 @@
-[p, ux, uy, meta] = setupSim();
-meta = setupObstacles(meta, p, ux, uy);
-
+[p, ux, uy, meta] = setupSim(6000, 0.1);
+meta = setupDomain(meta, p, ux, uy);
+meta = makeMap(meta, p, ux, uy);
 yRec = ceil(25/meta.gx);
 xRec = ceil(5/meta.gy);
 ct = 1;
@@ -20,7 +20,7 @@ plot(myTimeVector, myRecieverData);
 axis tight
 grid
 
-function [p, ux, uy, meta] = setupSim()
+function [p, ux, uy, meta] = setupSim(fmax, T)
 
 %Units
 
@@ -48,7 +48,7 @@ cstab = 2/(pi*sqrt(2));
 %%
 %%Hard Code Variables
 %Maximum calculation frequency
-fmax = 6000 * hertz;
+% fmax = 10000 * hertz;
 
 %grid size
 gx = c * (1/fmax) / cstab;
@@ -77,12 +77,6 @@ alphaPositiveY = 0.001;
 
 %number of sources
 snum = 2;
-%source locations
-% meta.s1loc = [ceil((15/gx)) ceil((15/gx)/2)];
-% meta.s2loc = [(meta.s1loc(1) - ceil(1.05/gx)) (meta.s1loc(2) + ceil(1.05/gx))];%source frequency
-meta.s1loc = [ceil((15/gx)) ceil((15/gy))];
-% meta.s2loc = [(meta.s1loc(1)) (meta.s1loc(2) + ceil(1.05/gy))];%source frequency
-meta.s2loc = [(meta.s1loc(1)) (meta.s1loc(2) + ceil(sqrt(1.05^2 + 1.05^2)/gy))];%source frequency
 
 %recieves position
 recieverleftloc = [ceil(ycells/2) ceil(xcells/2)];
@@ -90,7 +84,6 @@ recieverleftloc = [ceil(ycells/2) ceil(xcells/2)];
 %Time of sim
 dt = 1/ (c*sqrt((1/(gy^2))+(1/(gx^2))));
 meta.dt = dt;
-T = 0.2;
 meta.T = T;
 
 % generate the source(s) & determine number of time steps needed
@@ -98,12 +91,14 @@ tnum = ceil(T/dt);
 source1 = zeros(1,tnum);
 source2 = zeros(1,tnum);
 
-stimulus = create_stimulus('tone', 1e-4, 100, T, 0, [], 1/dt);
-stimulus = stimulus .* hannrectwindow(1, 200 , length(stimulus) - 200, length(stimulus));
+stimulus = create_stimulus('tone', 1e-4, 60, T, 0, [], 1/dt);
+windowWidth = ceil(length(stimulus)/8);
+stimulus = stimulus .* hannrectwindow(1, windowWidth, length(stimulus) - windowWidth, length(stimulus));
 gradDelay = ceil(4.17e-3 / dt);
-meta.source1 = stimulus;
-meta.source2 = zeros(length(stimulus),1);
-% meta.source2 = [zeros(gradDelay,1); -stimulus];
+meta.signals = [stimulus,...
+    -stimulus*0.5];
+    
+%     zeros(length(stimulus),1)];
 
 % initialize the velocity and pressure matrices (matrices are set up in a
 % y by x fashion to properly display the 2D space (y = rows, x = columns))
@@ -116,8 +111,8 @@ uxObs = zeros(ycells - 1, xcells);
 uyObs = zeros(ycells, xcells - 1);
 
 % set up the multiplication constants for the update equations
-meta.uCx = dt/(gx*rho);
-meta.uCy = dt/(gy*rho);
+meta.uCx = ones(size(p)) .* dt/(gx*rho);
+meta.uCy = ones(size(p)) .* dt/(gy*rho);
 meta.pCx = c^2*rho*dt/gx;
 meta.pCy = c^2*rho*dt/gy;
 
@@ -164,10 +159,16 @@ dimsy = size(uy)-1;
 
 end
 
-function meta = setupObstacles(meta, p, ux, uy)
+function meta = setupDomain(meta, p, ux, uy)
 
-referencePointX = ceil(20/meta.gx);
-referencePointY = ceil(5/meta.gy);
+referencePointX = ceil(12.5/meta.gx);
+referencePointY = ceil(12.5/meta.gy);
+
+%source locations
+s1loc = [referencePointY+ceil((5/meta.gy)), referencePointX+ceil((2.5/meta.gx))];
+s2loc = [referencePointY+ceil((5/meta.gy))-1, referencePointX+ceil((2.5/meta.gx))];
+sources = [s1loc; s2loc];
+meta.sources = sub2ind(size(p), sources(:,1), sources(:,2));
 
 % Row % Col
 wallOne = [referencePointY : referencePointY + ceil(5/meta.gy);...
@@ -175,12 +176,19 @@ wallOne = [referencePointY : referencePointY + ceil(5/meta.gy);...
 
 wallTwo = [ones(1, length(referencePointX : referencePointX + ceil(5/meta.gx))) * referencePointY;...
     referencePointX : referencePointX + ceil(5/meta.gx)];
+% wallTwo = [1; 1];
 
 wallThree = [referencePointY : referencePointY + ceil(5/meta.gy);...
     ones(1, length(referencePointY : referencePointY + ceil(5/meta.gy))) * (referencePointX + ceil(5/meta.gx))];
 
 wallFour = [ones(1, length(referencePointX : referencePointX + ceil(5/meta.gx))) * (referencePointY+ ceil(5/meta.gy));...
     referencePointX : referencePointX + ceil(5/meta.gx)];
+wallFour = [1;1];
+% wallFoursection1 = [ones(1, length(referencePointX : referencePointX + ceil(2/meta.gx))) * (referencePointY+ ceil(5/meta.gy));...
+%     referencePointX : referencePointX + ceil(2/meta.gx)];
+% wallFoursection2 = [ones(1, length(referencePointX : referencePointX + ceil(2/meta.gx))) * (referencePointY+ ceil(5/meta.gy));...
+%     referencePointX+ ceil(3/meta.gx) : referencePointX + ceil(5/meta.gx)];
+% wallFour = [wallFoursection1 wallFoursection2];
 
 meta.negativeXWalls = sub2ind(size(p), wallOne(1,:), wallOne(2,:));
 meta.negativeYWalls = sub2ind(size(p), wallTwo(1,:), wallTwo(2,:));
@@ -200,181 +208,132 @@ meta.uxMask(:, 1:end-1) = abs(meta.pMask - 1);
 meta.uyMask = zeros(size(uy));
 meta.uyMask(1:end-1, :) = abs(meta.pMask - 1);
 
-% template = zeros(size(ux));
-% template(:, 2:end-1) = ones;
-% template(meta.walls) = zeros;
-% % meta.uXBiasTemplate = find(template(:, 2:end-1));
-% meta.uXBiasTemplate = find(template);
-% 
-% 
-% template = zeros(size(ux));
-% template(:, 2:end) = ones;
-% template(meta.walls) = zeros;
-% % meta.uXNegBiasTemplate = find(template(:, 2:end));
-% meta.uXNegBiasTemplate = find(template);
-% 
-% template = zeros(size(ux));
-% template(:, 1:end-1) = ones;
-% template(meta.walls) = zeros;
-% % meta.uXPosBiasTemplate = find(template(:, 1:end-1));
-% meta.uXPosBiasTemplate = find(template);
-% 
-% template = zeros(size(uy));
-% template(2:end-1, :) = ones;
-% template(meta.walls) = zeros;
-% % meta.uYBiasTemplate = find(template(2:end-1, :));
-% meta.uYBiasTemplate = find(template);
-% 
-% template = zeros(size(uy));
-% template(2:end, :) = ones;
-% template(meta.walls) = zeros;
-% % meta.uYNegBiasTemplate = find(template(2:end, :));
-% meta.uYNegBiasTemplate = find(template);
-% 
-% template = zeros(size(uy));
-% template(1:end-1, :) = ones;
-% template(meta.walls) = zeros;
-% % meta.uYPosBiasTemplate = find(template(1:end-1, :));
-% meta.uYPosBiasTemplate = find(template);
-% 
-% template = ones(size(p));
-% template(meta.walls) = zeros;
-% meta.pTemplate = find(template);
-% 
-% template = zeros(size(p));
-% template(2:end, :) = ones;
-% template(meta.walls) = zeros;
-% % meta.PuYNegBiasTemplate = find(template(2:end, :));
-% meta.PuYNegBiasTemplate = find(template);
-% 
-% template = zeros(size(p));
-% template(1:end-1, :) = ones;
-% template(meta.walls) = zeros;
-% % meta.PuYPosBiasTemplate = find(template(1:end-1, :));
-% meta.PuYPosBiasTemplate = find(template);
-% 
-% template = zeros(size(p));
-% template(:, 2:end) = ones;
-% template(meta.walls) = zeros;
-% % meta.PuXNegBiasTemplate = find(template(:, 2:end));
-% meta.PuXNegBiasTemplate = find(template);
-% 
-% template = zeros(size(p));
-% template(:, 1:end-1) = ones;
-% template(meta.walls) = zeros;
-% % meta.PuXPosBiasTemplate = find(template(:, 1:end-1));
-% meta.PuXPosBiasTemplate = find(template);
 
+end
 
+function meta = makeMap(meta, p, ux, uy)
 
-%     boxBottomLeftCorner1 = [ceil(5/gx) ceil(5/gx)];
-%     boxWidth1 = ceil(20/gx);
-%     boxDepth1 = ceil(2/gx);
-%
-%     boxBottomLeftCorner2 = [ceil(5/gx) ceil(25/gx)];
-%     boxWidth2 = ceil(2/gx);
-%     boxDepth2 = ceil(20/gx);
-%
-%     meta.uxIndexes1 = [boxBottomLeftCorner1(1), boxBottomLeftCorner1(1) + boxDepth1;...
-%         boxBottomLeftCorner1(2), (boxBottomLeftCorner1(2) + boxWidth1)-1];
-%     meta.uyIndexes1 = [boxBottomLeftCorner1(1), (boxBottomLeftCorner1(1) + boxDepth1)-1;...
-%         boxBottomLeftCorner1(2), boxBottomLeftCorner1(2) + boxWidth1];
-%
-%      meta.uxIndexes2 = [boxBottomLeftCorner2(1), boxBottomLeftCorner2(1) + boxDepth2;...
-%         boxBottomLeftCorner2(2), (boxBottomLeftCorner2(2) + boxWidth2)-1];
-%     meta.uyIndexes2 = [boxBottomLeftCorner2(1), (boxBottomLeftCorner2(1) + boxDepth2)-1;...
-%         boxBottomLeftCorner2(2), boxBottomLeftCorner2(2) + boxWidth2];
+referencePointX = ceil(5/meta.gx);
+referencePointY = ceil(5/meta.gy);
+
+velocityRectangle= drawRectangle([referencePointX , referencePointY], [5, 5]);
+meta.pressureRectangle = drawRectangle([referencePointX , referencePointY], [5, 5]);
+meta.xWallsNeg = sub2ind(size(ux), velocityRectangle(4,:),velocityRectangle(3,:));
+meta.yWallsNeg = sub2ind(size(uy), velocityRectangle(2,:),velocityRectangle(1,:));
+pxWallsNeg = sub2ind(size(p), meta.pressureRectangle(4,:),meta.pressureRectangle(3,:));
+pyWallsNeg = sub2ind(size(p), meta.pressureRectangle(2,:),meta.pressureRectangle(1,:));
+
+mask = zeros(size(p));
+mask(pxWallsNeg) = ones;
+mask(pyWallsNeg) = ones;
+
+uxNcounter = 1;
+uxPcounter = 1;
+uyNcounter = 1;
+uyPcounter = 1;
+uxDiffCounter = 1;
+uyDiffCounter = 1;
+
+for iYcoord = 1 : size(mask, 1) - 1
+    for iXcoord = 1 : size(mask, 2) - 1
+        % Check to see if this value is 1, if so, handle the north and east
+        % values
+        if mask(iYcoord, iXcoord) >= 1
+            if ((mask(iYcoord, iXcoord + 1) < 1) && ((iXcoord + 1) < size(mask,2)))
+                uxPosBoundariesCoord(uxPcounter, :) = [iYcoord, iXcoord + 1];
+                uxPosBoundariesPCoord(uxPcounter, :) = [iYcoord, iXcoord + 1];
+                uxPosBoundariesImpedace(uxPcounter) = mask(iYcoord, iXcoord);
+                uxPcounter = uxPcounter + 1;
+            end
+            if ((mask(iYcoord + 1, iXcoord) < 1) && ((iYcoord + 1) < size(mask,1)))
+                uyPosBoundariesCoord(uyPcounter, :) = [iYcoord + 1, iXcoord];
+                uyPosBoundariesPCoord(uyPcounter, :) = [iYcoord + 1, iXcoord];
+                uyPosBoundariesImpedace(uyPcounter) = mask(iYcoord, iXcoord);
+                uyPcounter = uyPcounter + 1;
+            end
+        else
+            % This value is 0, check east north west and south
+            % Look west
+            if mask(iYcoord, iXcoord + 1) >= 1
+                uxNegBoundariesCoord(uxNcounter, :) = [iYcoord, iXcoord + 1];
+                uxNegBoundariesPCoord(uxNcounter, :) = [iYcoord, iXcoord];
+                uxNegBoundariesImpedace(uxNcounter) = mask(iYcoord, iXcoord + 1);
+                uxNcounter = uxNcounter + 1;
+            elseif  ((mask(iYcoord, iXcoord + 1) == 0) && ((iXcoord + 1) < size(mask,2)))
+                uxDiffCoord(uxDiffCounter, :) = [iYcoord, iXcoord + 1];
+                uxDiffPCoords(uxDiffCounter, :) = [[iYcoord, iXcoord] [iYcoord, iXcoord + 1]];
+                uxDiffCounter = uxDiffCounter + 1;
+            end
+            % Look North
+            if mask(iYcoord + 1, iXcoord) >= 1
+                uyNegBoundariesCoord(uyNcounter, :) = [iYcoord + 1, iXcoord];
+                uyNegBoundariesPCoord(uyNcounter, :) = [iYcoord, iXcoord];
+                uyNegBoundariesImpedace(uyNcounter) = mask(iYcoord+ 1, iXcoord);
+                uyNcounter = uyNcounter + 1;
+            elseif  ((mask(iYcoord + 1, iXcoord) == 0) && ((iYcoord + 1) < size(mask, 1)))
+                uyDiffCoord(uyDiffCounter, :) = [iYcoord, iXcoord + 1];
+                uyDiffPCoords(uyDiffCounter, :) = [[iYcoord, iXcoord] [iYcoord + 1, iXcoord]];
+                uyDiffCounter = uyDiffCounter + 1;
+            end
+        end
+    end
+end
+
+                meta.uxPosBoundariesCoord = uxPosBoundariesCoord;
+                meta.uxPosBoundariesPCoord = uxPosBoundariesPCoord;
+                meta.uxPosBoundariesImpedace = uxPosBoundariesImpedace;
+                meta.uyPosBoundariesCoord  = uyPosBoundariesCoord;
+                meta.uyPosBoundariesPCoord = uyPosBoundariesPCoord;
+                meta.uyPosBoundariesImpedace = uyPosBoundariesImpedace;
+                meta.uxNegBoundariesCoord = uxNegBoundariesCoord;
+                meta.uxNegBoundariesPCoord = uxNegBoundariesPCoord;
+                meta.uxNegBoundariesImpedace = uxNegBoundariesImpedace;
+                meta.uxDiffCoord = uxDiffCoord;
+                meta.uxDiffPCoords = uxDiffPCoords;
+                meta.uyNegBoundariesCoord = uyNegBoundariesCoord;
+                meta.uyNegBoundariesPCoord = uyNegBoundariesPCoord;
+                meta.uyNegBoundariesImpedace = uyNegBoundariesImpedace ;
+                meta.uyDiffCoord = uyDiffCoord;
+                meta.uyDiffPCoords = uyDiffPCoords;
+
+end
+
+function newCoords = translate(shape, p)
 
 end
 
 function [p, ux, uy] = fun2do(p, ux, uy, meta, ct)
 % update the non-boundary condition nodes for velocity
-    ux(:, 2:end-1) = ux(:, 2:end-1) - meta.uCx*(p(:, 2:end) - p(:, 1:end-1));
-    uy(2:end-1, :) = uy(2:end-1, :) - meta.uCy*(p(2:end, :) - p(1:end-1, :));
-%     ux(:, 2:end-1) = meta.uxMask(:, 2:end-1) .* ux(:, 2:end-1) - meta.uCx*(p(:, 2:end) - p(:, 1:end-1));
-%     uy(2:end-1, :) = meta.uyMask(2:end-1, :) .* uy(2:end-1, :) - meta.uCy*(p(2:end, :) - p(1:end-1, :));
-% ux(meta.uXBiasTemplate) = ux(meta.uXBiasTemplate)...
-%     - meta.uCx*(p(meta.PuXNegBiasTemplate) - p(meta.PuXPosBiasTemplate));
-% uy(meta.uYBiasTemplate) = uy(meta.uYBiasTemplate)...
-%     - meta.uCy*(p(meta.PuYNegBiasTemplate) - p(meta.PuYPosBiasTemplate));
+% ux(:, 2:end-1) = ux(:, 2:end-1) - meta.uCx*(p(:, 2:end) - p(:, 1:end-1));
+% uy(2:end-1, :) = uy(2:end-1, :) - meta.uCy*(p(2:end, :) - p(1:end-1, :));
+
+ux(:, 2:end-1) = ux(:, 2:end-1) - meta.uCx(:, 2:end) .*(p(:, 2:end) - p(:, 1:end-1));
+uy(2:end-1, :) = uy(2:end-1, :) - meta.uCy(2:end, :) .*(p(2:end, :) - p(1:end-1, :));
 
 % update the velocity at the right wall
 ux(:, end) = meta.xEnduImpedance * ux(:, end) ...
     + meta.xEndpImpedance * p(:, end);
 
-% ux(meta.negativeXWalls) = meta.xNegativeuImpedance * ux(meta.negativeXWalls) ...
-%     + meta.xNegativepImpedance * p(meta.negativeXWalls);
-%     ux(meta.walls) = meta.xNegativeuImpedance * ux(meta.walls) ...
-%         + meta.xNegativepImpedance * p(meta.walls);
-
 %update the velocity at the left wall
 ux(:, 1) = meta.xOneuImpedance * ux(:, 1) ...
     - meta.xOnepImpedance * p(:, 1);
-
-% ux(meta.positiveXWalls) = meta.xPositiveuImpedance * ux(meta.positiveXWalls) ...
-%     + meta.xPositivepImpedance * p(meta.positiveXWalls);
-%     x(meta.walls) = meta.xPositiveuImpedance * ux(meta.walls) ...
-%         + meta.xPositivepImpedance * p(meta.walls);
 
 %update the velocity at the top wall
 uy(end, :) = meta.yEnduImpedance * uy(end, :) ...
     + meta.yEndpImpedance * p(end, :);
 
-% uy(meta.negativeYWalls) = meta.yNegativeuImpedance * ux(meta.negativeYWalls) ...
-%     + meta.yNegativepImpedance * p(meta.negativeYWalls);
-%     uy(meta.walls) = meta.yNegativeuImpedance * ux(meta.walls) ...
-%         + meta.yNegativepImpedance * p(meta.walls);
-
 %update the velocity at the bottom wall
 uy(1, :) = meta.yOneuImpedance * uy(1, :) ...
     - meta.yOnepImpedance * p(1, :);
 
-% uy(meta.positiveYWalls) = meta.yPositiveuImpedance * uy(meta.positiveYWalls) ...
-%     - meta.yPositivepImpedance * p(meta.positiveYWalls);
-%     uy(meta.walls) = meta.yPositiveuImpedance * uy(meta.walls) ...
-%         - meta.yPositivepImpedance * p(meta.walls);
-
-% 
-% ux(meta.walls) = zeros;
-% 
-% uy(meta.walls) = zeros;
-
 % update the pressure at all nodes
 p = meta.pMask .* (p - meta.pCx*(ux(:, 2:end) - ux(:, 1:end-1))...
     - meta.pCy*(uy(2:end, :) - uy(1:end-1, :)));
-% p = meta.pMask .* p - meta.pCx*(ux(:, 2:end) - ux(:, 1:end-1))...
-%     - meta.pCy*(uy(2:end, :) - uy(1:end-1, :));
 
-% p(meta.pTemplate) = p(meta.pTemplate) - meta.pCx*(ux(meta.uXNegBiasTemplate) - ux(meta.uXPosBiasTemplate))...
-%     - meta.pCy*(uy(meta.uYNegBiasTemplate) - uy(meta.uYPosBiasTemplate));
+% p(meta.s1loc(1),meta.s1loc(2)) = p(meta.s1loc(1),meta.s1loc(2)) - meta.source1(ct);
+% p(meta.s2loc(1),meta.s2loc(2)) = p(meta.s2loc(1),meta.s2loc(2)) - meta.source2(ct);
+p(meta.sources) = p(meta.sources) - meta.signals(ct, :)';
 
-% meta.PuXNegBiasTemplate = find(template(:, 2:end));
-% meta.PuXPosBiasTemplate = find(template(:, 1:end-1));
-% meta.PuYNegBiasTemplate = find(template(2:end, :));
-% meta.PuYPosBiasTemplate = find(template(1:end-1, :));
-
-p(meta.s1loc(1),meta.s1loc(2)) = p(meta.s1loc(1),meta.s1loc(2)) - meta.source1(ct);
-p(meta.s2loc(1),meta.s2loc(2)) = p(meta.s2loc(1),meta.s2loc(2)) - meta.source2(ct);
-
-%     ux(meta.uxIndexes1(1,1):meta.uxIndexes1(1,2),...
-%         meta.uxIndexes1(2,1):meta.uxIndexes1(2,2)) =...
-%         ux(meta.uxIndexes1(1,1):meta.uxIndexes1(1,2),...
-%         meta.uxIndexes1(2,1):meta.uxIndexes1(2,2)) .* 0.0002;
-%
-%     uy(meta.uyIndexes1(1,1):meta.uyIndexes1(1,2),...
-%         meta.uyIndexes1(2,1):meta.uyIndexes1(2,2)) =...
-%         uy(meta.uyIndexes1(1,1):meta.uyIndexes1(1,2),...
-%         meta.uyIndexes1(2,1):meta.uyIndexes1(2,2)) .* 0.0002;
-%
-%     ux(meta.uxIndexes2(1,1):meta.uxIndexes2(1,2),...
-%         meta.uxIndexes2(2,1):meta.uxIndexes2(2,2)) =...
-%         ux(meta.uxIndexes2(1,1):meta.uxIndexes2(1,2),...
-%         meta.uxIndexes2(2,1):meta.uxIndexes2(2,2)) .* 0.0002;
-%
-%     uy(meta.uyIndexes2(1,1):meta.uyIndexes2(1,2),...
-%         meta.uyIndexes2(2,1):meta.uyIndexes2(2,2)) =...
-%         uy(meta.uxIndexes2(1,1):meta.uyIndexes2(1,2),...
-%         meta.uyIndexes2(2,1):meta.uyIndexes2(2,2)) .* 0.0002;
 end
 
 function [p, ux, uy] = fun2d(p, ux, uy, meta, ct)
@@ -435,5 +394,50 @@ for  arrayYIndex = 1 : size(domain, 1)
         
     end
 end
+
+end
+
+function circle = drawCircle(referenceCoordinate, diameter)
+
+end
+
+function rectangle = drawRectangle(referenceCoordinate, edgeLengths)
+% rectangle = drawRectangle(referenceCoordinate, edgeLengths)
+% rectangle = drawRectangle([1,1], [5,5])
+% Draw a rectangle from the bottom left corner, going clockwise. This
+% returns a two column array of [yCoordinates xCoordinates] in the
+% following order:  [westWall northWall eastWall southWall]
+
+referencePointY = referenceCoordinate(1);
+referencePointX = referenceCoordinate(2);
+westEdgeLength = edgeLengths(1);
+northEdgeLength = edgeLengths(2);
+eastEdgeLength = edgeLengths(1);
+southEdgeLength = edgeLengths(2);
+
+westWall = [referencePointY : referencePointY + westEdgeLength;...
+    ones(1, length(referencePointY : referencePointY + westEdgeLength)) * referencePointX];
+
+northWall = [ones(1, length(referencePointX : referencePointX + northEdgeLength)) * referencePointY;...
+    referencePointX : referencePointX + northEdgeLength];
+
+eastWall = [referencePointY : referencePointY + eastEdgeLength;...
+    ones(1, length(referencePointY : referencePointY + eastEdgeLength)) * (referencePointX + northEdgeLength)];
+
+southWall = [ones(1, length(referencePointX : referencePointX + southEdgeLength)) * (referencePointY + eastEdgeLength);...
+    referencePointX : referencePointX + southEdgeLength];
+
+rectangle = [[westWall eastWall]; [northWall southWall]];
+
+end
+
+function lineSegment = drawLineSegment(startCoordinate, endCoordinate)
+
+% wallOne = [referencePointY : referencePointY + ceil(5/meta.gy);...
+%     ones(1, length(referencePointY : referencePointY + ceil(5/meta.gy))) * referencePointX];
+
+% Ycoords; Xcoords
+lineSegment = [startCoordinate(1) : endCoordinate(1);...
+    startCoordinate(2) : endCoordinate(2)];
 
 end
